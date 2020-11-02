@@ -2,8 +2,10 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Role;
 use App\Models\Team;
 use App\Models\User;
+use Faker\Factory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,6 +33,9 @@ class CreateNewUser implements CreatesNewUsers
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
+                'iin' => $input['iin'] ?? Factory::create()->bankAccountNumber,
+                'phone' => $input['phone'] ?? Factory::create()->phoneNumber,
+                'role_id' => Role::ROLE_CLIENT,
                 'password' => Hash::make($input['password']),
             ]), function (User $user) {
                 $this->createTeam($user);
