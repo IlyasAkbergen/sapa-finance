@@ -11,7 +11,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable  implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -26,7 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'iin', 'password',
+        'name', 'email', 'phone', 'iin', 'password', 'referer_id'
     ];
 
     /**
@@ -62,5 +62,21 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referrer_id');
+    }
+
+    public function referals()
+    {
+        return $this->hasMany(User::class, 'referrer_id');
+    }
+
+    public function allReferals()
+    {
+        return $this->referals()
+            ->with('allReferals');
     }
 }
