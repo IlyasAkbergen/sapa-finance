@@ -26,7 +26,8 @@ class User extends Authenticatable  implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'iin', 'password', 'referer_id'
+        'name', 'email', 'phone', 'iin', 'password', 'referer_id',
+        'balance', 'points', 'team_points'
     ];
 
     /**
@@ -74,9 +75,25 @@ class User extends Authenticatable  implements MustVerifyEmail
         return $this->hasMany(User::class, 'referrer_id');
     }
 
-    public function allReferals()
+    public function allReferrals()
     {
         return $this->referals()
-            ->with('allReferals');
+            ->with('allReferrals');
+    }
+
+    public function briefcases()
+    {
+        return $this->belongsToMany(Briefcase::class);
+    }
+
+    public function newNotifications()
+    {
+        return $this->notifications()
+            ->wherePivot('seed', false);
+    }
+
+    public function notifications()
+    {
+        return $this->belongsToMany(Notification::class);
     }
 }
