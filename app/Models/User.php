@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasReferrals;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,6 +20,7 @@ class User extends Authenticatable  implements MustVerifyEmail
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasReferrals;
 
     /**
      * The attributes that are mass assignable.
@@ -27,7 +29,7 @@ class User extends Authenticatable  implements MustVerifyEmail
      */
     protected $fillable = [
         'name', 'email', 'phone', 'iin', 'password', 'referer_id',
-        'balance', 'points', 'team_points'
+        'balance', 'points', 'team_points', 'referral_level_id'
     ];
 
     /**
@@ -70,17 +72,6 @@ class User extends Authenticatable  implements MustVerifyEmail
         return $this->belongsTo(User::class, 'referrer_id');
     }
 
-    public function referals()
-    {
-        return $this->hasMany(User::class, 'referrer_id');
-    }
-
-    public function allReferrals()
-    {
-        return $this->referals()
-            ->with('allReferrals');
-    }
-
     public function briefcases()
     {
         return $this->belongsToMany(Briefcase::class);
@@ -89,7 +80,7 @@ class User extends Authenticatable  implements MustVerifyEmail
     public function newNotifications()
     {
         return $this->notifications()
-            ->wherePivot('seed', false);
+            ->wherePivot('seen', false);
     }
 
     public function notifications()
