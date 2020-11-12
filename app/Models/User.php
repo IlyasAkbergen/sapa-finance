@@ -62,6 +62,9 @@ class User extends Authenticatable  implements MustVerifyEmail
         'profile_photo_url',
     ];
 
+    const POINTS_PER_REFERRAL = 15;
+    const POINTS_PER_GRAND_REFERRAL = 10;
+
     public function role()
     {
         return $this->belongsTo(Role::class);

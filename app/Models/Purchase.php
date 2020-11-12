@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\PurchaseSaved;
+use App\Events\PurchaseMade;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,6 +21,6 @@ class Purchase extends Model
     }
 
     protected $dispatchesEvents = [
-        'saved' => PurchaseSaved::class
+        'saved' => PurchaseMade::class
     ];
 }

@@ -17,28 +17,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        Role::insert([
-            [
-                'id'   => Role::ROLE_ADMIN,
-                'name' => 'Администратор',
-            ],
-            [
-                'id'   => Role::ROLE_CLIENT,
-                'name' => 'Клиент'
-            ]
-        ]);
-
-        ReferralLevel::insert([
-            [
-                'id'   => ReferralLevel::LEVEL_AGENT,
-                'title' => 'Агент'
-            ],
-            [
-                'id'   => ReferralLevel::LEVEL_CONSULTANT,
-                'title' => 'Финансовый консультант'
-            ]
-        ]);
-
         User::updateOrCreate(['phone' => '111'],[
             'name' => "Test Admin",
             'iin' => '111111111',

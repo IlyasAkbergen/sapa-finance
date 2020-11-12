@@ -16,6 +16,10 @@ class CreateReferralLevelsTable extends Migration
         Schema::create('referral_levels', function (Blueprint $table) {
             $table->unsignedTinyInteger('id', true);
             $table->string('title');
+//            $table->unsignedInteger('reach_points')->nullable();
+//            $table->unsignedInteger('reach_team_points')->nullable();
+//            $table->unsignedInteger('defend_points')->nullable();
+//            $table->unsignedInteger('defend_team_points')->nullable();
             $table->text('description')->nullable();
         });
     }

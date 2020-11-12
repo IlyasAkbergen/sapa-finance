@@ -14,17 +14,11 @@ class AddBalanceToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->bigInteger('balance')
-                ->after('two_factor_recovery_codes')
-                ->default(0);
-
-            $table->unsignedBigInteger('points')
-                ->nullable()
-                ->after('balance');
-
-            $table->unsignedBigInteger('team_points')
-                ->nullable()
-                ->after('points');
+            $table->unsignedBigInteger('balance_id')
+                ->nullable();
+            $table->foreign('balance_id')
+                ->references('id')
+                ->on('balances');
         });
     }
 
@@ -36,7 +30,8 @@ class AddBalanceToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['balance', 'points', 'team_points']);
+            $table->dropForeign(['balance_id']);
+            $table->dropColumn('balance_id');
         });
     }
 }

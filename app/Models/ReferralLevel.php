@@ -13,4 +13,7 @@ class ReferralLevel extends Model
 
     const LEVEL_AGENT = 1;
     const LEVEL_CONSULTANT = 2;
+    const LEVEL_TUTOR = 3;
+    const LEVEL_MENTOR = 4;
+    const LEVEL_PARTNER = 5;
 }
