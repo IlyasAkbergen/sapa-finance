@@ -29,7 +29,7 @@ class CreateBalanceOperationsTable extends Migration
 
             $table->bigInteger('sum')
                 ->nullable();
-            $table->integer('points')
+            $table->integer('direct_points')
                 ->nullable();
             $table->integer('team_points')
                 ->nullable();

@@ -18,7 +18,7 @@ class CreateBalancesTable extends Migration
             $table->bigInteger('sum')
                 ->default(0);
 
-            $table->unsignedBigInteger('points')
+            $table->unsignedBigInteger('direct_points')
                 ->nullable();
 
             $table->unsignedBigInteger('team_points')

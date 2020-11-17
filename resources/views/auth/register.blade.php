@@ -16,13 +16,31 @@
 
             <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email"
+                             :value="old('email')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="iin" value="{{ __('IIN') }}" />
+                <x-jet-input id="iin" class="block mt-1 w-full" type="number" name="iin" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="phone" value="{{ __('Phone') }}" />
+                <x-jet-input id="phone" class="block mt-1 w-full"
+                             type="phone" name="phone" :value="old('phone')" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="referrer_id" value="{{ __('Referrer ID') }}" />
+                <x-jet-input id="referrer_id" class="block mt-1 w-full" type="number" name="referrer_id" />
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
                 <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
+
 
             <div class="mt-4">
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />

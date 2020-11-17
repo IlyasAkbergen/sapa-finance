@@ -17,9 +17,21 @@ class AddReferrerToUsersTable extends Migration
             $table->unsignedBigInteger('referrer_id')
                 ->nullable()
                 ->after('role_id');
+
             $table->foreign('referrer_id')
                 ->references('id')
                 ->on('users');
+
+            $table->unsignedBigInteger('root_referrer_id')
+                ->nullable()
+                ->after('referrer_id');
+
+            $table->foreign('root_referrer_id')
+                ->references('id')
+                ->on('users');
+
+            $table->unsignedTinyInteger('direct_fee_percent')->nullable();
+            $table->unsignedTinyInteger('team_fee_percent')->nullable();
         });
     }
 

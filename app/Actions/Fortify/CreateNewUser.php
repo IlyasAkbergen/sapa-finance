@@ -26,6 +26,7 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'referrer_id' => ['numeric', 'exists:' . User::class . ',id'],
             'password' => $this->passwordRules(),
         ])->validate();
 
@@ -35,6 +36,7 @@ class CreateNewUser implements CreatesNewUsers
                 'email' => $input['email'],
                 'iin' => $input['iin'] ?? Factory::create()->bankAccountNumber,
                 'phone' => $input['phone'] ?? Factory::create()->phoneNumber,
+                'referrer_id' => $input['referrer_id'] ?? null,
                 'role_id' => Role::ROLE_CLIENT,
                 'password' => Hash::make($input['password']),
             ]), function (User $user) {
