@@ -30,6 +30,11 @@ class CreateBriefcasesTable extends Migration
             $table->unsignedBigInteger('monthly_payment')
                 ->nullable();
 
+            $table->unsignedBigInteger('direct_fee');
+
+            $table->boolean('awardable')
+                ->default(true);
+
             $table->timestamps();
         });
     }

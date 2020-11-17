@@ -10,6 +10,8 @@ class Purchase extends Model
 {
     use HasFactory;
 
+    static $DIRECT_POINTS_PER_PURCHASE = 10;
+
     public function user()
     {
         return $this->belongsTo(User::class);
