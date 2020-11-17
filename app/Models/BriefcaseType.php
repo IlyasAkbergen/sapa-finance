@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class BriefcaseType extends Model
 {
     use HasFactory;
 
-    const ROLE_ADMIN = 1;
-    const ROLE_CLIENT = 2;
-
-    public $timestamps = false;
-
     protected $fillable = [
-        'name'
+        'title', 'description'
     ];
 }

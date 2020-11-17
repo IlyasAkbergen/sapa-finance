@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ReferralLevel;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
@@ -16,25 +17,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        Role::insert([
-            [
-                'id'   => Role::ROLE_ADMIN,
-                'name' => 'Администратор',
-            ],
-            [
-                'id'   => Role::ROLE_CLIENT,
-                'name' => 'Клиент'
-            ],
-            [
-                'id'   => Role::ROLE_AGENT,
-                'name' => 'Агент'
-            ],
-            [
-                'id'   => Role::ROLE_CONSULTANT,
-                'name' => 'Финансовый консультант'
-            ]
-        ]);
-
         User::updateOrCreate(['phone' => '111'],[
             'name' => "Test Admin",
             'iin' => '111111111',
@@ -61,7 +43,8 @@ class UserSeeder extends Seeder
             'phone' => '888',
             'email' => "agent@mail.ru",
             'password' => bcrypt('password'),
-            'role_id' => Role::ROLE_AGENT,
+            'role_id' => Role::ROLE_CLIENT,
+            'referral_level_id' => ReferralLevel::LEVEL_AGENT,
             'email_verified_at' => Carbon::now(),
         ]);
 
@@ -71,7 +54,8 @@ class UserSeeder extends Seeder
             'phone' => '999',
             'email' => "consultant@mail.ru",
             'password' => bcrypt('password'),
-            'role_id' => Role::ROLE_CONSULTANT,
+            'role_id' => Role::ROLE_CLIENT,
+            'referral_level_id' => ReferralLevel::LEVEL_CONSULTANT,
             'email_verified_at' => Carbon::now(),
         ]);
     }

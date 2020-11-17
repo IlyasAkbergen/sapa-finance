@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasReferrals;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +12,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable // implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -19,6 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasReferrals;
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name', 'email', 'phone', 'iin', 'password',
+        'referrer_id', 'root_referer_id', 'referral_level_id'
     ];
 
     /**
@@ -59,8 +62,32 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
+    const POINTS_PER_REFERRAL = 15;
+    const POINTS_PER_GRAND_REFERRAL = 10;
+
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function briefcases()
+    {
+        return $this->belongsToMany(Briefcase::class);
+    }
+
+    public function newNotifications()
+    {
+        return $this->notifications()
+            ->wherePivot('seen', false);
+    }
+
+    public function notifications()
+    {
+        return $this->belongsToMany(Notification::class);
+    }
+
+    public function balance()
+    {
+        return $this->belongsTo(Balance::class);
     }
 }
