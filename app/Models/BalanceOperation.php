@@ -15,7 +15,12 @@ class BalanceOperation extends Model
     ];
 
     protected $fillable = [
-        'target_balance_id', 'purchase_id', 'sum',
+        'target_balance_id', 'purchase_id', 'sum', 'reward_id',
         'direct_points', 'team_points', 'committed'
     ];
+
+    public function reward()
+    {
+        return $this->belongsTo(Reward::class);
+    }
 }

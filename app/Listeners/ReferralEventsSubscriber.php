@@ -4,40 +4,86 @@ namespace App\Listeners;
 
 use App\Events\BalanceUpdated;
 use App\Events\PurchaseMade;
+use App\Events\RewardCreated;
 use App\Models\Balance;
 use App\Models\BalanceOperation;
 use App\Models\Purchase;
+use App\Models\Reward;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Support\Facades\DB;
 
 class ReferralEventsSubscriber
 {
     public function handlePurchaseMade($event) {
-        $purchase = $event->purchase;
-        $purchase->load(['user.referrer', 'purchasable']);
 
-        if (empty($purchase->user->referrer)) {
-            return;
+        DB::beginTransaction();
+
+        try {
+            $purchase = $event->purchase;
+            $purchase->load(['user.allReferrers', 'purchasable']);
+
+            if (empty($purchase->user->referrer)) {
+                return;
+            }
+
+            $purchasable = $purchase->purchasable;
+
+            $all_referrers = $purchase->user->flattenTree('allReferrers');
+
+            foreach ($all_referrers as $referrer) {
+                Reward::updateOrCreate([
+                    'target_user_id' => $purchase->user->referrer_id,
+                    'purchase_id' => $purchase->id,
+                ],[
+                    'sum' => $purchasable->getAwardSum(),
+                    'is_direct' => $purchase->user->referrer_id == $referrer,
+                    'points' => $purchasable->isAwardable()
+                        ? Purchase::$DIRECT_POINTS_PER_PURCHASE
+                        : null
+                ]);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
         }
+    }
 
-        $purchasable = $purchase->purchasable;
+    public function handleRewardCreated($event) {
+        $reward = $event->reward;
 
-        if (empty(Balance::find($purchase->user->referrer->balance_id))) {
-            $purchase->user->referrer->update([
-                'balance_id' => Balance::create()->id
-            ]);
+        DB::beginTransaction();
+
+        try {
+
+            $reward->load(['awardable']);
+
+            if (empty($reward->awardable->balance_id)) {
+                $reward->awardable->update([
+                    'balance_id' => Balance::create()->id
+                ]);
+            }
+
+            $operation = new BalanceOperation();
+            $operation->target_balance_id = $reward->awardable->balance_id;
+            $operation->sum = $reward->sum;
+            $operation->purchase_id = $reward->purchase_id;
+
+            if (!empty($reward->points)) {
+                if ($reward->is_direct) {
+                    $operation->direct_points = $reward->points;
+                } else {
+                    $operation->team_points = $reward->points;
+                }
+            }
+
+            $operation->save();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
         }
-
-        $operation = new BalanceOperation();
-        $operation->target_balance_id = $purchase->user->referrer->balance_id;
-        $operation->sum = $purchasable->getAwardSum();
-        $operation->purchase_id = $purchase->id;
-
-        if ($purchasable->isAwardable()) {
-            $operation->direct_points = Purchase::$DIRECT_POINTS_PER_PURCHASE;
-        }
-
-        $operation->save();
     }
 
     public function handleBalanceUpdated($event) {
@@ -77,6 +123,11 @@ class ReferralEventsSubscriber
         $events->listen(
             PurchaseMade::class,
             [self::class, 'handlePurchaseMade']
+        );
+
+        $events->listen(
+            RewardCreated::class,
+            [self::class, 'handleRewardCreated']
         );
 
         $events->listen(
