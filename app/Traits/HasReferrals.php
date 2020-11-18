@@ -30,10 +30,10 @@ trait HasReferrals
             ->with('all_referrals');
     }
 
-    public function all_referrers()
+    public function referrer_recursive()
     {
         return $this->referrer()
-            ->with('all_referrers');
+            ->with('referrer_recursive');
     }
 
     public function referralLevel()

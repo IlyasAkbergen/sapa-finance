@@ -12,7 +12,7 @@ class Reward extends Model
 
     protected $fillable = [
         'target_user_id', 'purchase_id', 'handled',
-        'is_direct', 'sum', 'direct_points', 'team_points'
+        'is_direct', 'sum', 'points'
     ];
 
     protected $dispatchesEvents = [

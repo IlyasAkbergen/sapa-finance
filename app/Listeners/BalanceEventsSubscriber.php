@@ -26,6 +26,10 @@ class BalanceEventsSubscriber
             $target_balance->direct_points += $operation->direct_points;
         }
 
+        if (!empty($operation->team_points)) {
+            $target_balance->team_points += $operation->team_points;
+        }
+
         $target_balance->save();
 
         $operation->update([

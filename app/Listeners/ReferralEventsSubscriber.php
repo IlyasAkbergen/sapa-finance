@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\BalanceUpdated;
 use App\Events\PurchaseMade;
 use App\Events\RewardCreated;
+use App\Helpers\Helper;
 use App\Models\Balance;
 use App\Models\BalanceOperation;
 use App\Models\Purchase;
@@ -21,7 +22,7 @@ class ReferralEventsSubscriber
 
         try {
             $purchase = $event->purchase;
-            $purchase->load(['user.allReferrers', 'purchasable']);
+            $purchase->load(['user.referrer_recursive', 'purchasable']);
 
             if (empty($purchase->user->referrer)) {
                 return;
@@ -29,15 +30,15 @@ class ReferralEventsSubscriber
 
             $purchasable = $purchase->purchasable;
 
-            $all_referrers = $purchase->user->flattenTree('allReferrers');
+            $all_referrers = Helper::flat_all_referrers($purchase->user);
 
             foreach ($all_referrers as $referrer) {
                 Reward::updateOrCreate([
-                    'target_user_id' => $purchase->user->referrer_id,
+                    'target_user_id' => $referrer->id,
                     'purchase_id' => $purchase->id,
                 ],[
                     'sum' => $purchasable->getAwardSum(),
-                    'is_direct' => $purchase->user->referrer_id == $referrer,
+                    'is_direct' => $purchase->user->referrer_id == $referrer->id,
                     'points' => $purchasable->isAwardable()
                         ? Purchase::$DIRECT_POINTS_PER_PURCHASE
                         : null
@@ -52,6 +53,8 @@ class ReferralEventsSubscriber
 
     public function handleRewardCreated($event) {
         $reward = $event->reward;
+
+        if ($reward->handled) return;
 
         DB::beginTransaction();
 
@@ -69,6 +72,7 @@ class ReferralEventsSubscriber
             $operation->target_balance_id = $reward->awardable->balance_id;
             $operation->sum = $reward->sum;
             $operation->purchase_id = $reward->purchase_id;
+            $operation->reward_id = $reward->id;
 
             if (!empty($reward->points)) {
                 if ($reward->is_direct) {
@@ -79,6 +83,9 @@ class ReferralEventsSubscriber
             }
 
             $operation->save();
+            $reward->update([
+                'handled' => true
+            ]);
 
             DB::commit();
         } catch (\Exception $e) {

@@ -16,16 +16,17 @@ class Helper
     }
 
     public static function flat_all_referrers($model) {
-        $result = [];
-        dd($model);
-        foreach ($model->all_referrers as $referrer) {
-            $result[] = $referrer;
+        $result = collect();
 
-            dd($referrer);
-            if ($referrer->all_referrers) {
-                $result = array_merge($result, self::flat_descendants($referrer));
+        if (!empty($model->referrer_recursive)) {
+            $referrer = $model->referrer_recursive;
+            $result->add($referrer);
+
+            if ($referrer->referrer_recursive) {
+                $result = $result->merge(self::flat_all_referrers($referrer));
             }
         }
+
         return $result;
     }
 }
