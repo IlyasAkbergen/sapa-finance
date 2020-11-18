@@ -13,4 +13,9 @@ class BalanceOperation extends Model
     protected $dispatchesEvents = [
         'saved' => BalanceOperationCreated::class
     ];
+
+    protected $fillable = [
+        'target_balance_id', 'purchase_id', 'sum',
+        'direct_points', 'team_points', 'committed'
+    ];
 }

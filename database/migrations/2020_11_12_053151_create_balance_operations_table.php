@@ -16,8 +16,15 @@ class CreateBalanceOperationsTable extends Migration
         Schema::create('balance_operations', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('target_balance_id');
+            $table->unsignedBigInteger('target_balance_id')
+                ->nullable();
             $table->foreign('target_balance_id')
+                ->references('id')
+                ->on('balances');
+
+            $table->unsignedBigInteger('source_balance_id')
+                ->nullable();
+            $table->foreign('source_balance_id')
                 ->references('id')
                 ->on('balances');
 
@@ -35,6 +42,7 @@ class CreateBalanceOperationsTable extends Migration
                 ->nullable();
 
             $table->boolean('committed')
+                ->index()
                 ->default(false);
 
             $table->timestamps();

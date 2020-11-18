@@ -12,6 +12,10 @@ class Purchase extends Model
 
     static $DIRECT_POINTS_PER_PURCHASE = 10;
 
+    protected $fillable = [
+        'user_id', 'sum', 'purchasable_id', 'purchasable_type'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

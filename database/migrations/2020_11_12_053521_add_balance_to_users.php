@@ -15,7 +15,8 @@ class AddBalanceToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('balance_id')
-                ->nullable();
+                ->nullable()
+                ->after('role_id');
             $table->foreign('balance_id')
                 ->references('id')
                 ->on('balances');

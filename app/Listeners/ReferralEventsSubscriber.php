@@ -14,7 +14,7 @@ class ReferralEventsSubscriber
 {
     public function handlePurchaseMade($event) {
         $purchase = $event->purchase;
-        $purchase->load(['user.referrer.balance', 'purchasable.awardable']);
+        $purchase->load(['user.referrer', 'purchasable']);
 
         if (empty($purchase->user->referrer)) {
             return;
@@ -22,12 +22,18 @@ class ReferralEventsSubscriber
 
         $purchasable = $purchase->purchasable;
 
+        if (empty(Balance::find($purchase->user->referrer->balance_id))) {
+            $purchase->user->referrer->update([
+                'balance_id' => Balance::create()->id
+            ]);
+        }
+
         $operation = new BalanceOperation();
         $operation->target_balance_id = $purchase->user->referrer->balance_id;
-        $operation->sum = $purchasable->awardable->getAwardSum();
+        $operation->sum = $purchasable->getAwardSum();
         $operation->purchase_id = $purchase->id;
 
-        if ($purchasable->awardable->isAwardable()) {
+        if ($purchasable->isAwardable()) {
             $operation->direct_points = Purchase::$DIRECT_POINTS_PER_PURCHASE;
         }
 

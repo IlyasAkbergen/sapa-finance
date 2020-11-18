@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Briefcase;
+use App\Models\BriefcaseType;
+use App\Models\Course;
 use App\Models\ReferralLevel;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
@@ -58,7 +61,28 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+
         $this->call(UserSeeder::class);
         // \App\Models\User::factory(10)->create();
+
+        BriefcaseType::create([
+           'title' => 'Накопительный'
+        ]);
+
+        Briefcase::create([
+            'title' => 'Первый портфель',
+            'type_id' => 1,
+            'sum' => 1200000,
+            'profit' => 100000,
+            'duration' => 10,
+            'monthly_payment' => 12000,
+            'direct_fee' => 3000,
+            'awardable' => true
+        ]);
+
+        Course::factory(5)->create([
+            'direct_fee' => 2000,
+            'awardable' => true
+        ]);
     }
 }

@@ -23,8 +23,6 @@ class CreateCoursesTable extends Migration
             $table->boolean('is_online');
             $table->unsignedInteger('price_without_feedback');
             $table->unsignedInteger('price_with_feedback');
-            $table->unsignedInteger('direct_points');
-            $table->unsignedInteger('team_points');
             $table->unsignedInteger('direct_fee');
             $table->boolean('awardable')
                 ->default(true);
