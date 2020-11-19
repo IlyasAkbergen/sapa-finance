@@ -26,12 +26,14 @@ class ReferralEventsSubscriber implements ShouldQueue
         $this->balanceService = $balanceService;
     }
 
-    public function handlePurchaseMade($event) {
+    public function handlePurchaseMade($event)
+    {
         $purchase = $event->purchase;
         $this->userService->awardReferrersAfterPurchase($purchase);
     }
 
-    public function handleRewardCreated($event) {
+    public function handleRewardCreated($event)
+    {
         $reward = $event->reward;
 
         if ($reward->handled) return;
@@ -54,12 +56,8 @@ class ReferralEventsSubscriber implements ShouldQueue
         }
     }
 
-    public function handleBalanceUpdated($event) {
-        // TODO realize
-        // нужно для пересчета процентов в верхней части пирамиды
-    }
-
-    public function handleUserRegistered($event) {
+    public function handleUserRegistered($event)
+    {
         $user = $event->user;
         $user->load(['referrer']);
 
@@ -96,11 +94,6 @@ class ReferralEventsSubscriber implements ShouldQueue
         $events->listen(
             RewardCreated::class,
             [self::class, 'handleRewardCreated']
-        );
-
-        $events->listen(
-            BalanceUpdated::class,
-            [self::class, 'handleBalanceUpdated']
         );
 
         $events->listen(

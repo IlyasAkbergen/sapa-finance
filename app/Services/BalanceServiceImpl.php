@@ -20,7 +20,7 @@ class BalanceServiceImpl extends BaseServiceImpl implements BalanceService
      */
     public function createOperationForReward(Reward $reward)
     {
-        $reward->load(['awardable']);
+        $reward->loadMissing(['awardable']);
 
         if (empty($reward->awardable->balance_id)) {
             $reward->awardable->update([

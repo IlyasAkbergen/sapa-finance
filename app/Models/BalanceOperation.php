@@ -11,7 +11,7 @@ class BalanceOperation extends Model
     use HasFactory;
 
     protected $dispatchesEvents = [
-        'saved' => BalanceOperationCreated::class
+        'created' => BalanceOperationCreated::class
     ];
 
     protected $fillable = [

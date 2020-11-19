@@ -16,7 +16,7 @@ class Reward extends Model
     ];
 
     protected $dispatchesEvents = [
-        'saved' => RewardCreated::class
+        'created' => RewardCreated::class
     ];
 
     public function operation()

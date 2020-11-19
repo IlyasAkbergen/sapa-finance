@@ -27,6 +27,6 @@ class Purchase extends Model
     }
 
     protected $dispatchesEvents = [
-        'saved' => PurchaseMade::class
+        'created' => PurchaseMade::class
     ];
 }
