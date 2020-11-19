@@ -14,7 +14,7 @@ trait HasReferrals
         return $this->belongsTo(User::class, 'referrer_id');
     }
 
-    public function rootReferrer()
+    public function root_referrer()
     {
         return $this->belongsTo(User::class, 'root_referrer_id');
     }
@@ -24,10 +24,16 @@ trait HasReferrals
         return $this->hasMany(User::class, 'referrer_id');
     }
 
-    public function allReferrals()
+    public function all_referrals()
     {
         return $this->referrals()
-            ->with('allReferrals');
+            ->with('all_referrals');
+    }
+
+    public function referrer_recursive()
+    {
+        return $this->referrer()
+            ->with('referrer_recursive');
     }
 
     public function referralLevel()

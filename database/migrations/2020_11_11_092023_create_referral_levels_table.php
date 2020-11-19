@@ -20,6 +20,7 @@ class CreateReferralLevelsTable extends Migration
 //            $table->unsignedInteger('reach_team_points')->nullable();
 //            $table->unsignedInteger('defend_points')->nullable();
 //            $table->unsignedInteger('defend_team_points')->nullable();
+            $table->unsignedTinyInteger('team_fee_percent')->nullable();
             $table->text('description')->nullable();
         });
     }

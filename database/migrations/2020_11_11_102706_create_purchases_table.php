@@ -23,12 +23,12 @@ class CreatePurchasesTable extends Migration
 
             $table->unsignedBigInteger('sum')->default(0);
 
-            $table->unsignedBigInteger('model_id');
-            $table->string('model_type');
+            $table->unsignedBigInteger('purchasable_id');
+            $table->string('purchasable_type');
 
             $table->timestamps();
 
-            $table->index(['model_type', 'model_id']);
+            $table->index(['purchasable_type', 'purchasable_id']);
         });
     }
 

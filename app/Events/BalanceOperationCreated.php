@@ -2,24 +2,24 @@
 
 namespace App\Events;
 
-use App\Models\Purchase;
+use App\Models\BalanceOperation;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PurchaseMade implements ShouldQueue
+class BalanceOperationCreated implements ShouldQueue
 {
     use Dispatchable, SerializesModels;
 
-    public $purchase;
+    public $operation;
 
     /**
      * Create a new event instance.
      *
-     * @param Purchase $purchase
+     * @param BalanceOperation $operation
      */
-    public function __construct(Purchase $purchase)
+    public function __construct(BalanceOperation $operation)
     {
-        $this->purchase = $purchase;
+        $this->operation = $operation;
     }
 }

@@ -12,7 +12,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable // implements MustVerifyEmail
+class User extends Authenticatable // todo uncomment implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -28,7 +28,7 @@ class User extends Authenticatable // implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'iin', 'password',
+        'name', 'email', 'phone', 'iin', 'password', 'balance_id',
         'referrer_id', 'root_referer_id', 'referral_level_id'
     ];
 
@@ -75,6 +75,11 @@ class User extends Authenticatable // implements MustVerifyEmail
         return $this->belongsToMany(Briefcase::class);
     }
 
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
+
     public function newNotifications()
     {
         return $this->notifications()
@@ -89,5 +94,10 @@ class User extends Authenticatable // implements MustVerifyEmail
     public function balance()
     {
         return $this->belongsTo(Balance::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 }

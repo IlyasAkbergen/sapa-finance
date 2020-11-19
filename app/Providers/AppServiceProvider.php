@@ -6,6 +6,12 @@ use App\Models\Purchase;
 use App\Models\User;
 use App\Observers\PurchaseObserver;
 use App\Observers\UserObserver;
+use App\Services\BalanceOperationService;
+use App\Services\BalanceOperationServiceImpl;
+use App\Services\BaseService;
+use App\Services\BaseServiceImpl;
+use App\Services\UserService;
+use App\Services\UserServiceImpl;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,7 +23,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(BaseService::class, BaseServiceImpl::class);
+        $this->app->bind(UserService::class, UserServiceImpl::class);
+        $this->app->bind(
+            BalanceOperationService::class,
+            BalanceOperationServiceImpl::class
+        );
     }
 
     /**

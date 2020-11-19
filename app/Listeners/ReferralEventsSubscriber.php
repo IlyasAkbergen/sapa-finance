@@ -2,26 +2,61 @@
 
 namespace App\Listeners;
 
-use App\Events\BalanceUpdated;
 use App\Events\PurchaseMade;
+use App\Events\RewardCreated;
 use App\Models\Balance;
+use App\Services\BalanceOperationService;
+use App\Services\UserService;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Support\Facades\DB;
 
-class ReferralEventsSubscriber
+class ReferralEventsSubscriber implements ShouldQueue
 {
-    public function handlePurchaseMade($event) {
+    private $userService;
+    private $balanceService;
+
+    public function __construct(
+        UserService $userService,
+        BalanceOperationService $balanceService
+    ) {
+        $this->userService = $userService;
+        $this->balanceService = $balanceService;
+    }
+
+    public function handlePurchaseMade($event)
+    {
         $purchase = $event->purchase;
-        $purchase->load(['user', 'purchasable']);
-
-        // TODO realize
+        $this->userService->awardReferrersAfterPurchase($purchase);
     }
 
-    public function handleBalanceUpdated($event) {
-        // TODO realize
+    public function handleRewardCreated($event)
+    {
+        $reward = $event->reward;
+
+        if ($reward->handled) return;
+
+        DB::beginTransaction();
+
+        try {
+
+            $operation = $this->balanceService->createOperationForReward($reward);
+
+            if (!empty($operation)) {
+                $reward->update([
+                    'handled' => true
+                ]);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
     }
 
-    public function handleUserRegistered($event) {
+    public function handleUserRegistered($event)
+    {
         $user = $event->user;
         $user->load(['referrer']);
 
@@ -56,8 +91,8 @@ class ReferralEventsSubscriber
         );
 
         $events->listen(
-            BalanceUpdated::class,
-            [self::class, 'handleBalanceUpdated']
+            RewardCreated::class,
+            [self::class, 'handleRewardCreated']
         );
 
         $events->listen(

@@ -2,25 +2,25 @@
 
 namespace App\Events;
 
-use App\Models\Balance;
+use App\Models\Reward;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BalanceUpdated implements ShouldQueue
+class RewardCreated implements ShouldQueue
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $balance;
+    public $reward;
 
     /**
      * Create a new event instance.
      *
-     * @param Balance $balance
+     * @param Reward $reward
      */
-    public function __construct(Balance $balance)
+    public function __construct(Reward $reward)
     {
-        $this->balance = $balance;
+        $this->reward = $reward;
     }
 }
