@@ -2,11 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\BalanceUpdated;
 use App\Events\PurchaseMade;
 use App\Events\RewardCreated;
 use App\Models\Balance;
-use App\Services\BalanceService;
+use App\Services\BalanceOperationService;
 use App\Services\UserService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,7 +19,7 @@ class ReferralEventsSubscriber implements ShouldQueue
 
     public function __construct(
         UserService $userService,
-        BalanceService $balanceService
+        BalanceOperationService $balanceService
     ) {
         $this->userService = $userService;
         $this->balanceService = $balanceService;

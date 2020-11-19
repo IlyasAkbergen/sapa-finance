@@ -6,8 +6,8 @@ use App\Models\Purchase;
 use App\Models\User;
 use App\Observers\PurchaseObserver;
 use App\Observers\UserObserver;
-use App\Services\BalanceService;
-use App\Services\BalanceServiceImpl;
+use App\Services\BalanceOperationService;
+use App\Services\BalanceOperationServiceImpl;
 use App\Services\BaseService;
 use App\Services\BaseServiceImpl;
 use App\Services\UserService;
@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(BaseService::class, BaseServiceImpl::class);
         $this->app->bind(UserService::class, UserServiceImpl::class);
         $this->app->bind(
-            BalanceService::class,
-            BalanceServiceImpl::class
+            BalanceOperationService::class,
+            BalanceOperationServiceImpl::class
         );
     }
 

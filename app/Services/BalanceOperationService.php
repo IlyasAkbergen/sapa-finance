@@ -6,7 +6,7 @@ namespace App\Services;
 
 use App\Models\Reward;
 
-interface BalanceService
+interface BalanceOperationService
 {
     /**
      * @param Reward $reward
