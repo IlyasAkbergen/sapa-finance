@@ -6,7 +6,10 @@ use App\Models\Purchase;
 use App\Models\User;
 use App\Observers\PurchaseObserver;
 use App\Observers\UserObserver;
-use Illuminate\Database\Eloquent\Collection;
+use App\Services\BaseService;
+use App\Services\BaseServiceImpl;
+use App\Services\UserService;
+use App\Services\UserServiceImpl;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,7 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(RepositoryServiceProvider::class);
+        $this->app->bind(BaseService::class, BaseServiceImpl::class);
+        $this->app->bind(UserService::class, UserServiceImpl::class);
     }
 
     /**

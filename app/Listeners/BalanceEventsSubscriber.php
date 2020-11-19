@@ -4,8 +4,9 @@ namespace App\Listeners;
 
 use App\Events\BalanceOperationCreated;
 use App\Models\Balance;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class BalanceEventsSubscriber
+class BalanceEventsSubscriber implements ShouldQueue
 {
     public function handleBalanceOperationCreated($event)
     {

@@ -5,50 +5,30 @@ namespace App\Listeners;
 use App\Events\BalanceUpdated;
 use App\Events\PurchaseMade;
 use App\Events\RewardCreated;
-use App\Helpers\Helper;
 use App\Models\Balance;
-use App\Models\BalanceOperation;
-use App\Models\Purchase;
-use App\Models\Reward;
+use App\Services\BalanceService;
+use App\Services\UserService;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\DB;
 
-class ReferralEventsSubscriber
+class ReferralEventsSubscriber implements ShouldQueue
 {
+    private $userService;
+    private $balanceService;
+
+    public function __construct(
+        UserService $userService,
+        BalanceService $balanceService
+    ) {
+        $this->userService = $userService;
+        $this->balanceService = $balanceService;
+    }
+
     public function handlePurchaseMade($event) {
-
-        DB::beginTransaction();
-
-        try {
-            $purchase = $event->purchase;
-            $purchase->load(['user.referrer_recursive', 'purchasable']);
-
-            if (empty($purchase->user->referrer)) {
-                return;
-            }
-
-            $purchasable = $purchase->purchasable;
-
-            $all_referrers = Helper::flat_all_referrers($purchase->user);
-
-            foreach ($all_referrers as $referrer) {
-                Reward::updateOrCreate([
-                    'target_user_id' => $referrer->id,
-                    'purchase_id' => $purchase->id,
-                ],[
-                    'sum' => $purchasable->getAwardSum(),
-                    'is_direct' => $purchase->user->referrer_id == $referrer->id,
-                    'points' => $purchasable->isAwardable()
-                        ? Purchase::$DIRECT_POINTS_PER_PURCHASE
-                        : null
-                ]);
-            }
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $purchase = $event->purchase;
+        $this->userService->awardReferrersAfterPurchase($purchase);
     }
 
     public function handleRewardCreated($event) {
@@ -60,32 +40,13 @@ class ReferralEventsSubscriber
 
         try {
 
-            $reward->load(['awardable']);
+            $operation = $this->balanceService->createOperationForReward($reward);
 
-            if (empty($reward->awardable->balance_id)) {
-                $reward->awardable->update([
-                    'balance_id' => Balance::create()->id
+            if (!empty($operation)) {
+                $reward->update([
+                    'handled' => true
                 ]);
             }
-
-            $operation = new BalanceOperation();
-            $operation->target_balance_id = $reward->awardable->balance_id;
-            $operation->sum = $reward->sum;
-            $operation->purchase_id = $reward->purchase_id;
-            $operation->reward_id = $reward->id;
-
-            if (!empty($reward->points)) {
-                if ($reward->is_direct) {
-                    $operation->direct_points = $reward->points;
-                } else {
-                    $operation->team_points = $reward->points;
-                }
-            }
-
-            $operation->save();
-            $reward->update([
-                'handled' => true
-            ]);
 
             DB::commit();
         } catch (\Exception $e) {
