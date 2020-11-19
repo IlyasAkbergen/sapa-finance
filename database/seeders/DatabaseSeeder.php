@@ -33,31 +33,27 @@ class DatabaseSeeder extends Seeder
             [
                 'id'   => ReferralLevel::LEVEL_AGENT,
                 'title' => 'Агент',
+                'team_fee_percent' => 0
             ],
             [
                 'id'   => ReferralLevel::LEVEL_CONSULTANT,
                 'title' => 'Финансовый консультант',
-//                'reach_points' => 100,
-//                'defend_points' => null,
-//                'defend_team_points' => 200,
+                'team_fee_percent' => 10
             ],
             [
                 'id'   => ReferralLevel::LEVEL_TUTOR,
                 'title' => 'Наставник',
-//                'reach_team_points' => 2000,
-//                'defend_team_points' => 1000,
+                'team_fee_percent' => 15
             ],
             [
                 'id'   => ReferralLevel::LEVEL_MENTOR,
                 'title' => 'Ментор',
-//                'reach_team_points' => 20000,
-//                'defend_team_points' => 7000,
+                'team_fee_percent' => 20
             ],
             [
                 'id'   => ReferralLevel::LEVEL_PARTNER,
                 'title' => 'Управляющий партнер',
-//                'reach_team_points' => 100000,
-//                'defend_team_points' => 50000,
+                'team_fee_percent' => 20
             ]
         ]);
 
