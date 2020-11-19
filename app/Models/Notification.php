@@ -10,7 +10,7 @@ class Notification extends Model
     use HasFactory;
 
     protected $fillable = [
-        'text', 'url'
+        'text', 'url', 'content', 'is_public'
     ];
 
     public function attachments()

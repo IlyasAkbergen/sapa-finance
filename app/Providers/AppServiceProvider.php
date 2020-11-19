@@ -10,6 +10,8 @@ use App\Services\BalanceOperationService;
 use App\Services\BalanceOperationServiceImpl;
 use App\Services\BaseService;
 use App\Services\BaseServiceImpl;
+use App\Services\NotificationService;
+use App\Services\NotificationServiceImpl;
 use App\Services\UserService;
 use App\Services\UserServiceImpl;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             BalanceOperationService::class,
             BalanceOperationServiceImpl::class
+        );
+        $this->app->bind(
+            NotificationService::class,
+            NotificationServiceImpl::class
         );
     }
 
