@@ -14,7 +14,9 @@ use App\Services\NotificationService;
 use App\Services\NotificationServiceImpl;
 use App\Services\UserService;
 use App\Services\UserServiceImpl;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -46,5 +48,20 @@ class AppServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         Purchase::observe(PurchaseObserver::class);
+
+        // todo practice tutorial from here: https://www.itsolutionstuff.com/post/laravel-8-inertia-js-crud-with-jetstream-tailwind-cssexample.html
+        Inertia::share([
+            'errors' => function () {
+                return Session::get('errors')
+                    ? Session::get('errors')->getBag('default')->getMessages()
+                    : (object) [];
+            },
+        ]);
+
+        Inertia::share('flash', function () {
+            return [
+                'message' => Session::get('message'),
+            ];
+        });
     }
 }
