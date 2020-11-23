@@ -14,6 +14,12 @@ use App\Services\BaseService;
 use App\Services\BaseServiceImpl;
 use App\Services\BriefcaseService;
 use App\Services\BriefcaseServiceImpl;
+use App\Services\CourseService;
+use App\Services\CourseServiceImpl;
+use App\Services\HomeworkService;
+use App\Services\HomeworkServiceImpl;
+use App\Services\LessonService;
+use App\Services\LessonServiceImpl;
 use App\Services\NotificationService;
 use App\Services\NotificationServiceImpl;
 use App\Services\UserService;
@@ -48,6 +54,18 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             BriefcaseService::class,
             BriefcaseServiceImpl::class
+        );
+        $this->app->bind(
+            CourseService::class,
+            CourseServiceImpl::class
+        );
+        $this->app->bind(
+            LessonService::class,
+            LessonServiceImpl::class
+        );
+        $this->app->bind(
+            HomeworkService::class,
+            HomeworkServiceImpl::class
         );
     }
 

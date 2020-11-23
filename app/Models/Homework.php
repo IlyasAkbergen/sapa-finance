@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\HomeworkCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +12,10 @@ class Homework extends Model
 
     protected $fillable = [
         'user_id', 'lesson_id', 'score'
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => HomeworkCreated::class
     ];
 
     public function lesson()

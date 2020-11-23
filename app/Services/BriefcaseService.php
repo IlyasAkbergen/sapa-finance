@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Models\Briefcase;
+use App\Models\BriefcaseType;
 
 interface BriefcaseService
 {
@@ -18,4 +19,10 @@ interface BriefcaseService
      * @param array $ids user ids to be attached
      */
     public function detachFromUsers($briefcase, array $ids);
+
+    /**
+     * @param array $attributes
+     * @return BriefcaseType
+     */
+    public function createType(array $attributes): BriefcaseType;
 }

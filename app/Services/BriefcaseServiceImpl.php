@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Briefcase;
+use App\Models\BriefcaseType;
 
 class BriefcaseServiceImpl extends BaseServiceImpl implements BriefcaseService
 {
@@ -21,5 +22,10 @@ class BriefcaseServiceImpl extends BaseServiceImpl implements BriefcaseService
     public function detachFromUsers($briefcase, array $ids)
     {
         return $briefcase->users()->detach($ids);
+    }
+
+    public function createType(array $attributes): BriefcaseType
+    {
+        return BriefcaseType::create($attributes);
     }
 }
