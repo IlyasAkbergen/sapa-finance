@@ -6,6 +6,8 @@ use App\Models\Purchase;
 use App\Models\User;
 use App\Observers\PurchaseObserver;
 use App\Observers\UserObserver;
+use App\Services\ArticlesService;
+use App\Services\ArticlesServiceImpl;
 use App\Services\BalanceOperationService;
 use App\Services\BalanceOperationServiceImpl;
 use App\Services\BaseService;
@@ -36,6 +38,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             NotificationService::class,
             NotificationServiceImpl::class
+        );
+        $this->app->bind(
+            ArticlesService::class,
+            ArticlesServiceImpl::class
         );
     }
 
