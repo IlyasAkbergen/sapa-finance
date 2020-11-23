@@ -12,6 +12,8 @@ use App\Services\BalanceOperationService;
 use App\Services\BalanceOperationServiceImpl;
 use App\Services\BaseService;
 use App\Services\BaseServiceImpl;
+use App\Services\BriefcaseService;
+use App\Services\BriefcaseServiceImpl;
 use App\Services\NotificationService;
 use App\Services\NotificationServiceImpl;
 use App\Services\UserService;
@@ -42,6 +44,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             ArticlesService::class,
             ArticlesServiceImpl::class
+        );
+        $this->app->bind(
+            BriefcaseService::class,
+            BriefcaseServiceImpl::class
         );
     }
 

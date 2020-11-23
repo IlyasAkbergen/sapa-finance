@@ -31,20 +31,13 @@ class NotificationServiceImpl extends BaseServiceImpl implements NotificationSer
         return $this->create($attributes);
     }
 
-    private function allForUser($user_id) {
-        return Notification::public()
+    public function allForUser($user_id) {
+        return $this->model->public()
             ->orWhere
             ->forUser($user_id);
     }
 
-    public function getAll($user_id)
-    {
-        $model = $this->allForUser($user_id)->get();
-
-        return $model;
-    }
-
-    public function getAllNew($user_id)
+    public function allNew($user_id)
     {
         $model = $this->allForUser($user_id)
                     ->newFor($user_id)

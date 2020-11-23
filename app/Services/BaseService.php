@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Collection\Collection;
 
 interface BaseService
 {
@@ -12,6 +13,12 @@ interface BaseService
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function all();
+
+    /**
+     * @param $user_id
+     * @return Collection
+     */
+    public function allForUser($user_id);
 
     /**
      * @param array $relationships

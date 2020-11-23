@@ -25,13 +25,7 @@ interface NotificationService
      * @param $user_id
      * @return Collection
      */
-    public function getAll($user_id);
-
-    /**
-     * @param $user_id
-     * @return Collection
-     */
-    public function getAllNew($user_id);
+    public function allNew($user_id);
 
     /**
      * @param int $notification_id

@@ -25,6 +25,13 @@ class BaseServiceImpl implements BaseService
         return $this->model->all();
     }
 
+    public function allForUser($user_id)
+    {
+        return $this->model->whereHas('user', function ($q) use ($user_id) {
+            $q->where('id', $user_id);
+        });
+    }
+
     public function allWith(array $relationships)
     {
         return $this->model->with($relationships)->get();
