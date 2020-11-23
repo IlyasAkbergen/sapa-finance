@@ -15,5 +15,9 @@ interface HomeworkService
      */
     public function rate($homework_id, $score);
 
+    /**
+     * @param $homework_id
+     * @param $file
+     */
     public function saveAttachment($homework_id, $file);
 }

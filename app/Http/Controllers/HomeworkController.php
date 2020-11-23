@@ -8,6 +8,7 @@ use App\Models\Lesson;
 use App\Services\HomeworkService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class HomeworkController extends Controller
@@ -26,17 +27,34 @@ class HomeworkController extends Controller
             'file' => ['required', 'file', 'mimes:pdf,doc,docx,txt,png,jpg,jpeg,zip']
         ])->validate();
 
-        $homework = $this->homeworkService->create(array_merge($validatedData, [
-            'user_id' => Auth::user()->id
-        ]));
+        DB::beginTransaction();
 
-        if (empty($homework->id)) {
-            return $this->responseFail('Не удалось сохранить.');
-        } else {
-            return $this->responseSuccess(
-                'Домашняя работа сохранена.',
-                $homework
+        try {
+            $homework = $this->homeworkService->create(array_merge($validatedData, [
+                'user_id' => Auth::user()->id
+            ]));
+
+            $attachment = $this->homeworkService->saveAttachment(
+                $homework->id,
+                $request->file('file')
             );
+
+            DB::commit();
+
+            if ($homework->id == $attachment->model_id) {
+                return $this->responseSuccess(
+                    'Домашняя работа сохранена.',
+                    $homework
+                );
+            } else {
+                return $this->responseFail(
+                    'Что-то пошло не так.',
+                    $homework
+                );
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->responseFail('Не удалось сохранить.');
         }
     }
 

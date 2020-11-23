@@ -8,7 +8,9 @@ use App\Models\Homework;
 
 class HomeworkServiceImpl extends BaseServiceImpl implements HomeworkService
 {
-    public function __construct(Homework $model)
+    private $attachmentService;
+
+    public function __construct(Homework $model, AttachmentService $attachmentService)
     {
         parent::__construct($model);
     }
@@ -22,6 +24,10 @@ class HomeworkServiceImpl extends BaseServiceImpl implements HomeworkService
 
     public function saveAttachment($homework_id, $file)
     {
-        // TODO: Implement saveAttachment() method.
+        $this->attachmentService->setDir(Homework::ATTACHMENT_MAIN_DIR);
+
+        return $this->attachmentService->save(
+            $homework_id, Homework::class, $file
+        );
     }
 }

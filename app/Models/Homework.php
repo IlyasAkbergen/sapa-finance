@@ -18,6 +18,8 @@ class Homework extends Model
         'created' => HomeworkCreated::class
     ];
 
+    const ATTACHMENT_MAIN_DIR = 'homeworks';
+
     public function lesson()
     {
         return $this->belongsTo(Lesson::class);
