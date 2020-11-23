@@ -19,4 +19,9 @@ class HomeworkServiceImpl extends BaseServiceImpl implements HomeworkService
             'score' => $score
         ]);
     }
+
+    public function saveAttachment($homework_id, $file)
+    {
+        // TODO: Implement saveAttachment() method.
+    }
 }
