@@ -34,7 +34,7 @@ class BriefcaseController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => ['required|max:255'],
             'description' => ['required'],
-            'type_id' => ['required', 'exists:' . BriefcaseType::class . ', id'],
+            'type_id' => ['required', 'exists:' . BriefcaseType::class . ',id'],
             'sum' => ['required'],
             'duration' => ['required'],
             'direct_fee' => ['required'],

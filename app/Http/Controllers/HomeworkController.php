@@ -22,17 +22,20 @@ class HomeworkController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = Validator::make($request->all(), [
-            'lesson_id' => ['required', 'exists:' . Lesson::class . ', id'],
+        $request->validate([
+            'lesson_id' => ['required', 'exists:' . Lesson::class . ',id'],
             'file' => ['required', 'file', 'mimes:pdf,doc,docx,txt,png,jpg,jpeg,zip']
-        ])->validate();
+        ]);
 
         DB::beginTransaction();
 
         try {
-            $homework = $this->homeworkService->create(array_merge($validatedData, [
-                'user_id' => Auth::user()->id
-            ]));
+            $homework = $this->homeworkService->create(
+                array_merge(
+                    $request->only(['lesson_id']),
+                    [ 'user_id' => Auth::user()->id ]
+                )
+            );
 
             $attachment = $this->homeworkService->saveAttachment(
                 $homework->id,
@@ -42,11 +45,13 @@ class HomeworkController extends Controller
             DB::commit();
 
             if ($homework->id == $attachment->model_id) {
+                dd('saved');
                 return $this->responseSuccess(
                     'Домашняя работа сохранена.',
                     $homework
                 );
             } else {
+                dd('failed');
                 return $this->responseFail(
                     'Что-то пошло не так.',
                     $homework
@@ -54,6 +59,7 @@ class HomeworkController extends Controller
             }
         } catch (\Exception $e) {
             DB::rollBack();
+            dd('catch failed: '. $e->getMessage());
             return $this->responseFail('Не удалось сохранить.');
         }
     }

@@ -12,6 +12,7 @@ class HomeworkServiceImpl extends BaseServiceImpl implements HomeworkService
 
     public function __construct(Homework $model, AttachmentService $attachmentService)
     {
+        $this->attachmentService = $attachmentService;
         parent::__construct($model);
     }
 

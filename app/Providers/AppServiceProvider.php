@@ -8,6 +8,8 @@ use App\Observers\PurchaseObserver;
 use App\Observers\UserObserver;
 use App\Services\ArticlesService;
 use App\Services\ArticlesServiceImpl;
+use App\Services\AttachmentService;
+use App\Services\AttachmentServiceImpl;
 use App\Services\BalanceOperationService;
 use App\Services\BalanceOperationServiceImpl;
 use App\Services\BaseService;
@@ -66,6 +68,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             HomeworkService::class,
             HomeworkServiceImpl::class
+        );
+        $this->app->bind(
+            AttachmentService::class,
+            AttachmentServiceImpl::class
         );
     }
 
