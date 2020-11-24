@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\HomeworkCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,17 @@ class Homework extends Model
     protected $fillable = [
         'user_id', 'lesson_id', 'score'
     ];
+
+    protected $dispatchesEvents = [
+        'created' => HomeworkCreated::class
+    ];
+
+    const ATTACHMENT_MAIN_DIR = 'homeworks';
+
+    public function getLinkAttribute()
+    {
+        return url('/'); // todo dynamic route to homework
+    }
 
     public function lesson()
     {

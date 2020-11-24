@@ -6,10 +6,22 @@ use App\Models\Purchase;
 use App\Models\User;
 use App\Observers\PurchaseObserver;
 use App\Observers\UserObserver;
+use App\Services\ArticlesService;
+use App\Services\ArticlesServiceImpl;
+use App\Services\AttachmentService;
+use App\Services\AttachmentServiceImpl;
 use App\Services\BalanceOperationService;
 use App\Services\BalanceOperationServiceImpl;
 use App\Services\BaseService;
 use App\Services\BaseServiceImpl;
+use App\Services\BriefcaseService;
+use App\Services\BriefcaseServiceImpl;
+use App\Services\CourseService;
+use App\Services\CourseServiceImpl;
+use App\Services\HomeworkService;
+use App\Services\HomeworkServiceImpl;
+use App\Services\LessonService;
+use App\Services\LessonServiceImpl;
 use App\Services\NotificationService;
 use App\Services\NotificationServiceImpl;
 use App\Services\UserService;
@@ -36,6 +48,30 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             NotificationService::class,
             NotificationServiceImpl::class
+        );
+        $this->app->bind(
+            ArticlesService::class,
+            ArticlesServiceImpl::class
+        );
+        $this->app->bind(
+            BriefcaseService::class,
+            BriefcaseServiceImpl::class
+        );
+        $this->app->bind(
+            CourseService::class,
+            CourseServiceImpl::class
+        );
+        $this->app->bind(
+            LessonService::class,
+            LessonServiceImpl::class
+        );
+        $this->app->bind(
+            HomeworkService::class,
+            HomeworkServiceImpl::class
+        );
+        $this->app->bind(
+            AttachmentService::class,
+            AttachmentServiceImpl::class
         );
     }
 
