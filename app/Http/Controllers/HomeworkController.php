@@ -64,10 +64,11 @@ class HomeworkController extends Controller
         }
     }
 
+    // todo add middleware to rate
     public function rate(Request $request)
     {
         $request->validate([
-            'homework_id' => ['required', 'exists:' . Homework::class . ', id'],
+            'homework_id' => ['required', 'exists:' . Homework::class . ',id'],
             'score' => ['required', 'integer', 'min:0', 'max:100']
         ]);
 
@@ -76,10 +77,11 @@ class HomeworkController extends Controller
             $request->input('score')
         );
 
+        event(new HomeworkRated($homework));
+
         if (empty($homework->id)) {
             return $this->responseFail('Не удалось сохранить оценку.');
         } else {
-            event(new HomeworkRated($homework));
             return $this->responseSuccess('Оценка сохранена.', $homework);
         }
     }

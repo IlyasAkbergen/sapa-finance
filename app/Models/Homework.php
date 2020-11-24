@@ -20,6 +20,11 @@ class Homework extends Model
 
     const ATTACHMENT_MAIN_DIR = 'homeworks';
 
+    public function getLinkAttribute()
+    {
+        return url('/'); // todo dynamic route to homework
+    }
+
     public function lesson()
     {
         return $this->belongsTo(Lesson::class);
