@@ -30,4 +30,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'paybox' => [
+        'api_id' => env('PAYBOX_ID'),
+        'api_key' => env('PAYBOX_KEY')
+    ]
 ];

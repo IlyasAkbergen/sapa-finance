@@ -2,10 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\PurchaseMade;
+use App\Events\PurchasePaid;
 use App\Events\RewardCreated;
 use App\Models\Balance;
 use App\Services\BalanceOperationService;
+use App\Services\PurchaseServiceContract;
 use App\Services\UserService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,18 +17,25 @@ class ReferralEventsSubscriber implements ShouldQueue
 {
     private $userService;
     private $balanceService;
+    private $purchaseService;
 
     public function __construct(
         UserService $userService,
-        BalanceOperationService $balanceService
+        BalanceOperationService $balanceService,
+        PurchaseServiceContract $purchaseService
     ) {
         $this->userService = $userService;
         $this->balanceService = $balanceService;
+        $this->purchaseService = $purchaseService;
     }
 
-    public function handlePurchaseMade($event)
+    public function handlePurchasePaid($event)
     {
         $purchase = $event->purchase;
+        $purchase->loadMissing('purchasable');
+        $this->purchaseService->addUsersToPurchasable(
+            [$purchase->user_id], $purchase->purchasable
+        );
         $this->userService->awardReferrersAfterPurchase($purchase);
     }
 
@@ -86,8 +94,8 @@ class ReferralEventsSubscriber implements ShouldQueue
     public function subscribe($events)
     {
         $events->listen(
-            PurchaseMade::class,
-            [self::class, 'handlePurchaseMade']
+            PurchasePaid::class,
+            [self::class, 'handlePurchasePaid']
         );
 
         $events->listen(

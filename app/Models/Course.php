@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Interfaces\WithPurchase;
 use App\Traits\Awardable;
+use App\Traits\HasUsers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +12,7 @@ class Course extends Model implements WithPurchase
 {
     use HasFactory;
     use Awardable;
+    use HasUsers;
 
     protected $fillable = [
         'title', 'description', 'direct_fee', 'awardable',
