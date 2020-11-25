@@ -14,7 +14,7 @@ class Purchase extends Model
     static $DIRECT_POINTS_PER_PURCHASE = 10;
 
     protected $fillable = [
-        'user_id', 'sum', 'purchasable_id', 'purchasable_type', 'payed'
+        'user_id', 'sum', 'purchasable_id', 'purchasable_type', 'payed', 'with_feedback'
     ];
 
     public function user()

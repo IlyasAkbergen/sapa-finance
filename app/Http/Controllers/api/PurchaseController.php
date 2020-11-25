@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\ApiBaseController;
 use App\Services\PurchaseServiceContract;
 use Illuminate\Http\Request;
 
@@ -16,18 +17,22 @@ class PurchaseController extends ApiBaseController
 
     public function makePayed($id)
     {
-        // todo check status through gate
+        $payed = true; // todo check status through gate
 
         $purchase = $this->purchaseService->find($id);
 
-        if (!isset($purchase) || $purchase->payed) {
+        if (!isset($purchase)) {
+            return $this->failedResponse([
+                'message' => 'Not found.'
+            ]);
+        } else if($purchase->payed) {
             return $this->failedResponse([
                 'message' => 'Already payed.'
             ]);
         }
 
         $purchase = $this->purchaseService->update($purchase->id, [
-            'payed' => true
+            'payed' => $payed
         ]);
 
         if ($purchase->payed) {
