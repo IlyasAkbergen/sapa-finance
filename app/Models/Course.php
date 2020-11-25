@@ -28,4 +28,9 @@ class Course extends Model implements WithPurchase
     {
         return $this->morphMany(Purchase::class, 'purchasable');
     }
+
+    public function getDescription()
+    {
+        return 'Покупкка курса "' . $this->title . '"';
+    }
 }

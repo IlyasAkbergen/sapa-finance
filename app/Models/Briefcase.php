@@ -23,4 +23,9 @@ class Briefcase extends Model implements WithPurchase
     {
         return $this->morphMany(Purchase::class, 'purchasable');
     }
+
+    public function getDescription()
+    {
+        return 'Покупка портфеля "' . $this->title . '"';
+    }
 }

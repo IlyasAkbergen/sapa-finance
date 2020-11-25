@@ -29,5 +29,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 });
 
 Route::get('/test', function () {
-    return Inertia\Inertia::render('MainLayout');
+    $gate = new \App\Services\Gates\PayboxGate();
+    $gate->setOrder(\App\Models\Purchase::find(45));
+    $gate->redirectToPaymentPage();
 });
+

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CourseRequest;
 use App\Services\CourseService;
 
-class CourseController extends Controller
+class CourseController extends WebBaseController
 {
     private $courseService;
 

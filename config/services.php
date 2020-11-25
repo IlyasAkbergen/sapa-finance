@@ -32,6 +32,9 @@ return [
 
     'paybox' => [
         'api_id' => env('PAYBOX_ID'),
-        'api_key' => env('PAYBOX_KEY')
+        'api_pay_in_key' => env('PAYBOX_PAY_IN_KEY'),
+        'api_pay_out_key' => env('PAYBOX_PAY_OUT_KEY'),
+        'testing_mode' => env('PAYBOX_TESTING_MODE', false),
+        'result_url' => env('PAYBOX_RESULT_URL', '/paybox/result'),
     ]
 ];

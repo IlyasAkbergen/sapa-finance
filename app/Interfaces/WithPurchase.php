@@ -13,4 +13,6 @@ interface WithPurchase
     function getAwardSum();
 
     function users();
+
+    function getDescription();
 }
