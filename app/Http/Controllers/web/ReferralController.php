@@ -27,7 +27,7 @@ class ReferralController extends WebBaseController
         // todo render Inertia
     }
 
-    public function myReward()
+    public function myRewards()
     {
         // todo implement rewards
     }
