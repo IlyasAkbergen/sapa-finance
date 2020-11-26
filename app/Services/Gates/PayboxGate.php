@@ -3,6 +3,7 @@
 namespace App\Services\Gates;
 
 use App\Models\Purchase;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Paybox\Pay\Facade as Paybox;
 
@@ -15,7 +16,8 @@ class PayboxGate implements PaymentGateContract
     private $mode;
 
     const MODE_PAY_IN = 1;
-    const MODE_PAYOUT_IN = 1;
+    const MODE_PAY_OUT = 2;
+    const PAYMENT_STATUS_OK = 'ok';
 
     // todo samples here: https://packagist.org/packages/payboxmoney/pay
 
@@ -29,7 +31,8 @@ class PayboxGate implements PaymentGateContract
         try{
             $this->api = new Paybox();
             $this->setMode(self::MODE_PAY_IN);
-            $this->api->config->setResultUrl($config['result_url']);
+            $this->api->config->setSiteUrl($config['site_url']);
+            $this->api->config->setResultUrl($config['site_url'] . '/' . $config['result_url']);
             $this->api->config->setIsTestingMode($config['testing_mode']);
 
         } catch (\Exception $e) {
@@ -44,8 +47,8 @@ class PayboxGate implements PaymentGateContract
 
     public function setMerchant()
     {
-        $this->api->getMerchant()->setId($this->api_id);
-        $this->api->getMerchant()->setSecretKey($this->getApiKey());
+        $this->api->merchant->setId($this->api_id);
+        $this->api->merchant->setSecretKey($this->getApiKey());
     }
 
     public function init()
@@ -85,5 +88,55 @@ class PayboxGate implements PaymentGateContract
     {
         $this->init();
         header('Location:' . $this->api->redirectUrl);
+    }
+
+    /**
+     * partial|pending|ok|failed|revoked|incomplete
+     * @param $purchase
+     * @return \Paybox\Pay\Exception|string
+     */
+    function getStatus($purchase = null)
+    {
+        if (!empty($purchase)) {
+            $this->setOrder($purchase);
+            $this->init();
+        }
+
+        return $this->api->getStatus();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    function isPayed($purchase = null)
+    {
+        $payed = false;
+        try {
+            $payed = $this->getStatus($purchase) == self::PAYMENT_STATUS_OK;
+        } catch (\Exception $e) {
+            Log::critical($e->getTraceAsString());
+            dd($e);
+        }
+
+        return $payed;
+    }
+
+    public function parseRequest($request)
+    {
+        $this->setMerchant();
+        $this->api->payment->id = $request->input('pg_payment_id');
+        $this->api->order->id = $request->input('pg_order_id');
+
+        return $this->api->checkSig($request->all()) && $request->input('pg_result');
+    }
+
+    public function accept()
+    {
+        $this->api->accept('Ok. Order handled');
+    }
+
+    public function getOrder()
+    {
+        return $this->api->order;
     }
 }

@@ -14,9 +14,11 @@ class PurchaseService extends BaseServiceImpl implements PurchaseServiceContract
         parent::__construct($model);
     }
 
-    function addUsersToPurchasable(array $user_ids, WithPurchase $purchasable)
+    function addUsersToPurchasable(array $user_ids, WithPurchase $purchasable, $consultant_id)
     {
-        return $purchasable->users()->attach($user_ids);
+        return $purchasable->users()->attach($user_ids, [
+            'consultant_id' => $consultant_id
+        ]);
     }
 
     function ofUser($user_id)

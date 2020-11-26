@@ -32,9 +32,9 @@ class ReferralEventsSubscriber implements ShouldQueue
     public function handlePurchasePaid($event)
     {
         $purchase = $event->purchase;
-        $purchase->loadMissing('purchasable');
+        $purchase->loadMissing('purchasable', 'user');
         $this->purchaseService->addUsersToPurchasable(
-            [$purchase->user_id], $purchase->purchasable
+            [$purchase->user_id], $purchase->purchasable, $purchase->user->referrer_id
         );
         $this->userService->awardReferrersAfterPurchase($purchase);
     }

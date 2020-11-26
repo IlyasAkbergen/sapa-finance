@@ -2,24 +2,37 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\ApiBaseController;
+use App\Http\Requests\api\PayboxResultRequest;
+use App\Services\Gates\PaymentGateContract;
 use App\Services\PurchaseServiceContract;
 use Illuminate\Http\Request;
 
 class PurchaseController extends ApiBaseController
 {
     private $purchaseService;
+    private $paymentGate;
 
-    public function __construct(PurchaseServiceContract $purchaseService)
-    {
+    public function __construct(
+        PurchaseServiceContract $purchaseService,
+        PaymentGateContract $paymentGate
+    ) {
         $this->purchaseService = $purchaseService;
+        $this->paymentGate = $paymentGate;
     }
 
-    public function makePayed($id)
+    public function makePayed(PayboxResultRequest $request)
     {
-        $payed = true; // todo check status through gate
+        if (!$this->paymentGate->parseRequest($request) ) {
+            return $this->failedResponse([
+                'message' => 'could not parse request.'
+            ]);
+        }
 
-        $purchase = $this->purchaseService->find($id);
+        $payed = $this->paymentGate->isPayed();
+
+        $purchase = $this->purchaseService->find(
+            $this->paymentGate->getOrder()->id
+        );
 
         if (!isset($purchase)) {
             return $this->failedResponse([
@@ -31,11 +44,12 @@ class PurchaseController extends ApiBaseController
             ]);
         }
 
-        $purchase = $this->purchaseService->update($purchase->id, [
-            'payed' => $payed
-        ]);
+        $purchase->setPayed();
 
         if ($purchase->payed) {
+
+            $this->paymentGate->accept();
+
             return $this->successResponse([
                'message' => 'Successfully received.'
             ]);

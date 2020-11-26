@@ -32,16 +32,13 @@ class Purchase extends Model
         'payed' => PurchasePayed::class
     ];
 
-    protected static function booted()
+    public function setPayed()
     {
-        static::saved(function ($purchase) {
-            if (!$purchase->wasRecentlyCreated
-                && $purchase->payed
-                && isset($purchase->getChanges()['payed'])
-                && !$purchase->getChanges()['payed']
-            ) {
-                $purchase->fireModelEvent('payed', false);
-            }
-        });
+        // todo вынести в сервис
+        $this->update([
+            'payed' => true
+        ]);
+
+        $this->fireModelEvent('payed');
     }
 }

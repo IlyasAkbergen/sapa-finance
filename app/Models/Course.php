@@ -12,7 +12,6 @@ class Course extends Model implements WithPurchase
 {
     use HasFactory;
     use Awardable;
-    use HasUsers;
 
     protected $fillable = [
         'title', 'description', 'direct_fee', 'awardable',
@@ -32,5 +31,10 @@ class Course extends Model implements WithPurchase
     public function getDescription()
     {
         return 'Покупкка курса "' . $this->title . '"';
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_course');
     }
 }
