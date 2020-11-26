@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
+
+use App\Http\Controllers\Controller;
 
 class WebBaseController extends Controller
 {

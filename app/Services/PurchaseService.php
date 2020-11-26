@@ -18,4 +18,10 @@ class PurchaseService extends BaseServiceImpl implements PurchaseServiceContract
     {
         return $purchasable->users()->attach($user_ids);
     }
+
+    function ofUser($user_id)
+    {
+        $this->with(['purchasable']);
+        return $this->firstWhere(['user_id' => $user_id]);
+    }
 }

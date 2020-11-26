@@ -18,6 +18,8 @@ use App\Services\BriefcaseService;
 use App\Services\BriefcaseServiceImpl;
 use App\Services\CourseService;
 use App\Services\CourseServiceImpl;
+use App\Services\Gates\PayboxGate;
+use App\Services\Gates\PaymentGateContract;
 use App\Services\HomeworkService;
 use App\Services\HomeworkServiceImpl;
 use App\Services\LessonService;
@@ -78,6 +80,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             PurchaseServiceContract::class,
             PurchaseService::class
+        );
+        $this->app->bind(
+            PaymentGateContract::class,
+            PayboxGate::class
         );
     }
 

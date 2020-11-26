@@ -51,6 +51,13 @@ interface BaseService
     public function find($id): ?Model;
 
     /**
+     * @param $id
+     * @param array $relationships
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function findWith($id, array $relationships);
+
+    /**
      * @param array $params
      * @return Model
      */
