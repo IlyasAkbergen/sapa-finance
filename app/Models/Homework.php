@@ -30,6 +30,18 @@ class Homework extends Model
         return $this->belongsTo(Lesson::class);
     }
 
+    public function course()
+    {
+        return $this->hasOneThrough(
+            Course::class,
+            Lesson::class,
+            'id',
+            'id',
+            'lesson_id',
+            'course_id'
+        );
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

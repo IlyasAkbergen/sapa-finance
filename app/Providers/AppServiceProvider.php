@@ -18,12 +18,16 @@ use App\Services\BriefcaseService;
 use App\Services\BriefcaseServiceImpl;
 use App\Services\CourseService;
 use App\Services\CourseServiceImpl;
+use App\Services\Gates\PayboxGate;
+use App\Services\Gates\PaymentGateContract;
 use App\Services\HomeworkService;
 use App\Services\HomeworkServiceImpl;
 use App\Services\LessonService;
 use App\Services\LessonServiceImpl;
 use App\Services\NotificationService;
 use App\Services\NotificationServiceImpl;
+use App\Services\PurchaseService;
+use App\Services\PurchaseServiceContract;
 use App\Services\UserService;
 use App\Services\UserServiceImpl;
 use Illuminate\Support\Facades\Session;
@@ -72,6 +76,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             AttachmentService::class,
             AttachmentServiceImpl::class
+        );
+        $this->app->bind(
+            PurchaseServiceContract::class,
+            PurchaseService::class
+        );
+        $this->app->bind(
+            PaymentGateContract::class,
+            PayboxGate::class
         );
     }
 

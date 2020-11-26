@@ -11,4 +11,8 @@ interface WithPurchase
     function isAwardable();
 
     function getAwardSum();
+
+    function users();
+
+    function getDescription();
 }

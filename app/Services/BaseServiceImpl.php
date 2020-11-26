@@ -32,6 +32,11 @@ class BaseServiceImpl implements BaseService
         });
     }
 
+    public function with(array $relationships)
+    {
+        $this->model = $this->model->with($relationships);
+    }
+
     public function allWith(array $relationships)
     {
         return $this->model->with($relationships)->get();
@@ -50,6 +55,11 @@ class BaseServiceImpl implements BaseService
         $model = $this->model->find($id);
 
         return $model;
+    }
+
+    public function findWith($id, array $relationships)
+    {
+        return $this->model->with($relationships)->find($id);
     }
 
     public function firstWhere(array $params)

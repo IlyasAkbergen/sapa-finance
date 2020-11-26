@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use App\Models\Purchase;
 use App\Models\Reward;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserServiceImpl extends BaseServiceImpl implements UserService
@@ -69,5 +70,11 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
         } catch (\Exception $e) {
             DB::rollBack();
         }
+    }
+
+    public function allReferralsOf($user_id)
+    {
+        $model = $this->findWith($user_id, ['all_referrals']);
+        return Helper::flat_all_referrals($model);
     }
 }

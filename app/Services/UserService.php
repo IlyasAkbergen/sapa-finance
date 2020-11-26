@@ -28,4 +28,9 @@ interface UserService
      * @param Purchase $purchase
      */
     public function awardReferrersAfterPurchase(Purchase $purchase);
+
+    /**
+     * @param $user_id
+     */
+    public function allReferralsOf($user_id);
 }

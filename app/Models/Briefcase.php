@@ -12,7 +12,6 @@ class Briefcase extends Model implements WithPurchase
 {
     use HasFactory;
     use Awardable;
-    use HasUsers;
 
     protected $fillable = [
         'title', 'description', 'type_id', 'sum', 'profit', 'duration',
@@ -22,5 +21,15 @@ class Briefcase extends Model implements WithPurchase
     function purchases()
     {
         return $this->morphMany(Purchase::class, 'purchasable');
+    }
+
+    public function getDescription()
+    {
+        return 'Покупка портфеля "' . $this->title . '"';
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_briefcase');
     }
 }

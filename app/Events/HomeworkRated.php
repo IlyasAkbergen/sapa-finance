@@ -2,7 +2,9 @@
 
 namespace App\Events;
 
+use App\Models\Course;
 use App\Models\Homework;
+use App\Models\Purchase;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -24,14 +26,23 @@ class HomeworkRated extends Notification implements ShouldQueue
     public function __construct(Homework $homework)
     {
         $this->homework = $homework;
-        $this->homework->load('user');
+        $this->homework->load('user', 'course');
         $this->homework->user->notify($this);
     }
 
     public function via($notifiable)
     {
-        // todo check if notifiable can receive email, has subscription
-        return [];
+        $result = [];
+        $purchase = Purchase::where('purchasable_id', $this->homework->course->id)
+            ->where('purchasable_type', Course::class)
+            ->where('user_id', $notifiable->id)
+            ->first();
+
+        if (!empty($purchase) && $purchase->with_feedback) {
+            array_push($result, 'mail');
+        }
+
+        return $result;
     }
 
     public function toMail($notifiable)

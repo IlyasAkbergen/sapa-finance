@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\web\PurchaseController;
+use App\Http\Controllers\web\ReferralController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,8 +28,20 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         '/articles',
         \App\Http\Controllers\ArticleController::class
     );
+
+    Route::resource(
+        'purchases',
+        \App\Http\Controllers\web\PurchaseController::class
+    );
+
+    Route::get('/my-purchases', [PurchaseController::class, 'my']);
+
+    Route::get('/my-referrals', [ReferralController::class, 'myReferrals']);
 });
 
 Route::get('/test', function () {
-    return Inertia\Inertia::render('MainLayout');
+    $gate = new \App\Services\Gates\PayboxGate();
+    $gate->setOrder(\App\Models\Purchase::find(45));
+    $gate->redirectToPaymentPage();
 });
+

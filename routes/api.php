@@ -1,7 +1,7 @@
 <?php
 
-use App\Helpers\Helper;
-use App\Models\User;
+use App\Http\Controllers\api\PurchaseController;
+use App\Http\Controllers\HomeworkController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +27,16 @@ Route::get('test', function () {
         'purchasable_id' => 5,
         'purchasable_type' => \App\Models\Course::class
    ]);
+});
+
+Route::post(
+    '/paybox/result',
+    [PurchaseController::class, 'makePayed']
+);
+
+Route::apiResource('homeworks', HomeworkController::class);
+
+Route::post('homework/rate', [HomeworkController::class, 'rate']);
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
 });

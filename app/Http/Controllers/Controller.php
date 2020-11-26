@@ -10,14 +10,4 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function responseSuccess($message, $data = null) {
-        return redirect()->back()
-            ->with('message', $message);
-    }
-
-    public function responseFail($error, $data = null) {
-        return redirect()->back()
-            ->with('error', $error);
-    }
 }

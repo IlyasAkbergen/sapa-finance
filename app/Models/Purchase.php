@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\PurchaseMade;
+use App\Events\PurchasePayed;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,7 @@ class Purchase extends Model
     static $DIRECT_POINTS_PER_PURCHASE = 10;
 
     protected $fillable = [
-        'user_id', 'sum', 'purchasable_id', 'purchasable_type'
+        'user_id', 'sum', 'purchasable_id', 'purchasable_type', 'payed', 'with_feedback'
     ];
 
     public function user()
@@ -27,6 +28,17 @@ class Purchase extends Model
     }
 
     protected $dispatchesEvents = [
-        'created' => PurchaseMade::class
+        'created' => PurchaseMade::class,
+        'payed' => PurchasePayed::class
     ];
+
+    public function setPayed()
+    {
+        // todo вынести в сервис
+        $this->update([
+            'payed' => true
+        ]);
+
+        $this->fireModelEvent('payed');
+    }
 }
