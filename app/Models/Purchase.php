@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Events\PurchaseMade;
-use App\Events\PurchasePaid;
+use App\Events\PurchasePayed;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,7 +29,7 @@ class Purchase extends Model
 
     protected $dispatchesEvents = [
         'created' => PurchaseMade::class,
-        'paid' => PurchasePaid::class
+        'payed' => PurchasePayed::class
     ];
 
     protected static function booted()

@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\PurchasePaid;
+use App\Events\PurchasePayed;
 use App\Events\RewardCreated;
 use App\Models\Balance;
 use App\Services\BalanceOperationService;
@@ -94,7 +94,7 @@ class ReferralEventsSubscriber implements ShouldQueue
     public function subscribe($events)
     {
         $events->listen(
-            PurchasePaid::class,
+            PurchasePayed::class,
             [self::class, 'handlePurchasePaid']
         );
 
