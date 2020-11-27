@@ -39,4 +39,6 @@ interface PaymentGateContract
     function accept();
 
     function getOrder();
+
+    function getRedirectUrl();
 }

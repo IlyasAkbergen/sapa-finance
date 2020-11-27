@@ -90,6 +90,12 @@ class PayboxGate implements PaymentGateContract
         header('Location:' . $this->api->redirectUrl);
     }
 
+    public function getRedirectUrl()
+    {
+        $this->init();
+        return $this->api->redirectUrl;
+    }
+
     /**
      * partial|pending|ok|failed|revoked|incomplete
      * @param $purchase

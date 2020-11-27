@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\web\WebBaseController;
 use App\Http\Requests\CourseRequest;
 use App\Services\CourseService;
 
