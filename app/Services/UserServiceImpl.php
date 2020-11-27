@@ -32,6 +32,10 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
         ]), $reward_attributes);
     }
 
+    public function addPayout($id, array $payout_attributes) {
+        // todo check if allowed and create
+    }
+
     /**
      * @inheritDoc
      */
