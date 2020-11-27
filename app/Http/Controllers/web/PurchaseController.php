@@ -42,6 +42,7 @@ class PurchaseController extends WebBaseController
 
     public function store(PurchaseRequest $request)
     {
+        // todo Пездюк потести этот момент
         $inputData = $request->only([
             'purchasable_id', 'purchasable_type', 'with_feedback'
         ]);
@@ -55,8 +56,8 @@ class PurchaseController extends WebBaseController
         if(empty($purchase->id)) {
             return $this->responseFail('Что-то пошло не так.');
         } else {
-            // todo init paybox payment page ??
-            return $this->responseSuccess('Заявка на покупку успешно сохранена.');
+            $this->paymentGate->setOrder($purchase);
+            return $this->paymentGate->redirectToPaymentPage();
         }
     }
 }
