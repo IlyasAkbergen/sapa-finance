@@ -100,4 +100,9 @@ class User extends Authenticatable // todo uncomment implements MustVerifyEmail
     {
         return $this->hasMany(Purchase::class);
     }
+
+    public function payouts()
+    {
+        return $this->hasMany(Payout::class);
+    }
 }

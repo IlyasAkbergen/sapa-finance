@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Helpers\Helper;
+use App\Models\Payout;
 use App\Models\Purchase;
 use App\Models\Reward;
 use App\Models\User;
@@ -33,7 +34,13 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
     }
 
     public function addPayout($id, array $payout_attributes) {
-        // todo check if allowed and create
+        $user = $this->findWith($id, ['balance']);
+
+        if ($payout_attributes['sum'] > $user->balance->sum) {
+            return null;
+        }
+
+        return $user->payouts()->create($payout_attributes);
     }
 
     /**

@@ -20,7 +20,7 @@ interface UserService
     /**
      * @param int $id user_id
      * @param array $payout_attributes
-     * @return Payout
+     * @return Payout | null
      */
     public function addPayout($id, array $payout_attributes);
 

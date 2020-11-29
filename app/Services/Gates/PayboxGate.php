@@ -2,6 +2,7 @@
 
 namespace App\Services\Gates;
 
+use App\Models\Payout;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -14,16 +15,14 @@ class PayboxGate implements PaymentGateContract
     private $api_pay_out_key;
     private $api;
     private $mode;
-
-    const MODE_PAY_IN = 1;
-    const MODE_PAY_OUT = 2;
-    const PAYMENT_STATUS_OK = 'ok';
+    private $config;
 
     // todo samples here: https://packagist.org/packages/payboxmoney/pay
 
     public function __construct()
     {
         $config = config('services.paybox');
+        $this->config = $config;
         $this->api_id = $config['api_id'];
         $this->api_pay_in_key = $config['api_pay_in_key'];
         $this->api_pay_out_key = $config['api_pay_out_key'];
@@ -54,6 +53,11 @@ class PayboxGate implements PaymentGateContract
     public function init()
     {
         $this->setMerchant();
+
+        if ($this->mode == self::MODE_PAY_OUT) {
+            $this->setSuccessUrl($this->config['check_url']);
+        }
+
         $this->api->init();
     }
 
@@ -82,6 +86,18 @@ class PayboxGate implements PaymentGateContract
         $this->api->order->setAmount($purchase->sum);
         $this->api->order->setDescription($purchase->purchasable->getDescription());
         $this->api->customer->setUserEmail($purchase->user->email);
+    }
+
+    public function setPayout(Payout $payout)
+    {
+        $payout->loadMissing('user');
+
+        $this->api->order->setId($payout->id);
+        $this->api->order->setAmount($payout->sum);
+        $this->api->order->setDescription(
+            'Вывод средств для пользователя: ' . $payout->user->email
+        );
+        $this->api->customer->setUserEmail($payout->user->email);
     }
 
     public function redirectToPaymentPage()
