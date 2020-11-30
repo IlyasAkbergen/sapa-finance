@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\api;
+namespace App\Http\Requests\api\Paybox\pay;
 
 
 use App\Http\Requests\ApiBaseRequest;
 
-class PayboxResultRequest extends ApiBaseRequest
+class ResultRequest extends ApiBaseRequest
 {
     public function injectedRules()
     {

@@ -38,10 +38,9 @@ interface PaymentGateContract
     function getStatus($purchase = null);
 
     /**
-     * @param $purchase Purchase
      * @return boolean
      */
-    function isPayed($purchase = null);
+    function isStatusOk();
 
     /**
      * @param $request

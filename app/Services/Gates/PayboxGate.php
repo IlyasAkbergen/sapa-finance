@@ -157,17 +157,17 @@ class PayboxGate implements PaymentGateContract
     /**
      * @inheritDoc
      */
-    function isPayed($purchase = null)
+    function isStatusOk()
     {
-        $payed = false;
+        $result = false;
         try {
-            $payed = $this->getStatus($purchase) == self::PAYMENT_STATUS_OK;
+            $result = $this->api->getStatus() == self::PAYMENT_STATUS_OK;
         } catch (\Exception $e) {
             Log::critical($e->getTraceAsString());
             dd($e);
         }
 
-        return $payed;
+        return $result;
     }
 
     public function parseRequest($request)
