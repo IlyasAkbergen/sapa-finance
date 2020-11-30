@@ -4,9 +4,10 @@ namespace App\Services\Gates;
 
 use App\Models\Payout;
 use App\Models\Purchase;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
-use Paybox\Pay\Facade as Paybox;
+use Paybox\Pay\Facade as PayboxPay;
+use Paybox\Payout\Facade as PayboxPayout;
 
 class PayboxGate implements PaymentGateContract
 {
@@ -26,14 +27,43 @@ class PayboxGate implements PaymentGateContract
         $this->api_id = $config['api_id'];
         $this->api_pay_in_key = $config['api_pay_in_key'];
         $this->api_pay_out_key = $config['api_pay_out_key'];
+    }
 
+    private function commonInit()
+    {
+        if (!empty($this->api)) {
+            $this->setMerchant();
+            $this->api->config->setIsTestingMode($this->config['testing_mode']);
+        }
+    }
+
+    public function initPayin()
+    {
         try{
-            $this->api = new Paybox();
             $this->setMode(self::MODE_PAY_IN);
-            $this->api->config->setSiteUrl($config['site_url']);
-            $this->api->config->setResultUrl($config['site_url'] . '/' . $config['result_url']);
-            $this->api->config->setIsTestingMode($config['testing_mode']);
 
+            $this->api = new PayboxPay();
+
+            $this->api->config->setSiteUrl($this->config['site_url']);
+            $this->api->config->setResultUrl($this->config['site_url'] . '/' . $this->config['result_url']);
+            $this->setSuccessUrl($this->config['site_url']);
+            $this->commonInit();
+        } catch (\Exception $e) {
+            Log::critical($e->getMessage());
+        }
+    }
+
+    public function initPayout()
+    {
+        try {
+            $this->setMode(self::MODE_PAY_OUT);
+
+            $this->api = new PayboxPayout();
+
+            $this->api->config->setPostLink($this->config['site_url'] . '/' . $this->config['result_url']);
+            $this->api->config->setBackLink($this->config['site_url']);
+            $this->api->config->setOrderTimeLimit(Carbon::tomorrow()->endOfDay());
+            $this->commonInit();
         } catch (\Exception $e) {
             Log::critical($e->getMessage());
         }
@@ -48,17 +78,6 @@ class PayboxGate implements PaymentGateContract
     {
         $this->api->merchant->setId($this->api_id);
         $this->api->merchant->setSecretKey($this->getApiKey());
-    }
-
-    public function init()
-    {
-        $this->setMerchant();
-
-        if ($this->mode == self::MODE_PAY_OUT) {
-            $this->setSuccessUrl($this->config['check_url']);
-        }
-
-        $this->api->init();
     }
 
     private function getApiKey()
@@ -86,6 +105,7 @@ class PayboxGate implements PaymentGateContract
         $this->api->order->setAmount($purchase->sum);
         $this->api->order->setDescription($purchase->purchasable->getDescription());
         $this->api->customer->setUserEmail($purchase->user->email);
+        $this->api->customer->setId($purchase->user->id);
     }
 
     public function setPayout(Payout $payout)
@@ -102,13 +122,20 @@ class PayboxGate implements PaymentGateContract
 
     public function redirectToPaymentPage()
     {
-        $this->init();
+        $this->api->init();
+        header('Location:' . $this->api->redirectUrl);
+    }
+
+    public function redirectToPayoutPage()
+    {
+        $this->api->reg2nonreg();
         header('Location:' . $this->api->redirectUrl);
     }
 
     public function getRedirectUrl()
     {
         $this->init();
+        $this->api->init();
         return $this->api->redirectUrl;
     }
 

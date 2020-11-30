@@ -14,6 +14,10 @@ interface PaymentGateContract
     const MODE_PAY_OUT = 2;
     const PAYMENT_STATUS_OK = 'ok';
 
+    function initPayin();
+
+    function initPayout();
+
     function setOrder(Purchase $purchasable);
 
     function setPayout(Payout $payout);
@@ -21,6 +25,8 @@ interface PaymentGateContract
     function setMode($mode);
 
     function redirectToPaymentPage();
+
+    function redirectToPayoutPage();
 
     function setSuccessUrl($url);
 

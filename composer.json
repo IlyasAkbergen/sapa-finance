@@ -18,6 +18,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "payboxmoney/pay": "^1.2",
+        "payboxmoney/payout": "^1.2",
         "tightenco/ziggy": "^0.9.4"
     },
     "require-dev": {

@@ -56,6 +56,7 @@ class PurchaseController extends WebBaseController
         if(empty($purchase->id)) {
             return $this->responseFail('Что-то пошло не так.');
         } else {
+            $this->paymentGate->initPayin();
             $this->paymentGate->setOrder($purchase);
             return $this->paymentGate->redirectToPaymentPage();
         }

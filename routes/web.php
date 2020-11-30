@@ -40,10 +40,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/my-referrals', [ReferralController::class, 'myReferrals']);
 });
 
-Route::get('/test-payout/{sum}', [PayoutController::class, 'store']);
-
-Route::get('/test/{id}', function ($id) {
-    $gate = new \App\Services\Gates\PayboxGate();
-    $gate->setOrder(\App\Models\Purchase::find($id));
-    $gate->redirectToPaymentPage();
-});
+//Route::get('/test-payout/{sum}', [PayoutController::class, 'store']);
+//
+//Route::get('/test/{id}', function ($id) {
+//    $gate = new \App\Services\Gates\PayboxGate();
+//    $gate->initPayin();
+//    $gate->setOrder(\App\Models\Purchase::find($id));
+//    $gate->redirectToPaymentPage();
+//});
