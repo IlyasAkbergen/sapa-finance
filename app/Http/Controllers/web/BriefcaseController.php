@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\web\WebBaseController;
 use App\Models\BriefcaseType;
 use App\Services\BriefcaseService;
 use Illuminate\Http\Request;

@@ -6,6 +6,7 @@ use App\Services\Gates\PaymentGateContract;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PayoutController extends WebBaseController
 {
@@ -23,9 +24,15 @@ class PayoutController extends WebBaseController
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'sum' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return $this->responseFail(
+                'Вывод средств на данную сумму невозможен.'
+            );
+        }
 
         $payout = $this->userService->addPayout(
             Auth::user()->id,
