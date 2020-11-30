@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Models\Payout;
 use App\Models\Purchase;
 use App\Models\Reward;
 
@@ -15,6 +16,13 @@ interface UserService
      * @return Reward
      */
     public function addReward($id, array $reward_attributes);
+
+    /**
+     * @param int $id user_id
+     * @param array $payout_attributes
+     * @return Payout | null
+     */
+    public function addPayout($id, array $payout_attributes);
 
     /**
      * @param int $id user_id

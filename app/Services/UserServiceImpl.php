@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Helpers\Helper;
+use App\Models\Payout;
 use App\Models\Purchase;
 use App\Models\Reward;
 use App\Models\User;
@@ -30,6 +31,16 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
         return Reward::updateOrCreate(array_merge($params, [
             'target_user_id' => $id
         ]), $reward_attributes);
+    }
+
+    public function addPayout($id, array $payout_attributes) {
+        $user = $this->findWith($id, ['balance']);
+
+        if ($payout_attributes['sum'] > $user->balance->sum) {
+            return null;
+        }
+
+        return $user->payouts()->create($payout_attributes);
     }
 
     /**

@@ -3,11 +3,20 @@
 namespace App\Listeners;
 
 use App\Events\BalanceOperationCreated;
+use App\Events\PayoutCreated;
 use App\Models\Balance;
+use App\Services\Gates\PaymentGateContract;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class BalanceEventsSubscriber implements ShouldQueue
 {
+    private $paymentGate;
+
+    public function __construct(PaymentGateContract $paymentGate)
+    {
+        $this->paymentGate = $paymentGate;
+    }
+
     public function handleBalanceOperationCreated($event)
     {
         $operation = $event->operation;
@@ -38,11 +47,18 @@ class BalanceEventsSubscriber implements ShouldQueue
         ]);
     }
 
+    public function handlePayoutCreated($event)
+    {
+
+    }
+
     public function subscribe($events)
     {
         $events->listen(
             BalanceOperationCreated::class,
-            [self::class, 'handleBalanceOperationCreated']
+            [self::class, 'handleBalanceOperationCreated'],
+            PayoutCreated::class,
+            [self::class, 'handlePayoutCreated']
         );
     }
 }

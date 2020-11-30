@@ -28,7 +28,11 @@ class PurchaseController extends ApiBaseController
             ]);
         }
 
-        $payed = $this->paymentGate->isPayed();
+        if (!$this->paymentGate->isPayed()) {
+            return $this->failedResponse([
+                'message' => 'Payment is not OK.'
+            ]);
+        }
 
         $purchase = $this->purchaseService->find(
             $this->paymentGate->getOrder()->id
@@ -44,7 +48,9 @@ class PurchaseController extends ApiBaseController
             ]);
         }
 
-        $purchase->setPayed();
+        $purchase->setPayed(
+            $request->input('pg_payment_id', null)
+        );
 
         if ($purchase->payed) {
 

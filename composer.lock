@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "54d23790430ba5dc7774b7b242b77716",
+    "content-hash": "70d01c85fede59dfd72e00df00a88e2f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2164,6 +2164,37 @@
             "time": "2019-11-06T19:20:29+00:00"
         },
         {
+            "name": "payboxmoney/cardstorage",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PayBox/PayboxCardStorage.git",
+                "reference": "4a098bd1cd524d730e3b5e7a8d4f25cc3d439c06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PayBox/PayboxCardStorage/zipball/4a098bd1cd524d730e3b5e7a8d4f25cc3d439c06",
+                "reference": "4a098bd1cd524d730e3b5e7a8d4f25cc3d439c06",
+                "shasum": ""
+            },
+            "require": {
+                "payboxmoney/core": "1.2.*",
+                "php": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Paybox\\CardStorage\\": "src/",
+                    "Paybox\\CardStorage\\Models\\": "src/models/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "time": "2019-07-01T09:38:22+00:00"
+        },
+        {
             "name": "payboxmoney/core",
             "version": "1.2.9",
             "source": {
@@ -2243,6 +2274,37 @@
                 "source": "https://github.com/PayBox/PayboxPay/tree/version-1.2.x"
             },
             "time": "2018-12-21T08:56:19+00:00"
+        },
+        {
+            "name": "payboxmoney/payout",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PayBox/PayboxPayout.git",
+                "reference": "7e03ee182f59fd569d27065129b7e613133dc176"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PayBox/PayboxPayout/zipball/7e03ee182f59fd569d27065129b7e613133dc176",
+                "reference": "7e03ee182f59fd569d27065129b7e613133dc176",
+                "shasum": ""
+            },
+            "require": {
+                "payboxmoney/cardstorage": "^1.2.0",
+                "php": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Paybox\\Payout\\": "src/",
+                    "Paybox\\Payout\\Models\\": "src/models/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "time": "2019-02-21T09:07:05+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -7630,5 +7692,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }
