@@ -23,8 +23,6 @@ class PayoutController extends ApiBaseController
 
     public function makeCommitted(ResultRequest $request)
     {
-        // todo add payments
-
         $this->paymentGate->initPayout();
         if (!$this->paymentGate->parseRequest($request)) {
             return $this->failedResponse([
@@ -57,6 +55,15 @@ class PayoutController extends ApiBaseController
         );
 
         if ($payout->committed) {
+
+            $payment_id = $request->input('pg_payment_id', null);
+
+            $payout->payments()->updateOrCreate([
+                'eid' => $payment_id,
+            ], [
+                'status' => PaymentGateContract::PAYMENT_STATUS_OK
+            ]);
+
             $this->paymentGate->accept();
 
             return $this->successResponse([
