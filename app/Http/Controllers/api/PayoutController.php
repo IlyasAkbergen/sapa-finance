@@ -2,64 +2,65 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Requests\api\Paybox\pay\ResultRequest;
+use App\Http\Requests\api\Paybox\payout\ResultRequest;
 use App\Services\Gates\PaymentGateContract;
-use App\Services\PurchaseServiceContract;
+use App\Services\PayoutServiceContract;
+use Illuminate\Http\Request;
 
-class PurchaseController extends ApiBaseController
+class PayoutController extends ApiBaseController
 {
-    private $purchaseService;
+    private $payoutService;
     private $paymentGate;
 
     public function __construct(
-        PurchaseServiceContract $purchaseService,
+        PayoutServiceContract $payoutService,
         PaymentGateContract $paymentGate
-    ) {
-        $this->purchaseService = $purchaseService;
+    )
+    {
+        $this->payoutService = $payoutService;
         $this->paymentGate = $paymentGate;
     }
 
-    public function makePayed(ResultRequest $request)
+    public function makeCommitted(ResultRequest $request)
     {
         // todo add payments
 
-        $this->paymentGate->initPayin();
-        if (!$this->paymentGate->parseRequest($request) ) {
+        $this->paymentGate->initPayout();
+        if (!$this->paymentGate->parseRequest($request)) {
             return $this->failedResponse([
                 'message' => 'could not parse request.'
             ]);
         }
 
-        if (!$this->paymentGate->isStatusOk()) {
+        if (!$this->$this->paymentGate->isStatusOk()) {
             return $this->failedResponse([
                 'message' => 'Payment is not OK.'
             ]);
         }
 
-        $purchase = $this->purchaseService->find(
+        $payout = $this->payoutService->find(
             $this->paymentGate->getOrder()->id
         );
 
-        if (!isset($purchase)) {
+        if (!isset($payout)) {
             return $this->failedResponse([
                 'message' => 'Not found.'
             ]);
-        } else if($purchase->payed) {
+        } else if($payout->committed) {
             return $this->failedResponse([
-                'message' => 'Already payed.'
+                'message' => 'Already committed.'
             ]);
         }
 
-        $purchase->setPayed(
+        $payout->setCommitted(
             $request->input('pg_payment_id', null)
         );
 
-        if ($purchase->payed) {
-
+        if ($payout->committed) {
             $this->paymentGate->accept();
 
             return $this->successResponse([
-               'message' => 'Successfully received.'
+                'message' => 'Successfully received.'
             ]);
         } else {
             return $this->failedResponse([

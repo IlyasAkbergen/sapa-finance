@@ -32,4 +32,11 @@ class Briefcase extends Model implements WithPurchase
     {
         return $this->belongsToMany(User::class, 'user_briefcase');
     }
+
+    function getPurchaseSum($with_feedback)
+    {
+        return empty($this->monthly_payment)
+            ? $this->sum
+            : $this->monthly_payment;
+    }
 }

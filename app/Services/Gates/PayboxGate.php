@@ -45,7 +45,9 @@ class PayboxGate implements PaymentGateContract
             $this->api = new PayboxPay();
 
             $this->api->config->setSiteUrl($this->config['site_url']);
-            $this->api->config->setResultUrl($this->config['site_url'] . '/' . $this->config['result_url']);
+            $this->api->config->setResultUrl(
+                $this->config['site_url'] . '/' . $this->config['pay_result_url']
+            );
             $this->setSuccessUrl($this->config['site_url']);
             $this->commonInit();
         } catch (\Exception $e) {
@@ -60,7 +62,9 @@ class PayboxGate implements PaymentGateContract
 
             $this->api = new PayboxPayout();
 
-            $this->api->config->setPostLink($this->config['site_url'] . '/' . $this->config['result_url']);
+            $this->api->config->setPostLink(
+                $this->config['site_url'] . '/' . $this->config['payout_result_url']
+            );
             $this->api->config->setBackLink($this->config['site_url']);
             $this->api->config->setOrderTimeLimit(Carbon::tomorrow()->endOfDay());
             $this->commonInit();
@@ -132,10 +136,18 @@ class PayboxGate implements PaymentGateContract
         header('Location:' . $this->api->redirectUrl);
     }
 
+    public function initPayment()
+    {
+        $this->api->init();
+    }
+
+    public function reg2nonreg()
+    {
+        $this->api->reg2nonreg();
+    }
+
     public function getRedirectUrl()
     {
-        $this->init();
-        $this->api->init();
         return $this->api->redirectUrl;
     }
 
@@ -157,17 +169,17 @@ class PayboxGate implements PaymentGateContract
     /**
      * @inheritDoc
      */
-    function isPayed($purchase = null)
+    function isStatusOk()
     {
-        $payed = false;
+        $result = false;
         try {
-            $payed = $this->getStatus($purchase) == self::PAYMENT_STATUS_OK;
+            $result = $this->api->getStatus() == self::PAYMENT_STATUS_OK;
         } catch (\Exception $e) {
             Log::critical($e->getTraceAsString());
             dd($e);
         }
 
-        return $payed;
+        return $result;
     }
 
     public function parseRequest($request)
@@ -187,5 +199,18 @@ class PayboxGate implements PaymentGateContract
     public function getOrder()
     {
         return $this->api->order;
+    }
+
+    public function getPayment()
+    {
+        return $this->api->payment;
+    }
+
+    public function getPaymentId()
+    {
+        $server_answer = $this->api->getFullServerAnswer();
+        return isset($server_answer['pg_payment_id'])
+            ? $server_answer['pg_payment_id']
+            : null;
     }
 }

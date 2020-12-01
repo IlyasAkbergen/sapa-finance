@@ -26,6 +26,7 @@ use App\Services\LessonService;
 use App\Services\LessonServiceImpl;
 use App\Services\NotificationService;
 use App\Services\NotificationServiceImpl;
+use App\Services\PayoutServiceContract;
 use App\Services\PurchaseService;
 use App\Services\PurchaseServiceContract;
 use App\Services\UserService;
@@ -84,6 +85,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             PaymentGateContract::class,
             PayboxGate::class
+        );
+        $this->app->bind(
+            PayoutServiceContract::class,
+            PayoutServiceContract::class
         );
     }
 

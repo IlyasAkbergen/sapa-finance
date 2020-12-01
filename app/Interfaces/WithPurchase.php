@@ -15,4 +15,6 @@ interface WithPurchase
     function users();
 
     function getDescription();
+
+    function getPurchaseSum($with_feedback);
 }
