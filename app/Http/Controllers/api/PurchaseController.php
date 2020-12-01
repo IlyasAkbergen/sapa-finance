@@ -21,8 +21,6 @@ class PurchaseController extends ApiBaseController
 
     public function makePayed(ResultRequest $request)
     {
-        // todo add payments
-
         $this->paymentGate->initPayin();
         if (!$this->paymentGate->parseRequest($request) ) {
             return $this->failedResponse([
@@ -50,11 +48,18 @@ class PurchaseController extends ApiBaseController
             ]);
         }
 
-        $purchase->setPayed(
-            $request->input('pg_payment_id', null)
-        );
+        $purchase->setPayed(); // todo except it is not monthly
+
 
         if ($purchase->payed) {
+
+            $payment_id = $request->input('pg_payment_id', null);
+
+            $purchase->payments()->updateOrCreate([
+                'eid' => $payment_id,
+            ], [
+                'status' => PaymentGateContract::PAYMENT_STATUS_OK
+            ]);
 
             $this->paymentGate->accept();
 

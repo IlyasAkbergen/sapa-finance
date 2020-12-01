@@ -14,7 +14,7 @@ class Purchase extends Model
     static $DIRECT_POINTS_PER_PURCHASE = 10;
 
     protected $fillable = [
-        'user_id', 'sum', 'purchasable_id', 'purchasable_type', 'payed', 'with_feedback', 'payment_id'
+        'user_id', 'sum', 'purchasable_id', 'purchasable_type', 'payed', 'with_feedback'
     ];
 
     public function user()
@@ -32,12 +32,11 @@ class Purchase extends Model
         'payed' => PurchasePayed::class
     ];
 
-    public function setPayed($payment_id = null)
+    public function setPayed()
     {
         // todo вынести в сервис
         $this->update([
-            'payed' => true,
-            'payment_id' => $payment_id
+            'payed' => true
         ]);
 
         $this->fireModelEvent('payed');

@@ -25,11 +25,10 @@ class Payout extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function setCommitted($payment_id = null)
+    public function setCommitted()
     {
         $this->update([
-            'committed' => true,
-            'payment_id' => $payment_id
+            'committed' => true
         ]);
 
         $this->fireModelEvent('committed');

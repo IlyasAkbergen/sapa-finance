@@ -32,7 +32,7 @@ class AddReferrerToUsersTable extends Migration
 
             $table->unsignedTinyInteger('fee_percent')
                 ->nullable()
-                ->after('referral_level_id');
+                ->after('root_referrer_id');
         });
     }
 
