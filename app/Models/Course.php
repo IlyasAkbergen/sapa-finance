@@ -23,6 +23,13 @@ class Course extends Model implements WithPurchase
         $this->hasMany(Lesson::class);
     }
 
+    public function getPurchaseSum($with_feedback)
+    {
+        return $with_feedback
+            ? $this->price_with_feedback
+            : $this->price_without_feedback;
+    }
+
     public function purchases()
     {
         return $this->morphMany(Purchase::class, 'purchasable');

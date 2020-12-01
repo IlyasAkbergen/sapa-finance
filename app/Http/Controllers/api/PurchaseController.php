@@ -21,6 +21,8 @@ class PurchaseController extends ApiBaseController
 
     public function makePayed(ResultRequest $request)
     {
+        // todo add payments
+
         $this->paymentGate->initPayin();
         if (!$this->paymentGate->parseRequest($request) ) {
             return $this->failedResponse([

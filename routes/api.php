@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\PayoutController;
 use App\Http\Controllers\api\PurchaseController;
 use App\Http\Controllers\HomeworkController;
 use Illuminate\Http\Request;
@@ -30,8 +31,13 @@ Route::get('test', function () {
 });
 
 Route::post(
-    '/paybox/result',
+    '/pay/result',
     [PurchaseController::class, 'makePayed']
+);
+
+Route::post(
+    '/payout/result',
+    [PayoutController::class, 'makeCommitted']
 );
 
 Route::apiResource('homeworks', HomeworkController::class);

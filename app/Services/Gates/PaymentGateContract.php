@@ -12,6 +12,7 @@ interface PaymentGateContract
 {
     const MODE_PAY_IN = 1;
     const MODE_PAY_OUT = 2;
+    const PAYMENT_STATUS_CREATED = 'created';
     const PAYMENT_STATUS_OK = 'ok';
 
     function initPayin();
@@ -31,6 +32,8 @@ interface PaymentGateContract
     function setSuccessUrl($url);
 
     function setFailureUrl($url);
+
+    function getPayment();
 
     /**
      * @param $purchase Purchase

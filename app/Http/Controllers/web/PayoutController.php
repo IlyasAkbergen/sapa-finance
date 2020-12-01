@@ -22,6 +22,11 @@ class PayoutController extends WebBaseController
         $this->userService = $userService;
     }
 
+    public function index()
+    {
+
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -39,14 +44,19 @@ class PayoutController extends WebBaseController
             ['sum' => $request->only('sum')]
         );
 
-        if (empty($payout)) {
+        if (empty($payout->id)) {
             return $this->responseFail('Вывод средств на данную сумму невозможен.');
         }
 
         $this->paymentGate->initPayout();
-
         $this->paymentGate->setPayout($payout);
+        $this->paymentGate->reg2nonreg();
 
-        $this->paymentGate->redirectToPayoutPage();
+        $payout->payments()->create([
+            'eid' => $this->paymentGate->getPaymentId(),
+            'redirect_url' => $this->paymentGate->getRedirectUrl()
+        ]);
+
+        header('Location:' . $this->paymentGate->getRedirectUrl());
     }
 }

@@ -23,6 +23,8 @@ class PayoutController extends ApiBaseController
 
     public function makeCommitted(ResultRequest $request)
     {
+        // todo add payments
+
         $this->paymentGate->initPayout();
         if (!$this->paymentGate->parseRequest($request)) {
             return $this->failedResponse([

@@ -47,8 +47,13 @@ class PurchaseController extends WebBaseController
             'purchasable_id', 'purchasable_type', 'with_feedback'
         ]);
 
+        $purchasable_class = $request->purchasable_type;
+
+        $purchasable = $purchasable_class::find($request->purchasable_id);
+
         $inputData = array_merge($inputData, [
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'sum' => $purchasable->getPurchaseSum($request->with_feedback)
         ]);
 
         $purchase = $this->purchaseService->create($inputData);
@@ -58,7 +63,14 @@ class PurchaseController extends WebBaseController
         } else {
             $this->paymentGate->initPayin();
             $this->paymentGate->setOrder($purchase);
-            return $this->paymentGate->redirectToPaymentPage();
+            $this->paymentGate->initPayment();
+
+            $purchase->payments()->create([
+                'eid' => $this->paymentGate->getPaymentId(),
+                'redirect_url' => $this->paymentGate->getRedirectUrl()
+            ]);
+
+            header('Location:' . $this->paymentGate->getRedirectUrl());
         }
     }
 }

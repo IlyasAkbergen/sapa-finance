@@ -35,13 +35,16 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         \App\Http\Controllers\web\PurchaseController::class
     );
 
+    Route::resource(
+        'payouts',
+        PayoutController::class
+    );
+
     Route::get('/my-purchases', [PurchaseController::class, 'my']);
 
     Route::get('/my-referrals', [ReferralController::class, 'myReferrals']);
 });
 
-//Route::get('/test-payout/{sum}', [PayoutController::class, 'store']);
-//
 //Route::get('/test/{id}', function ($id) {
 //    $gate = new \App\Services\Gates\PayboxGate();
 //    $gate->initPayin();

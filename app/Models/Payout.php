@@ -34,4 +34,9 @@ class Payout extends Model
 
         $this->fireModelEvent('committed');
     }
+
+    public function payments()
+    {
+        return $this->morphMany(Payment::class, 'payable');
+    }
 }
