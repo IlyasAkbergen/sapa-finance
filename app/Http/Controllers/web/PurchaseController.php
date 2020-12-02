@@ -47,7 +47,7 @@ class PurchaseController extends WebBaseController
             'purchasable_type' => $inputData['purchasable_type'],
         ];
 
-        $inputData['sum'] = $purchasable->getPurchaseSum(1);
+        $inputData['sum'] = $purchasable->getPurchaseSum(true);
 
         $purchase = $this->purchaseService->updateOrCreate(
             $params,
@@ -59,6 +59,11 @@ class PurchaseController extends WebBaseController
         } else {
             $this->paymentGate->initPayin();
             $this->paymentGate->setOrder($purchase);
+
+            if ($purchasable->isPartPaid) {
+                $this->paymentGate->setAmount($purchasable->monthly_payment);
+            }
+
             $this->paymentGate->initPayment();
 
             $purchase->payments()->create([
@@ -111,6 +116,11 @@ class PurchaseController extends WebBaseController
         } else {
             $this->paymentGate->initPayin();
             $this->paymentGate->setOrder($purchase);
+
+            if ($purchasable->isPartPaid) {
+                $this->paymentGate->setAmount($purchasable->monthly_payment);
+            }
+
             $this->paymentGate->initPayment();
 
             $purchase->payments()->create([

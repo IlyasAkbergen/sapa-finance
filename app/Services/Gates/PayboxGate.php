@@ -67,7 +67,7 @@ class PayboxGate implements PaymentGateContract
             $this->api->config->setPostLink(
                 $this->config['site_url'] . '/' . $this->config['payout_result_url']
             );
-            $this->api->config->setSuccessUrl(
+            $this->api->config->setBackLink(
                 $this->config['site_url'] . '/' . $this->config['payout_success_url']
             );
             $this->api->config->setOrderTimeLimit(Carbon::tomorrow()->endOfDay());
@@ -103,6 +103,11 @@ class PayboxGate implements PaymentGateContract
     public function setFailureUrl($url)
     {
         $this->api->config->setFailureUrl($url);
+    }
+
+    public function setAmount($amount)
+    {
+        $this->api->order->setAmount($amount);
     }
 
     public function setOrder(Purchase $purchase)

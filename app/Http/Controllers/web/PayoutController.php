@@ -24,7 +24,27 @@ class PayoutController extends WebBaseController
 
     public function index()
     {
+        // ONLY FOR TEST
+        $payout = $this->userService->addPayout(
+            Auth::user()->id,
+            ['sum' => 222]
+        );
 
+        if (empty($payout->id)) {
+            return $this->responseFail('Вывод средств на данную сумму невозможен.');
+        }
+
+        $this->paymentGate->initPayout();
+        $this->paymentGate->setPayout($payout);
+        $this->paymentGate->reg2nonreg();
+
+        $payout->payments()->create([
+            'eid' => $this->paymentGate->getPaymentId(),
+            'redirect_url' => $this->paymentGate->getRedirectUrl(),
+            'status' => PaymentGateContract::PAYMENT_STATUS_CREATED
+        ]);
+
+        header('Location:' . $this->paymentGate->getRedirectUrl());
     }
 
     public function store(Request $request)
