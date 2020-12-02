@@ -35,19 +35,22 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         \App\Http\Controllers\web\PurchaseController::class
     );
 
+
     Route::resource(
         'payouts',
         PayoutController::class
     );
 
+    Route::post(
+        '/pay/success',
+        [PurchaseController::class, 'my']
+    );
+
     Route::get('/my-purchases', [PurchaseController::class, 'my']);
+
+    Route::post('/payout/success', function () {
+        return redirect('balance');
+    });
 
     Route::get('/my-referrals', [ReferralController::class, 'myReferrals']);
 });
-
-//Route::get('/test/{id}', function ($id) {
-//    $gate = new \App\Services\Gates\PayboxGate();
-//    $gate->initPayin();
-//    $gate->setOrder(\App\Models\Purchase::find($id));
-//    $gate->redirectToPaymentPage();
-//});

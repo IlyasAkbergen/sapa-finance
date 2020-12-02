@@ -93,6 +93,11 @@ class BaseServiceImpl implements BaseService
         return $model;
     }
 
+    public function updateOrCreate(array $params,  array $attributes): Model
+    {
+        return $this->model->updateOrCreate($params, $attributes);
+    }
+
     public function delete($id)
     {
         return $this->find($id)->delete();

@@ -39,4 +39,9 @@ class Briefcase extends Model implements WithPurchase
             ? $this->sum
             : $this->monthly_payment;
     }
+
+    function isPartPaid()
+    {
+        return !empty($this->monthly_payment);
+    }
 }

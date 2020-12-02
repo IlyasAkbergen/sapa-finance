@@ -40,6 +40,13 @@ interface BaseService
     public function update($id, array $attributes): Model;
 
     /**
+     * @param array $params
+     * @param array $attributes
+     * @return Model
+     */
+    public function updateOrCreate(array $params,  array $attributes): Model;
+
+    /**
      * @param int $id
      */
     public function delete($id);

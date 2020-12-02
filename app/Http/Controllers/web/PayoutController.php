@@ -54,7 +54,8 @@ class PayoutController extends WebBaseController
 
         $payout->payments()->create([
             'eid' => $this->paymentGate->getPaymentId(),
-            'redirect_url' => $this->paymentGate->getRedirectUrl()
+            'redirect_url' => $this->paymentGate->getRedirectUrl(),
+            'status' => PaymentGateContract::PAYMENT_STATUS_CREATED
         ]);
 
         header('Location:' . $this->paymentGate->getRedirectUrl());

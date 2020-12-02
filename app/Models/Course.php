@@ -44,4 +44,9 @@ class Course extends Model implements WithPurchase
     {
         return $this->belongsToMany(User::class, 'user_course');
     }
+
+    function isPartPaid()
+    {
+        return false;
+    }
 }

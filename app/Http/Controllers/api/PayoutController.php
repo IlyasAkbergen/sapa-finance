@@ -57,11 +57,13 @@ class PayoutController extends ApiBaseController
         if ($payout->committed) {
 
             $payment_id = $request->input('pg_payment_id', null);
+            $payouted_sum = $request->input('pg_payment_amount', null);
 
             $payout->payments()->updateOrCreate([
                 'eid' => $payment_id,
             ], [
-                'status' => PaymentGateContract::PAYMENT_STATUS_OK
+                'status' => PaymentGateContract::PAYMENT_STATUS_OK,
+                'sum' => $payouted_sum
             ]);
 
             $this->paymentGate->accept();

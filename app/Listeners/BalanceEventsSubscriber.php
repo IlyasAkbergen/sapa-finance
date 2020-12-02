@@ -32,10 +32,10 @@ class BalanceEventsSubscriber implements ShouldQueue
             return;
         }
 
-        $source_balance = !empty($operation->source_balance_id)
-            ?: Balance::find($operation->source_balance_id);
-        $target_balance = !empty($operation->target_balance_id)
-            ?: Balance::find($operation->target_balance_id);
+        $source_balance = empty($operation->source_balance_id)
+            ? null : Balance::find($operation->source_balance_id);
+        $target_balance = empty($operation->target_balance_id)
+            ? null : Balance::find($operation->target_balance_id);
 
         // todo подумать над всей этой копипастой
 
