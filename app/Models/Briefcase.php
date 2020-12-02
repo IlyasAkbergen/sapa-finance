@@ -35,8 +35,11 @@ class Briefcase extends Model implements WithPurchase
 
     function getPurchaseSum($with_feedback)
     {
-        return empty($this->monthly_payment)
-            ? $this->sum
-            : $this->monthly_payment;
+        return  $this->sum;
+    }
+
+    function getIsPartPaidAttribute()
+    {
+        return !empty($this->monthly_payment);
     }
 }

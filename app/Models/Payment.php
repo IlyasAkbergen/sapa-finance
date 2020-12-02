@@ -10,7 +10,7 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'eid', 'status', 'payable_id', 'payable_type', 'redirect_url'
+        'eid', 'status', 'payable_id', 'payable_type', 'redirect_url', 'sum'
     ];
 
     public function payable()

@@ -21,6 +21,8 @@ interface PaymentGateContract
 
     function setOrder(Purchase $purchasable);
 
+    function setAmount($amount);
+
     function setPayout(Payout $payout);
 
     function setMode($mode);

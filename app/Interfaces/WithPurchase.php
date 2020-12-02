@@ -17,4 +17,6 @@ interface WithPurchase
     function getDescription();
 
     function getPurchaseSum($with_feedback);
+
+    function getIsPartPaidAttribute();
 }
