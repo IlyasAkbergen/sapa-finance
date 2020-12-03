@@ -2,28 +2,24 @@
 
 namespace App\Events;
 
-use App\Models\Notification;
 use App\Models\User;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Queue\SerializesModels;
 
 class ReferralLevelUpdated extends Notification implements ShouldQueue
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels, Queueable;
+use Dispatchable, InteractsWithSockets, SerializesModels, Queueable;
 
     public $user;
 
     /**
      * Create a new event instance.
      *
-     * @param User $user
+     * @param $user
      */
     public function __construct(User $user)
     {
@@ -33,13 +29,18 @@ class ReferralLevelUpdated extends Notification implements ShouldQueue
 
     public function via($user)
     {
-        return ['mail', 'database'];
+        return ['mail']; // , 'database'
     }
 
     public function toMail($user)
     {
-        return (new \App\Mail\ReferralLevelUpdated($user))
+        return (new \App\Mail\ReferralLevelUpdatedMailable($user))
             ->subject('У Вас сменился уровень.')
             ->to($user->email);
+    }
+
+    public function toDatabase($user)
+    {
+        // todo $user->addNotification
     }
 }

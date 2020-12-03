@@ -2,9 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Enums\ReferralLevelEnum;
 use App\Events\RewardHandled;
-use App\Models\ReferralLevel;
 use App\Services\UserService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Events\Dispatcher;
@@ -33,25 +31,7 @@ class LevelUpListener implements ShouldQueue
         $event->reward->loadMissing(['awardable.balance.incomes']);
         $user = $event->reward->awardable;
 
-        if ($user->referral_level_id == ReferralLevelEnum::Partner) {
-            return;
-        }
-
-        $next_level_id = empty($user->referral_level_id)
-            ? ReferralLevelEnum::Agent
-            : $user->referral_level_id + 1;
-
-        $next_level = ReferralLevel::findOrFail($next_level_id);
-
-        $deservesLevelUp = true;
-
-        foreach ($next_level->achieve_challenges as $challenge) {
-            $deservesLevelUp = $deservesLevelUp && $challenge::check($user);
-        }
-
-        if ($deservesLevelUp) {
-            $user->updateReferralLevel($next_level_id);
-        }
+        $this->userService->tryNextLevel($user);
     }
 
     /**

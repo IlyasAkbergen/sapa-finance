@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ReferralLevelUpdated extends Mailable implements ShouldQueue
+class ReferralLevelUpdatedMailable extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -20,6 +20,7 @@ class ReferralLevelUpdated extends Mailable implements ShouldQueue
      */
     public function __construct(User $user)
     {
+        $this->user = $user;
         $this->user->loadMissing('referral_level');
     }
 

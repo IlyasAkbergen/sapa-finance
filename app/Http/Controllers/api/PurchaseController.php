@@ -80,6 +80,7 @@ class PurchaseController extends ApiBaseController
 
         } catch (\Exception $e) {
             DB::rollBack();
+
             return $this->failedResponse([
                 'message' => 'Something went wrong.'
             ]);

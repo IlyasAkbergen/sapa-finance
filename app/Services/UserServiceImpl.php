@@ -4,12 +4,13 @@
 namespace App\Services;
 
 
+use App\Enums\ReferralLevelEnum;
 use App\Helpers\Helper;
-use App\Models\Payout;
+use App\Models\Course;
 use App\Models\Purchase;
+use App\Models\ReferralLevel;
 use App\Models\Reward;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserServiceImpl extends BaseServiceImpl implements UserService
@@ -62,6 +63,9 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
 
             $all_referrers = Helper::flat_all_referrers($purchase->user);
 
+            $is_start_course = $purchasable instanceof Course
+                && $purchasable->id == Course::START_COURSE_ID;
+
             foreach ($all_referrers as $referrer) {
                 $is_direct = $purchase->user->referrer_id == $referrer->id;
                 $this->updateOrAddReward($referrer->id, [
@@ -71,7 +75,7 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
                         ? $purchasable->getAwardSum()
                         : $purchasable->getAwardSum() * $referrer->fee_percent / 100,
                     'is_direct' => $is_direct,
-                    'points' => $purchasable->isAwardable()
+                    'points' => $purchasable->isAwardable() && !$is_start_course
                         ? Purchase::$DIRECT_POINTS_PER_PURCHASE
                         : null
                 ]);
@@ -87,5 +91,30 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
     {
         $model = $this->findWith($user_id, ['all_referrals']);
         return Helper::flat_all_referrals($model);
+    }
+
+    public function tryNextLevel(User $user)
+    {
+        if ($user->referral_level_id == ReferralLevelEnum::Partner) {
+            return false;
+        }
+
+        $next_level_id = empty($user->referral_level_id)
+            ? ReferralLevelEnum::Agent
+            : $user->referral_level_id + 1;
+
+        $next_level = ReferralLevel::findOrFail($next_level_id);
+
+        $deservesLevelUp = true;
+
+        foreach ($next_level->achieve_challenges as $challenge) {
+            $deservesLevelUp = $deservesLevelUp && $challenge::check($user);
+        }
+
+        if ($deservesLevelUp) {
+            return $user->updateReferralLevel($next_level_id);
+        }
+
+        return $deservesLevelUp;
     }
 }

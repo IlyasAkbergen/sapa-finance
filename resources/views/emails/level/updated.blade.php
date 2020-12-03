@@ -3,7 +3,7 @@
     @component('mail::panel')
     #    {{ $user->name }}, рады приветствовать Вас!
 
-    Ваша уровень сменен на "{{ $user->referral_level->title }}".
+    Ваш уровень сменен на "{{ $user->referral_level->title }}".
 
     @endcomponent
 

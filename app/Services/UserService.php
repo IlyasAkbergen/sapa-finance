@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Models\Payout;
 use App\Models\Purchase;
 use App\Models\Reward;
+use App\Models\User;
 
 interface UserService
 {
@@ -41,4 +42,9 @@ interface UserService
      * @param $user_id
      */
     public function allReferralsOf($user_id);
+
+    /**
+     * @param User $user
+     */
+    public function tryNextLevel(User $user);
 }
