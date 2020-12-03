@@ -32,11 +32,11 @@ class PurchaseController extends WebBaseController
 
         $inputData = [
             'purchasable_id' => 1,
-            'purchasable_type' => Briefcase::class,
+            'purchasable_type' => Course::class,
             'with_feedback' => true
         ];
 
-        $purchasable_class = Briefcase::class;
+        $purchasable_class = Course::class;
 
         $purchasable = $purchasable_class::find(1);
 

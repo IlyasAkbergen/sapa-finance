@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\PurchasePayed;
 use App\Events\RewardCreated;
 use App\Models\Balance;
+use App\Models\Course;
 use App\Services\BalanceOperationService;
 use App\Services\PurchaseServiceContract;
 use App\Services\UserService;
@@ -32,11 +33,16 @@ class ReferralEventsSubscriber implements ShouldQueue
     public function handlePurchasePaid($event)
     {
         $purchase = $event->purchase;
-        $purchase->loadMissing('purchasable', 'user');
+        $purchase->loadMissing(['purchasable', 'user']);
+        $purchasable = $purchase->purchasable;
         $this->purchaseService->addUsersToPurchasable(
-            [$purchase->user_id], $purchase->purchasable, $purchase->user->referrer_id
+            [$purchase->user_id], $purchasable, $purchase->user->referrer_id
         );
         $this->userService->awardReferrersAfterPurchase($purchase);
+
+        if ($purchasable instanceof Course && $purchasable->id == Course::START_COURSE_ID) {
+            $this->userService->tryNextLevel($purchase->user);
+        }
     }
 
     public function handleRewardCreated($event)

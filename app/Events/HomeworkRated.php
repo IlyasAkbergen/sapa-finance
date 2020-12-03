@@ -6,7 +6,6 @@ use App\Models\Course;
 use App\Models\Homework;
 use App\Models\Purchase;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Notifications\Notification;
@@ -14,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 
 class HomeworkRated extends Notification implements ShouldQueue
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels, Queueable;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $homework;
 
