@@ -15,4 +15,10 @@ class Balance extends Model
     protected $dispatchesEvents = [
         'updated' => BalanceUpdated::class
     ];
+
+    public function incomes()
+    {
+        $this->hasMany(BalanceOperation::class, 'target_balance_id')
+            ->committed();
+    }
 }

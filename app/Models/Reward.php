@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\RewardCreated;
+use App\Events\RewardHandled;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +17,8 @@ class Reward extends Model
     ];
 
     protected $dispatchesEvents = [
-        'created' => RewardCreated::class
+        'created' => RewardCreated::class,
+        'handled' => RewardHandled::class
     ];
 
     public function operation()
@@ -27,5 +29,18 @@ class Reward extends Model
     public function awardable()
     {
         return $this->belongsTo(User::class, 'target_user_id');
+    }
+
+    public function makeHandled()
+    {
+        $updated = $this->update([
+            'handled' => true
+        ]);
+
+        if ($updated) {
+            $this->fireModelEvent('handled');
+        }
+
+        return $updated;
     }
 }

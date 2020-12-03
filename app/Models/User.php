@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Challenges\Contracts\Challengable;
+use App\Events\ReferralLevelUpdated;
+use App\Traits\Challengable as ChallengableTrait;
 use App\Traits\HasReferrals;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +15,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable // todo uncomment implements MustVerifyEmail
+class User extends Authenticatable implements Challengable // todo uncomment MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -21,7 +24,7 @@ class User extends Authenticatable // todo uncomment implements MustVerifyEmail
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasReferrals;
-
+    use ChallengableTrait;
     /**
      * The attributes that are mass assignable.
      *
@@ -62,6 +65,10 @@ class User extends Authenticatable // todo uncomment implements MustVerifyEmail
         'profile_photo_url',
     ];
 
+    protected $dispatchesEvents = [
+        'level_updated' => ReferralLevelUpdated::class
+    ];
+
     const POINTS_PER_REFERRAL = 15;
     const POINTS_PER_GRAND_REFERRAL = 10;
 
@@ -77,7 +84,9 @@ class User extends Authenticatable // todo uncomment implements MustVerifyEmail
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(
+            Course::class, 'user_course'
+        );
     }
 
     public function newNotifications()
@@ -104,5 +113,18 @@ class User extends Authenticatable // todo uncomment implements MustVerifyEmail
     public function payouts()
     {
         return $this->hasMany(Payout::class);
+    }
+
+    public function updateReferralLevel($new_level_id)
+    {
+        $updated = $this->update([
+            'referral_level_id' => $new_level_id
+        ]);
+
+        if ($updated) {
+            $this->fireModelEvent('level_updated');
+        }
+
+        return $updated;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Listeners\BalanceEventsSubscriber;
+use App\Listeners\LevelUpListener;
 use App\Listeners\ReferralEventsSubscriber;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -23,7 +24,8 @@ class EventServiceProvider extends ServiceProvider
 
     protected $subscribe = [
         ReferralEventsSubscriber::class,
-        BalanceEventsSubscriber::class
+        BalanceEventsSubscriber::class,
+        LevelUpListener::class
     ];
 
     /**

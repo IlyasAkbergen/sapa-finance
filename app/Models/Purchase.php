@@ -46,4 +46,9 @@ class Purchase extends Model
     {
         return $this->morphMany(Payment::class, 'payable');
     }
+
+    public function fireFinished()
+    {
+        return $this->fireModelEvent('finished');
+    }
 }

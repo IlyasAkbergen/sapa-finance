@@ -23,4 +23,9 @@ class BalanceOperation extends Model
     {
         return $this->belongsTo(Reward::class);
     }
+
+    public function scopeCommitted($query)
+    {
+        return $query->where('committed', true);
+    }
 }
