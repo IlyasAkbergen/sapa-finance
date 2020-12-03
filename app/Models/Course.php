@@ -13,6 +13,8 @@ class Course extends Model implements WithPurchase
     use HasFactory;
     use Awardable;
 
+    const START_COURSE_ID = 1;
+
     protected $fillable = [
         'title', 'description', 'direct_fee', 'awardable',
         'price_without_feedback', 'price_with_feedback', 'is_online'

@@ -52,9 +52,7 @@ class ReferralEventsSubscriber implements ShouldQueue
             $operation = $this->balanceService->createOperationForReward($reward);
 
             if (!empty($operation)) {
-                $reward->update([
-                    'handled' => true
-                ]);
+                $reward->makeHandled();
             }
 
             DB::commit();

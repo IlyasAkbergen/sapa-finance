@@ -36,7 +36,7 @@ trait HasReferrals
             ->with('referrer_recursive');
     }
 
-    public function referralLevel()
+    public function referral_level()
     {
         return $this->belongsTo(
             ReferralLevel::class,

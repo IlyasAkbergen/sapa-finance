@@ -54,3 +54,27 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/my-referrals', [ReferralController::class, 'myReferrals']);
 });
+
+Route::get('/test', function () {
+//    $user = User::with('balance')->findOrFail(5);
+//
+//    if ($user->referral_level_id == ReferralLevelEnum::Partner) {
+//        return;
+//    }
+//
+//    $next_level_id = empty($user->referral_level_id)
+//        ? ReferralLevelEnum::Agent
+//        : $user->referral_level_id + 1;
+//
+//    $next_level = ReferralLevel::findOrFail($next_level_id);
+//
+//    $deservesLevelUp = true;
+//
+//    foreach ($next_level->achieve_challenges as $challenge) {
+//        $deservesLevelUp = $deservesLevelUp && $challenge::check($user);
+//    }
+//
+//    if ($deservesLevelUp) {
+//        $user->updateReferralLevel($next_level_id);
+//    }
+});

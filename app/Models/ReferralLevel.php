@@ -9,11 +9,12 @@ class ReferralLevel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'target_points'];
+    protected $fillable = [
+        'title', 'description', 'slug', 'achieve_challenges', 'remain_challenges'
+    ];
 
-    const LEVEL_AGENT = 1;
-    const LEVEL_CONSULTANT = 2;
-    const LEVEL_TUTOR = 3;
-    const LEVEL_MENTOR = 4;
-    const LEVEL_PARTNER = 5;
+    protected $casts = [
+        'achieve_challenges' => 'array',
+        'remain_challenges' => 'array',
+    ];
 }

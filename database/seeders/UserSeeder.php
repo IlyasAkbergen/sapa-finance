@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\ReferralLevel;
+use App\Enums\ReferralLevelEnum;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
             'email' => "agent@mail.ru",
             'password' => bcrypt('password'),
             'role_id' => Role::ROLE_CLIENT,
-            'referral_level_id' => ReferralLevel::LEVEL_AGENT,
+            'referral_level_id' => ReferralLevelEnum::Agent,
             'email_verified_at' => Carbon::now(),
         ]);
 
@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
             'email' => "consultant@mail.ru",
             'password' => bcrypt('password'),
             'role_id' => Role::ROLE_CLIENT,
-            'referral_level_id' => ReferralLevel::LEVEL_CONSULTANT,
+            'referral_level_id' => ReferralLevelEnum::Consultant,
             'email_verified_at' => Carbon::now(),
         ]);
     }
