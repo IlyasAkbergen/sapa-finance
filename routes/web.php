@@ -30,10 +30,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::resource('courses', CourseController::class);
 
-    Route::get('my-courses', [CourseController::class, 'my'])->name('my-courses');
+    Route::get(
+        'my-courses',
+        [CourseController::class, 'my']
+    )->name('my-courses');
 
     Route::resource('briefcases', BriefcaseController::class);
 
@@ -47,7 +50,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::resource(
         'purchases',
-        \App\Http\Controllers\web\PurchaseController::class
+        PurchaseController::class
     );
 
     Route::resource(
@@ -55,12 +58,17 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         PayoutController::class
     );
 
-    Route::post(
+    Route::get(
         '/pay/success',
-        [PurchaseController::class, 'my']
+        function () {
+            return redirect()->route('my-purchases');
+        }
     );
 
-    Route::get('/my-purchases', [PurchaseController::class, 'my']);
+    Route::get(
+        '/my-purchases',
+        [PurchaseController::class, 'my']
+    )->name('my-purchases');
 
     Route::post('/payout/success', function () {
         return redirect('balance');
@@ -72,7 +80,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::resource('support', SupportController::class);
 
-    Route::resource('notification', NotificationController::class);
+    Route::resource('notifications', NotificationController::class);
 
 });
 

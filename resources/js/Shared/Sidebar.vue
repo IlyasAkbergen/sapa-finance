@@ -52,7 +52,7 @@
                         Поддержка
                     </SidebarItem>
 
-                    <SidebarItem :route_name="'/notification.index'"
+                    <SidebarItem :route_name="'notifications.index'"
                                  icon="bell">
                         Увеодомления
                     </SidebarItem>

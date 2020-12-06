@@ -47,8 +47,13 @@ class Course extends Model implements WithPurchase
         return $this->belongsToMany(User::class, 'user_course');
     }
 
-    function getIsPartPaidAttribute()
+    public function getIsPartPaidAttribute()
     {
         return false;
+    }
+
+    public function getProgressPercentAttribute()
+    {
+        return 55;
     }
 }

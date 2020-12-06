@@ -5,6 +5,7 @@
     <div class="main">
       <nav class="navbar sticky-top navbar-light bg-white">
         <span class="navbar-brand mb-0">
+          <slot name="back-link"></slot>
           <slot name="header"></slot>
         </span>
         <ul class="nav">
@@ -29,7 +30,11 @@
             <div class="dropdown-menu">
               <a href="../user-settings/settings.html" class="dropdown-item">Настройка профиля</a>
               <a href="../support/support.html" class="dropdown-item">Поддержка</a>
-              <a href="#" class="dropdown-item text-danger">Выйти</a>
+              <a href="#"
+                 class="dropdown-item text-danger"
+                 @click.prevent="logout">
+                Выйти
+              </a>
             </div>
           </li>
         </ul>
@@ -39,6 +44,7 @@
         <slot></slot>
       </div>
     </div>
+    <slot name="modals"></slot>
   </div>
 </template>
 
@@ -50,7 +56,9 @@
   import JetNavLink from '@/Jetstream/NavLink'
   import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
   import Sidebar from '@/Shared/Sidebar'
-  import HasUser from "@/Mixins/HasUser";
+  import FlashMessage from '@/Shared/FlashMessage'
+  import HasUser from "@/Mixins/HasUser"
+
   export default {
     components: {
       JetApplicationMark,
@@ -58,7 +66,8 @@
       JetDropdownLink,
       JetNavLink,
       JetResponsiveNavLink,
-      Sidebar
+      Sidebar,
+      FlashMessage
     },
 
     mixins: [HasUser],

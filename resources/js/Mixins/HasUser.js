@@ -5,7 +5,7 @@ export default {
     },
     hasLevel(level) {
       return this.referralLevel === level || true;
-    }
+    },
   },
 
   computed: {

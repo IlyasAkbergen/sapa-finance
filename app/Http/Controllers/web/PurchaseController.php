@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Requests\PurchaseRequest;
-use App\Models\Briefcase;
 use App\Models\Course;
 use App\Services\Gates\PaymentGateContract;
 use App\Services\PurchaseServiceContract;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class PurchaseController extends WebBaseController
 {
@@ -89,9 +90,8 @@ class PurchaseController extends WebBaseController
 
     public function store(PurchaseRequest $request)
     {
-        // todo Пездюк потести этот момент
         $inputData = $request->only([
-            'purchasable_id', 'purchasable_type', 'with_feedback'
+            'purchasable_id', 'purchasable_type', 'with_feedback', 'pay_online'
         ]);
 
         $purchasable_class = $request->purchasable_type;
@@ -114,6 +114,10 @@ class PurchaseController extends WebBaseController
         if(empty($purchase->id)) {
             return $this->responseFail('Что-то пошло не так.');
         } else {
+            if (!$request->pay_online) {
+                return $this->responseSuccess('Запрос успешно отправлен');
+            }
+
             $this->paymentGate->initPayin();
             $this->paymentGate->setOrder($purchase);
 
@@ -129,7 +133,9 @@ class PurchaseController extends WebBaseController
                 'status' => PaymentGateContract::PAYMENT_STATUS_CREATED
             ]);
 
-            header('Location:' . $this->paymentGate->getRedirectUrl());
+            return Inertia::location(
+                $this->paymentGate->getRedirectUrl()
+            );
         }
     }
 }

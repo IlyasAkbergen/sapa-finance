@@ -3,16 +3,11 @@
         <template #header>
             Курсы
         </template>
-        <div class="page">
-            <div class="main">
-                <div class="main__content">
-                    <div class="main__content__courses-flex">
-                        <CourseCard v-for="course in courses"
-                            :course="course"
-                            :key="course.id" />
-                    </div>
-                </div>
-            </div>
+
+        <div class="main__content__courses-flex">
+            <CourseCard v-for="course in courses"
+                :course="course"
+                :key="course.id" />
         </div>
     </main-layout>
 </template>

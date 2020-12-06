@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Requests\CourseRequest;
+use App\Http\Resources\MyCourseResource;
 use App\Services\CourseService;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -28,7 +29,7 @@ class CourseController extends WebBaseController
     {
         $courses = $this->courseService->ofUser(Auth::user());
         return Inertia::render('Courses/MyCourses', [
-            'courses' => $courses
+            'courses' => MyCourseResource::collection($courses)->resolve()
         ]);
     }
 
