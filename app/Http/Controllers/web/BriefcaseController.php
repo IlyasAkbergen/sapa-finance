@@ -18,18 +18,23 @@ class BriefcaseController extends WebBaseController
         $this->briefcaseService = $briefcaseService;
     }
 
+    // GET /briefcase
     public function index()
     {
         $briefcases = $this->briefcaseService->all();
-        // todo render Inertia
+        return Inertia('Briefcase', [
+            'briefcases' => $briefcase
+        ]);
     }
-
-    public function myBriefcases()
+    
+    // GET /my-briefcases
+    public function my()
     {
         $briefcases = $this->briefcaseService->allForUser(Auth::user()->id);
         // todo render Inertia
     }
 
+    // POST /briefcases
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -63,6 +68,7 @@ class BriefcaseController extends WebBaseController
         return $this->responseSuccess('Created', $briefcase);
     }
 
+    // DELETE /briefcases/{id}
     public function destroy(Request $request)
     {
         if ($request->has('id')) {
@@ -71,4 +77,18 @@ class BriefcaseController extends WebBaseController
 
         return $this->responseSuccess('Deleted');
     }
+
+    // GET /briefcases/{id}
+    public function show($id) {
+        return null;
+    }
+
+    // PUT /briefcases/{id}
+    public function update(Request $request) {}
+
+    // GET /briefcases/edit/{id}
+    public function edit($id) { return null; }
+
+    // GET /briefcases/create
+    public function create() {}
 }

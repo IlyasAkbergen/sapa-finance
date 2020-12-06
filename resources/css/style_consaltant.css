@@ -304,7 +304,7 @@ body
     padding: 30px;
     position: relative;
 }
-.main .main__content .main__content__agent-courses-flex
+.main .main__content .main__content__consultant-courses-flex
 {
     max-width: 1345px;
     display: flex;
@@ -312,7 +312,7 @@ body
 }
 
 /*========== Main container Courses Card ==========*/
-.main .main__content .main__content__agent-courses-flex .main__content__courses-flex__card
+.main .main__content .main__content__consultant-courses-flex .main__content__courses-flex__card
 {
     width: 254px;
     margin-right: 7.5px;
@@ -323,12 +323,12 @@ body
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     border-radius: 10px;
 }
-.main .main__content .main__content__agent-courses-flex .main__content__courses-flex__card:hover
+.main .main__content .main__content__consultant-courses-flex .main__content__courses-flex__card:hover
 {
     cursor: pointer;
     box-shadow: 0px 6px 20px rgba(25, 1, 52, 0.1);
 }
-.main .main__content .main__content__agent-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__img
+.main .main__content .main__content__consultant-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__img
 {
     width: 100%;
     height: auto;
@@ -336,34 +336,34 @@ body
     margin-bottom: 20px;
     border-radius: 10px;
 }
-.main .main__content .main__content__agent-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__title
+.main .main__content .main__content__consultant-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__title
 {
     font-size: 16px;
     font-weight: 600;
     color: #190134;
     margin-bottom: 8px;
 }
-.main .main__content .main__content__agent-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__text
+.main .main__content .main__content__consultant-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__text
 {
     font-size: 13px;
     font-weight: 400;
     color: #190134;
     margin-bottom: 20px;
 }
-.main .main__content .main__content__agent-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__bottom
+.main .main__content .main__content__consultant-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__bottom
 {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.main .main__content .main__content__agent-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__bottom .main__content__courses-flex__card__bottom__price
+.main .main__content .main__content__consultant-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__bottom .main__content__courses-flex__card__bottom__price
 {
     margin: 0;
     font-size: 18px;
     font-weight: 700;
     color: #190134;
 }
-.main .main__content .main__content__agent-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__bottom .main__content__courses-flex__card__bottom__button
+.main .main__content .main__content__consultant-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__bottom .main__content__courses-flex__card__bottom__button
 {
     text-decoration: none;
     background-color: #00A859;
@@ -375,15 +375,15 @@ body
 }
 
 /*========== Main container Agent Courses Modal ==========*/
-.page .main .agent-course-navbar
+.page .main .consultant-course-navbar
 {
     z-index: 999;
 }
-.page .agent-course-navbar-bottom
+.page .consultant-course-navbar-bottom
 {
     z-index: 999;
 }
-.page .page__agent-course-modal
+.page .page__consultant-course-modal
 {
     display: none;
     position: absolute;
@@ -394,18 +394,18 @@ body
     background-color: rgba(1, 15, 52, 0.9);
     z-index: 1000;
 }
-.page .page__agent-course-modal i
+.page .page__consultant-course-modal i
 {
     position: absolute;
     top: 65px;
     right: 5%;
     color: #fff;
 }
-.page .page__agent-course-modal i:hover
+.page .page__consultant-course-modal i:hover
 {
     cursor: pointer;
 }
-.page .page__agent-course-modal .page__course-modal__body
+.page .page__consultant-course-modal .page__course-modal__body
 {
     width: 96%;
     max-width: 340px;
@@ -420,7 +420,7 @@ body
 }
 
 /*========== Main container Course Buy modal 1 ==========*/
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav
 {
     /* display: none; */
     width: 100%;
@@ -428,7 +428,7 @@ body
     padding-left: 0;
     margin-bottom: 0;
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__link
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__link
 {
     position: relative;
     display: block;
@@ -440,7 +440,7 @@ body
     text-decoration: none;
     transition: 0.5s;
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__item:first-child .page__course-modal__body__nav__link::after
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__item:first-child .page__course-modal__body__nav__link::after
 {
     content: '';
     position: absolute;
@@ -453,21 +453,21 @@ body
     height: 1px;
 
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__item:hover .page__course-modal__body__nav__link
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__item:hover .page__course-modal__body__nav__link
 {
     background-color: #C2C3CF;
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__item:first-child .page__course-modal__body__nav__link
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__item:first-child .page__course-modal__body__nav__link
 {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__item:last-child .page__course-modal__body__nav__link
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__item:last-child .page__course-modal__body__nav__link
 {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__link img
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav .page__course-modal__body__nav__link img
 {
     width: 100%;
     max-width: 20px;
@@ -476,7 +476,7 @@ body
 }
 
 /*========== Main container Course Buy modal 2 ==========*/
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav-2
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav-2
 {
     display: none;
     width: 100%;
@@ -484,7 +484,7 @@ body
     padding-left: 0;
     margin-bottom: 0;
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__link
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__link
 {
     position: relative;
     display: block;
@@ -496,7 +496,7 @@ body
     text-decoration: none;
     transition: 0.5s;
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__item:first-child .page__course-modal__body__nav__link::after
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__item:first-child .page__course-modal__body__nav__link::after
 {
     content: '';
     position: absolute;
@@ -509,21 +509,21 @@ body
     height: 1px;
 
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__item:hover .page__course-modal__body__nav__link
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__item:hover .page__course-modal__body__nav__link
 {
     background-color: #C2C3CF;
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__item:first-child .page__course-modal__body__nav__link
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__item:first-child .page__course-modal__body__nav__link
 {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__item:last-child .page__course-modal__body__nav__link
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__item:last-child .page__course-modal__body__nav__link
 {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__link img
+.page .page__consultant-course-modal .page__course-modal__body .page__course-modal__body__nav-2 .page__course-modal__body__nav__link img
 {
     width: 100%;
     max-width: 20px;
@@ -532,7 +532,7 @@ body
 }
 
 /*========== Main container Course Buy modal success ==========*/
-.main__content .main__content__agent-course-success
+.main__content .main__content__consultant-course-success
 {
     display: none;
     width: 100%;
@@ -542,7 +542,7 @@ body
     right: 30px;
     /* display: flex; */
 }
-.main__content .main__content__agent-course-success .main__content__course-success__left
+.main__content .main__content__consultant-course-success .main__content__course-success__left
 {
     width: 32px;
     background-color: #5FADE5;
@@ -551,7 +551,7 @@ body
     border-bottom-left-radius: 8px;
     position: relative;
 }
-.main__content .main__content__agent-course-success .main__content__course-success__left img
+.main__content .main__content__consultant-course-success .main__content__course-success__left img
 {
     position: absolute;
     top: 50%;
@@ -561,7 +561,7 @@ body
     max-width: 14px;
     height: auto;
 }
-.main__content .main__content__agent-course-success .main__content__course-success__right
+.main__content .main__content__consultant-course-success .main__content__course-success__right
 {
     position: relative;
     width: 100%;
@@ -572,24 +572,24 @@ body
     border-bottom-right-radius: 8px;
     padding: 12px 60px 12px 12px;
 }
-.main__content .main__content__agent-course-success .main__content__course-success__right i
+.main__content .main__content__consultant-course-success .main__content__course-success__right i
 {
     position: absolute;
     top: 12px;
     right: 12px;
 }
-.main__content .main__content__agent-course-success .main__content__course-success__right i:hover
+.main__content .main__content__consultant-course-success .main__content__course-success__right i:hover
 {
     cursor: pointer;
 }
-.main__content .main__content__agent-course-success .main__content__course-success__right .main__content__course-success__right__title
+.main__content .main__content__consultant-course-success .main__content__course-success__right .main__content__course-success__right__title
 {
     font-size: 16px;
     font-weight: 800;
     color: #190134;
     margin-bottom: 5px;
 }
-.main__content .main__content__agent-course-success .main__content__course-success__right .main__content__course-success__right__text
+.main__content .main__content__consultant-course-success .main__content__course-success__right .main__content__course-success__right__text
 {
     font-size: 16px;
     font-weight: 400;
@@ -598,7 +598,7 @@ body
 }
 
 /*========== Main container Course Card ==========*/
-.main__content .main__content__agent-course-card
+.main__content .main__content__consultant-course-card
 {
     width: 100%;
     max-width: 550px;
@@ -607,42 +607,42 @@ body
     background-color: #fff;
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
 }
-.main__content .main__content__agent-course-card .main__content__course-card__img
+.main__content .main__content__consultant-course-card .main__content__course-card__img
 {
     width: 100%;
     height: auto;
     display: block;
     margin-bottom: 25px;
 }
-.main__content .main__content__agent-course-card .main__content__course-card__title
+.main__content .main__content__consultant-course-card .main__content__course-card__title
 {
     font-size: 18px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 12px;
 }
-.main__content .main__content__agent-course-card .main__content__course-card__text
+.main__content .main__content__consultant-course-card .main__content__course-card__text
 {
     font-size: 16px;
     font-weight: 400;
     color: #190134;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-course-card .main__content__course-card__bottom
+.main__content .main__content__consultant-course-card .main__content__course-card__bottom
 {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.main__content .main__content__agent-course-card .main__content__course-card__bottom__price
+.main__content .main__content__consultant-course-card .main__content__course-card__bottom__price
 {
     font-size: 30px;
     font-weight: bold;
     color: #190134;
     margin-bottom: 0;
 }
-.main__content .main__content__agent-course-card .main__content__course-card__bottom__button
+.main__content .main__content__consultant-course-card .main__content__course-card__bottom__button
 {
     text-decoration: none;
     background-color: #00A859;
@@ -655,20 +655,20 @@ body
 
 
 /*========== Main container My Courses ==========*/
-.main .main__content .main__content__agent-empty-courses
+.main .main__content .main__content__consultant-empty-courses
 {
     width: 100%;
     text-align: center;
     margin-top: 30%;
 }
-.main .main__content .main__content__agent-empty-courses .main__content__empty-courses__text
+.main .main__content .main__content__consultant-empty-courses .main__content__empty-courses__text
 {
     font-size: 16px;
     font-weight: 500;
     color: #92929E;
     margin-bottom: 15px;
 }
-.main .main__content .main__content__agent-empty-courses .main__content__empty-courses__button
+.main .main__content .main__content__consultant-empty-courses .main__content__empty-courses__button
 {
     text-decoration: none;
     background-color: #fff;
@@ -679,7 +679,7 @@ body
     padding: 8px 16px;
     border-radius: 24px;
 }
-.main .main__content .main__content__agent-my-courses-flex
+.main .main__content .main__content__consultant-my-courses-flex
 {
     max-width: 1345px;
     display: flex;
@@ -687,7 +687,7 @@ body
 }
 
 /*========== Main container My Courses Card ==========*/
-.main .main__content .main__content__agent-my-courses-flex .main__content__courses-flex__card
+.main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card
 {
     width: 254px;
     margin-right: 7.5px;
@@ -698,12 +698,12 @@ body
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     border-radius: 10px;
 }
-.main .main__content .main__content__agent-my-courses-flex .main__content__courses-flex__card:hover
+.main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card:hover
 {
     cursor: pointer;
     box-shadow: 0px 6px 20px rgba(25, 1, 52, 0.1);
 }
-.main .main__content .main__content__agent-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__img
+.main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__img
 {
     width: 100%;
     height: auto;
@@ -711,41 +711,41 @@ body
     margin-bottom: 20px;
     border-radius: 10px;
 }
-.main .main__content .main__content__agent-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__title
+.main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__title
 {
     font-size: 16px;
     font-weight: 600;
     color: #190134;
     margin-bottom: 8px;
 }
-.main .main__content .main__content__agent-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__process
+.main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__process
 {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
 }
-.main .main__content .main__content__agent-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__process .main__content__courses-flex__card__process__title
+.main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__process .main__content__courses-flex__card__process__title
 {
     font-size: 14px;
     font-weight: 500;
     color: #92929E;
     margin-bottom: 0;
 }
-.main .main__content .main__content__agent-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__process .main__content__courses-flex__card__process__percent 
+.main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__process .main__content__courses-flex__card__process__percent 
 {
     font-size: 14px;
     font-weight: 700;
     color: #92929E;
     margin-bottom: 0;
 }
-.main .main__content .main__content__agent-my-courses-flex .main__content__courses-flex__card .progress
+.main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card .progress
 {
     width: 100%;
     height: 7px;
     border-radius: 0;
     margin-bottom: 20px;
 }
-.main .main__content .main__content__agent-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__button
+.main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__button
 {
     font-size: 14px;
     font-weight: 700;
@@ -758,13 +758,13 @@ body
 }
 
 /*========== Main Container My Courses Course Card ==========*/
-.main__content .main__content__agent-my-course__flex
+.main__content .main__content__consultant-my-course__flex
 {
     display: flex;
     align-items: flex-end;
     flex-wrap: wrap-reverse;
 }
-.main__content .main__content__agent-my-course-card
+.main__content .main__content__consultant-my-course-card
 {
     width: 100%;
     max-width: 550px;
@@ -774,54 +774,54 @@ body
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     margin-right: 20px;
 }
-.main__content .main__content__agent-my-course-card .main__content__course-card__img
+.main__content .main__content__consultant-my-course-card .main__content__course-card__img
 {
     width: 100%;
     height: auto;
     display: block;
     margin-bottom: 25px;
 }
-.main__content .main__content__agent-my-course-card .main__content__course-card__title
+.main__content .main__content__consultant-my-course-card .main__content__course-card__title
 {
     font-size: 18px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 12px;
 }
-.main__content .main__content__agent-my-course-card .main__content__course-card__text
+.main__content .main__content__consultant-my-course-card .main__content__course-card__text
 {
     font-size: 16px;
     font-weight: 400;
     color: #190134;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-my-course-card .main__content__my-course-card__process
+.main__content .main__content__consultant-my-course-card .main__content__my-course-card__process
 {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
 }
-.main__content .main__content__agent-my-course-card .main__content__my-course-card__process__title
+.main__content .main__content__consultant-my-course-card .main__content__my-course-card__process__title
 {
     font-size: 16px;
     font-weight: 500;
     color: #92929E;
     margin-bottom: 0;
 }
-.main__content .main__content__agent-my-course-card .main__content__my-course-card__process__percent
+.main__content .main__content__consultant-my-course-card .main__content__my-course-card__process__percent
 {
     font-size: 16px;
     font-weight: 700;
     color: #92929E;
     margin-bottom: 0;
 }
-.main__content .main__content__agent-my-course-card .progress
+.main__content .main__content__consultant-my-course-card .progress
 {
     height: 7px;
     width: 100%;
     border-radius: 0;
 }
-.main__content .main__content__agent-my-course-lessons
+.main__content .main__content__consultant-my-course-lessons
 {
     width: 100%;
     max-width: 380px;
@@ -829,35 +829,35 @@ body
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     margin-bottom: 30px;
 }
-.main__content .main__content__agent-my-course-lessons .list-group
+.main__content .main__content__consultant-my-course-lessons .list-group
 {
     border-radius: 10px;
 }
-.main__content .main__content__agent-my-course-lessons .list-group .title
+.main__content .main__content__consultant-my-course-lessons .list-group .title
 {
     border-bottom: 0;
     font-size: 18px;
     font-weight: 700;
     color: #190134;
 }
-.main__content .main__content__agent-my-course-lessons .list-group .enabled
+.main__content .main__content__consultant-my-course-lessons .list-group .enabled
 {
     color: #5FADE5;
 }
-.main__content .main__content__agent-my-course-lessons .list-group .list-group-item img
+.main__content .main__content__consultant-my-course-lessons .list-group .list-group-item img
 {
     float: right;
 }
 
 /*========== Main container Lesson page ==========*/
-.main__content .main__content__agent-lesson-flex
+.main__content .main__content__consultant-lesson-flex
 {
     display: flex;
     flex-wrap: wrap-reverse;
 }
 
 /*========== Main container Lesson card ==========*/
-.main__content .main__content__agent-lesson-card
+.main__content .main__content__consultant-lesson-card
 {
     width: 100%;
     max-width: 550px;
@@ -867,50 +867,50 @@ body
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     margin-right: 20px;
 }
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__title
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__title
 {
     font-size: 18px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 12px;
 }
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__text
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__text
 {
     font-size: 16px;
     font-weight: 400;
     color: #190134;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__video-title,
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__img-title,
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__materials-title
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__video-title,
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__img-title,
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__materials-title
 {
     font-size: 14px;
     font-weight: 400;
     color: #92929E;
     margin-bottom: 10px;
 }
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__video
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__video
 {
     width: 100%;
     max-width: 320px;
     margin-bottom: 30px;
 }
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__img
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__img
 {
     width: 100%;
     max-width: 320px;
     height: auto;
     margin-bottom: 30px;
 }
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__materials
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__materials
 {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__materials a
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__materials a
 {
     text-decoration: none;
     width: 60px;
@@ -923,19 +923,19 @@ body
     font-weight: 700;
     color: #fff;
 }
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__materials .main__content__lesson-card__materials__pdf
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__materials .main__content__lesson-card__materials__pdf
 {
     background-color: #B30B00;
 }
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__materials .main__content__lesson-card__materials__ppt
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__materials .main__content__lesson-card__materials__ppt
 {
     background-color: #D35230;
 }
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__materials .main__content__lesson-card__materials__word
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__materials .main__content__lesson-card__materials__word
 {
     background-color: #006AB9;
 }
-.main__content .main__content__agent-lesson-card .main__content__lesson-card__materials-button
+.main__content .main__content__consultant-lesson-card .main__content__lesson-card__materials-button
 {
     text-decoration: none;
     color: #00A859;
@@ -949,13 +949,13 @@ body
 }
 
 /*========== Main container Homework card ==========*/
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task
 {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework
 {
     width: 100%;
     max-width: 330px;
@@ -965,36 +965,36 @@ body
     padding: 20px;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework .list-group
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework .list-group
 {
     margin-bottom: 15px;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework .list-group .list-group-item
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework .list-group .list-group-item
 {
     border: 0;
     padding: 5px 0;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework .list-group .list-group-item .upload-file
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework .list-group .list-group-item .upload-file
 {
     margin-right: 8px;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework .list-group .list-group-item .remove-file:hover
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework .list-group .list-group-item .remove-file:hover
 {
     cursor: pointer;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework .list-group .list-group-item p
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework .list-group .list-group-item p
 {
     margin-bottom: 0;
     margin-right: auto;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework .main__content__lesson-flex__task__homework__title
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework .main__content__lesson-flex__task__homework__title
 {
     font-size: 18px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 15px;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework #main__content__lesson-flex__task__homework__input
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework #main__content__lesson-flex__task__homework__input
 {
     width: 0.1px;
     height: 0.1px;
@@ -1002,7 +1002,7 @@ body
     z-index: -1;
     overflow: hidden;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework label
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework label
 {
     padding: 20px 30px;
     border: 1px dashed #C2C3CF;
@@ -1013,17 +1013,17 @@ body
     color: #92929E;
     margin-bottom: 10px;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework label:hover
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework label:hover
 {
     cursor: pointer;
     border-color: #5FADE5;
     color: #5FADE5;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework label:hover svg
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework label:hover svg
 {
     fill: #5FADE5;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework label svg
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework label svg
 {
     width: 100%;
     max-width: 15px;
@@ -1032,7 +1032,7 @@ body
     margin: 0 auto 10px auto;
     fill: #92929E;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework .main__content__lesson-flex__task__homework__button
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework .main__content__lesson-flex__task__homework__button
 {
     text-align: center;
     font-size: 14px;
@@ -1045,14 +1045,14 @@ body
     background-color: #D9DAE7;
     text-decoration: none;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework .active
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework .active
 {
     background-color: #00A859;
     color: #fff;
 }
 
 /*========== Main container Grade card ==========*/
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade
 {
     width: 100%;
     max-width: 330px;
@@ -1062,14 +1062,14 @@ body
     padding: 20px;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .main__content__lesson-flex__task__grade__title
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .main__content__lesson-flex__task__grade__title
 {
     font-size: 18px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress{
     width: 150px;
     height: 150px;
     line-height: 150px;
@@ -1078,7 +1078,7 @@ body
     box-shadow: none;
     position: relative;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress:after{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress:after{
     content: "";
     width: 100%;
     height: 100%;
@@ -1088,7 +1088,7 @@ body
     top: 0;
     left: 0;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress > span{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress > span{
     width: 50%;
     height: 100%;
     overflow: hidden;
@@ -1096,10 +1096,10 @@ body
     top: 0;
     z-index: 1;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-left{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-left{
     left: 0;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-bar{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-bar{
     width: 100%;
     height: 100%;
     background: none;
@@ -1108,7 +1108,7 @@ body
     position: absolute;
     top: 0;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-left .progress-bar{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-left .progress-bar{
     left: 100%;
     border-top-right-radius: 80px;
     border-bottom-right-radius: 80px;
@@ -1116,10 +1116,10 @@ body
     -webkit-transform-origin: center left;
     transform-origin: center left;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-right{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-right{
     right: 0;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-right .progress-bar{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-right .progress-bar{
     left: -100%;
     border-top-left-radius: 80px;
     border-bottom-left-radius: 80px;
@@ -1128,7 +1128,7 @@ body
     transform-origin: center right;
     animation: loading-1 1.8s linear forwards;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-value{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress .progress-value{
     width: 90%;
     height: 90%;
     border-radius: 50%;
@@ -1140,13 +1140,13 @@ body
     top: 5%;
     left: 5%;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress.blue .progress-bar{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress.blue .progress-bar{
     border-color: #5FADE5;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress.blue .progress-left .progress-bar{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress.blue .progress-left .progress-bar{
     animation: loading-2 1s linear forwards 1.8s;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade .progress.green .progress-left .progress-bar{
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade .progress.green .progress-left .progress-bar{
     animation: loading-5 1.2s linear forwards 1.8s;
 }
 @keyframes loading-1{
@@ -1200,7 +1200,7 @@ body
     }
 }
 
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__next
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__next
 {
     width: 100%;
     max-width: 330px;
@@ -1214,24 +1214,24 @@ body
     border-radius: 50px;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__next svg
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__next svg
 {
     float: right;
     fill: #92929E;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .active
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .active
 {
     color: #00A859;
     background-color: #fff;
     border: 1px solid #00A859;
 }
-.main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .active svg
+.main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .active svg
 {
     fill: #00A859;
 }
 
 /*========== Main Container Support Form ==========*/
-.main__content .main__content__agent-support-form
+.main__content .main__content__consultant-support-form
 {
     width: 100%;
     max-width: 328px;
@@ -1241,14 +1241,14 @@ body
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     margin-bottom: 30px;
 }
-.main__content .main__content__agent-support-form input[type="file"]
+.main__content .main__content__consultant-support-form input[type="file"]
 {
     width: 0.1px;
     height: 0.1px;
     overflow: hidden;
     opacity: 0;
 }
-.main__content .main__content__agent-support-form label
+.main__content .main__content__consultant-support-form label
 {
     width: 100%;
     text-align: center;
@@ -1261,16 +1261,16 @@ body
     border-radius: 50px;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-support-form label:hover
+.main__content .main__content__consultant-support-form label:hover
 {
     cursor: pointer;
 }
-.main__content .main__content__agent-support-form label i
+.main__content .main__content__consultant-support-form label i
 {
     color: #00A859;
     margin-right: 12px;
 }
-.main__content .main__content__agent-support-form textarea
+.main__content .main__content__consultant-support-form textarea
 {
     width: 100%;
     height: 150px;
@@ -1281,7 +1281,7 @@ body
     border: 1px solid #A5BDC7;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-support-form a
+.main__content .main__content__consultant-support-form a
 {
     text-align: center;
     display: block;
@@ -1294,7 +1294,7 @@ body
     color: #fff;
     text-decoration: none;
 }
-.main__content .main__content__agent-support-notification
+.main__content .main__content__consultant-support-notification
 {
     width: 100%;
     max-width: 328px;
@@ -1506,14 +1506,14 @@ body
 }
 
 /*========== Main container Settings page flex ==========*/
-.main__content .main__content__agent-settings-flex
+.main__content .main__content__consultant-settings-flex
 {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__ava
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__ava
 {
     width: 100%;
     max-width: 210px;
@@ -1526,14 +1526,14 @@ body
     text-align: center;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__ava__img
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__ava__img
 {
     width: 100%;
     max-width: 120px;
     height: auto;
     margin-bottom: 15px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__ava__button
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__ava__button
 {
     font-size: 14px;
     font-weight: 700;
@@ -1545,7 +1545,7 @@ body
     border-radius: 24px;
     border: 1px solid #373777;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__form
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__form
 {
     width: 100%;
     max-width: 440px;
@@ -1556,18 +1556,18 @@ body
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     padding: 20px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__form form
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__form form
 {
     margin-bottom: 0;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__form .main__content__settings-flex__form__subtitle
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__form .main__content__settings-flex__form__subtitle
 {
     font-size: 14px;
     font-weight: 400;
     color: #92929E;
     margin-bottom: 7px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__form .main__content__settings-flex__form__input
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__form .main__content__settings-flex__form__input
 {
     width: 100%;
     padding: 7px 14px;
@@ -1578,7 +1578,7 @@ body
     border-radius: 24px;
     border: 1px solid #C2C3CF;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__form .main__content__settings-flex__form__submit
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__form .main__content__settings-flex__form__submit
 {
     width: 100%;
     margin-bottom: 0;
@@ -1591,18 +1591,18 @@ body
     padding-bottom: 8px;
     border: 0;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__form .enabled
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__form .enabled
 {
     color: #fff;
     background-color: #00A859;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right
 {
     margin-right: 10px;
     margin-left: 10px;
     max-width: 275px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats
 {
     width: 100%;
     max-width: 275px;
@@ -1611,7 +1611,7 @@ body
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__top
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__top
 {
     padding: 15px;
     padding-bottom: 0;
@@ -1619,28 +1619,28 @@ body
     justify-content: center;
     flex-wrap: wrap;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__top .main__content__settings-flex__stats__top__item
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__top .main__content__settings-flex__stats__top__item
 {
     padding: 0 5px 20px 5px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__top .main__content__settings-flex__stats__top__item p
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__top .main__content__settings-flex__stats__top__item p
 {
     text-align: center;
     margin-bottom: 0;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__top .main__content__settings-flex__stats__top__item p:first-child
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__top .main__content__settings-flex__stats__top__item p:first-child
 {
     font-size: 14px;
     font-weight: 400;
     color: #92929E;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__top .main__content__settings-flex__stats__top__item p:last-child
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__top .main__content__settings-flex__stats__top__item p:last-child
 {
     font-size: 24px;
     font-weight: 500;
     color: #190134;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__button
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__stats .main__content__settings-flex__stats__button
 {
     display: block;
     text-decoration: none;
@@ -1652,7 +1652,7 @@ body
     border-top: 1px solid #D9DAE7;
 }
 
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__comission
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__comission
 {
     width: 100%;
     max-width: 210px;
@@ -1662,21 +1662,21 @@ body
     padding: 20px;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__comission .main__content__settings-flex__comission__title
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__comission .main__content__settings-flex__comission__title
 {
     font-size: 14px;
     font-weight: 400;
     color: #92929E;
     margin-bottom: 5px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__comission .main__content__settings-flex__comission__price
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__comission .main__content__settings-flex__comission__price
 {
     font-size: 24px;
     font-weight: 500;
     color: #190134;
     margin-bottom: 10px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__comission .main__content__settings-flex__comission__btn-1
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__comission .main__content__settings-flex__comission__btn-1
 {
     font-size: 14px;
     font-weight: 700;
@@ -1689,7 +1689,7 @@ body
     border: 1px solid #00A859;
     margin-bottom: 10px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__comission .main__content__settings-flex__comission__btn-2
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__comission .main__content__settings-flex__comission__btn-2
 {
     font-size: 14px;
     font-weight: 700;
@@ -1702,7 +1702,7 @@ body
     border-radius: 24px;
 }
 
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__agent
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__agent
 {
     width: 100%;
     max-width: 211px;
@@ -1713,28 +1713,28 @@ body
     margin-bottom: 20px;
     text-align: center;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__agent .main__content__settings-flex__agent__img
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__agent .main__content__settings-flex__agent__img
 {
     width: 100%;
     max-width: 50px;
     height: auto;
     margin-bottom: 12px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__agent .main__content__settings-flex__agent__name
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__agent .main__content__settings-flex__agent__name
 {
     font-size: 16px;
     font-weight: 500;
     color: #190134;
     margin-bottom: 8px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__agent .main__content__settings-flex__agent__post
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__agent .main__content__settings-flex__agent__post
 {
     font-size: 14px;
     font-weight: 400;
     color: #92929E;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-settings-flex .main__content__settings-flex__right .main__content__settings-flex__agent .main__content__settings-flex__agent__button
+.main__content .main__content__consultant-settings-flex .main__content__settings-flex__right .main__content__settings-flex__agent .main__content__settings-flex__agent__button
 {
     display: block;
     font-size: 14px;
@@ -1749,22 +1749,22 @@ body
 }
 
 /*========== Main container Portfels nav ==========*/
-.main__content .agent-portfels-2 > div
+.main__content .consultant-portfels-2 > div
 {
     display: none;
 }
-.main__content .main__content__agent-portfels-nav
+.main__content .main__content__consultant-portfels-nav
 {
     list-style: none;
     padding: 0;
     margin-left: 7.5px;
     margin-bottom: 30px;
 }
-.main__content .main__content__agent-portfels-nav .main__content__portfels-nav__item
+.main__content .main__content__consultant-portfels-nav .main__content__portfels-nav__item
 {
     display: inline-block;
 }
-.main__content .main__content__agent-portfels-nav .main__content__portfels-nav__link
+.main__content .main__content__consultant-portfels-nav .main__content__portfels-nav__link
 {
     display: block;
     width: 160px;
@@ -1778,17 +1778,17 @@ body
     background-color: #fff;
     border: 1px solid #C2C3CF;
 }
-.main__content .main__content__agent-portfels-nav .active .main__content__portfels-nav__link
+.main__content .main__content__consultant-portfels-nav .active .main__content__portfels-nav__link
 {
     color: #fff;
     background-color: #00A859;
 }
-.main__content .main__content__agent-portfels-nav .main__content__portfels-nav__item:first-child .main__content__portfels-nav__link
+.main__content .main__content__consultant-portfels-nav .main__content__portfels-nav__item:first-child .main__content__portfels-nav__link
 {
     border-top-left-radius: 24px;
     border-bottom-left-radius: 24px;
 }
-.main__content .main__content__agent-portfels-nav .main__content__portfels-nav__item:last-child .main__content__portfels-nav__link
+.main__content .main__content__consultant-portfels-nav .main__content__portfels-nav__item:last-child .main__content__portfels-nav__link
 {
     border-top-right-radius: 24px;
     border-bottom-right-radius: 24px;
@@ -1796,7 +1796,7 @@ body
 }
 
 /*========== Main container Portfels flex container ==========*/
-.main .main__content .main__content__agent-portfels-flex
+.main .main__content .main__content__consultant-portfels-flex
 {
     max-width: 1396px;
     display: flex;
@@ -1804,7 +1804,7 @@ body
 }
 
 /*========== Main container Portfels Card ==========*/
-.main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card
+.main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card
 {
     width: 334px;
     margin-right: 7.5px;
@@ -1815,12 +1815,12 @@ body
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     border-radius: 10px;
 }
-.main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card:hover
+.main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card:hover
 {
     cursor: pointer;
     box-shadow: 0px 6px 20px rgba(25, 1, 52, 0.1);
 }
-.main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__img
+.main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__img
 {
     width: 100%;
     height: auto;
@@ -1828,7 +1828,7 @@ body
     margin-bottom: 20px;
     border-radius: 10px;
 }
-.main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__title
+.main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__title
 {
     text-decoration: none;
     display: block;
@@ -1837,32 +1837,32 @@ body
     color: #190134;
     margin-bottom: 8px;
 }
-.main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__title:hover
+.main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__title:hover
 {
     text-decoration: underline;
 }
-.main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__text
+.main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__text
 {
     font-size: 13px;
     font-weight: 400;
     color: #190134;
     margin-bottom: 20px;
 }
-.main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__subtitle
+.main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__subtitle
 {
     font-size: 14px;
     font-weight: 400;
     color: #92929E;
     margin-bottom: 3px;
 }
-.main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__digit
+.main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__digit
 {
     font-size: 16px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 15px;
 }
-.main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__button
+.main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__button
 {
     font-size: 14px;
     font-weight: 700;
@@ -1873,7 +1873,7 @@ body
     border-radius: 24px;
     background-color: #00A859;
 }
-.main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card .sent
+.main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card .sent
 {
     display: inline-block;
     background-color: #5FADE5;
@@ -1882,7 +1882,7 @@ body
 }
 
 /*========== Main container Portfels Program card ==========*/
-.main__content .main__content__agent-program-success
+.main__content .main__content__consultant-program-success
 {
     display: none;
     width: 100%;
@@ -1891,7 +1891,7 @@ body
     top: 30px;
     right: 30px;
 }
-.main__content .main__content__agent-program-success .main__content__program-success__left
+.main__content .main__content__consultant-program-success .main__content__program-success__left
 {
     width: 32px;
     background-color: #5FADE5;
@@ -1900,7 +1900,7 @@ body
     border-bottom-left-radius: 8px;
     position: relative;
 }
-.main__content .main__content__agent-program-success .main__content__program-success__left img
+.main__content .main__content__consultant-program-success .main__content__program-success__left img
 {
     position: absolute;
     top: 50%;
@@ -1910,7 +1910,7 @@ body
     max-width: 14px;
     height: auto;
 }
-.main__content .main__content__agent-program-success .main__content__program-success__right
+.main__content .main__content__consultant-program-success .main__content__program-success__right
 {
     position: relative;
     width: 100%;
@@ -1921,31 +1921,31 @@ body
     border-bottom-right-radius: 8px;
     padding: 12px 60px 12px 12px;
 }
-.main__content .main__content__agent-program-success .main__content__program-success__right i
+.main__content .main__content__consultant-program-success .main__content__program-success__right i
 {
     position: absolute;
     top: 12px;
     right: 12px;
 }
-.main__content .main__content__agent-program-success .main__content__program-success__right i:hover
+.main__content .main__content__consultant-program-success .main__content__program-success__right i:hover
 {
     cursor: pointer;
 }
-.main__content .main__content__agent-program-success .main__content__program-success__right .main__content__program-success__right__title
+.main__content .main__content__consultant-program-success .main__content__program-success__right .main__content__program-success__right__title
 {
     font-size: 16px;
     font-weight: 800;
     color: #190134;
     margin-bottom: 5px;
 }
-.main__content .main__content__agent-program-success .main__content__program-success__right .main__content__program-success__right__text
+.main__content .main__content__consultant-program-success .main__content__program-success__right .main__content__program-success__right__text
 {
     font-size: 16px;
     font-weight: 400;
     color: #92929E;
     margin-bottom: 0;
 }
-.main__content .main__content__agent-program-card
+.main__content .main__content__consultant-program-card
 {
     width: 100%;
     max-width: 550px;
@@ -1954,42 +1954,42 @@ body
     background-color: #fff;
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
 }
-.main__content .main__content__agent-program-card .main__content__program-card__img
+.main__content .main__content__consultant-program-card .main__content__program-card__img
 {
     width: 100%;
     height: auto;
     display: block;
     margin-bottom: 25px;
 }
-.main__content .main__content__agent-program-card .main__content__program-card__title
+.main__content .main__content__consultant-program-card .main__content__program-card__title
 {
     font-size: 18px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 12px;
 }
-.main__content .main__content__agent-program-card .main__content__program-card__text
+.main__content .main__content__consultant-program-card .main__content__program-card__text
 {
     font-size: 16px;
     font-weight: 400;
     color: #190134;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-program-card .main__content__program-card__subtitle
+.main__content .main__content__consultant-program-card .main__content__program-card__subtitle
 {
     font-size: 16px;
     font-weight: 400;
     color: #92929E;
     margin-bottom: 3px;
 }
-.main__content .main__content__agent-program-card .main__content__program-card__digit
+.main__content .main__content__consultant-program-card .main__content__program-card__digit
 {
     font-size: 24px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 25px;
 }
-.main__content .main__content__agent-program-card .main__content__program-card__button
+.main__content .main__content__consultant-program-card .main__content__program-card__button
 {
     display: inline-block;
     text-decoration: none;
@@ -2002,7 +2002,7 @@ body
 }
 
 /*========== Main container My Portfels nav ==========*/
-.main__content .main__content__agent-my-portfels-diagram
+.main__content .main__content__consultant-my-portfels-diagram
 {
     width: 100%;
     max-width: 526px;
@@ -2013,22 +2013,22 @@ body
     margin-bottom: 40px;
     margin-left: 7.5px;
 }
-.main__content .agent-my-portfels-2 > div
+.main__content .consultant-my-portfels-2 > div
 {
     display: none;
 }
-.main__content .main__content__agent-my-portfels-nav
+.main__content .main__content__consultant-my-portfels-nav
 {
     list-style: none;
     padding: 0;
     margin-left: 7.5px;
     margin-bottom: 30px;
 }
-.main__content .main__content__agent-my-portfels-nav .main__content__portfels-nav__item
+.main__content .main__content__consultant-my-portfels-nav .main__content__portfels-nav__item
 {
     display: inline-block;
 }
-.main__content .main__content__agent-my-portfels-nav .main__content__portfels-nav__link
+.main__content .main__content__consultant-my-portfels-nav .main__content__portfels-nav__link
 {
     display: block;
     width: 160px;
@@ -2042,17 +2042,17 @@ body
     background-color: #fff;
     border: 1px solid #C2C3CF;
 }
-.main__content .main__content__agent-my-portfels-nav .active .main__content__portfels-nav__link
+.main__content .main__content__consultant-my-portfels-nav .active .main__content__portfels-nav__link
 {
     color: #fff;
     background-color: #00A859;
 }
-.main__content .main__content__agent-my-portfels-nav .main__content__portfels-nav__item:first-child .main__content__portfels-nav__link
+.main__content .main__content__consultant-my-portfels-nav .main__content__portfels-nav__item:first-child .main__content__portfels-nav__link
 {
     border-top-left-radius: 24px;
     border-bottom-left-radius: 24px;
 }
-.main__content .main__content__agent-my-portfels-nav .main__content__portfels-nav__item:last-child .main__content__portfels-nav__link
+.main__content .main__content__consultant-my-portfels-nav .main__content__portfels-nav__item:last-child .main__content__portfels-nav__link
 {
     border-top-right-radius: 24px;
     border-bottom-right-radius: 24px;
@@ -2060,7 +2060,7 @@ body
 }
 
 /*========== Main container My Portfels flex container ==========*/
-.main .main__content .main__content__agent-my-portfels-flex
+.main .main__content .main__content__consultant-my-portfels-flex
 {
     max-width: 1396px;
     display: flex;
@@ -2068,7 +2068,7 @@ body
 }
 
 /*========== Main container My Portfels Card ==========*/
-.main .main__content .main__content__agent-my-portfels-flex .main__content__portfels-flex__card
+.main .main__content .main__content__consultant-my-portfels-flex .main__content__portfels-flex__card
 {
     width: 334px;
     margin-right: 7.5px;
@@ -2079,12 +2079,12 @@ body
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     border-radius: 10px;
 }
-.main .main__content .main__content__agent-my-portfels-flex .main__content__portfels-flex__card:hover
+.main .main__content .main__content__consultant-my-portfels-flex .main__content__portfels-flex__card:hover
 {
     cursor: pointer;
     box-shadow: 0px 6px 20px rgba(25, 1, 52, 0.1);
 }
-.main .main__content .main__content__agent-my-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__img
+.main .main__content .main__content__consultant-my-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__img
 {
     width: 100%;
     height: auto;
@@ -2092,28 +2092,28 @@ body
     margin-bottom: 20px;
     border-radius: 10px;
 }
-.main .main__content .main__content__agent-my-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__title
+.main .main__content .main__content__consultant-my-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__title
 {
     font-size: 16px;
     font-weight: 600;
     color: #190134;
     margin-bottom: 8px;
 }
-.main .main__content .main__content__agent-my-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__text
+.main .main__content .main__content__consultant-my-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__text
 {
     font-size: 13px;
     font-weight: 400;
     color: #190134;
     margin-bottom: 20px;
 }
-.main .main__content .main__content__agent-my-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__subtitle
+.main .main__content .main__content__consultant-my-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__subtitle
 {
     font-size: 14px;
     font-weight: 400;
     color: #92929E;
     margin-bottom: 3px;
 }
-.main .main__content .main__content__agent-my-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__digit
+.main .main__content .main__content__consultant-my-portfels-flex .main__content__portfels-flex__card .main__content__portfels-flex__card__digit
 {
     font-size: 16px;
     font-weight: 700;
@@ -2122,16 +2122,16 @@ body
 }
 
 /*========== Main container Sellings container ==========*/
-.main__content .main__content__sellings-wrapper
+.main__content .main__content__consultant-sellings-wrapper
 {
     width: 100%;
     max-width: 910px;
 }
-.main__content .main__content__sellings-wrapper .clear
+.main__content .main__content__consultant-sellings-wrapper .clear
 {
     clear: both;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings
 {
     background-color: #fff;
     padding: 20px 30px;
@@ -2139,7 +2139,7 @@ body
     border-radius: 10px;
     margin-bottom: 20px;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top
 {
     display: flex;
     justify-content: space-between;
@@ -2147,18 +2147,18 @@ body
     margin-bottom: 20px;
     align-items: center;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav
 {
     padding: 0;
     margin: 0;
     list-style: none;
     margin-bottom: 20px;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__item
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__item
 {
     display: inline-block;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__link
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__link
 {
     display: block;
     width: 160px;
@@ -2172,23 +2172,23 @@ body
     background-color: #fff;
     border: 1px solid #C2C3CF;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .active .main__content__sellings-wrapper__sellings__top__nav__link
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .active .main__content__sellings-wrapper__sellings__top__nav__link
 {
     color: #fff;
     background-color: #00A859;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__item:first-child .main__content__sellings-wrapper__sellings__top__nav__link
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__item:first-child .main__content__sellings-wrapper__sellings__top__nav__link
 {
     border-top-left-radius: 24px;
     border-bottom-left-radius: 24px;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__item:last-child .main__content__sellings-wrapper__sellings__top__nav__link
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__item:last-child .main__content__sellings-wrapper__sellings__top__nav__link
 {
     border-top-right-radius: 24px;
     border-bottom-right-radius: 24px;
     border-left: 0;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__button
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__button
 {
     text-decoration: none;
     display: inline-block;
@@ -2200,16 +2200,16 @@ body
     border-radius: 24px;
     margin-bottom: 20px;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table
 {
     overflow-x: auto;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table
 {
     min-width: 820px;
     margin-bottom: 0;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table thead tr th
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table thead tr th
 {
     font-size: 14px;
     font-weight: 500;
@@ -2218,26 +2218,26 @@ body
     border-top: 0;
     padding-bottom: 20px;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table thead tr th:nth-child(2),
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table tbody tr td:first-child
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table thead tr th:nth-child(2),
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table tbody tr td:first-child
 {
     width: 250px;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table tbody tr td:last-child
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table tbody tr td:last-child
 {
     color: #00A859;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table tbody tr th img
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__table .table tbody tr th img
 {
     margin-right: 15px;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination
 {
     display: flex;
     align-items: center;
     float: right;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__left
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__left
 {
     position: relative;
     display: inline-block;
@@ -2246,7 +2246,7 @@ body
     border: 2px solid #D9DAE7;
     border-radius: 50%;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__left svg
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__left svg
 {
     position: absolute;
     top: 50%;
@@ -2254,7 +2254,7 @@ body
     transform: translate(-50%, -50%);
     fill: #92929E;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__right
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__right
 {
     position: relative;
     display: inline-block;
@@ -2263,7 +2263,7 @@ body
     border: 2px solid #D9DAE7;
     border-radius: 50%;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__right svg
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__right svg
 {
     position: absolute;
     top: 50%;
@@ -2271,7 +2271,7 @@ body
     transform: translate(-50%, -50%);
     fill: #92929E;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav
 {
     display: inline-block;
     margin-bottom: 0;
@@ -2279,7 +2279,7 @@ body
     margin-left: 15px;
     padding: 0;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .main__content__sellings-wrapper__pagination__nav-item
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .main__content__sellings-wrapper__pagination__nav-item
 {
     display: inline-block;
     background-color: #D9DAE7;
@@ -2289,32 +2289,32 @@ body
     text-align: center;
     border: 1px solid #D9DAE7;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .disabled
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .disabled
 {
     display: none;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .active
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .active
 {
     background-color: #fff;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .active .main__content__sellings-wrapper__pagination__nav-link
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .active .main__content__sellings-wrapper__pagination__nav-link
 {
     color: #00A859;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .empty
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .empty
 {
     background-color: transparent;
     border: 0;
     cursor: none;
     pointer-events: none;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav > .main-item
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav > .main-item
 {
     position: relative;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav > .main-item a::after
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav > .main-item a::after
 {
     content: '';
     position: absolute;
@@ -2325,26 +2325,26 @@ body
     background-color: #C2C3CF;
     height: 15px;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav li.main-item:nth-last-child(3) a::after
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav li.main-item:nth-last-child(3) a::after
 {
     width: 0;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav > .main-item ~ .main-item
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav > .main-item ~ .main-item
 {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav li.main-item:nth-last-child(3)
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav li.main-item:nth-last-child(3)
 {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .first-page,
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .last-page
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .first-page,
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .last-page
 {
     border-radius: 15px;
 }
-.main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .main__content__sellings-wrapper__pagination__nav-link
+.main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav .main__content__sellings-wrapper__pagination__nav-link
 {
     display: block;
     text-decoration: none;
@@ -2353,7 +2353,7 @@ body
 }
 
 
-.main__content .main__content__referals-top
+.main__content .main__content__consultant-referals-top
 {
     width: 100%;
     max-width: 410px;
@@ -2363,37 +2363,37 @@ body
     padding: 20px;
     margin-bottom: 20px;
 }
-.main__content .main__content__referals-top .main__content__referals-top__wrapper
+.main__content .main__content__consultant-referals-top .main__content__referals-top__wrapper
 {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
 }
-.main__content .main__content__referals-top .main__content__referals-top__wrapper .blue
+.main__content .main__content__consultant-referals-top .main__content__referals-top__wrapper .blue
 {
     min-width: 16px;
     margin-right: 12px;
 }
-.main__content .main__content__referals-top .main__content__referals-top__wrapper .blue-text
+.main__content .main__content__consultant-referals-top .main__content__referals-top__wrapper .blue-text
 {
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 600;
     color: #190134;
 }
-.main__content .main__content__referals-top .main__content__referals-top__measure
+.main__content .main__content__consultant-referals-top .main__content__referals-top__measure
 {
     font-size: 14px;
     font-weight: 600;
     color: #190134;
     margin-bottom: 15px;
 }
-.main__content .main__content__referals-top .main__content__referals-top__measure:last-child
+.main__content .main__content__consultant-referals-top .main__content__referals-top__measure:last-child
 {
     margin-bottom: 0;
 }
 
-.main__content .main__content__referals-bottom
+.main__content .main__content__consultant-referals-bottom
 {
     width: 100%;
     max-width: 410px;
@@ -2523,15 +2523,15 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     color: #5FADE5;
 }
 
-.page .main .agent-settings-portfels-navbar
+.page .main .consultant-settings-portfels-navbar
 {
     z-index: 999;
 }
-.page .agent-settings-portfels-navbar-bottom
+.page .consultant-settings-portfels-navbar-bottom
 {
     z-index: 999;
 }
-.page .page__agent-settings-program-modal
+.page .page__consultant-settings-program-modal
 {
     display: none;
     position: absolute;
@@ -2542,18 +2542,18 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     background-color: rgba(1, 15, 52, 0.9);
     z-index: 1000;
 }
-.page .page__agent-settings-program-modal i
+.page .page__consultant-settings-program-modal i
 {
     position: absolute;
     top: 65px;
     right: 5%;
     color: #fff;
 }
-.page .page__agent-settings-program-modal i:hover
+.page .page__consultant-settings-program-modal i:hover
 {
     cursor: pointer;
 }
-.page .page__agent-settings-program-modal .page__program-modal__body
+.page .page__consultant-settings-program-modal .page__program-modal__body
 {
     width: 96%;
     max-width: 850px;
@@ -2567,17 +2567,17 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     margin-left: 2%;
     border-radius: 10px;
 }
-.page .page__agent-settings-program-modal .page__program-modal__body
+.page .page__consultant-settings-program-modal .page__program-modal__body
 {
     overflow-x: scroll;
     text-align: center;
 }
-.page .page__agent-settings-program-modal .page__program-modal__body .table
+.page .page__consultant-settings-program-modal .page__program-modal__body .table
 {
     min-width: 820px;
     margin-bottom: 25px;
 }
-.page .page__agent-settings-program-modal .page__program-modal__body .table thead tr th
+.page .page__consultant-settings-program-modal .page__program-modal__body .table thead tr th
 {
     font-size: 14px;
     font-weight: 500;
@@ -2586,20 +2586,20 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     border-top: 0;
     padding-bottom: 20px;
 }
-.page .page__agent-settings-program-modal .page__program-modal__body .table thead tr th:nth-child(2),
-.page .page__agent-settings-program-modal .page__program-modal__body .table tbody tr td:first-child
+.page .page__consultant-settings-program-modal .page__program-modal__body .table thead tr th:nth-child(2),
+.page .page__consultant-settings-program-modal .page__program-modal__body .table tbody tr td:first-child
 {
     width: 250px;
 }
-.page .page__agent-settings-program-modal .page__program-modal__body .table tbody tr td:last-child
+.page .page__consultant-settings-program-modal .page__program-modal__body .table tbody tr td:last-child
 {
     color: #00A859;
 }
-.page .page__agent-settings-program-modal .page__program-modal__body .table tbody tr th img
+.page .page__consultant-settings-program-modal .page__program-modal__body .table tbody tr th img
 {
     margin-right: 15px;
 }
-.page .page__agent-settings-program-modal .page__program-modal__body .page__program-modal__body__button
+.page .page__consultant-settings-program-modal .page__program-modal__body .page__program-modal__body__button
 {
     font-size: 14px;
     font-weight: 700;
@@ -2611,7 +2611,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     text-decoration: none;
 }
 
-.page .page__agent-settings-program-modal-2
+.page .page__consultant-settings-program-modal-2
 {
     /* display: none; */
     position: absolute;
@@ -2622,18 +2622,18 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     background-color: rgba(1, 15, 52, 0.9);
     z-index: 1000;
 }
-.page .page__agent-settings-program-modal-2 i
+.page .page__consultant-settings-program-modal-2 i
 {
     position: absolute;
     top: 65px;
     right: 5%;
     color: #fff;
 }
-.page .page__agent-settings-program-modal-2 i:hover
+.page .page__consultant-settings-program-modal-2 i:hover
 {
     cursor: pointer;
 }
-.page .page__agent-settings-program-modal-2 .page__program-modal__body
+.page .page__consultant-settings-program-modal-2 .page__program-modal__body
 {
     width: 96%;
     max-width: 440px;
@@ -2647,18 +2647,18 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     margin-left: 2%;
     border-radius: 10px;
 }
-.page .page__agent-settings-program-modal-2 .page__program-modal__body .page__program-modal__body__text
+.page .page__consultant-settings-program-modal-2 .page__program-modal__body .page__program-modal__body__text
 {
     font-size: 14px;
     font-weight: 600;
     color: #190134;
     margin-bottom: 20px;
 }
-.page .page__agent-settings-program-modal-2 .page__program-modal__body ol
+.page .page__consultant-settings-program-modal-2 .page__program-modal__body ol
 {
     padding-left: 20px;
 }
-.page .page__agent-settings-program-modal-2 .page__program-modal__body .page__program-modal__body__button
+.page .page__consultant-settings-program-modal-2 .page__program-modal__body .page__program-modal__body__button
 {
     font-size: 14px;
     font-weight: 700;
@@ -2670,7 +2670,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     text-decoration: none;
 }
 
-.page .page__agent-settings-not-available-program-modal
+.page .page__consultant-settings-not-available-program-modal
 {
     position: absolute;
     top: 0;
@@ -2680,18 +2680,18 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     background-color: rgba(1, 15, 52, 0.9);
     z-index: 1000;
 }
-.page .page__agent-settings-not-available-program-modal i
+.page .page__consultant-settings-not-available-program-modal i
 {
     position: absolute;
     top: 65px;
     right: 5%;
     color: #fff;
 }
-.page .page__agent-settings-not-available-program-modal i:hover
+.page .page__consultant-settings-not-available-program-modal i:hover
 {
     cursor: pointer;
 }
-.page .page__agent-settings-not-available-program-modal .page__agent-not-available-modal__body
+.page .page__consultant-settings-not-available-program-modal .page__agent-not-available-modal__body
 {
     width: 96%;
     max-width: 820px;
@@ -2705,19 +2705,19 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     margin-left: 2%;
     border-radius: 10px;
 }
-.page .page__agent-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__title
+.page .page__consultant-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__title
 {
     font-size: 16px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 15px;
 }
-.page .page__agent-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__flex
+.page .page__consultant-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__flex
 {
     display: flex;
     flex-wrap: wrap;
 }
-.page .page__agent-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item
+.page .page__consultant-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item
 {
     position: relative;
     width: 100%;
@@ -2725,13 +2725,13 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     margin-left: 5px;
     margin-right: 5px;
 }
-.page .page__agent-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item__img
+.page .page__consultant-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item__img
 {
     width: 100%;
     height: auto;
     display: block;
 }
-.page .page__agent-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item__text
+.page .page__consultant-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item__text
 {
     position: absolute;
     font-size: 14px;
@@ -2743,7 +2743,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
 }
 
 /*========== Main container News flex container ==========*/
-.main .main__content .main__content__agent-news-flex
+.main .main__content .main__content__consultant-news-flex
 {
     max-width: 1396px;
     display: flex;
@@ -2751,7 +2751,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
 }
 
 /*========== Main container News Card ==========*/
-.main .main__content .main__content__agent-news-flex .main__content__news-flex__card
+.main .main__content .main__content__consultant-news-flex .main__content__news-flex__card
 {
     width: 334px;
     margin-right: 7.5px;
@@ -2762,12 +2762,12 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     border-radius: 10px;
 }
-.main .main__content .main__content__agent-news-flex .main__content__news-flex__card:hover
+.main .main__content .main__content__consultant-news-flex .main__content__news-flex__card:hover
 {
     cursor: pointer;
     box-shadow: 0px 6px 20px rgba(25, 1, 52, 0.1);
 }
-.main .main__content .main__content__agent-news-flex .main__content__news-flex__card .main__content__news-flex__card__img
+.main .main__content .main__content__consultant-news-flex .main__content__news-flex__card .main__content__news-flex__card__img
 {
     width: 100%;
     height: auto;
@@ -2775,21 +2775,21 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     margin-bottom: 20px;
     border-radius: 10px;
 }
-.main .main__content .main__content__agent-news-flex .main__content__news-flex__card .main__content__news-flex__card__title
+.main .main__content .main__content__consultant-news-flex .main__content__news-flex__card .main__content__news-flex__card__title
 {
     font-size: 16px;
     font-weight: 600;
     color: #190134;
     margin-bottom: 8px;
 }
-.main .main__content .main__content__agent-news-flex .main__content__news-flex__card .main__content__news-flex__card__text
+.main .main__content .main__content__consultant-news-flex .main__content__news-flex__card .main__content__news-flex__card__text
 {
     font-size: 13px;
     font-weight: 400;
     color: #190134;
     margin-bottom: 20px;
 }
-.main .main__content .main__content__agent-news-flex .main__content__news-flex__card .main__content__news-flex__card__button
+.main .main__content .main__content__consultant-news-flex .main__content__news-flex__card .main__content__news-flex__card__button
 {
     font-size: 14px;
     font-weight: 700;
@@ -2803,7 +2803,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
 }
 
 /*========== Main container New Card ==========*/
-.main__content .main__content__agent-new-card
+.main__content .main__content__consultant-new-card
 {
     width: 100%;
     max-width: 550px;
@@ -2812,32 +2812,32 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     background-color: #fff;
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
 }
-.main__content .main__content__agent-new-card .main__content__new-card__img
+.main__content .main__content__consultant-new-card .main__content__new-card__img
 {
     width: 100%;
     height: auto;
     display: block;
     margin-bottom: 25px;
 }
-.main__content .main__content__agent-new-card .main__content__new-card__title
+.main__content .main__content__consultant-new-card .main__content__new-card__title
 {
     font-size: 18px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 12px;
 }
-.main__content .main__content__agent-new-card .main__content__new-card__text
+.main__content .main__content__consultant-new-card .main__content__new-card__text
 {
     font-size: 16px;
     font-weight: 400;
     color: #190134;
     margin-bottom: 20px;
 }
-.main__content .main__content__agent-new-card .main__content__new-card__text:last-child
+.main__content .main__content__consultant-new-card .main__content__new-card__text:last-child
 {
     margin-bottom: 0;
 }
-.main .main__agent-next-new-button
+.main .main__consultant-next-new-button
 {
     position: absolute;
     right: 30px;
@@ -2851,21 +2851,21 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     border: 1px solid #00A859;
     border-radius: 50px;
 }
-.main .main__agent-next-new-button .main__next-new-button__img
+.main .main__consultant-next-new-button .main__next-new-button__img
 {
     margin-left: 15px;
 }
 
 /*========== Main container's wrapper Program modal ==========*/
-.page .main .agent-portfels-navbar
+.page .main .consultant-portfels-navbar
 {
     z-index: 999;
 }
-.page .agent-portfels-navbar-bottom
+.page .consultant-portfels-navbar-bottom
 {
     z-index: 999;
 }
-.page .page__agent-program-modal
+.page .page__consultant-program-modal
 {
     display: none;
     position: absolute;
@@ -2876,18 +2876,18 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     background-color: rgba(1, 15, 52, 0.9);
     z-index: 1000;
 }
-.page .page__agent-program-modal i
+.page .page__consultant-program-modal i
 {
     position: absolute;
     top: 65px;
     right: 5%;
     color: #fff;
 }
-.page .page__agent-program-modal i:hover
+.page .page__consultant-program-modal i:hover
 {
     cursor: pointer;
 }
-.page .page__agent-program-modal .page__program-modal__body
+.page .page__consultant-program-modal .page__program-modal__body
 {
     width: 96%;
     max-width: 820px;
@@ -2901,19 +2901,19 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     margin-left: 2%;
     border-radius: 10px;
 }
-.page .page__agent-program-modal .page__program-modal__body .page__program-modal__body__title
+.page .page__consultant-program-modal .page__program-modal__body .page__program-modal__body__title
 {
     font-size: 16px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 15px;
 }
-.page .page__agent-program-modal .page__program-modal__body .page__program-modal__body__flex
+.page .page__consultant-program-modal .page__program-modal__body .page__program-modal__body__flex
 {
     display: flex;
     flex-wrap: wrap;
 }
-.page .page__agent-program-modal .page__program-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item
+.page .page__consultant-program-modal .page__program-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item
 {
     position: relative;
     width: 100%;
@@ -2921,13 +2921,13 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     margin-left: 5px;
     margin-right: 5px;
 }
-.page .page__agent-program-modal .page__program-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item__img
+.page .page__consultant-program-modal .page__program-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item__img
 {
     width: 100%;
     height: auto;
     display: block;
 }
-.page .page__agent-program-modal .page__program-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item__text
+.page .page__consultant-program-modal .page__program-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item__text
 {
     position: absolute;
     font-size: 14px;
@@ -2937,7 +2937,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     bottom: 20px;
     margin-bottom: 0;
 }
-.page .page__agent-program-modal .page__program-modal__body-2
+.page .page__consultant-program-modal .page__program-modal__body-2
 {
     display: none;
     width: 96%;
@@ -2952,14 +2952,14 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     margin-left: 2%;
     border-radius: 10px;
 }
-.page .page__agent-program-modal .page__program-modal__body-2 .page__program-modal__body-2__title
+.page .page__consultant-program-modal .page__program-modal__body-2 .page__program-modal__body-2__title
 {
     font-size: 16px;
     font-weight: 700;
     color: #190134;
     margin-bottom: 20px;
 }
-.page .page__agent-program-modal .page__program-modal__body-2 .page__program-modal__body-2__input
+.page .page__consultant-program-modal .page__program-modal__body-2 .page__program-modal__body-2__input
 {
     width: 100%;
     font-size: 14px;
@@ -2970,7 +2970,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     border-radius: 24px;
     padding: 8px 16px;
 }
-.page .page__agent-program-modal .page__program-modal__body-2 .page__program-modal__body-2__button
+.page .page__consultant-program-modal .page__program-modal__body-2 .page__program-modal__body-2__button
 {
     text-decoration: none;
     font-size: 14px;
@@ -2983,7 +2983,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     cursor: none;
     pointer-events: none;
 }
-.page .page__agent-program-modal .page__program-modal__body-2 .active
+.page .page__consultant-program-modal .page__program-modal__body-2 .active
 {
     background-color: #00A859;
     cursor: pointer;
@@ -2996,7 +2996,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
 }
 
 /*========== Main container Agent Settings Success modal ==========*/
-.main__content .main__content__agent-settings-success
+.main__content .main__content__consultant-settings-success
 {
     display: flex;
     width: 100%;
@@ -3005,7 +3005,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     top: 30px;
     right: 30px;
 }
-.main__content .main__content__agent-settings-success .main__content__program-success__left
+.main__content .main__content__consultant-settings-success .main__content__program-success__left
 {
     width: 32px;
     background-color: #5FADE5;
@@ -3014,7 +3014,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     border-bottom-left-radius: 8px;
     position: relative;
 }
-.main__content .main__content__agent-settings-success .main__content__program-success__left img
+.main__content .main__content__consultant-settings-success .main__content__program-success__left img
 {
     position: absolute;
     top: 50%;
@@ -3024,7 +3024,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     max-width: 14px;
     height: auto;
 }
-.main__content .main__content__agent-settings-success .main__content__program-success__right
+.main__content .main__content__consultant-settings-success .main__content__program-success__right
 {
     position: relative;
     width: 100%;
@@ -3035,24 +3035,24 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     border-bottom-right-radius: 8px;
     padding: 12px 60px 12px 12px;
 }
-.main__content .main__content__agent-settings-success .main__content__program-success__right i
+.main__content .main__content__consultant-settings-success .main__content__program-success__right i
 {
     position: absolute;
     top: 12px;
     right: 12px;
 }
-.main__content .main__content__aagent-settings-success .main__content__program-success__right i:hover
+.main__content .main__content__consultant-settings-success .main__content__program-success__right i:hover
 {
     cursor: pointer;
 }
-.main__content .main__content__agent-settings-success .main__content__program-success__right .main__content__program-success__right__title
+.main__content .main__content__consultant-settings-success .main__content__program-success__right .main__content__program-success__right__title
 {
     font-size: 16px;
     font-weight: 800;
     color: #190134;
     margin-bottom: 5px;
 }
-.main__content .main__content__agent-settings-success .main__content__program-success__right .main__content__program-success__right__text
+.main__content .main__content__consultant-settings-success .main__content__program-success__right .main__content__program-success__right__text
 {
     font-size: 16px;
     font-weight: 400;
@@ -3072,19 +3072,19 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
         padding-right: 0 !important;
         padding-left: 0 !important;
     }
-    .main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__link
+    .main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__link
     {
         width: 120px;
         padding-top: 5px;
         padding-bottom: 5px;
     }
-    .main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__button
+    .main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__button
     {
         padding-top: 5px;
         padding-bottom: 5px;
         margin-bottom: 0;
     }
-    .main .main__content .main__content__agent-courses-flex .main__content__courses-flex__card {
+    .main .main__content .main__content__consultant-courses-flex .main__content__courses-flex__card {
         width: 100%;
         background: #fff;
         margin-left: 0;
@@ -3094,95 +3094,98 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
         box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
         border-radius: 0;
     }
-    .main__content .main__content__agent-course-card {
+    .main__content .main__content__consultant-course-card {
         padding: 20px 10px;
         border-radius: 0;
     }
-    .main__content .main__content__agent-course-card .main__content__course-card__img {
+    .main__content .main__content__consultant-course-card .main__content__course-card__img {
         margin-bottom: 10px;
     }
-    .main .main__content .main__content__agent-my-courses-flex .main__content__courses-flex__card {
+    .main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card {
         width: 100%;
         margin-right: 0;
         margin-left: 0;
         border-radius: 0;
     }
-    .main__content .main__content__agent-my-course-card {
+    .main__content .main__content__consultant-my-course-card {
         padding: 10px;
         border-radius: 0;
     }
-    .main__content .main__content__agent-lesson-card
+    .main__content .main__content__consultant-lesson-card
     {
         border-radius: 0;
     }
-    .main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework,
-    .main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade
+    .main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework,
+    .main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade
     {
         border-radius: 0;
     }
-    .main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card
+    .main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card
     {
         border-radius: 0;
     }
-    .page .page__agent-program-modal .page__program-modal__body
+    .page .page__consultant-program-modal .page__program-modal__body
     {
         flex-direction: column;
     }
     
-    .main__content .main__content__agent-program-card
+    .main__content .main__content__consultant-program-card
     {
         border-radius: 0;
     }
-    .main__content .main__content__agent-program-card .main__content__program-card__button
+    .main__content .main__content__consultant-program-card .main__content__program-card__button
     {
         padding: 8px 20px;
     }
     
-    .main .main__content .main__content__agent-my-portfels-flex .main__content__portfels-flex__card
+    .main .main__content .main__content__consultant-my-portfels-flex .main__content__portfels-flex__card
     {
         border-radius: 0;
         margin-left: 0;
         margin-right: 0;
     }
-    .main__content .main__content__agent-my-portfels-diagram
+    .main__content .main__content__consultant-my-portfels-diagram
     {
         border-radius: 0;
         margin-bottom: 15px;
     }
-    .main__content .main__content__referals-top
+    .main__content .main__content__consultant-referals-top
     {
         border-radius: 0;
     }
-    .main__content .main__content__referals-bottom
+    .main__content .main__content__consultant-referals-bottom
     {
         border-radius: 0;
     }
-    .main .main__content .main__content__agent-news-flex .main__content__news-flex__card
+    .main .main__content .main__content__consultant-news-flex .main__content__news-flex__card
     {
         border-radius: 0;
     }
-    .main__content .main__content__agent-new-card
+    .main__content .main__content__consultant-new-card
     {
         border-radius: 0;
     }
-    .main__content .main__content__agent-support-form
+    .main__content .main__content__consultant-support-form
     {
         border-radius: 0;
         padding: 10px;
     }
-    .main__content .main__content__agent-support-notification
+    .main__content .main__content__consultant-support-notification
     {
         max-width: 300px;
         padding-left: 10px;
         padding-right: 10px;
     }
-    .main__content .main__content__agent-settings-flex .main__content__settings-flex__form
+    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__form
     {
         border-radius: 0;
     }
 }
 @media screen and (max-width: 480px)
 {
+    .page, .main {
+        height: auto;
+    }
     .main .navbar .nav .add-client .nav-link p 
     {
         display: none;
@@ -3191,9 +3194,6 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     {
         display: block !important;
         color: #fff;
-    }
-    .page, .main {
-        height: auto;
     }
     /*========== Main container wrapper user's nav ==========*/
     .page > .navbar .nav .profile-item-text
@@ -3229,83 +3229,83 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
         padding-bottom: 20px;
     }
 
-    .main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings
+    .main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings
     {
         padding: 10px;
     }
 
-    .main__content .main__content__agent-settings-flex
+    .main__content .main__content__consultant-settings-flex
     {
         align-items: center;
     }
-    .main__content .main__content__agent-settings-flex .main__content__settings-flex__right > div
+    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__right > div
     {
         margin: 0 auto;
     }
 
-    .main__content .main__content__agent-course-success
+    .main__content .main__content__consultant-course-success
     {
         right: 10px;
         justify-content: flex-end;
     }
-    .main__content .main__content__agent-course-success .main__content__course-success__right
+    .main__content .main__content__consultant-course-success .main__content__course-success__right
     {
         padding-right: 20px;
         max-width: 270px;
     }
-    .main__content .main__content__agent-my-course-card {
+    .main__content .main__content__consultant-my-course-card {
         margin-right: 0;
     }
-    .main__content .main__content__agent-lesson-card
+    .main__content .main__content__consultant-lesson-card
     {
         margin-right: 0;
     }
-    .main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task
+    .main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task
     {
         width: 100%;
     }
-    .main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework
+    .main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework
     {
         max-width: 480px;
     }
-    .main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__grade
+    .main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__grade
     {
         max-width: 480px;
     }
-    .main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__homework label
+    .main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__homework label
     {
         width: 100%;
         padding: 30px;
     }
-    .main__content .main__content__agent-lesson-flex .main__content__agent-lesson-flex__task .main__content__lesson-flex__task__next
+    .main__content .main__content__consultant-lesson-flex .main__content__consultant-lesson-flex__task .main__content__lesson-flex__task__next
     {
         max-width: 480px;
     }
-    .main__content .main__content__agent-portfels-nav .main__content__portfels-nav__link {
+    .main__content .main__content__consultant-portfels-nav .main__content__portfels-nav__link {
         width: 120px;
         padding-top: 5px;
         padding-bottom: 5px;
     }
-    .main__content .main__content__agent-portfels-nav {
+    .main__content .main__content__consultant-portfels-nav {
         margin-bottom: 15px;
     }
-    .main .main__content .main__content__agent-portfels-flex .main__content__portfels-flex__card {
+    .main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card {
         margin-right: 0;
         margin-left: 0;
     }
 
-    .page .page__agent-program-modal {
+    .page .page__consultant-program-modal {
         position: fixed;
         top: 0;
         left: 0;
         overflow-y: scroll;
     }
-    .page .page__agent-program-modal i {
+    .page .page__consultant-program-modal i {
         top: 10px;
         color: #000;
         z-index: 1;
     }
-    .page .page__agent-program-modal .page__program-modal__body {
+    .page .page__consultant-program-modal .page__program-modal__body {
         padding: 50px 10px 10px 10px;
         top: 0;
         left: 0;
@@ -3314,121 +3314,157 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
         margin-left: 0;
         border-radius: 0;
         width: 100%;
+        height: 100vh;
+        overflow-y: scroll;
     }
-    .page .page__agent-program-modal .page__program-modal__body .page__program-modal__body__flex
+    .page .page__consultant-program-modal .page__program-modal__body .page__program-modal__body__flex
     {
         justify-content: center;
     }
-    .page .page__agent-program-modal .page__program-modal__body .page__program-modal__body__title
+    .page .page__consultant-program-modal .page__program-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item
+    {
+        margin-bottom: 20px;
+    }
+    .page .page__consultant-program-modal .page__program-modal__body .page__program-modal__body__title
     {
         text-align: center;
     }
-    .main__content .main__content__agent-program-success
+    .main__content .main__content__consultant-program-success
     {
         right: 10px;
         justify-content: flex-end;
     }
-    .main__content .main__content__agent-program-success .main__content__program-success__right
+    .main__content .main__content__consultant-program-success .main__content__program-success__right
     {
         padding-right: 20px;
         max-width: 270px;
     }
     
-    .main__content .main__content__agent-program-card
+    .main__content .main__content__consultant-program-card
     {
         padding: 10px;
     }
 
-    .main__content .main__content__agent-my-portfels-nav .main__content__portfels-nav__link {
+    .main__content .main__content__consultant-my-portfels-nav .main__content__portfels-nav__link {
         width: 120px;
         padding-top: 5px;
         padding-bottom: 5px;
     }
-    .main__content .main__content__agent-my-portfels-nav {
+    .main__content .main__content__consultant-my-portfels-nav {
         margin-bottom: 15px;
     }
-    .main .main__content .main__content__agent-my-portfels-flex .main__content__portfels-flex__card
+    .main .main__content .main__content__consultant-my-portfels-flex .main__content__portfels-flex__card
     {
         padding: 10px;
     }
 
-    .main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__item .main__content__sellings-wrapper__sellings__top__nav__link {
+    .main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav .main__content__sellings-wrapper__sellings__top__nav__item .main__content__sellings-wrapper__sellings__top__nav__link {
         width: 120px;
         padding-top: 5px;
         padding-bottom: 5px;
     }
-    .main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav {
+    .main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__nav {
         margin-bottom: 15px;
     }
-    .main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top
+    .main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top
     {
         margin-bottom: 0;
     }
-    .main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__button
+    .main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__sellings .main__content__sellings-wrapper__sellings__top .main__content__sellings-wrapper__sellings__top__button
     {
         padding: 5px 15px;
     }
-    .main .main__content .main__content__agent-news-flex .main__content__news-flex__card
+    .main .main__content .main__content__consultant-news-flex .main__content__news-flex__card
     {
         padding: 10px;
         margin-left: 0;
         margin-right: 0;    
     }
 
-    .main__content .main__content__agent-new-card
+    .main__content .main__content__consultant-new-card
     {
         padding: 10px;
         margin-bottom: 70px;
     }
-    .main__content .main__content__agent-settings-flex .main__content__settings-flex__right
+    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__right
     {
         display: block;
         margin: 0 !important;
         max-width: 440px;
     }
-    .main__content .main__content__agent-settings-flex .main__content__settings-flex__ava
+    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__ava
     {
         max-width: 275px !important;
     }
-    .main__content .main__content__agent-settings-flex .main__content__settings-flex__right > div 
+    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__right > div 
     {
         max-width: 275px !important;
         margin: 0 auto 20px !important;
     }
-    .main__content .main__content__agent-settings-flex .main__content__settings-flex__form
+    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__form
     {
         margin-left: 0;
         margin-right: 0;
     }
-    .page .page__agent-settings-program-modal-2
+    .page .page__consultant-settings-program-modal-2
     {
         position: fixed;
     }
-    .page .page__agent-settings-program-modal-2 .page__program-modal__body
+    .page .page__consultant-settings-program-modal-2 .page__program-modal__body
     {
         margin-left: 0;
         margin-right: 0;
         width: 100%;
         border-radius: 0;
     }
-    .page .page__agent-settings-program-modal-2 i
+    .page .page__consultant-settings-program-modal-2 i
     {
         top: 20px;
     }
-    .main__content .main__content__agent-settings-success
+    .main__content .main__content__consultant-settings-success
     {
         max-width: 292px;
         top: 10px;
         right: 10px;
     }
-    .main__content .main__content__agent-settings-success .main__content__program-success__right
+    .main__content .main__content__consultant-settings-success .main__content__program-success__right
     {
         padding: 5px 30px 5px 5px;
         max-width: 260px;
     }
-    .main .main__content .main__content__agent-courses-flex .main__content__courses-flex__card
+    .main__content .main__content__consultant-course-card
     {
         padding: 10px;
+    }
+    .main__content .main__content__consultant-my-course-card
+    {
+        padding: 10px;
+    }
+    .main__content .main__content__consultant-my-course-lessons
+    {
+        max-width: 480px;
+    }
+    .main .main__content .main__content__consultant-portfels-flex .main__content__portfels-flex__card
+    {
+        padding: 10px;
+    }
+    .page .page__consultant-settings-not-available-program-modal i
+    {
+        z-index: 1;
+        color: #000;
+    }
+    .page .page__consultant-settings-not-available-program-modal .page__agent-not-available-modal__body
+    {
+        position: flex;
+        top: 0;
+        left: 0;
+        transform: none;
+        height: 100vh;
+        overflow-y: scroll;
+    }
+    .page .page__consultant-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__flex .page__program-modal__body__flex__item
+    {
+        margin-top: 20px;
     }
 }
 @media screen and (max-width: 597px)
@@ -3439,17 +3475,17 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
         justify-content: center;
     }
 
-    .main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav li.active
+    .main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav li.active
     {
         border-radius: 15px;
     }
 
-    .main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav li.active a::after
+    .main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav li.active a::after
     {
         width: 0;
     }
 
-    .main__content .main__content__sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav li:not(.active):not(.last-page):not(.empty)
+    .main__content .main__content__consultant-sellings-wrapper .main__content__sellings-wrapper__pagination .main__content__sellings-wrapper__pagination__nav li:not(.active):not(.last-page):not(.empty)
     {
         display: none;
     }
@@ -3511,10 +3547,6 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     .main .navbar .nav .add-client .nav-link {
         padding: 5px 16px;
     }
-    .main .navbar .nav .add-client .nav-link i
-    {
-        display: none;
-    }
     .main .navbar .nav li:first-child a
     {
         padding-right: 0;
@@ -3533,7 +3565,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
         margin: 0 auto;
     }
 
-    .main .main__content .main__content__agent-courses-flex {
+    .main .main__content .main__content__consultant-courses-flex {
         justify-content: center;
     }
     
@@ -3542,7 +3574,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
         margin: 0 auto;
     }
 
-    .main__content .main__content__agent-course-card {
+    .main__content .main__content__consultant-course-card {
         margin: 0 auto;
     }
 
@@ -3553,68 +3585,83 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     }
 
     /*========== Support card ==========*/
-    .main__content .main__content__agent-support-form
+    .main__content .main__content__consultant-support-form
     {
         margin-left: auto;
         margin-right: auto;
     }
-    .main__content .main__content__agent-support-notification
+    .main__content .main__content__consultant-support-notification
     {
         margin: 0 auto;
     }
 
     /*========== Agent card ==========*/
-    .main__content .main__content__agent-card
+    .main__content .main__content__consultant-card
     {
         margin: 0 auto;
     }
 
-    .main .main__content .main__content__agent-my-courses-flex {
+    .main .main__content .main__content__consultant-my-courses-flex {
         justify-content: center;
     }
-    .main__content .main__content__agent-portfels-nav
+    .main__content .main__content__consultant-portfels-nav
     {
         text-align: center;
     }
-    .main .main__content .main__content__agent-portfels-flex
+    .main .main__content .main__content__consultant-portfels-flex
     {
         justify-content: center;
     }
-    .main__content .main__content__agent-program-card
+    .main__content .main__content__consultant-program-card
     {
         margin: 0 auto;
     }
 
-    .main__content .main__content__agent-my-portfels-diagram
+    .main__content .main__content__consultant-my-portfels-diagram
     {
         margin: 0 auto 30px;
     }
-    .main__content .main__content__agent-my-portfels-nav
+    .main__content .main__content__consultant-my-portfels-nav
     {
         text-align: center;
     }
-    .main .main__content .main__content__agent-my-portfels-flex
+    .main .main__content .main__content__consultant-my-portfels-flex
     {
         justify-content: center;
     }
-    .main .main__content .main__content__agent-news-flex
+    .main .main__content .main__content__consultant-news-flex
     {
         justify-content: center;
     }
-    .page .page__agent-settings-program-modal
+    .page .page__consultant-settings-program-modal
     {
         position: fixed;
     }
-    .page .page__agent-settings-program-modal i
+    .page .page__consultant-settings-program-modal i
     {
         top: 20px;
     }
-    .page .page__agent-settings-program-modal .page__program-modal__body
+    .page .page__consultant-settings-program-modal .page__program-modal__body
     {
         width: 100%;
         margin-left: 0;
         margin-right: 0;
         border-radius: 0;
+    }
+    .page .page__consultant-settings-not-available-program-modal i
+    {
+        top: 20px;
+    }
+    .page .page__consultant-settings-not-available-program-modal .page__agent-not-available-modal__body
+    {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0;
+    }
+    .page .page__consultant-settings-not-available-program-modal .page__agent-not-available-modal__body .page__program-modal__body__flex
+    {
+        justify-content: center;
     }
 }
 @media screen and (max-width: 1263px)
@@ -3635,15 +3682,15 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
 @media screen and (max-width: 1348px)
 {
     /*========== Settings flex items order change ==========*/
-    .main__content .main__content__agent-settings-flex .main__content__settings-flex__ava
+    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__ava
     {
         order: 1;
     }
-    .main__content .main__content__agent-settings-flex .main__content__settings-flex__form
+    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__form
     {
         order: 3;
     }
-    .main__content .main__content__agent-settings-flex .main__content__settings-flex__right
+    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__right
     {
         order: 2;
         width: 100%;
@@ -3652,11 +3699,11 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
         align-items: flex-start;
         flex-wrap: wrap;
     }
-    .main__content .main__content__agent-settings-flex .main__content__settings-flex__right > div
+    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__right > div
     {
         margin-right: 20px;        
     }
-    .main__content .main__content__agent-settings-flex
+    .main__content .main__content__consultant-settings-flex
     {
         flex-direction: column;
     }

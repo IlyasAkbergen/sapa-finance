@@ -19,6 +19,7 @@
 <script>
     import MainLayout from '@/Layouts/MainLayout'
     import Welcome from '@/Jetstream/Welcome'
+    // import Sidebar from '@/Pages/Shared/Sidebar'
 
     export default {
         components: {
