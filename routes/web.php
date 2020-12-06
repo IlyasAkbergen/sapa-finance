@@ -5,6 +5,9 @@ use App\Http\Controllers\web\PurchaseController;
 use App\Http\Controllers\web\ReferralController;
 use Illuminate\Support\Facades\Route;
 
+// controllers for front
+use App\Http\Controllers\front\CoursesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', [CoursesController::class, 'Courses'])
+    ->name('courses')
+    ->middleware('auth');
 
 Route::get('/', function () {
     return view('welcome');
