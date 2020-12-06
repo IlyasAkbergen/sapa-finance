@@ -6,12 +6,12 @@
         <template #trigger>
           <button v-if="$page.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
             <img class="h-8 w-8 rounded-full object-cover"
-                 :src="$page.user.profile_photo_url"
-                 :alt="$page.user.name" />
+                 :src="getUser().profile_photo_url"
+                 :alt="getUser().name" />
           </button>
 
           <button v-else class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-            <div>{{ $page.user.name }}</div>
+            <div>{{ getUser().name }}</div>
 
             <div class="ml-1">
               <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -53,6 +53,7 @@
   import JetNavLink from '@/Jetstream/NavLink'
   import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
   import Sidebar from '@/Shared/Sidebar'
+  import HasUser from "@/Mixins/HasUser";
   export default {
     components: {
       JetApplicationMark,
@@ -62,6 +63,8 @@
       JetResponsiveNavLink,
       Sidebar
     },
+
+    mixins: [HasUser],
 
     data() {
       return {

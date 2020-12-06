@@ -1,12 +1,11 @@
 <?php
 
+use App\Http\Controllers\web\CoursesController;
 use App\Http\Controllers\web\PayoutController;
 use App\Http\Controllers\web\PurchaseController;
 use App\Http\Controllers\web\ReferralController;
 use Illuminate\Support\Facades\Route;
 
-// controllers for front
-use App\Http\Controllers\front\CoursesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +18,6 @@ use App\Http\Controllers\front\CoursesController;
 |
 */
 
-Route::get('/', [CoursesController::class, 'Courses'])
-    ->name('courses')
-    ->middleware('auth');
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -32,6 +27,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::resource('courses', CoursesController::class);
+
     Route::resource(
         '/articles',
         \App\Http\Controllers\ArticleController::class
@@ -41,7 +38,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         'purchases',
         \App\Http\Controllers\web\PurchaseController::class
     );
-
 
     Route::resource(
         'payouts',
