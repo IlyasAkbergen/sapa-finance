@@ -22,8 +22,8 @@ class BriefcaseController extends WebBaseController
     public function index()
     {
         $briefcases = $this->briefcaseService->all();
-        return Inertia('Briefcase', [
-            'briefcases' => $briefcase
+        return Inertia('Briefcase/Briefcases', [
+            'briefcases' => $briefcases
         ]);
     }
     

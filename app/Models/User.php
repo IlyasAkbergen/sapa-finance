@@ -86,7 +86,7 @@ class User extends Authenticatable implements Challengable // todo uncomment Mus
     {
         return $this->belongsToMany(
             Course::class, 'user_course'
-        );
+        )->withPivot('score', 'status');
     }
 
     public function newNotifications()

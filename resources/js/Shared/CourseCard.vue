@@ -1,0 +1,51 @@
+<template>
+  <div class="main__content__courses-flex__card">
+    <img src="../../img/course-card-img.png"
+         class="main__content__courses-flex__card__img"
+         alt="">
+    <p class="main__content__courses-flex__card__title">
+      {{ course.title }}
+    </p>
+
+    <div v-if="bought">
+      <div class="main__content__courses-flex__card__process">
+        <p class="main__content__courses-flex__card__process__title">Процесс обучения</p>
+        <p class="main__content__courses-flex__card__process__percent">70%</p>
+      </div>
+      <div class="progress">
+        <div class="progress-bar bg-info"
+             role="progressbar" style="width: 70%" aria-valuenow="50"
+             aria-valuemin="0" aria-valuemax="100">
+
+        </div>
+      </div>
+      <a :href="`courses/${course.id}`" class="main__content__courses-flex__card__button">
+        Перейти на курс
+      </a>
+    </div>
+
+    <div v-else>
+      <div class="main__content__courses-flex__card__bottom">
+        <p class="main__content__courses-flex__card__bottom__price">5 000 ₸</p>
+        <a href="course.html" class="main__content__courses-flex__card__bottom__button">Купить</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: "CourseCard",
+    props: {
+      course: Object,
+      bought: {
+        type: Boolean,
+        default: false
+      }
+    }
+  }
+</script>
+
+<style scoped>
+
+</style>

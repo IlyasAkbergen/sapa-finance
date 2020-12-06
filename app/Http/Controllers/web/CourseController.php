@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
-use App\Http\Controllers\web\WebBaseController;
 use App\Http\Requests\CourseRequest;
 use App\Services\CourseService;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class CourseController extends WebBaseController
 {
@@ -18,8 +19,17 @@ class CourseController extends WebBaseController
     public function index()
     {
         $courses = $this->courseService->all();
+        return Inertia::render('Courses/Courses', [
+            'courses' => $courses
+        ]);
+    }
 
-        // todo render Inertia
+    public function my()
+    {
+        $courses = $this->courseService->ofUser(Auth::user());
+        return Inertia::render('Courses/MyCourses', [
+            'courses' => $courses
+        ]);
     }
 
     public function store(CourseRequest $request)
@@ -31,6 +41,15 @@ class CourseController extends WebBaseController
         } else {
             return $this->responseFail('failed saving');
         }
+    }
+
+    public function show($id)
+    {
+        $course = $this->courseService->find($id);
+
+        return Inertia::render('Courses/CourseDetail', [
+            'course' => $course
+        ]);
     }
 
     public function update(CourseRequest $request)

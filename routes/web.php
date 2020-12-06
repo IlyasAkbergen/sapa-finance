@@ -1,9 +1,13 @@
 <?php
 
-use App\Http\Controllers\web\CoursesController;
+use App\Http\Controllers\BriefcaseController;
+use App\Http\Controllers\web\CourseController;
+use App\Http\Controllers\web\NotificationController;
 use App\Http\Controllers\web\PayoutController;
 use App\Http\Controllers\web\PurchaseController;
 use App\Http\Controllers\web\ReferralController;
+use App\Http\Controllers\web\SaleController;
+use App\Http\Controllers\web\SupportController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,7 +31,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::resource('courses', CoursesController::class);
+    Route::resource('courses', CourseController::class);
+
+    Route::get('my-courses', [CourseController::class, 'my'])->name('my-courses');
+
+    Route::resource('briefcases', BriefcaseController::class);
+
+    Route::get('/my-briefcases', [BriefcaseController::class, 'my'])
+        ->name('my-briefcases');
 
     Route::resource(
         '/articles',
@@ -56,6 +67,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::get('/my-referrals', [ReferralController::class, 'myReferrals']);
+
+    Route::resource('sales', SaleController::class);
+
+    Route::resource('support', SupportController::class);
+
+    Route::resource('notification', NotificationController::class);
+
 });
 
 Route::get('/test', function () {
