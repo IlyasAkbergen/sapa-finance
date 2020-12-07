@@ -53,9 +53,6 @@
         type: Boolean,
         default: false
       }
-    },
-    created() {
-      console.log('course: ' + this.course)
     }
   }
 </script>

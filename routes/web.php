@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BriefcaseController;
 use App\Http\Controllers\web\CourseController;
 use App\Http\Controllers\web\NotificationController;
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware(['guest']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
@@ -45,7 +46,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::resource(
         '/articles',
-        \App\Http\Controllers\ArticleController::class
+        ArticleController::class
     );
 
     Route::resource(

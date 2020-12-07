@@ -7,7 +7,7 @@
                     {{ username }}
                 </p>
                 <p class="sidebar__profile__client-post">
-                    {{ referralLevel }}
+                    {{ referralLevel != null ? referralLevel.title : "Клиент" }}
                 </p>
 
                 <ProfileStats />
@@ -37,7 +37,7 @@
                     </SidebarItem>
 
                     <SidebarItem :route_name="'sales.index'"
-                                 v-if="hasLevel('agent')"
+                                 v-if="hasLevel('Agent')"
                                  icon="cart">
                         Продажи
                     </SidebarItem>

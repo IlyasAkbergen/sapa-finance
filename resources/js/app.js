@@ -13,6 +13,16 @@ Vue.use(PortalVue);
 
 const app = document.getElementById('app');
 
+Vue.filter('truncate', function (value, size) {
+  if (!value) return '';
+  value = value.toString();
+
+  if (value.length <= size) {
+    return value;
+  }
+  return value.substr(0, size) + '...';
+});
+
 new Vue({
     render: (h) =>
         h(InertiaApp, {

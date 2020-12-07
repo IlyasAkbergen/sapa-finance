@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Resources\AuthUserResource;
 use App\Models\Purchase;
 use App\Models\User;
 use App\Observers\PurchaseObserver;
@@ -31,6 +32,8 @@ use App\Services\PurchaseService;
 use App\Services\PurchaseServiceContract;
 use App\Services\UserService;
 use App\Services\UserServiceImpl;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
@@ -103,6 +106,7 @@ class AppServiceProvider extends ServiceProvider
         Purchase::observe(PurchaseObserver::class);
 
         // todo practice tutorial from here: https://www.itsolutionstuff.com/post/laravel-8-inertia-js-crud-with-jetstream-tailwind-cssexample.html
+
         Inertia::share([
             'errors' => function () {
                 return Session::get('errors')
@@ -116,5 +120,6 @@ class AppServiceProvider extends ServiceProvider
                 'message' => Session::get('message'),
             ];
         });
+
     }
 }

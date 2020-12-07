@@ -3,7 +3,6 @@
       content-classes="sidebar__profile__dropdown-block"
       @switch="(value) => this.open = value"
   >
-    // todo dynamic by levels
     <template #content>
       <div class="sidebar__profile__progress__header">
         <p class="sidebar__profile__progress__header__course">Финансовый консультант</p>
@@ -22,17 +21,28 @@
       <div class="sidebar__profile__stats">
         <div class="sidebar__profile__stats__left">
           <p class="sidebar__profile__stats__left__title">Единицы</p>
-          <p class="sidebar__profile__stats__left__text">10</p>
+          <p class="sidebar__profile__stats__left__text">
+            {{ balance != null ? balance.direct_points : 0 }}
+          </p>
         </div>
         <div class="sidebar__profile__stats__right">
           <p class="sidebar__profile__stats__right__title">Командные единицы</p>
-          <p class="sidebar__profile__stats__right__text">0</p>
+          <p class="sidebar__profile__stats__right__text">
+            {{ balance != null ? balance.team_points : 0 }}
+          </p>
         </div>
       </div>
-      <div class="sidebar__profile__agent">
+      <div class="sidebar__profile__agent" v-if="!!referrer">
         <img src="../../img/profile-agent-ava.png" class="sidebar__profile__agent__ava" alt="">
-        <p class="sidebar__profile__agent__name">Зарлыков Темирлан</p>
-        <p class="sidebar__profile__agent__post">Мой финансовый консультант</p>
+        <p class="sidebar__profile__agent__name">
+          {{ referrer.name }}
+        </p>
+        <p class="sidebar__profile__agent__post" v-if="!!referrer.referral_level">
+          {{ referrer.referral_level.title }}
+        </p>
+        <p class="sidebar__profile__agent__post">
+          Мой финансовый консультант
+        </p>
       </div>
     </template>
     <template #trigger>

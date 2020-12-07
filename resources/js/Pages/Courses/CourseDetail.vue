@@ -5,9 +5,11 @@
         <img src="../../../img/back-arrow.png" alt="">
       </a>
     </template>
+
     <template #header>
       {{ course.title }}
     </template>
+
     <div class="main__content__course-card">
       <img src="../../../img/course-card-img.png"
            class="main__content__course-card__img" alt="">
