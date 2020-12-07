@@ -24,12 +24,12 @@
           </li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              Хасен Таир
+              {{ username }}
               <img src="" class="ml-2 mr-1" alt="">
             </a>
             <div class="dropdown-menu">
-              <a href="../user-settings/settings.html" class="dropdown-item">Настройка профиля</a>
-              <a href="../support/support.html" class="dropdown-item">Поддержка</a>
+              <a href="#" class="dropdown-item">Настройка профиля</a>
+              <a href="#" class="dropdown-item">Поддержка</a>
               <a href="#"
                  class="dropdown-item text-danger"
                  @click.prevent="logout">
