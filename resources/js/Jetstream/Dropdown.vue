@@ -1,11 +1,11 @@
 <template>
     <div class="relative">
-        <div @click="open = ! open">
+        <div @click="toggle">
             <slot name="trigger"></slot>
         </div>
 
         <!-- Full Screen Dropdown Overlay -->
-        <div v-show="open" class="fixed inset-0 z-40" @click="open = false">
+        <div v-show="open" class="fixed inset-0 z-40" @click="toggle">
         </div>
 
         <transition
@@ -45,6 +45,13 @@
         data() {
             return {
                 open: false
+            }
+        },
+
+        methods: {
+            toggle() {
+                this.open = !this.open;
+                this.$emit('switch', this.open);
             }
         },
 

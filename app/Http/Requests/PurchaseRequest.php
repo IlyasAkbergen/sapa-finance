@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class PurchaseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -26,7 +27,8 @@ class PurchaseRequest extends FormRequest
         return [
             'purchasable_id' => ['required'],
             'purchasable_type' => ['required', 'max:255'],
-            'with_feedback' => ['required']
+            'with_feedback' => ['required'],
+            'pay_online' => ['required']
         ];
     }
 }

@@ -1,14 +1,28 @@
 <template>
-    <inertia-link class="flex items-center group py-3" :href="route('contacts')">
-        <div class="text-white">
+    <li :class="`sidebar__menu__nav__item ${route().current(route_name) ? 'active' : ''}`">
+        <inertia-link class="sidebar__menu__nav__link" :href="route(route_name)">
+            <img :src="iconPath" class="mr-3" />
             <slot></slot>
-        </div>
-    </inertia-link>
+        </inertia-link>
+    </li>
 </template>
 
 <script>
     export default {
         name: "SidebarItem",
-        props: ['string'] 
+        props: {
+            route_name: {
+                type: String,
+                default: '#'
+            },
+            icon: {
+                type: String
+            }
+        },
+        computed: {
+            iconPath() {
+                return require('../../svg/sidebar-menu-icon-' + this.icon + '.svg')
+            }
+        }
     }
 </script> 

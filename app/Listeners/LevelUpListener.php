@@ -28,7 +28,11 @@ class LevelUpListener implements ShouldQueue
     */
     public function handleRewardHandled($event)
     {
-        $event->reward->loadMissing(['awardable.balance.incomes']);
+        // may be errors todo test
+        if (!$event->reward->relationLoaded('awardable')) {
+            $event->reward->load(['awardable.balance.incomes']);
+        }
+
         $user = $event->reward->awardable;
 
         $this->userService->tryNextLevel($user);

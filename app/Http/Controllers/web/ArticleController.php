@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\web\WebBaseController;
+use App\Http\Resources\ArticleResource;
 use App\Services\ArticlesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
 
 class ArticleController extends WebBaseController
 {
@@ -18,9 +21,20 @@ class ArticleController extends WebBaseController
 
     public function index()
     {
-        $articles = $this->articlesService->all();
+        $articles = $this->articlesService->allWith(['image']);
 
-        // todo render in Inertia
+        return Inertia::render('Articles/Index', [
+            'articles' => ArticleResource::collection($articles)->resolve()
+        ]);
+    }
+
+    public function show($id)
+    {
+        $article = $this->articlesService->findWith($id, ['image']);
+
+        return Inertia::render('Articles/ArticleDetail', [
+            'article' => ArticleResource::make($article)->resolve()
+        ]);
     }
 
     public function store(Request $request)

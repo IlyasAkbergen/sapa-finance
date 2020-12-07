@@ -1,9 +1,14 @@
 <?php
 
-use App\Http\Controllers\web\CoursesController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BriefcaseController;
+use App\Http\Controllers\web\CourseController;
+use App\Http\Controllers\web\NotificationController;
 use App\Http\Controllers\web\PayoutController;
 use App\Http\Controllers\web\PurchaseController;
 use App\Http\Controllers\web\ReferralController;
+use App\Http\Controllers\web\SaleController;
+use App\Http\Controllers\web\SupportController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,23 +25,33 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware(['guest']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::resource('courses', CoursesController::class);
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::resource('courses', CourseController::class);
+
+    Route::get(
+        'my-courses',
+        [CourseController::class, 'my']
+    )->name('my-courses');
+
+    Route::resource('briefcases', BriefcaseController::class);
+
+    Route::get('/my-briefcases', [BriefcaseController::class, 'my'])
+        ->name('my-briefcases');
 
     Route::resource(
         '/articles',
-        \App\Http\Controllers\ArticleController::class
+        ArticleController::class
     );
 
     Route::resource(
         'purchases',
-        \App\Http\Controllers\web\PurchaseController::class
+        PurchaseController::class
     );
 
     Route::resource(
@@ -44,18 +59,30 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         PayoutController::class
     );
 
-    Route::post(
+    Route::get(
         '/pay/success',
-        [PurchaseController::class, 'my']
+        function () {
+            return redirect()->route('my-purchases');
+        }
     );
 
-    Route::get('/my-purchases', [PurchaseController::class, 'my']);
+    Route::get(
+        '/my-purchases',
+        [PurchaseController::class, 'my']
+    )->name('my-purchases');
 
     Route::post('/payout/success', function () {
         return redirect('balance');
     });
 
     Route::get('/my-referrals', [ReferralController::class, 'myReferrals']);
+
+    Route::resource('sales', SaleController::class);
+
+    Route::resource('support', SupportController::class);
+
+    Route::resource('notifications', NotificationController::class);
+
 });
 
 Route::get('/test', function () {

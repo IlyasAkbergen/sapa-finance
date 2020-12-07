@@ -22,4 +22,15 @@ class Article extends Model
     {
         return $this->morphMany(Attachment::class, 'model');
     }
+
+    public function image()
+    {
+        return $this->morphOne(Attachment::class, 'model');
+    }
+
+    public function getImageLinkAttribute()
+    {
+        $this->loadMissing('image');
+        return $this->image->link;
+    }
 }

@@ -1,0 +1,34 @@
+<template>
+  <main-layout>
+    <template #header>
+      Курсы
+    </template>
+    <div class="page">
+      <div class="main">
+        <div class="main__content">
+          <div class="main__content__agent-my-courses-flex" v-if="courses && courses.length > 0">
+             <CourseCard v-for="course in courses"
+                        :course="course"
+                        :bought="true"
+                        :key="course.id" />
+          </div>
+          <div class="main__content__agent-empty-courses" v-else>
+            <p class="main__content__empty-courses__text">У вас пока нету преобретенных курсов</p>
+            <a href="/courses" class="main__content__empty-courses__button">Перейти к курсам</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main-layout>
+</template>
+
+<script>
+  import MainLayout from '@/Layouts/MainLayout'
+  export default {
+    components: {
+      MainLayout,
+      CourseCard: () => import('../../Shared/CourseCard')
+    },
+    props: ['courses']
+  }
+</script>
