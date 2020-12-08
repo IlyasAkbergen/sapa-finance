@@ -41,7 +41,7 @@
                                 <td>
                                     {{ reward.purchase.purchasable.title }}
                                 </td>
-                                <td>{{ reward.purchase.purchasable.sum }} ₸</td>
+                                <td>{{ reward.purchase.sum }} ₸</td>
                                 <td>{{ reward.sum }} ₸</td>
                             </tr>
                         </tbody>

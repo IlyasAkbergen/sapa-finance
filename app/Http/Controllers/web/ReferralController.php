@@ -20,13 +20,10 @@ class ReferralController extends WebBaseController
 
     public function myReferrals()
     {
-//        DB::connection()->enableQueryLog();
-        $referrals = $this->userService->allReferralsOf(Auth::user()->id);
-//        dd(DB::getQueryLog());
-//        dd($referrals);
+        $referrals = $this->userService->findWith(Auth::user()->id, ['all_referrals']);
 
         return Inertia::render('Profile/Referrals', [
-            'referrals' => $referrals
+            'referrals' => $referrals->all_referrals
         ]);
     }
 
