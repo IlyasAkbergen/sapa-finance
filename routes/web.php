@@ -75,7 +75,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         return redirect('balance');
     });
 
-    Route::get('/my-referrals', [ReferralController::class, 'myReferrals']);
+    Route::get(
+        '/my-referrals',
+        [ReferralController::class, 'myReferrals']
+    )->name('my-referrals');
 
     Route::resource('sales', SaleController::class);
 

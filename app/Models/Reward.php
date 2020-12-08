@@ -43,4 +43,9 @@ class Reward extends Model
 
         return $updated;
     }
+
+    public function purchase()
+    {
+        return $this->belongsTo(Purchase::class);
+    }
 }

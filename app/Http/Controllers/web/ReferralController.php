@@ -6,6 +6,7 @@ use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class ReferralController extends WebBaseController
 {
@@ -24,7 +25,9 @@ class ReferralController extends WebBaseController
 //        dd(DB::getQueryLog());
 //        dd($referrals);
 
-        // todo render Inertia
+        return Inertia::render('Profile/Referrals', [
+            'referrals' => $referrals
+        ]);
     }
 
     public function myRewards()
