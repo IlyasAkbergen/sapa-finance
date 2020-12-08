@@ -7,7 +7,6 @@ use App\Challenges\Has100kTeamPoints;
 use App\Challenges\Has100Points;
 use App\Challenges\Has1kTeamPointsInLast6Month;
 use App\Challenges\Has1kTeamPointsLast3month;
-use App\Challenges\Has200PointsInLast6Month;
 use App\Challenges\Has200TeamPointsInLast6Month;
 use App\Challenges\Has20kTeamPoints;
 use App\Challenges\Has2kTeamPoints;
@@ -35,16 +34,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        Role::insert([
-//            [
-//                'id'   => Role::ROLE_ADMIN,
-//                'name' => 'Администратор',
-//            ],
-//            [
-//                'id'   => Role::ROLE_CLIENT,
-//                'name' => 'Клиент'
-//            ]
-//        ]);
+        Role::insert([
+            [
+                'id'   => Role::ROLE_ADMIN,
+                'name' => 'Администратор',
+            ],
+            [
+                'id'   => Role::ROLE_CLIENT,
+                'name' => 'Клиент'
+            ]
+        ]);
 
         ReferralLevel::insert([
             [
@@ -114,27 +113,27 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-//        $this->call(UserSeeder::class);
-//        // \App\Models\User::factory(10)->create();
-//
-//        BriefcaseType::create([
-//           'title' => 'Накопительный'
-//        ]);
-//
-//        Briefcase::create([
-//            'title' => 'Первый портфель',
-//            'type_id' => 1,
-//            'sum' => 1200000,
-//            'profit' => 100000,
-//            'duration' => 10,
-//            'monthly_payment' => 12000,
-//            'direct_fee' => 3000,
-//            'awardable' => true
-//        ]);
-//
-//        Course::factory(5)->create([
-//            'direct_fee' => 2000,
-//            'awardable' => true
-//        ]);
+        $this->call(UserSeeder::class);
+        // \App\Models\User::factory(10)->create();
+
+        BriefcaseType::create([
+           'title' => 'Накопительный'
+        ]);
+
+        Briefcase::create([
+            'title' => 'Первый портфель',
+            'type_id' => 1,
+            'sum' => 1200000,
+            'profit' => 100000,
+            'duration' => 10,
+            'monthly_payment' => 12000,
+            'direct_fee' => 3000,
+            'awardable' => true
+        ]);
+
+        Course::factory(5)->create([
+            'direct_fee' => 2000,
+            'awardable' => true
+        ]);
     }
 }
