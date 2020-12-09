@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Models\Briefcase;
 use App\Models\BriefcaseType;
+use App\Models\User;
 
 interface BriefcaseService
 {
@@ -25,4 +26,6 @@ interface BriefcaseService
      * @return BriefcaseType
      */
     public function createType(array $attributes): BriefcaseType;
+
+    function ofUser(User $user);
 }

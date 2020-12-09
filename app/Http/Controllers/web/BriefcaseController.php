@@ -30,8 +30,11 @@ class BriefcaseController extends WebBaseController
     // GET /my-briefcases
     public function my()
     {
-        $briefcases = $this->briefcaseService->allForUser(Auth::user()->id);
-        // todo render Inertia
+        $briefcases = $this->briefcaseService->ofUser(Auth::user());
+
+        return Inertia('Briefcase/Briefcases', [
+            'briefcases' => $briefcases
+        ]);
     }
 
     // POST /briefcases
