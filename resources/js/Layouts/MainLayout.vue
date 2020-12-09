@@ -9,23 +9,34 @@
           <slot name="header"></slot>
         </span>
         <ul class="nav">
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-bars sidebar-toggler"></i>
             </a>
           </li>
-          <li class="nav-item">
+
+          <li class="nav-item add-client"
+              v-if="hasSomeLevel([
+                'agent', 'consultant', 'mentor', 'tutor', 'partner'
+              ])">
             <a href="#" class="nav-link">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 22.5C13.6569 22.5 15 21.1569 15 19.5C15 19.4719 14.9996 19.4439 14.9988 19.416C14.9922 19.174 14.7823 18.998 14.5403 18.9953L9.47169 18.9378C9.22965 18.935 9.01585 19.1062 9.00379 19.348C9.00127 19.3983 9 19.449 9 19.5C9 21.1569 10.3431 22.5 12 22.5Z" fill="#92929E"/>
-                <path d="M5 9C5 5.13401 8.13401 1.5 12 1.5C15.866 1.5 19 5.13401 19 9V11.4607C19 12.7578 19.5547 13.9931 20.5242 14.8549C21.5645 15.7796 20.9104 17.5 19.5185 17.5H4.48147C3.08955 17.5 2.43545 15.7796 3.47579 14.8549C4.4453 13.9931 5 12.7578 5 11.4607V9Z" fill="#92929E"/>
-              </svg>
+              <p>Добавить клиента&nbsp;&nbsp;<i class="fas fa-user-plus"></i></p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <img src="../../img/bell.svg" alt="">
+            </a>
+          </li>
+
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="nav-link dropdown-toggle"
+               data-toggle="dropdown" role="button"
+               aria-haspopup="true" aria-expanded="false">
               {{ username }}
-              <img src="" class="ml-2 mr-1" alt="">
+              <img src="" class="ml-2 mr-1">
             </a>
             <div class="dropdown-menu">
               <a href="#" class="dropdown-item">Настройка профиля</a>
@@ -95,3 +106,9 @@
     }
   }
 </script>
+
+<style scoped>
+  .add-client {
+    display: block !important;
+  }
+</style>

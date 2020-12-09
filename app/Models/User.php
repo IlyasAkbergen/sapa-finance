@@ -79,14 +79,15 @@ class User extends Authenticatable implements Challengable // todo uncomment Mus
 
     public function briefcases()
     {
-        return $this->belongsToMany(Briefcase::class);
+        return $this->belongsToMany(Briefcase::class, 'user_briefcase')
+            ->withPivot('status', 'progress', 'completed');
     }
 
     public function courses()
     {
         return $this->belongsToMany(
             Course::class, 'user_course'
-        )->withPivot('score', 'status');
+        )->withPivot('score', 'status', 'progress', 'completed');
     }
 
     public function newNotifications()

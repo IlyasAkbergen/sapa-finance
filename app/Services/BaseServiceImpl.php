@@ -27,7 +27,7 @@ class BaseServiceImpl implements BaseService
 
     public function allForUser($user_id)
     {
-        return $this->model->whereHas('user', function ($q) use ($user_id) {
+        return $this->model->whereHas('users', function ($q) use ($user_id) {
             $q->where('id', $user_id);
         });
     }

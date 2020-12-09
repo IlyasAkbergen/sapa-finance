@@ -78,6 +78,7 @@
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
 
     export default {
+        // todo realize
         components: {
             JetActionMessage,
             JetButton,

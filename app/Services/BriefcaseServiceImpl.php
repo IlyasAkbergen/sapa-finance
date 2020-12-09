@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Models\Briefcase;
 use App\Models\BriefcaseType;
+use App\Models\User;
 
 class BriefcaseServiceImpl extends BaseServiceImpl implements BriefcaseService
 {
@@ -27,5 +28,12 @@ class BriefcaseServiceImpl extends BaseServiceImpl implements BriefcaseService
     public function createType(array $attributes): BriefcaseType
     {
         return BriefcaseType::create($attributes);
+    }
+
+    function ofUser(User $user)
+    {
+        $user->loadMissing('briefcases');
+
+        return $user->briefcases;
     }
 }

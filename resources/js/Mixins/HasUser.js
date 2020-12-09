@@ -3,9 +3,9 @@ export default {
     getUser() {
       return this.$page.user
     },
-    hasLevel(level) {
+    hasSomeLevel(levels) {
       return this.referralLevel != null
-        && this.referralLevel.slug === level
+        && levels.some(level => this.referralLevel.slug.toLowerCase() === level.toLowerCase())
     }
   },
 

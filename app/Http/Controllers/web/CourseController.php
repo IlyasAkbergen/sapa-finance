@@ -19,7 +19,7 @@ class CourseController extends WebBaseController
 
     public function index()
     {
-        $courses = $this->courseService->all();
+        $courses = $this->courseService->allCanBuy(Auth::user());
         return Inertia::render('Courses/Courses', [
             'courses' => $courses
         ]);

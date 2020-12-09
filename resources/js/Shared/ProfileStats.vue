@@ -47,7 +47,9 @@
     </template>
     <template #trigger>
       <div class="sidebar__profile__dropdown">
-        <img v-show="open" src="../../img/hide-arrow.png" alt="">
+        <svg v-show="open" class="" width="15" height="11" viewBox="0 0 12 8" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5893 7.08942C11.2639 7.41486 10.7362 7.41486 10.4108 7.08942L6.00004 2.67867L1.5893 7.08942C1.26386 7.41486 0.73622 7.41486 0.410784 7.08942C0.0853462 6.76398 0.0853461 6.23634 0.410784 5.91091L5.41078 0.910907C5.73622 0.58547 6.26386 0.58547 6.58929 0.910907L11.5893 5.91091C11.9147 6.23634 11.9147 6.76398 11.5893 7.08942Z" fill="white"></path>
+        </svg>
         <img v-show="!open" src="../../img/dropdown-arrow.png" alt="">
       </div>
     </template>

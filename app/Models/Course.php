@@ -47,6 +47,11 @@ class Course extends Model implements WithPurchase
         return $this->belongsToMany(User::class, 'user_course');
     }
 
+    public function users_pivot()
+    {
+        return $this->hasMany(UserCourse::class);
+    }
+
     public function getIsPartPaidAttribute()
     {
         return false;
@@ -54,6 +59,6 @@ class Course extends Model implements WithPurchase
 
     public function getProgressPercentAttribute()
     {
-        return 55;
+        return !empty($this->pivot) ? $this->pivot->progress : 0;
     }
 }
