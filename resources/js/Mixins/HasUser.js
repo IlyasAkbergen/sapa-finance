@@ -35,6 +35,10 @@ export default {
       return !!this.getUser().referrer
         ? this.getUser().referrer
         : null;
+    },
+
+    isAdmin() {
+      return !!this.getUser() && this.getUser().role_id === 1
     }
   },
 }

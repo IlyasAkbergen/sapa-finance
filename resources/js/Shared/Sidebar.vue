@@ -16,13 +16,36 @@
 
             <div class="sidebar__menu">
                 <ul class="sidebar__menu__nav">
-                    <SidebarItem :route_name="'courses.index'"
+                    <SidebarItem
+                            v-if="isAdmin"
+                            :route_name="'users.index'"
+                            icon="person-couple">
+                        Пользователи
+                    </SidebarItem>
+
+                    <SidebarItem
+                            v-if="isAdmin"
+                            :route_name="'partners.index'"
+                            icon="deal">
+                        Партнеры
+                    </SidebarItem>
+
+                    <SidebarItem :route_name="isAdmin ? 'courses-crud.index' : 'courses.index'"
                                  icon="graduation">
                          Курсы
                     </SidebarItem>
 
-                    <SidebarItem :route_name="'my-courses'"
-                                 icon="my-graduation">
+                    <SidebarItem
+                            v-if="isAdmin"
+                            :route_name="'welcome'"
+                            icon="mail-open">
+                        ШФК
+                    </SidebarItem>
+
+                    <SidebarItem
+                            v-if="!isAdmin"
+                            :route_name="'my-courses'"
+                            icon="my-graduation">
                         Мои курсы
                     </SidebarItem>
 
@@ -31,13 +54,23 @@
                         Портфели
                     </SidebarItem>
 
-                    <SidebarItem :route_name="'my-briefcases'"
-                                 icon="my-briefcase">
+                    <SidebarItem
+                            v-if="!isAdmin"
+                            :route_name="'my-briefcases'"
+                            icon="my-briefcase">
                         Мой портфель
                     </SidebarItem>
 
+
+                    <SidebarItem
+                            v-if="isAdmin"
+                            :route_name="'welcome'"
+                            icon="dislike">
+                        Список жалоб
+                    </SidebarItem>
+
                     <SidebarItem :route_name="'sales.index'"
-                                 v-if="hasSomeLevel(['Agent', 'Mentor', 'Tutor'])"
+                                 v-if="!isAdmin && hasSomeLevel(['Agent', 'Mentor', 'Tutor'])"
                                  icon="cart">
                         Продажи
                     </SidebarItem>
@@ -47,9 +80,39 @@
                         Новости
                     </SidebarItem>
 
-                    <SidebarItem :route_name="'support.index'"
-                                 icon="question">
+                    <SidebarItem
+                            v-if="!isAdmin"
+                            :route_name="'support.index'"
+                            icon="question">
                         Поддержка
+                    </SidebarItem>
+
+                    <SidebarItem
+                            v-if="isAdmin"
+                            :route_name="'welcome'"
+                            icon="partner-service">
+                        Услуги партнеров
+                    </SidebarItem>
+
+                    <SidebarItem
+                            v-if="isAdmin"
+                            :route_name="'welcome'"
+                            icon="app-service">
+                        Услуги на сайте
+                    </SidebarItem>
+
+                    <SidebarItem
+                            v-if="isAdmin"
+                            :route_name="'welcome'"
+                            icon="conversation">
+                        Консультанты на сайте
+                    </SidebarItem>
+
+                    <SidebarItem
+                            v-if="isAdmin"
+                            :route_name="'welcome'"
+                            icon="info">
+                        Информация об агентах
                     </SidebarItem>
 
                     <SidebarItem :route_name="'notifications.index'"

@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BriefcaseController;
+use App\Http\Controllers\web\admin\PartnerController;
+use App\Http\Controllers\web\admin\UserController;
 use App\Http\Controllers\web\CourseController;
+use App\Http\Controllers\web\admin\CourseController as CourseCrudController;
+use App\Http\Controllers\web\admin\LessonController as LessonCrudController;
 use App\Http\Controllers\web\NotificationController;
 use App\Http\Controllers\web\PayoutController;
 use App\Http\Controllers\web\PurchaseController;
@@ -25,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware(['guest']);
+})->middleware(['guest'])->name('welcome');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
@@ -86,6 +90,12 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::resource('notifications', NotificationController::class);
 
+    Route::group(['middleware' => ['admin']], function () {
+        Route::resource('courses-crud', CourseCrudController::class);
+        Route::resource('lessons-crud', LessonCrudController::class);
+        Route::resource('partners', PartnerController::class);
+        Route::resource('users', UserController::class);
+    });
 });
 
 Route::get('/test', function () {

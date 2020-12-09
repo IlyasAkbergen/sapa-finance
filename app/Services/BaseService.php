@@ -75,4 +75,14 @@ interface BaseService
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getWhere(array $params);
+
+    public function startQuery();
+
+    public function like($field, $searchKey);
+
+    public function paginate($per_page);
+
+    public function get();
+
+    public function first();
 }

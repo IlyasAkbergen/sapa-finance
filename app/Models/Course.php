@@ -22,7 +22,7 @@ class Course extends Model implements WithPurchase
 
     public function lessons()
     {
-        $this->hasMany(Lesson::class);
+        return $this->hasMany(Lesson::class);
     }
 
     public function getPurchaseSum($with_feedback)

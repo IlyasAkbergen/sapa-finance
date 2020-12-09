@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class BaseServiceImpl implements BaseService
 {
     protected $model;
+    protected $query;
 
     /**
      * BaseServiceImpl constructor.
@@ -18,6 +19,32 @@ class BaseServiceImpl implements BaseService
     public function __construct(Model $model)
     {
         $this->model = $model;
+    }
+
+    public function startQuery()
+    {
+        $this->query = $this->model;
+        return $this->query;
+    }
+
+    public function like($field, $searchKey)
+    {
+        return $this->query->where($field, 'like', "%$searchKey%");
+    }
+
+    public function get()
+    {
+        return $this->query->get();
+    }
+
+    public function first()
+    {
+        return $this->query->first();
+    }
+
+    public function paginate($per_page)
+    {
+        // TODO: Implement paginate() method.
     }
 
     public function all()
