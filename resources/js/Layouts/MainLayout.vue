@@ -52,6 +52,7 @@
       </nav>
 
       <div class="main__content">
+        <slot name="actions"></slot>
         <slot></slot>
       </div>
     </div>

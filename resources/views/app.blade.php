@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="{{ mix('css/style_agent.css') }}">
         <link rel="stylesheet" href="{{ mix('css/style_client.css') }}">
         <link rel="stylesheet" href="{{ mix('css/style_consaltant.css') }}">
+        <link rel="stylesheet" href="{{ mix('css/style_admin.css') }}">
 
         <!-- Scripts -->
         @routes
