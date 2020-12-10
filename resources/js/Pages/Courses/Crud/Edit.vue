@@ -31,7 +31,7 @@ export default {
     data() {
         return {
             form: this.$inertia.form({...this.course}, {
-                bag: 'updateTeamName',
+                bag: 'courseForm',
                 resetOnSuccess: false,
             })
         }
@@ -39,7 +39,7 @@ export default {
     methods: {
         updateCourse() {
             this.form.put(route('courses-crud.update', this.course), {
-                preserveScroll: true
+                preserveScroll: false
             })
         }
     }

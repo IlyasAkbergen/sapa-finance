@@ -15,29 +15,32 @@
         <label class="profile-form__label" for="name">
             Название программы
         </label>
-        <input class="profile-form__input"
+        <input class="profile-form__input mb-0"
                type="text"
                id="name"
                placeholder="Введите название программы"
-               v-model="form.title"
+               v-model="course.title"
         >
+        <JetInputError :message="form.error('title')" class="mt-1"/>
 
-        <label class="profile-form__label" for="pricewith">
+        <label class="profile-form__label mt-3" for="pricewith">
             Цена с обратной связью
         </label>
-        <input class="profile-form__input" type="text"
+        <input class="profile-form__input mb-0" type="text"
                id="pricewith"
-               v-model="form.price_with_feedback"
+               v-model="course.price_with_feedback"
                placeholder="Введите цену">
+        <jet-input-error :message="form.error('price_with_feedback')" class="mt-1" />
 
-        <label class="profile-form__label" for="pricewithout">
+        <label class="profile-form__label mt-3" for="pricewithout">
             Цена без обратной связи
         </label>
-        <input class="profile-form__input"
+        <input class="profile-form__input mb-0"
                type="text"
                id="pricewithout"
-               v-model="form.price_without_feedback"
+               v-model="course.price_without_feedback"
                placeholder="Введите цену">
+        <jet-input-error :message="form.error('price_without_feedback')" class="mt-1" />
 
         <label class="profile-form__clabel profile-form__clabel-2">Способ проведения</label>
 
@@ -62,14 +65,16 @@
             Комиссия агента
         </label>
         <input class="profile-form__input" type="text"
-               id="comission" placeholder="Введите комиссионные агента">
+               id="comission"
+               v-model="course.direct_fee"
+               placeholder="Введите комиссионные агента">
 
         <label class="profile-form__label" for="descriptionshort">
             Краткое описание
         </label>
         <textarea class="profile-form__textarea"
                   id="descriptionshort" cols="30" rows="3"
-                  v-model="form.short_description"
+                  v-model="course.short_description"
                   placeholder="Введите полное описание"></textarea>
 
         <label class="profile-form__label" for="description">
@@ -77,7 +82,7 @@
         </label>
         <textarea class="profile-form__textarea"
                   id="description" cols="30" rows="6"
-                  v-model="form.description"
+                  v-model="course.description"
                   placeholder="Введите полное описание"></textarea>
 
         <label class="profile-form__label">
@@ -96,7 +101,7 @@
         <label class="profile-form__label">Уроки</label>
         <div class="course-lessons-list">
             <LessonItem
-                v-for="lesson in form.lessons"
+                v-for="lesson in course.lessons"
                 :lesson="lesson"
                 :key="lesson.id"
             />
@@ -107,20 +112,25 @@
         </a>
 
         <a class="profile-form__submit" href="#"
-           @click="$emit('submit')">
-            Добавить программу
+           @click="$emit('submit')"
+           :class="{ 'opacity-25': form.processing }"
+           :disabled="form.processing">
+            Добавить
         </a>
     </form>
 </template>
 
 <script>
+
 export default {
     name: "Form",
     props: {
-        form: Object
+        course: Object,
+        form: Object,
     },
     components: {
-        LessonItem: () => import('./LessonItem')
+        LessonItem: () => import('./LessonItem'),
+        JetInputError: () => import('@/Jetstream/InputError')
     }
 }
 </script>

@@ -49,6 +49,11 @@ class CourseController extends WebBaseController
         }
     }
 
+    public function create()
+    {
+        return Inertia::render('Courses/Crud/Add');
+    }
+
     public function edit($id)
     {
         $course = $this->courseService->findWith($id, ['lessons']);
