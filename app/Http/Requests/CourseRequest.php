@@ -24,12 +24,18 @@ class CourseRequest extends FormRequest
             'title.required' => 'Укажите название',
             'short_description.required' => ['Укажите короткое описание'],
             'description.required' => ['Укажите полное описание'],
-            'is_online.required' => [''],
+            'is_online.required' => ['Не указан способ проведения'],
+            'is_offline.required' => ['Не указан способ проведения'],
             'price_without_feedback.required' => ['Укажите цену без обратной связи'],
             'price_without_feedback.integer' => ['Значение должно быть числовым'],
             'price_with_feedback.required' => ['Укажите цену с обратной связью'],
             'price_with_feedback.integer' => ['Значение должно быть числовым'],
             'direct_fee.required' => ['Укажите комиссию агента'],
+            'direct_points.required' => ['Укажите личные единицы'],
+            'direct_points.integer' => ['Значение должно быть числом'],
+            'team_points.required' => ['Укажите личные единицы'],
+            'team_points.integer' => ['Значение должно быть числом'],
+            'team_points' => ['required', 'integer'],
         ];
     }
 
@@ -44,11 +50,14 @@ class CourseRequest extends FormRequest
             'title' => ['required', 'max:255'],
             'short_description' => ['required', 'max:255'],
             'description' => ['required'],
-            'is_online' => ['required', 'boolean'],
+            'is_online' => ['required'],
+            'is_offline' => ['required'],
             'price_without_feedback' => ['required', 'integer'],
             'price_with_feedback' => ['required', 'integer'],
             'direct_fee' => ['required', 'integer'],
-            'awardable' => ['required', 'boolean']
+            'direct_points' => ['required', 'integer'],
+            'team_points' => ['required', 'integer'],
+//            'awardable' => ['required']
         ];
     }
 }

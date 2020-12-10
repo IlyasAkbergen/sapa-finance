@@ -20,7 +20,8 @@ class CreateCoursesTable extends Migration
                 ->nullable();
             $table->text('description')
                 ->nullable();
-            $table->boolean('is_online');
+            $table->boolean('is_online')
+                ->default(false);
             $table->unsignedInteger('price_without_feedback');
             $table->unsignedInteger('price_with_feedback');
             $table->unsignedInteger('direct_fee');

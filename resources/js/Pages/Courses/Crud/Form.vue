@@ -42,48 +42,71 @@
                placeholder="Введите цену">
         <jet-input-error :message="form.error('price_without_feedback')" class="mt-1" />
 
-        <label class="profile-form__clabel profile-form__clabel-2">Способ проведения</label>
+        <label class="profile-form__label mt-3 mb-0">
+            Способоб проведения
+        </label>
+        <input class="profile-form__checkbox" type="checkbox"
+               v-model="course.is_online" id="online">
+        <label class="profile-form__clabel">
+            Онлайн
+        </label><br>
 
-        <label class="profile-form__label">Способ проведения</label>
-        <input class="profile-form__checkbox" type="checkbox" name="online" id="online">
+        <input class="profile-form__checkbox" type="checkbox"
+               v-model="course.is_offline" id="offline">
 
-        <label class="profile-form__clabel">Способ проведения</label><br>
-        <input class="profile-form__checkbox" type="checkbox" name="offline" id="offline">
+        <label class="profile-form__clabel profile-form__clabel-2">
+            Оффлайн
+        </label>
 
-        <label class="profile-form__label" for="units">Личные единицы</label>
+        <JetInputError :message="form.error('is_online')" class="mt-1"/>
+        <JetInputError :message="form.error('is_offline')" class="mt-1"/>
 
-        <input class="profile-form__input"
+        <label class="profile-form__label mt-3" for="units">Личные единицы</label>
+
+        <input class="profile-form__input mb-0"
                type="text"
+               v-model="course.direct_points"
                id="units" placeholder="Введите личные единицы">
-        <label class="profile-form__label" for="commandunits">Командные единицы</label>
 
-        <input class="profile-form__input" type="text"
+        <JetInputError :message="form.error('direct_points')" class="mt-1"/>
+
+        <label class="profile-form__label mt-3"
+               for="commandunits">Командные единицы</label>
+
+        <input class="profile-form__input mb-0" type="text"
                id="commandunits"
+               v-model="course.team_points"
                placeholder="Введите командные единицы">
+        <JetInputError :message="form.error('team_points')" class="mt-1"/>
 
-        <label class="profile-form__label" for="comission">
+        <label class="profile-form__label mt-3" for="comission">
             Комиссия агента
         </label>
-        <input class="profile-form__input" type="text"
+        <input class="profile-form__input mb-0" type="text"
                id="comission"
                v-model="course.direct_fee"
                placeholder="Введите комиссионные агента">
+        <JetInputError :message="form.error('direct_fee')" class="mt-1"/>
 
-        <label class="profile-form__label" for="descriptionshort">
+        <label class="profile-form__label mt-3 mb-0" for="descriptionshort">
             Краткое описание
         </label>
-        <textarea class="profile-form__textarea"
+        <textarea class="profile-form__textarea mb-0"
                   id="descriptionshort" cols="30" rows="3"
                   v-model="course.short_description"
                   placeholder="Введите полное описание"></textarea>
 
-        <label class="profile-form__label" for="description">
+        <JetInputError :message="form.error('short_description')" class="mt-1"/>
+
+        <label class="profile-form__label mt-3" for="description">
             Полное описание
         </label>
-        <textarea class="profile-form__textarea"
+        <textarea class="profile-form__textarea mb-0"
                   id="description" cols="30" rows="6"
                   v-model="course.description"
                   placeholder="Введите полное описание"></textarea>
+
+        <JetInputError :message="form.error('description')" class="mt-1"/>
 
         <label class="profile-form__label">
             Документ для скачивания

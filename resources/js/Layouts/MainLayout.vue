@@ -54,6 +54,7 @@
       <div class="main__content">
         <slot name="actions"></slot>
         <slot></slot>
+        <flash-message />
       </div>
     </div>
     <slot name="modals"></slot>
@@ -70,6 +71,7 @@
   import Sidebar from '@/Shared/Sidebar'
   import FlashMessage from '@/Shared/FlashMessage'
   import HasUser from "@/Mixins/HasUser"
+  import InteractsWithErrorBags from "@/Mixins/InteractsWithErrorBags";
 
   export default {
     components: {
@@ -82,7 +84,7 @@
       FlashMessage
     },
 
-    mixins: [HasUser],
+    mixins: [HasUser, InteractsWithErrorBags],
 
     data() {
       return {

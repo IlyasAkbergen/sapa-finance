@@ -28,7 +28,12 @@
     },
     data() {
       return {
-        course: {},
+        course: {
+          is_online: 0,
+          is_offline: 0,
+          team_points: 0,
+          direct_points: 0
+        },
         form: this.$inertia.form({...this.course}, {
           resetOnSuccess: false,
           bag: 'courseForm',
@@ -39,7 +44,7 @@
       createCourse() {
         this.form.post(route('courses-crud.store', this.course), {
           preserveScroll: true
-        }).then((r) => console.log(r.data))
+        }).then((r) => console.log(r))
       }
     }
   }

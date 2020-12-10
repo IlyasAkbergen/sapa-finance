@@ -40,7 +40,7 @@ class CourseController extends WebBaseController
 
     public function store(CourseRequest $request)
     {
-        $course = $this->courseService->create($request->all());
+        $course = $this->courseService->create($request->except(['is_online', 'is_offline']));
 
         if (!empty($course)) {
             return $this->responseSuccess('Course saved', $course);
@@ -71,9 +71,20 @@ class CourseController extends WebBaseController
         );
 
         if (!empty($course)) {
-            return $this->responseSuccess('Course saved', $course);
+            return $this->responseSuccess('Курс обновлен', $course);
         } else {
-            return $this->responseFail('failed saving');
+            return $this->responseFail('Не удалось обновить курс');
+        }
+    }
+
+    public function destroy($id)
+    {
+        $deleted = true; //$this->courseService->delete($id);
+
+        if ($deleted) {
+            return $this->responseSuccess('Курс удален');
+        } else {
+            return $this->responseFail('Не удалосьу удалить');
         }
     }
 }
