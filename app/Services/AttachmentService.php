@@ -24,4 +24,6 @@ interface AttachmentService
      * @param $new_model_id
      */
     public function move($uuid, $new_model_id);
+
+    public function storeFile($file, $folder);
 }

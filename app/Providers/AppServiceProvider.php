@@ -93,6 +93,10 @@ class AppServiceProvider extends ServiceProvider
             PayoutServiceContract::class,
             PayoutServiceContract::class
         );
+        $this->app->bind(
+            AttachmentService::class,
+            AttachmentServiceImpl::class
+        );
     }
 
     /**

@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BriefcaseController;
 use App\Http\Controllers\web\admin\PartnerController;
 use App\Http\Controllers\web\admin\UserController;
+use App\Http\Controllers\web\AttachmentController;
 use App\Http\Controllers\web\CourseController;
 use App\Http\Controllers\web\admin\CourseController as CourseCrudController;
 use App\Http\Controllers\web\admin\LessonController as LessonCrudController;
@@ -35,7 +36,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'verified', 'share.inertia']], function () {
     Route::resource('courses', CourseController::class);
 
     Route::get(
@@ -90,9 +91,31 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::resource('notifications', NotificationController::class);
 
+    Route::resource(
+        'attachments',
+        AttachmentController::class
+    );
+
+    Route::post(
+        'attachments/list',
+        [AttachmentController::class, 'list']
+    );
+
     Route::group(['middleware' => ['admin']], function () {
         Route::resource('courses-crud', CourseCrudController::class);
+        Route::post('courses-crud/upload-image',
+            [CourseCrudController::class, 'uploadImage']
+        )->name('upload-course-image');
+
+        Route::post('courses-crud/upload-attachments',
+            [CourseCrudController::class, 'uploadAttachments']
+        )->name('upload-course-attachments');
+
         Route::resource('lessons-crud', LessonCrudController::class);
+        Route::post('courses-crud/upload-image',
+            [CourseCrudController::class, 'uploadImage']
+        )->name('upload-course-image');
+
         Route::resource('partners', PartnerController::class);
         Route::resource('users', UserController::class);
     });

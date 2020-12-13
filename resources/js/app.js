@@ -5,11 +5,15 @@ import Vue from 'vue';
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
+import VueFlashMessage from 'vue-flash-message';
+import UUID from "vue-uuid";
 
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);
 Vue.use(PortalVue);
+Vue.use(VueFlashMessage);
+Vue.use(UUID);
 
 const app = document.getElementById('app');
 
