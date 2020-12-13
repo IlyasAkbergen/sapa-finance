@@ -19,5 +19,5 @@ export default {
         return {
             flashMessageVisible: true
         }
-    }
+    },
 };

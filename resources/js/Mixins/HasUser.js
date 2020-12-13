@@ -15,7 +15,6 @@ export default {
     },
 
     referralLevel() {
-      console.log(this.getUser().referral_level);
       return !!this.getUser().referral_level
         ? this.getUser().referral_level
         : null;

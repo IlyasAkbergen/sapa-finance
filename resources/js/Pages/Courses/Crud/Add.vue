@@ -2,8 +2,8 @@
     <main-layout>
         <template #back-link>
             <a :href="route('courses-crud.index')"
-               class="navbar-brand mb-0">
-                <img src="../../../../img/back-arrow.png" alt="">
+               class="navbar-brand mb-0 pb-0">
+                <img src="../../../../img/back-arrow.png">
             </a>
         </template>
 
@@ -12,44 +12,47 @@
         </template>
 
         <div class="cec">
-            <Form :course="course"
-                  :form="form"
+            <Form :form="form"
                   @submit="createCourse"/>
         </div>
     </main-layout>
 </template>
 
 <script>
-  export default {
+import MainLayout from '@/Layouts/MainLayout'
+import { uuid } from 'vue-uuid'
+export default {
     name: "Add",
     components: {
       Form: () => import('./Form'),
-      MainLayout: () => import('@/Layouts/MainLayout')
+      MainLayout
     },
     data() {
       return {
-        course: {
-          is_online: 0,
-          is_offline: 0,
-          team_points: 0,
-          direct_points: 0
-        },
-        form: this.$inertia.form({...this.course}, {
-          resetOnSuccess: false,
-          bag: 'courseForm',
+        form: this.$inertia.form({
+            title: "",
+            price_with_feedback: null,
+            price_without_feedback: null,
+            direct_fee: null,
+            short_description: null,
+            description: null,
+            uuid: uuid.v1(),
+            is_online: 0,
+            is_offline: 0,
+            team_points: 0,
+            direct_points: 0,
+            image: null,
+            '_method': 'POST',
+        }, {
+            bag: 'courseForm',
+            resetOnSuccess: false,
         })
       }
     },
     methods: {
-      createCourse() {
-        this.form.post(route('courses-crud.store', this.course), {
-          preserveScroll: true
-        }).then((r) => console.log(r))
-      }
+        createCourse() {
+          this.form.post('/courses-crud');
+        },
     }
-  }
+}
 </script>
-
-<style scoped>
-
-</style>

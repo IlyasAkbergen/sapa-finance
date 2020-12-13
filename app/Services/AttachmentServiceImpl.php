@@ -33,18 +33,13 @@ class AttachmentServiceImpl extends BaseServiceImpl implements AttachmentService
             $type_path = $explode_type[0];
         }
 
-        $filename =  uniqid().'.'.File::extension($file->getClientOriginalName());
-        $fullpath = $this->main_dir.'/'.strtolower($type_path).'/'.$filename;
-
-        $path = Storage::disk('public')->put($fullpath,  File::get($file));
+        $fullpath = $this->storeFile($file, $type_path);
 
         $data['path'] = $fullpath;
         $data['name'] = $file->getClientOriginalName();
         $data['model_id'] = $model_id;
         $data['model_type'] = $model_type;
         $data['uuid'] = $uuid;
-
-        $data['user_id'] = Auth::user()->id;
 
         return $image = $this->create($data);
     }
@@ -61,5 +56,15 @@ class AttachmentServiceImpl extends BaseServiceImpl implements AttachmentService
             $model->uuid = null;
             $model->save();
         }
+    }
+
+    public function storeFile($file, $folder)
+    {
+        $filename =  uniqid().'.'.File::extension($file->getClientOriginalName());
+        $fullpath = $this->main_dir.'/'.strtolower($folder).'/'.$filename;
+
+        Storage::disk('public')->put($fullpath,  File::get($file));
+
+        return Storage::url($fullpath);
     }
 }

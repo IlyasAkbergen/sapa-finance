@@ -27,12 +27,12 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <img src="../../img/bell.svg" alt="">
+              <BellIcon />
             </a>
           </li>
 
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle"
+            <a href="#" class="nav-link dropdown-toggle d-flex"
                data-toggle="dropdown" role="button"
                aria-haspopup="true" aria-expanded="false">
               {{ username }}
@@ -54,7 +54,7 @@
       <div class="main__content">
         <slot name="actions"></slot>
         <slot></slot>
-        <flash-message />
+        <Message />
       </div>
     </div>
     <slot name="modals"></slot>
@@ -69,9 +69,10 @@
   import JetNavLink from '@/Jetstream/NavLink'
   import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
   import Sidebar from '@/Shared/Sidebar'
-  import FlashMessage from '@/Shared/FlashMessage'
+  import Message from '@/Shared/Message'
   import HasUser from "@/Mixins/HasUser"
-  import InteractsWithErrorBags from "@/Mixins/InteractsWithErrorBags";
+  import InteractsWithErrorBags from "@/Mixins/InteractsWithErrorBags"
+  import BellIcon from "@/assets/icons/Bell"
 
   export default {
     components: {
@@ -81,7 +82,8 @@
       JetNavLink,
       JetResponsiveNavLink,
       Sidebar,
-      FlashMessage
+      Message,
+      BellIcon
     },
 
     mixins: [HasUser, InteractsWithErrorBags],
@@ -93,14 +95,6 @@
     },
 
     methods: {
-      switchToTeam(team) {
-        this.$inertia.put(route('current-team.update'), {
-          'team_id': team.id
-        }, {
-          preserveState: false
-        })
-      },
-
       logout() {
         axios.post(route('logout').url()).then(response => {
           window.location = '/';

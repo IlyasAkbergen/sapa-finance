@@ -16,8 +16,9 @@ class Course extends Model implements WithPurchase
     const START_COURSE_ID = 1;
 
     protected $fillable = [
-        'title', 'description', 'direct_fee', 'direct_points', 'team_points', 'awardable',
-        'price_without_feedback', 'price_with_feedback', 'is_online', 'is_offline'
+        'title', 'short_description', 'description', 'direct_fee', 'direct_points', 'team_points', 'awardable',
+        'price_without_feedback', 'price_with_feedback', 'is_online', 'is_offline',
+        'image_path'
     ];
 
     public function lessons()

@@ -1,16 +1,20 @@
 <template>
     <form>
         <label class="profile-form__label">Титульное фото программы</label>
-        <label class="profile-form__label label-photo" for="photo3">
-            <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.83333 5.83333C4.45262 5.83333 3.33333 6.95262 3.33333 8.33333C3.33333 9.71405 4.45262 10.8333 5.83333 10.8333C7.21405 10.8333 8.33333 9.71405 8.33333 8.33333C8.33333 6.95262 7.21405 5.83333 5.83333 5.83333ZM5 8.33333C5 7.8731 5.3731 7.5 5.83333 7.5C6.29357 7.5 6.66667 7.8731 6.66667 8.33333C6.66667 8.79357 6.29357 9.16667 5.83333 9.16667C5.3731 9.16667 5 8.79357 5 8.33333Z"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.5 2.5C1.11929 2.5 0 3.61929 0 5V15C0 16.3807 1.11929 17.5 2.5 17.5H17.5C18.8807 17.5 20 16.3807 20 15V5C20 3.61929 18.8807 2.5 17.5 2.5H2.5ZM17.5 4.16667H2.5C2.03976 4.16667 1.66667 4.53976 1.66667 5V15C1.66667 15.4602 2.03976 15.8333 2.5 15.8333H6.09479L11.827 10.1011C12.8033 9.12482 14.3862 9.12482 15.3625 10.1011L18.3333 13.0719V5C18.3333 4.53976 17.9602 4.16667 17.5 4.16667ZM17.5 15.8333H8.45181L13.0055 11.2796C13.3309 10.9542 13.8586 10.9542 14.184 11.2796L18.2558 15.3514C18.1233 15.6361 17.8347 15.8333 17.5 15.8333Z"/>
-            </svg>
+        <label class="profile-form__label label-photo" @click="selectNewPhoto">
             <span>Изменить фото</span>
-            <img id="pcec" src="../../../../img/course-card-img.png" alt="">
+            <img :src="form.image_path" v-show="form.image_path">
+            <img id="pcec" src="../../../../img/course-card-img.png"
+                 v-show="photoPreview == null && !form.image_path">
+            <img :src="photoPreview" v-show="photoPreview">
         </label>
 
-        <input type="file" name="photo3" id="photo3" style="display: none;">
+        <input type="file"
+               ref="image"
+               @change="updatePhotoPreview"
+               class="hidden">
+
+        <JetInputError :message="form.error('photo')" class="mt-1" />
 
         <label class="profile-form__label" for="name">
             Название программы
@@ -19,7 +23,7 @@
                type="text"
                id="name"
                placeholder="Введите название программы"
-               v-model="course.title"
+               v-model="form.title"
         >
         <JetInputError :message="form.error('title')" class="mt-1"/>
 
@@ -28,7 +32,7 @@
         </label>
         <input class="profile-form__input mb-0" type="text"
                id="pricewith"
-               v-model="course.price_with_feedback"
+               v-model="form.price_with_feedback"
                placeholder="Введите цену">
         <jet-input-error :message="form.error('price_with_feedback')" class="mt-1" />
 
@@ -38,7 +42,7 @@
         <input class="profile-form__input mb-0"
                type="text"
                id="pricewithout"
-               v-model="course.price_without_feedback"
+               v-model="form.price_without_feedback"
                placeholder="Введите цену">
         <jet-input-error :message="form.error('price_without_feedback')" class="mt-1" />
 
@@ -46,13 +50,19 @@
             Способоб проведения
         </label>
         <input class="profile-form__checkbox" type="checkbox"
-               v-model="course.is_online" id="online">
+               v-model="form.is_online" id="online"
+               :checked="form.is_online"
+               true-value="1"
+               false-value="0">
         <label class="profile-form__clabel">
             Онлайн
         </label><br>
 
         <input class="profile-form__checkbox" type="checkbox"
-               v-model="course.is_offline" id="offline">
+               v-model="form.is_offline"
+               :checked="form.is_offline"
+               true-value="1"
+               false-value="0">
 
         <label class="profile-form__clabel profile-form__clabel-2">
             Оффлайн
@@ -65,7 +75,7 @@
 
         <input class="profile-form__input mb-0"
                type="text"
-               v-model="course.direct_points"
+               v-model="form.direct_points"
                id="units" placeholder="Введите личные единицы">
 
         <JetInputError :message="form.error('direct_points')" class="mt-1"/>
@@ -75,7 +85,7 @@
 
         <input class="profile-form__input mb-0" type="text"
                id="commandunits"
-               v-model="course.team_points"
+               v-model="form.team_points"
                placeholder="Введите командные единицы">
         <JetInputError :message="form.error('team_points')" class="mt-1"/>
 
@@ -84,7 +94,7 @@
         </label>
         <input class="profile-form__input mb-0" type="text"
                id="comission"
-               v-model="course.direct_fee"
+               v-model="form.direct_fee"
                placeholder="Введите комиссионные агента">
         <JetInputError :message="form.error('direct_fee')" class="mt-1"/>
 
@@ -93,8 +103,8 @@
         </label>
         <textarea class="profile-form__textarea mb-0"
                   id="descriptionshort" cols="30" rows="3"
-                  v-model="course.short_description"
-                  placeholder="Введите полное описание"></textarea>
+                  v-model="form.short_description"
+                  placeholder="Введите короткое описание"></textarea>
 
         <JetInputError :message="form.error('short_description')" class="mt-1"/>
 
@@ -103,42 +113,48 @@
         </label>
         <textarea class="profile-form__textarea mb-0"
                   id="description" cols="30" rows="6"
-                  v-model="course.description"
+                  v-model="form.description"
                   placeholder="Введите полное описание"></textarea>
 
         <JetInputError :message="form.error('description')" class="mt-1"/>
 
         <label class="profile-form__label">
-            Документ для скачивания
+            Документы для скачивания
         </label>
-        <div class="course-docs-list course-docs-add">
-        </div>
 
-        <label class="profile-form__label label-doc">
-            <img src="../../../../img/add_file.svg">
-            <span>Приложите документ для скачивания</span>
-        </label>
-        <input type="file" name="coursedoc" id="courseadddoc"
-               style="display: none;">
+        <Attachments
+                :model-type="'course'"
+                :model-id="form.id"
+                :uuid="form.uuid"
+        />
 
         <label class="profile-form__label">Уроки</label>
         <div class="course-lessons-list">
             <LessonItem
-                v-for="lesson in course.lessons"
+                v-for="lesson in form.lessons"
                 :lesson="lesson"
                 :key="lesson.id"
             />
         </div>
 
-        <a class="course__lesson-link lesson__add lesson__add">
+        <a class="course__lesson-link lesson__add lesson__add"
+           @click="showLessonForm"
+            v-show="form.id">
             Добавить урок
         </a>
+        
+        <jet-action-message :on="form.recentlySuccessful">
+            <label class="profile-form__label text-green">
+                <img src="../../../../img/lesson-icon-passed.png">
+                Сохранено
+            </label>
+        </jet-action-message>
 
         <a class="profile-form__submit" href="#"
-           @click="$emit('submit')"
+           @click="submitForm"
            :class="{ 'opacity-25': form.processing }"
            :disabled="form.processing">
-            Добавить
+            Сохранить
         </a>
     </form>
 </template>
@@ -147,13 +163,47 @@
 
 export default {
     name: "Form",
-    props: {
-        course: Object,
-        form: Object,
-    },
     components: {
         LessonItem: () => import('./LessonItem'),
-        JetInputError: () => import('@/Jetstream/InputError')
+        JetInputError: () => import('@/Jetstream/InputError'),
+        JetActionMessage: () => import('@/Jetstream/ActionMessage'),
+        Attachments: () => import('@/Shared/Attachments')
+    },
+    props: {
+        form: Object,
+    },
+    data() {
+        return {
+            photoPreview: null,
+            lessonForm: this.$inertia.form({...this.course}, {
+                resetOnSuccess: false,
+                bag: 'courseForm',
+            }),
+        }
+    },
+    methods: {
+        submitForm() {
+            if (this.$refs.image) {
+                this.$set(this.form, 'image', this.$refs.image.files[0]);
+            }
+            this.$emit('submit')
+        },
+        showLessonForm() {
+            // TODO IMPL
+        },
+        selectNewPhoto() {
+            this.$refs.image.click();
+        },
+
+        updatePhotoPreview() {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                this.photoPreview = e.target.result;
+            };
+
+            reader.readAsDataURL(this.$refs.image.files[0]);
+        },
     }
 }
 </script>

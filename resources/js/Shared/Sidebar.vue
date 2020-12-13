@@ -19,45 +19,45 @@
                     <SidebarItem
                             v-if="isAdmin"
                             :route_name="'users.index'"
-                            icon="person-couple">
+                            icon="PersonCouple">
                         Пользователи
                     </SidebarItem>
 
                     <SidebarItem
                             v-if="isAdmin"
                             :route_name="'partners.index'"
-                            icon="deal">
+                            icon="Deal">
                         Партнеры
                     </SidebarItem>
 
                     <SidebarItem :route_name="isAdmin ? 'courses-crud.index' : 'courses.index'"
-                                 icon="graduation">
+                                 icon="Graduation">
                          Курсы
                     </SidebarItem>
 
                     <SidebarItem
                             v-if="isAdmin"
                             :route_name="'welcome'"
-                            icon="mail-open">
+                            icon="MailOpen">
                         ШФК
                     </SidebarItem>
 
                     <SidebarItem
                             v-if="!isAdmin"
                             :route_name="'my-courses'"
-                            icon="my-graduation">
+                            icon="MyGraduation">
                         Мои курсы
                     </SidebarItem>
 
                     <SidebarItem :route_name="'briefcases.index'"
-                                 icon="briefcase">
+                                 icon="Briefcase">
                         Портфели
                     </SidebarItem>
 
                     <SidebarItem
                             v-if="!isAdmin"
                             :route_name="'my-briefcases'"
-                            icon="my-briefcase">
+                            icon="MyBriefcase">
                         Мой портфель
                     </SidebarItem>
 
@@ -65,58 +65,58 @@
                     <SidebarItem
                             v-if="isAdmin"
                             :route_name="'welcome'"
-                            icon="dislike">
+                            icon="Dislike">
                         Список жалоб
                     </SidebarItem>
 
                     <SidebarItem :route_name="'sales.index'"
                                  v-if="!isAdmin && hasSomeLevel(['Agent', 'Mentor', 'Tutor'])"
-                                 icon="cart">
+                                 icon="Cart">
                         Продажи
                     </SidebarItem>
 
                     <SidebarItem :route_name="'articles.index'"
-                                 icon="compass">
+                                 icon="Compass">
                         Новости
                     </SidebarItem>
 
                     <SidebarItem
                             v-if="!isAdmin"
                             :route_name="'support.index'"
-                            icon="question">
+                            icon="Question">
                         Поддержка
                     </SidebarItem>
 
                     <SidebarItem
                             v-if="isAdmin"
                             :route_name="'welcome'"
-                            icon="partner-service">
+                            icon="PartnerService">
                         Услуги партнеров
                     </SidebarItem>
 
                     <SidebarItem
                             v-if="isAdmin"
                             :route_name="'welcome'"
-                            icon="app-service">
+                            icon="AppService">
                         Услуги на сайте
                     </SidebarItem>
 
                     <SidebarItem
                             v-if="isAdmin"
                             :route_name="'welcome'"
-                            icon="conversation">
+                            icon="Conversation">
                         Консультанты на сайте
                     </SidebarItem>
 
                     <SidebarItem
                             v-if="isAdmin"
                             :route_name="'welcome'"
-                            icon="info">
+                            icon="Info">
                         Информация об агентах
                     </SidebarItem>
 
                     <SidebarItem :route_name="'notifications.index'"
-                                 icon="bell">
+                                 icon="Bell">
                         Увеодомления
                     </SidebarItem>
                 </ul>

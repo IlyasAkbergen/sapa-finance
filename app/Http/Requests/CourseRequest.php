@@ -35,7 +35,7 @@ class CourseRequest extends FormRequest
             'direct_points.integer' => ['Значение должно быть числом'],
             'team_points.required' => ['Укажите личные единицы'],
             'team_points.integer' => ['Значение должно быть числом'],
-            'team_points' => ['required', 'integer'],
+            'image.required_without' => ['Не загружено изображение курса']
         ];
     }
 
@@ -57,6 +57,7 @@ class CourseRequest extends FormRequest
             'direct_fee' => ['required', 'integer'],
             'direct_points' => ['required', 'integer'],
             'team_points' => ['required', 'integer'],
+            'image' => ['required_without:id', 'file']
 //            'awardable' => ['required']
         ];
     }

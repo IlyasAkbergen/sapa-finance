@@ -15,7 +15,7 @@ class Briefcase extends Model implements WithPurchase
 
     protected $fillable = [
         'title', 'description', 'type_id', 'sum', 'profit', 'duration',
-        'monthly_payment', 'direct_fee', 'awardable'
+        'monthly_payment', 'direct_fee', 'awardable', 'image_path'
     ];
 
     function purchases()
