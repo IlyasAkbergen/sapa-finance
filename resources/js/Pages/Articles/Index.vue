@@ -4,7 +4,7 @@
             Новости
         </template>
 
-        <div class="main__content__agent-news-flex">
+        <div class="main__content__agent-news-flex">  c
             <ArticleCard v-for="article in articles"
                 :article="article"
                  :key="article.id"
