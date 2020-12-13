@@ -11,10 +11,10 @@
                     @input="input => search_key = input"
                 />
 
-                <a class="actions__link actions__link--blue"
+                <a class="actions__link actions__link--blue d-flex"
                    :href="route('welcome')">
-                    <img src="../../../../img/stats.svg" alt="">
-                    <span>Что больше продается</span>
+                    <StatsIcon />
+                    Что больше продается
                 </a>
 
                 <a class="actions__link actions__link--green"
@@ -44,13 +44,15 @@
 </template>
 
 <script>
-  export default {
+import MainLayout from '@/Layouts/MainLayout'
+export default {
     name: "Index",
     components: {
-      MainLayout: () => import('@/Layouts/MainLayout'),
-      SearchBar: () => import('@/Shared/SearchBar'),
-      CrudTable: () => import('@/Shared/CrudTable'),
-      Pagination: () => import('@/Shared/Pagination')
+        MainLayout,
+        SearchBar: () => import('@/Shared/SearchBar'),
+        CrudTable: () => import('@/Shared/CrudTable'),
+        Pagination: () => import('@/Shared/Pagination'),
+        StatsIcon: () => import('@/assets/icons/Stats')
     },
     props: {
       data: Object,

@@ -11,5 +11,13 @@ export default {
 
             return this.$page.errorBags[bag][key][0];
         },
+        hideFlash() {
+            this.flashMessageVisible = false
+        }
+    },
+    data() {
+        return {
+            flashMessageVisible: true
+        }
     },
 };
