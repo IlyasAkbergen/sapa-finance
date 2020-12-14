@@ -128,20 +128,23 @@
                 :uuid="form.uuid"
         />
 
-        <label class="profile-form__label">Уроки</label>
-        <div class="course-lessons-list">
-            <LessonItem
-                v-for="lesson in form.lessons"
-                :lesson="lesson"
-                :key="lesson.id"
-            />
-        </div>
+        <div v-if="form.id">
+            <label class="profile-form__label">Уроки</label>
+            <div class="course-lessons-list">
+                <LessonItem
+                    v-for="lesson in form.lessons"
+                    :lesson="lesson"
+                    :key="lesson.id"
+                    @edit="() => editLesson(lesson)"
+                />
+            </div>
 
-        <a class="course__lesson-link lesson__add lesson__add"
-           @click="showLessonForm"
-            v-show="form.id">
-            Добавить урок
-        </a>
+            <a class="course__lesson-link lesson__add lesson__add"
+               href="#"
+               @click="createLesson">
+                Добавить урок
+            </a>
+        </div>
         
         <jet-action-message :on="form.recentlySuccessful">
             <label class="profile-form__label text-green">
@@ -156,6 +159,15 @@
            :disabled="form.processing">
             Сохранить
         </a>
+
+        <div class="modal-wrapper js-add-lesson"
+             v-show="lessonFormVisible">
+            <i class="fa fa-times fa-lg"></i>
+            <div class="modal-body">
+                <LessonForm @submit="submitLessonForm"
+                    :form="lessonForm"/>
+            </div>
+        </div>
     </form>
 </template>
 
@@ -167,7 +179,8 @@ export default {
         LessonItem: () => import('./LessonItem'),
         JetInputError: () => import('@/Jetstream/InputError'),
         JetActionMessage: () => import('@/Jetstream/ActionMessage'),
-        Attachments: () => import('@/Shared/Attachments')
+        Attachments: () => import('@/Shared/Attachments'),
+        LessonForm: () => import('@/Pages/Lessons/Crud/Form')
     },
     props: {
         form: Object,
@@ -175,10 +188,20 @@ export default {
     data() {
         return {
             photoPreview: null,
-            lessonForm: this.$inertia.form({...this.course}, {
-                resetOnSuccess: false,
-                bag: 'courseForm',
-            }),
+            lessonForm: this.$inertia.form(
+                    {
+                        course_id: this.form.id,
+                        title: null,
+                        content: null,
+                        video_url: null,
+                        homework_content: null,
+                        order: null
+                    }, {
+                        resetOnSuccess: true,
+                        bag: 'lessonForm',
+                    }
+            ),
+            lessonFormVisible: false
         }
     },
     methods: {
@@ -188,8 +211,8 @@ export default {
             }
             this.$emit('submit')
         },
-        showLessonForm() {
-            // TODO IMPL
+        showLessonForm(value) {
+            this.lessonFormVisible = value
         },
         selectNewPhoto() {
             this.$refs.image.click();
@@ -204,6 +227,37 @@ export default {
 
             reader.readAsDataURL(this.$refs.image.files[0]);
         },
+
+        createLesson() {
+            this.lessonForm = this.$inertia.form(
+                {
+                    course_id: this.form.id,
+                    title: null,
+                    content: null,
+                    video_url: null,
+                    homework_content: null,
+                    order: null
+                }, {
+                    resetOnSuccess: true,
+                    bag: 'lessonForm',
+                }
+            )
+            this.showLessonForm(true)
+        },
+
+        editLesson(lesson) {
+            this.lessonForm = this.$inertia.form(
+                lesson, {
+                    resetOnSuccess: true,
+                    bag: 'lessonForm',
+                }
+            )
+            this.showLessonForm(true)
+        },
+
+        submitLessonForm() {
+
+        }
     }
 }
 </script>
