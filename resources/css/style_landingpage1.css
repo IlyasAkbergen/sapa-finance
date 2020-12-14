@@ -1,0 +1,171 @@
+/*#slider
+{
+  max-width: 300px;
+  max-height: 370px;
+  margin: 0 auto;
+  position: relative;
+}
+.prev
+{
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.next
+{
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.wrapper
+{
+  position: relative;
+  overflow: hidden;
+  transition: 0.5;
+}
+.item
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: 0.5s;
+  visibility: hidden;
+}
+.active
+{
+  visibility: visible;
+  opacity: 1;
+}
+.item img
+{
+  width: 100%;
+  height: auto;
+  display: block;
+}*/
+
+
+
+/**{
+  margin: 0;
+  padding: 0;
+}
+#slider
+{
+  position: relative;
+  overflow: hidden;
+}
+#slider > ul
+{
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.3s cubic-bezier(1,.01,.32,1);
+}
+#slider > ul li
+{
+  float: left;
+  position: relative;
+}
+#slider > ul li .slider-text
+{
+  position: absolute;
+  top: 50%;
+  left: 135px;
+  width: 500px;
+  padding: 40px;
+  background: rgba(255,255,255,.5);
+  transform: translateY(-50%);
+}
+#slider > ul li .slider-text h1
+{
+  font-size: 24px;
+  font-weight: 700;
+  color: #190134;
+  margin-bottom: 20px;
+}
+#slider > ul li .slider-text p
+{
+  font-size: 16px;
+  font-weight: 500;
+  color: #190134;
+  margin-bottom: 20px;
+}
+#slider > ul li .slider-text a
+{
+  display: inline-block;
+  padding: 12px 40px;
+  text-decoration: none;
+  color: #373777;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 24px;
+  border: 1px solid #373777;
+  background: #fff;
+}
+#slider > ul li img
+{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+#slider .pagination
+{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#slider .pagination ul
+{
+  width: 100%;
+}
+#slider .pagination ul li
+{
+  display: inline-block;
+  margin: 10px 5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  transition: all 0.3s cubic-bezier(1,.01,.32,1);
+}
+#slider .pagination ul li.active
+{
+  background: #fff;
+}*/
+
+
+
+
+
+
+
+@media screen and (max-width: 480px)
+{
+
+}
+@media screen and (max-width: 768px)
+{
+    /*  #slider
+      {
+        display: none;
+      }*/
+}
+@media screen and (max-width: 1024px)
+{
+
+}
+@media screen and (max-width: 1200px)
+{
+
+}
+@media screen and (min-width: 1201px)
+{
+
+}
