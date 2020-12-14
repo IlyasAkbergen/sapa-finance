@@ -5,29 +5,11 @@
        <meta charset="UTF-8">
        	<meta name="viewport" content="width=device-width, initial-scale=1.0">
        	<title>Sapa</title>
-       	<script src="https://kit.fontawesome.com/c9e46db961.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-
-
-        <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
-
-
-
-       	<link rel="stylesheet" type = "text/css" href="{{ url('/css/style_landingpage.css')}}">
-       	<link rel="stylesheet" type = "text/css" href="{{ url('/css/style_landingpage.css')}}" />
-        <link rel="stylesheet" type = "text/css" href="{{ url('/css/style_landingpage1.css')}}"/>
-        <link rel="stylesheet" type = "text/css" href="{{ url('/css/slick.css')}}" />
-        <link rel="stylesheet" type = "text/css" href="{{ url('/css/slick-theme.css')}}" />
-
-
-
-
+		<script src="https://kit.fontawesome.com/c9e46db961.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="{{asset('landing/styles/style.css')}}">
+		<link rel="stylesheet" href="{{asset('landing/slick-1.8.1/slick/slick.css')}}">
+		<link rel="stylesheet" href="{{asset('landing/slick-1.8.1/slick/slick-theme.css')}}">
 
     </head>
 <body>
@@ -50,17 +32,18 @@
 						</ul>
 					</nav>
 					<nav id="auth">
-					 @if (Route::has('login'))
-					 @auth
 						<ul>
-						  @else
-							<li><a href="{{ route('login') }}">Войти</a></li>
-							 @if (Route::has('register'))
-							<li><a href="{{ route('register') }}">Зарегистрироваться</a></li>
-							   @endif
-                               @endif
+						  	<li>
+								<a href="{{ route('login') }}">
+									Войти
+								</a>
+							</li>
+							<li>
+								<a href="{{ route('register') }}">
+									Зарегистрироваться
+								</a>
+							</li>
 						</ul>
-						  @endif
 					</nav>
 				</div>
 				<div class="menu-toggle"><i class="fas fa-bars"></i></div>
@@ -542,7 +525,185 @@
 				</div>
 			</div>
 		</footer>
-@stack('script')
+		@stack('script')
+		<script src="{{asset('landing/scripts/jquery-3.5.1-min.js')}}"></script>
+		<script src="{{asset('landing/slick-1.8.1/slick/slick.min.js')}}"></script>
+		<script type="text/javascript">
+
+			$(document).ready(function(){
+				$('.menu-toggle').click(function(){
+					$('#navs').toggleClass('active');
+					$(this).toggleClass('menu-toggle-active');
+					$('body').toggleClass('disable-scroll');
+				})
+
+				$('.articles__slider').slick({
+					infinite: true,
+					autoplay: true,
+					slidesToShow: 3,
+					slidesToScroll: 1,
+					arrows: true,
+					prevArrow: '<button class="slide-arrow prev-arrow"></button>',
+					nextArrow: '<button class="slide-arrow next-arrow"></button>',
+					responsive: [
+						{
+							breakpoint: 1024,
+							settings: {
+								slidesToShow: 2
+							}
+						},
+						{
+							breakpoint: 768,
+							settings: {
+								slidesToShow: 1
+							}
+						}
+					]
+				});
+
+				$('.main-slider').slick({
+					infinite: true,
+					autoplay: true,
+					pauseOnHover: false,
+					dots: true
+				});
+
+				$('.community__blog-slider__for').slick({
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					arrows: false,
+					fade: true,
+					asNavFor: '.community__blog-slider__nav'
+				});
+
+				$('.community__blog-slider__nav').slick({
+					slidesToShow: 3,
+					slidesToScroll: 1,
+					asNavFor: '.community__blog-slider__for',
+					focusOnSelect: true,
+					autoplay: true,
+					arrows: true,
+					prevArrow: '<button class="slide-arrow community__blog-slider__prev"></button>',
+					nextArrow: '<button class="slide-arrow community__blog-slider__next"></button>'
+				});
+
+				$('.founder__slider').slick({
+					autoplay: true,
+					fade: true,
+					arrows: true,
+					prevArrow: '<button class="slide-arrow founder__slider__prev"></button>',
+					nextArrow: '<button class="slide-arrow founder__slider__next"></button>'
+				});
+
+				$('.academy__slider1').slick({
+					infinite: false,
+					slidesToShow: 3,
+					slidesToScroll: 3,
+					dots: true,
+					responsive: [
+						{
+							breakpoint: 1024,
+							settings: {
+								slidesToShow: 2
+							}
+						},
+						{
+							breakpoint: 768,
+							settings: {
+								slidesToShow: 1,
+								slidesToScroll: 1
+							}
+						},
+						{
+							breakpoint: 480,
+							settings: {
+								slidesToShow: 1,
+								slidesToScroll: 1,
+								dots: false
+							}
+						}
+					]
+				});
+
+				$('.academy__slider2').slick({
+					infinite: false,
+					slidesToShow: 3,
+					slidesToScroll: 3,
+					dots: true,
+					responsive: [
+						{
+							breakpoint: 1024,
+							settings: {
+								slidesToShow: 2
+							}
+						},
+						{
+							breakpoint: 768,
+							settings: {
+								slidesToShow: 1,
+								slidesToScroll: 1
+							}
+						},
+						{
+							breakpoint: 480,
+							settings: {
+								slidesToShow: 1,
+								slidesToScroll: 1,
+								dots: false
+							}
+						}
+					]
+				});
+
+				$('.consultants__main__slider').slick({
+					autoplay: true,
+					fade: true,
+					arrows: true,
+					prevArrow: '<button class="slide-arrow consultants__main__slider__prev"></button>',
+					nextArrow: '<button class="slide-arrow consultants__main__slider__next"></button>'
+				});
+
+				$('.consultants__consultants__slider').slick({
+					slidesToShow: 4,
+					slidesToScroll: 1,
+					arrows: true,
+					dots: true,
+					infinite: false,
+					responsive: [
+						{
+							breakpoint: 1200,
+							settings: {
+								slidesToShow: 3,
+								slidesToScroll: 1
+							}
+						},
+						{
+							breakpoint: 1024,
+							settings: {
+								slidesToShow: 2,
+								slidesToScroll: 1
+							}
+						},
+						{
+							breakpoint: 768,
+							settings: {
+								slidesToShow: 1,
+								slidesToScroll: 1,
+								dots: false
+							}
+						},
+						{
+							breakpoint: 480,
+							settings: {
+								slidesToShow: 1,
+								slidesToScroll: 1,
+								arrows: false
+							}
+						}
+					]
+				})
+			})
+		</script>
 	</div>
 </body>
 
