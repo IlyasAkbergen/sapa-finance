@@ -10,6 +10,18 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/style.css', 'public/css/', [
         require('postcss-import')
     ])
+    .postCss('resources/css/slick.css', 'public/css/', [
+        require('postcss-import')
+    ])
+    .postCss('resources/css/slick-theme.css', 'public/css/', [
+        require('postcss-import')
+    ])
+    .postCss('resources/css/style_landingpage.css', 'public/css/', [
+        require('postcss-import')
+    ])
+    .postCss('resources/css/style_landingpage1.css', 'public/css/', [
+        require('postcss-import')
+    ])
     .postCss('resources/css/style_agent.css', 'public/css/', [
         require('postcss-import')
     ])
