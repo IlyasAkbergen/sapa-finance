@@ -58,7 +58,7 @@
 export default {
   name: "Index",
   components: {
-    MainLayout: () => import('@/layouts/MainLayout'),
+    MainLayout: () => import('@/Layouts/MainLayout'),
     Pagination: () => import('@/Shared/Pagination')
   },
   props: {

@@ -37,7 +37,7 @@
 <script>
 export default {
     components: {
-        MainLayout: () => import('@/layouts/MainLayout'),
+        MainLayout: () => import('@/Layouts/MainLayout'),
         ReferralItem: () => import('@/Shared/ReferralItem')
     },
     props: {
