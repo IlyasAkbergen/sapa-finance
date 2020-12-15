@@ -40,7 +40,8 @@ export default {
             }, {
                 bag: 'courseForm',
                 resetOnSuccess: false,
-            })
+            }),
+            showLessonModal: false
         }
     },
     created() {

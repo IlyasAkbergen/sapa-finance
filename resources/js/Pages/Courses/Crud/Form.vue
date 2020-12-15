@@ -161,13 +161,20 @@
         </a>
 
         <div class="modal-wrapper js-add-lesson"
+             style="display: flex; justify-content: center; align-items: center;"
              v-show="lessonFormVisible">
             <i class="fa fa-times fa-lg"></i>
             <div class="modal-body">
                 <LessonForm @submit="submitLessonForm"
-                    :form="lessonForm"/>
+                            :form="lessonForm"/>
             </div>
         </div>
+
+        <Modal :show="lessonFormVisible"
+               @close="() => lessonFormVisible = false">
+            <LessonForm @submit="submitLessonForm"
+                                :form="lessonForm"/>
+        </Modal>
     </form>
 </template>
 
@@ -180,7 +187,8 @@ export default {
         JetInputError: () => import('@/Jetstream/InputError'),
         JetActionMessage: () => import('@/Jetstream/ActionMessage'),
         Attachments: () => import('@/Shared/Attachments'),
-        LessonForm: () => import('@/Pages/Lessons/Crud/Form')
+        LessonForm: () => import('@/Pages/Lessons/Crud/Form'),
+        Modal: () => import('@/Jetstream/Modal')
     },
     props: {
         form: Object,

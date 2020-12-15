@@ -51,8 +51,10 @@ export default {
     },
     methods: {
         load() {
+        	if (this.attachmentsForm.model_id) {
             axios.post('/attachments/list', this.attachmentsForm)
                 .then((r) => this.attachments = r.data.data)
+        	}
         },
         selectNewFile() {
           this.$refs.file.click();
