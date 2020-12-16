@@ -16,8 +16,9 @@ interface AttachmentService
      * @param $model_type
      * @param $file
      * @param null $uuid
+     * @param null $slug
      */
-    public function save($model_id, $model_type, $file, $uuid = null);
+    public function save($model_id, $model_type, $file, $uuid = null, $slug = null);
 
     /**
      * @param $uuid

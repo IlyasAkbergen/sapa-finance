@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="course-docs-list"
-       v-for="item in attachments"
+       v-for="item in list"
        :key="item.id">
       <div class="d-flex">
         <img src="../../img/uploaded-file.png">
@@ -35,25 +35,41 @@ export default {
     name: "Attachments",
     props: {
         modelType: String,
-        modelId: Number,
-        uuid: String
+        modelId: {
+          type: Number,
+          default: null
+        },
+        uuid: {
+          type: String,
+          default: null
+        },
+        slug: {
+          type: String,
+          default: null
+        }
     },
     data() {
         return {
             attachments: [],
-            attachmentsForm: this.$inertia.form({
-              model_type: this.modelType,
-              model_id: this.modelId,
-              uuid: this.uuid,
-              file: null
-            })
         }
+    },
+    computed: {
+      list() {
+        return this.attachments
+      }
     },
     methods: {
         load() {
-        	if (this.attachmentsForm.model_id) {
-            axios.post('/attachments/list', this.attachmentsForm)
-                .then((r) => this.attachments = r.data.data)
+          console.log('before load: ' + this.modelId + "  uuid: " + this.uuid)
+        	if (this.modelId || this.uuid) {
+            axios.post('/attachments/list', {
+              'model_id': this.modelId,
+              'model_type': this.modelType,
+              'uuid': this.uuid,
+              'slug': this.slug
+            }).then((r) => {
+              this.attachments = r.data.data
+            })
         	}
         },
         selectNewFile() {
@@ -62,8 +78,19 @@ export default {
         upload() {
             let formData = new FormData();
             formData.append('model_type', this.modelType)
-            formData.append('model_id', this.modelId)
-            formData.append('uuid', this.uuid)
+
+            if (this.modelId) {
+              formData.append('model_id', this.modelId)
+            }
+
+            if (this.uuid) {
+              formData.append('uuid', this.uuid)
+            }
+
+            if (this.slug) {
+              formData.append('slug', this.slug)
+            }
+
             if (this.$refs.file) {
               formData.append('file', this.$refs.file.files[0]);
             }

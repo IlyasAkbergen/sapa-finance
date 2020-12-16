@@ -132,10 +132,11 @@
             <label class="profile-form__label">Уроки</label>
             <div class="course-lessons-list">
                 <LessonItem
-                    v-for="lesson in form.lessons"
+                    v-for="lesson in course.lessons"
                     :lesson="lesson"
                     :key="lesson.id"
                     @edit="() => editLesson(lesson)"
+                    @delete="() => deleteLesson(lesson)"
                 />
             </div>
 
@@ -162,10 +163,11 @@
 
         <div class="modal-wrapper js-add-lesson"
              style="display: flex; justify-content: center; align-items: center;"
-             v-show="lessonFormVisible">
+             :on="lessonFormVisible">
             <i class="fa fa-times fa-lg"></i>
             <div class="modal-body">
                 <LessonForm @submit="submitLessonForm"
+                            v-if="lessonFormVisible"
                             :form="lessonForm"/>
             </div>
         </div>
@@ -180,6 +182,8 @@
 
 <script>
 
+import { uuid } from "vue-uuid";
+
 export default {
     name: "Form",
     components: {
@@ -192,23 +196,14 @@ export default {
     },
     props: {
         form: Object,
+        course: Object
     },
     data() {
         return {
             photoPreview: null,
-            lessonForm: this.$inertia.form(
-                    {
-                        course_id: this.form.id,
-                        title: null,
-                        content: null,
-                        video_url: null,
-                        homework_content: null,
-                        order: null
-                    }, {
-                        resetOnSuccess: true,
-                        bag: 'lessonForm',
-                    }
-            ),
+            lessonForm: this.$inertia.form({}, {
+                preserveScroll: false
+            }),
             lessonFormVisible: false
         }
     },
@@ -239,14 +234,17 @@ export default {
         createLesson() {
             this.lessonForm = this.$inertia.form(
                 {
+                    id: null,
+                    uuid: uuid.v1(),
                     course_id: this.form.id,
                     title: null,
                     content: null,
                     video_url: null,
                     homework_content: null,
-                    order: null
+                    order: this.nextLessonOrder
                 }, {
                     resetOnSuccess: true,
+                    preserveScroll: false,
                     bag: 'lessonForm',
                 }
             )
@@ -255,8 +253,9 @@ export default {
 
         editLesson(lesson) {
             this.lessonForm = this.$inertia.form(
-                lesson, {
+                    {...lesson, uuid: null}, {
                     resetOnSuccess: true,
+                    preserveScroll: false,
                     bag: 'lessonForm',
                 }
             )
@@ -264,7 +263,32 @@ export default {
         },
 
         submitLessonForm() {
+            if (!this.lessonForm.id) {
+                this.lessonForm.post('/lessons-crud')
+                    .then(() => {
+                        if (this.lessonForm.recentlySuccessful) {
+                            this.showLessonForm(false);
+                        }
+                    });
+            } else {
+                this.lessonForm.put('/lessons-crud/' + this.lessonForm.id)
+                    .then(() => {
+                        if (this.lessonForm.recentlySuccessful) {
+                            this.showLessonForm(false);
+                        }
+                    });
+            }
+        },
 
+        deleteLesson (lesson) {
+            this.lessonForm.delete(route('lessons-crud.destroy', lesson.id));
+        }
+    },
+    computed: {
+        nextLessonOrder() {
+            return this.course.lessons.length > 0
+                ? Math.max.apply(Math, this.course.lessons.map((l) => l.order )) + 1
+                : 1;
         }
     }
 }

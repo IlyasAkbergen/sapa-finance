@@ -43,13 +43,14 @@ class AttachmentController extends Controller
 
     public function store(Request $request)
     {
-        $model_id   = $request->input('model_id');
+        $model_id   = $request->input('model_id', 0);
         $model_type = $request->input('model_type');
-        $model_uuid = $request->input('uuid');
+        $model_uuid = $request->input('uuid', null);
+        $slug = $request->input('slug', null);
 
        if(!isset($this->attachments[$model_type])) {
             abort(404);
-        }
+       }
 
         $model_params = $this->attachments[$model_type];
         $model_name = $model_params['model'];
@@ -67,7 +68,8 @@ class AttachmentController extends Controller
             $model_id,
             $model_name,
             $request->file('file'),
-            $model_uuid
+            $model_uuid,
+            $slug
         );
 
         $response = [
@@ -80,7 +82,7 @@ class AttachmentController extends Controller
 
     public function list(Request $request)
     {
-        $data = $request->only('model_type', 'model_id');
+        $data = $request->only('model_type', 'model_id', 'uuid', 'slug');
 
         if(!isset($this->attachments[$data['model_type']])) {
             abort(404);
@@ -90,8 +92,16 @@ class AttachmentController extends Controller
         $model_name = $model_params['model'];
 
         $attachments = Attachment::where('model_type', $model_name)
-            ->where('model_id', $data['model_id'])
-            ->where('model_id', '!=', 0)
+            ->when(!empty($data['model_id']), function ($query) use ($data) {
+                return $query->where('model_id', $data['model_id'])
+                    ->where('model_id', '!=', 0);
+            })
+            ->when(!empty($data['uuid']), function ($query) use ($data) {
+                return $query->where('uuid', $data['uuid']);
+            })
+            ->when(!empty($data['slug']), function ($query) use ($data) {
+                return $query->where('slug', $data['slug']);
+            })
             ->orderBy('position')->get();
 
         return response()->json([
