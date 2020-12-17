@@ -1,45 +1,69 @@
 <template>
     <form>
         <div class="lesson-info">
-            <p class="text-center">Данные курса</p>
-            <input type="text" name="lessonname" id="lessonname" placeholder="Название урока">
-            <input type="text" name="videourl" id="videourl" placeholder="Приложите ссылку на видео">
-            <textarea name="lessondesc" id="lessondesc" cols="30" rows="5" placeholder="Описание урока"></textarea>
-            <div class="course-lessons-list lesson-docs">
+            <p class="text-center">Данные урока</p>
+            <input type="text"
+               placeholder="Название урока"
+               v-model="form.title"
+            >
 
-            </div>
-            <label class="profile-form__label label-doc" for="lessondoc">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5 0.833496C4.33696 0.833496 3.70107 1.09689 3.23223 1.56573C2.76339 2.03457 2.5 2.67045 2.5 3.3335L2.5 16.6668C2.5 17.3299 2.76339 17.9658 3.23223 18.4346C3.70107 18.9034 4.33696 19.1668 5 19.1668H15C15.663 19.1668 16.2989 18.9034 16.7678 18.4346C17.2366 17.9658 17.5 17.3299 17.5 16.6668V6.66683C17.5 6.44582 17.4122 6.23385 17.2559 6.07757L12.2559 1.07757C12.0996 0.921293 11.8877 0.833496 11.6667 0.833496L5 0.833496ZM4.41074 2.74424C4.56702 2.58796 4.77899 2.50016 5 2.50016L10.8333 2.50016V6.66683C10.8333 7.12707 11.2064 7.50016 11.6667 7.50016H15.8333V16.6668C15.8333 16.8878 15.7455 17.0998 15.5893 17.2561C15.433 17.4124 15.221 17.5002 15 17.5002H5C4.77899 17.5002 4.56702 17.4124 4.41074 17.2561C4.25446 17.0998 4.16667 16.8878 4.16667 16.6668L4.16667 3.3335C4.16667 3.11248 4.25446 2.90052 4.41074 2.74424ZM14.6548 5.8335L12.5 3.67867V5.8335H14.6548ZM10 9.16683C10.4602 9.16683 10.8333 9.53992 10.8333 10.0002V11.6668H12.5C12.9602 11.6668 13.3333 12.0399 13.3333 12.5002C13.3333 12.9604 12.9602 13.3335 12.5 13.3335H10.8333V15.0002C10.8333 15.4604 10.4602 15.8335 10 15.8335C9.53976 15.8335 9.16667 15.4604 9.16667 15.0002V13.3335H7.5C7.03976 13.3335 6.66667 12.9604 6.66667 12.5002C6.66667 12.0399 7.03976 11.6668 7.5 11.6668H9.16667V10.0002C9.16667 9.53992 9.53976 9.16683 10 9.16683Z" fill="#92929E"/>
-                </svg>
-                <span>Приложите документ для скачивания</span>
-            </label>
-            <input type="file" name="lessondoc" id="lessondoc" style="display: none;" multiple>
+            <JetInputError :message="form.error('title')" />
+
+            <input type="text"
+               id="videourl"
+               placeholder="Приложите ссылку на видео"
+               v-model="form.video_url"
+            >
+
+            <JetInputError :message="form.error('video_url')" />
+
+            <textarea id="lessondesc"
+                      cols="30" rows="5"
+                      v-model="form.content"
+                      placeholder="Описание урока"></textarea>
+
+            <JetInputError :message="form.error('content')" />
+
+            <Attachments
+                :modelType="'lesson'"
+                :modelId="form.id"
+                :uuid="form.uuid"
+                :slug="'lesson'"
+            />
         </div>
         <div class="lesson-homework">
             <p class="text-center">Домашнее задание</p>
-            <div class="course-lessons-list lesson-hws">
 
-            </div>
-            <label class="profile-form__label label-doc" for="hwdoc">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5 0.833496C4.33696 0.833496 3.70107 1.09689 3.23223 1.56573C2.76339 2.03457 2.5 2.67045 2.5 3.3335L2.5 16.6668C2.5 17.3299 2.76339 17.9658 3.23223 18.4346C3.70107 18.9034 4.33696 19.1668 5 19.1668H15C15.663 19.1668 16.2989 18.9034 16.7678 18.4346C17.2366 17.9658 17.5 17.3299 17.5 16.6668V6.66683C17.5 6.44582 17.4122 6.23385 17.2559 6.07757L12.2559 1.07757C12.0996 0.921293 11.8877 0.833496 11.6667 0.833496L5 0.833496ZM4.41074 2.74424C4.56702 2.58796 4.77899 2.50016 5 2.50016L10.8333 2.50016V6.66683C10.8333 7.12707 11.2064 7.50016 11.6667 7.50016H15.8333V16.6668C15.8333 16.8878 15.7455 17.0998 15.5893 17.2561C15.433 17.4124 15.221 17.5002 15 17.5002H5C4.77899 17.5002 4.56702 17.4124 4.41074 17.2561C4.25446 17.0998 4.16667 16.8878 4.16667 16.6668L4.16667 3.3335C4.16667 3.11248 4.25446 2.90052 4.41074 2.74424ZM14.6548 5.8335L12.5 3.67867V5.8335H14.6548ZM10 9.16683C10.4602 9.16683 10.8333 9.53992 10.8333 10.0002V11.6668H12.5C12.9602 11.6668 13.3333 12.0399 13.3333 12.5002C13.3333 12.9604 12.9602 13.3335 12.5 13.3335H10.8333V15.0002C10.8333 15.4604 10.4602 15.8335 10 15.8335C9.53976 15.8335 9.16667 15.4604 9.16667 15.0002V13.3335H7.5C7.03976 13.3335 6.66667 12.9604 6.66667 12.5002C6.66667 12.0399 7.03976 11.6668 7.5 11.6668H9.16667V10.0002C9.16667 9.53992 9.53976 9.16683 10 9.16683Z" fill="#92929E"/>
-                </svg>
-                <span>Приложите документ для скачивания</span>
-            </label>
-            <input type="file" name="hwdoc" id="hwdoc" style="display: none;" multiple>
-            <textarea name="hwdesc" id="hwdesc" cols="30" rows="5" placeholder="Описание домашнего задания"></textarea>
-            <input type="submit" value="Сохранить">
+            <Attachments
+                    :modelType="'lesson'"
+                    :modelId="form.id"
+                    :uuid="form.uuid"
+                    :slug="'homework'"
+            />
+
+            <textarea name="hwdesc" id="hwdesc" cols="30"
+                      v-model="form.homework_content"
+                      rows="5" placeholder="Описание домашнего задания" />
+
+            <JetInputError :message="form.error('homework_content')" />
+
+            <input type="submit"
+                   v-show="!form.processing"
+                   @click.prevent="$emit('submit')"
+                   value="Сохранить">
         </div>
     </form>
 </template>
 
 <script>
-  export default {
-    name: "Form"
-  }
+export default {
+    name: "Form",
+    components: {
+        Attachments: () => import('@/Shared/Attachments'),
+        JetInputError: () => import('@/Jetstream/InputError'),
+    },
+    props: {
+        form: Object
+    }
+}
 </script>
-
-<style scoped>
-
-</style>

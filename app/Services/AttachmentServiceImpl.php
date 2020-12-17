@@ -23,7 +23,7 @@ class AttachmentServiceImpl extends BaseServiceImpl implements AttachmentService
         $this->main_dir = $dir_name;
     }
 
-    public function save($model_id, $model_type, $file, $uuid = null)
+    public function save($model_id, $model_type, $file, $uuid = null, $slug = null)
     {
         //Берем только имя модели без неймспейса
         $explode_type = explode('\\', $model_type);
@@ -40,6 +40,7 @@ class AttachmentServiceImpl extends BaseServiceImpl implements AttachmentService
         $data['model_id'] = $model_id;
         $data['model_type'] = $model_type;
         $data['uuid'] = $uuid;
+        $data['slug'] = $slug;
 
         return $image = $this->create($data);
     }

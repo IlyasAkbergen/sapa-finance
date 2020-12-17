@@ -13,6 +13,7 @@
 
         <div class="cec">
             <Form :form="form"
+                  :course="course"
                  @submit="updateCourse"/>
         </div>
     </main-layout>
@@ -39,8 +40,8 @@ export default {
                 }
             }, {
                 bag: 'courseForm',
-                resetOnSuccess: false,
-            })
+                resetOnSuccess: true,
+            }),
         }
     },
     created() {

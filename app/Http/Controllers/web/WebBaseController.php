@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 class WebBaseController extends Controller
 {
     public function responseSuccess($message, $data = null) {
+
         return redirect()->back()
             ->with('message', $message);
     }

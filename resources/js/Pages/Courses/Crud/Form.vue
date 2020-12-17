@@ -128,20 +128,24 @@
                 :uuid="form.uuid"
         />
 
-        <label class="profile-form__label">Уроки</label>
-        <div class="course-lessons-list">
-            <LessonItem
-                v-for="lesson in form.lessons"
-                :lesson="lesson"
-                :key="lesson.id"
-            />
-        </div>
+        <div v-if="form.id">
+            <label class="profile-form__label">Уроки</label>
+            <div class="course-lessons-list">
+                <LessonItem
+                    v-for="lesson in course.lessons"
+                    :lesson="lesson"
+                    :key="lesson.id"
+                    @edit="() => editLesson(lesson)"
+                    @delete="() => deleteLesson(lesson)"
+                />
+            </div>
 
-        <a class="course__lesson-link lesson__add lesson__add"
-           @click="showLessonForm"
-            v-show="form.id">
-            Добавить урок
-        </a>
+            <a class="course__lesson-link lesson__add lesson__add"
+               href="#"
+               @click="createLesson">
+                Добавить урок
+            </a>
+        </div>
         
         <jet-action-message :on="form.recentlySuccessful">
             <label class="profile-form__label text-green">
@@ -156,10 +160,29 @@
            :disabled="form.processing">
             Сохранить
         </a>
+
+        <div class="modal-wrapper js-add-lesson"
+             style="display: flex; justify-content: center; align-items: center;"
+             :on="lessonFormVisible">
+            <i class="fa fa-times fa-lg"></i>
+            <div class="modal-body">
+                <LessonForm @submit="submitLessonForm"
+                            v-if="lessonFormVisible"
+                            :form="lessonForm"/>
+            </div>
+        </div>
+
+        <Modal :show="lessonFormVisible"
+               @close="() => lessonFormVisible = false">
+            <LessonForm @submit="submitLessonForm"
+                                :form="lessonForm"/>
+        </Modal>
     </form>
 </template>
 
 <script>
+
+import { uuid } from "vue-uuid";
 
 export default {
     name: "Form",
@@ -167,18 +190,21 @@ export default {
         LessonItem: () => import('./LessonItem'),
         JetInputError: () => import('@/Jetstream/InputError'),
         JetActionMessage: () => import('@/Jetstream/ActionMessage'),
-        Attachments: () => import('@/Shared/Attachments')
+        Attachments: () => import('@/Shared/Attachments'),
+        LessonForm: () => import('@/Pages/Lessons/Crud/Form'),
+        Modal: () => import('@/Jetstream/Modal')
     },
     props: {
         form: Object,
+        course: Object
     },
     data() {
         return {
             photoPreview: null,
-            lessonForm: this.$inertia.form({...this.course}, {
-                resetOnSuccess: false,
-                bag: 'courseForm',
+            lessonForm: this.$inertia.form({}, {
+                preserveScroll: false
             }),
+            lessonFormVisible: false
         }
     },
     methods: {
@@ -188,8 +214,8 @@ export default {
             }
             this.$emit('submit')
         },
-        showLessonForm() {
-            // TODO IMPL
+        showLessonForm(value) {
+            this.lessonFormVisible = value
         },
         selectNewPhoto() {
             this.$refs.image.click();
@@ -204,6 +230,66 @@ export default {
 
             reader.readAsDataURL(this.$refs.image.files[0]);
         },
+
+        createLesson() {
+            this.lessonForm = this.$inertia.form(
+                {
+                    id: null,
+                    uuid: uuid.v1(),
+                    course_id: this.form.id,
+                    title: null,
+                    content: null,
+                    video_url: null,
+                    homework_content: null,
+                    order: this.nextLessonOrder
+                }, {
+                    resetOnSuccess: true,
+                    preserveScroll: false,
+                    bag: 'lessonForm',
+                }
+            )
+            this.showLessonForm(true)
+        },
+
+        editLesson(lesson) {
+            this.lessonForm = this.$inertia.form(
+                    {...lesson, uuid: null}, {
+                    resetOnSuccess: true,
+                    preserveScroll: false,
+                    bag: 'lessonForm',
+                }
+            )
+            this.showLessonForm(true)
+        },
+
+        submitLessonForm() {
+            if (!this.lessonForm.id) {
+                this.lessonForm.post('/lessons-crud')
+                    .then(() => {
+                        if (this.lessonForm.recentlySuccessful) {
+                            this.showLessonForm(false);
+                        }
+                    });
+            } else {
+                this.lessonForm.put('/lessons-crud/' + this.lessonForm.id)
+                    .then(() => {
+                        if (this.lessonForm.recentlySuccessful) {
+                            this.showLessonForm(false);
+                        }
+                    });
+            }
+        },
+
+        deleteLesson (lesson) {
+            this.lessonForm.delete(route('lessons-crud.destroy', lesson.id));
+        }
+    },
+    computed: {
+        nextLessonOrder() {
+            return this.course.lessons.length > 0
+                ? Math.max.apply(Math, this.course.lessons.map((l) => l.order )) + 1
+                : 1;
+        }
     }
 }
 </script>

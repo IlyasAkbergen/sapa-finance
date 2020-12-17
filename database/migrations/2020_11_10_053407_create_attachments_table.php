@@ -19,6 +19,7 @@ class CreateAttachmentsTable extends Migration
             $table->string('uuid')
                 ->nullable();
             $table->unsignedBigInteger('model_id')
+                ->nullable()
                 ->default(0);
             $table->string('model_type');
 

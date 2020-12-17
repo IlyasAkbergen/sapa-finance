@@ -424,12 +424,16 @@ body
 }
 
 .modal-wrapper {
-    background: rgba(1, 15, 52, 0.9);
+    /*background: rgba(1, 15, 52, 0.9);*/
     padding: 10px;
     position: fixed;
     z-index: 10000;
     width: 100vw;
-    height: 100vh;
+    /*height: 100vh;*/
+}
+
+.bg-dark {
+    background: rgba(1, 15, 52, 0.9);
 }
 
 .js-delete-partner {
@@ -1539,9 +1543,9 @@ body
     color: #373777;
 }
 
-.js-add-lesson {
-    display: none;
-}
+/*.js-add-lesson {*/
+/*    display: none;*/
+/*}*/
 
 .js-add-lesson .modal-body {
     background: #fff;

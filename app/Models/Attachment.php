@@ -11,7 +11,7 @@ class Attachment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'path', 'model_id', 'model_type', 'uuid', 'user_id', 'name'
+        'path', 'model_id', 'model_type', 'uuid', 'user_id', 'name', 'slug'
     ];
 
     public function attachable()
