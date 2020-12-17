@@ -29,6 +29,7 @@
                 :modelId="form.id"
                 :uuid="form.uuid"
                 :slug="'lesson'"
+                ref="lesson_attachments"
             />
         </div>
         <div class="lesson-homework">
@@ -39,6 +40,7 @@
                     :modelId="form.id"
                     :uuid="form.uuid"
                     :slug="'homework'"
+                    ref="homework_attachments"
             />
 
             <textarea name="hwdesc" id="hwdesc" cols="30"
@@ -64,6 +66,6 @@ export default {
     },
     props: {
         form: Object
-    }
+    },
 }
 </script>

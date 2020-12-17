@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ArticleResource extends JsonResource
@@ -18,7 +19,9 @@ class ArticleResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content,
-            'imageLink' => $this->imageLink
+            'image_path' => $this->image_path,
+            'created_at' => Carbon::parse($this->created_at)
+                ->isoFormat('DD.MM.YYYY')
         ];
     }
 }

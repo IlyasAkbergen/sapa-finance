@@ -42,6 +42,11 @@ class Purchase extends Model
         $this->fireModelEvent('payed');
     }
 
+    public function scopePayed($query)
+    {
+        return $query->where('payed', 1);
+    }
+
     public function payments()
     {
         return $this->morphMany(Payment::class, 'payable');

@@ -12,7 +12,7 @@
                 />
 
                 <a class="actions__link actions__link--blue d-flex"
-                   :href="route('welcome')">
+                   :href="route('courses-stats')">
                     <StatsIcon />
                     Что больше продается
                 </a>

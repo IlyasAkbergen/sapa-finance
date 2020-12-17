@@ -40,6 +40,7 @@ class BriefcaseController extends WebBaseController
     // POST /briefcases
     public function store(Request $request)
     {
+        // todo create request to set a bag
         $validator = Validator::make($request->all(), [
             'title' => ['required|max:255'],
             'description' => ['required'],

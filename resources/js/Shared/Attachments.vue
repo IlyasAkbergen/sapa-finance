@@ -60,8 +60,7 @@ export default {
     },
     methods: {
         load() {
-          console.log('before load: ' + this.modelId + "  uuid: " + this.uuid)
-        	if (this.modelId || this.uuid) {
+          if (this.modelId || this.uuid) {
             axios.post('/attachments/list', {
               'model_id': this.modelId,
               'model_type': this.modelType,

@@ -74,9 +74,13 @@ class CourseController extends WebBaseController
     {
         $course = $this->courseService->findWith($id, ['lessons']);
 
-        return Inertia::render('Courses/Crud/Edit', [
-            'course' => $course
-        ]);
+        if (!empty($course)) {
+            return Inertia::render('Courses/Crud/Edit', [
+                'course' => $course
+            ]);
+        } else {
+            return redirect()->route('courses-crud.index');
+        }
     }
 
     public function update(CourseRequest $request, $id)
@@ -114,6 +118,19 @@ class CourseController extends WebBaseController
         } else {
             return $this->responseFail('Не удалосьу удалить');
         }
+    }
+
+    public function stats()
+    {
+        $courses = $this->courseService->allWith([
+            'purchases' => function ($q) {
+                return $q->payed();
+            }
+        ]);
+
+        return Inertia::render('Courses/Stats', [
+            'courses' => $courses
+        ]);
     }
 
     public function uploadImage(Request $request)

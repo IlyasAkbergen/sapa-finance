@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\web\WebBaseController;
+use App\Http\Requests\ArticleRequest;
 use App\Http\Resources\ArticleResource;
 use App\Services\ArticlesService;
+use App\Services\AttachmentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -13,10 +15,17 @@ use Inertia\Inertia;
 class ArticleController extends WebBaseController
 {
     private $articlesService;
+    private $attachmentService;
 
-    public function __construct(ArticlesService $articlesService)
+    public function __construct(
+        ArticlesService $articlesService,
+        AttachmentService $attachmentService
+    )
     {
         $this->articlesService = $articlesService;
+        $this->attachmentService = $attachmentService;
+        $this->middleware('admin')
+            ->except(['index', 'show']);
     }
 
     public function index()
@@ -28,71 +37,98 @@ class ArticleController extends WebBaseController
         ]);
     }
 
-    public function show($id)
+    public function create()
     {
-        $article = $this->articlesService->findWith($id, ['image']);
-
-        return Inertia::render('Articles/ArticleDetail', [
-            'article' => ArticleResource::make($article)->resolve()
-        ]);
+        return Inertia::render('Articles/Crud/Add');
     }
 
-    public function store(Request $request)
+    public function edit($id)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => ['required|max:255'],
-            'content' => ['required']
-        ]);
+        $article = $this->articlesService->find($id);
 
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
+        if (!empty($article)) {
+            return Inertia::render('Articles/Crud/Edit', [
+                'article' => ArticleResource::make($article)->resolve()
+            ]);
+        } else {
+            return redirect()->route('articles.index');
         }
+    }
+
+    public function show($id)
+    {
+        $article = $this->articlesService->find($id);
+
+        if (!empty($article)) {
+            return Inertia::render('Articles/ArticleDetail', [
+                'article' => ArticleResource::make($article)->resolve()
+            ]);
+        } else {
+            return redirect()->route('articles.index');
+        }
+    }
+
+    public function store(ArticleRequest $request)
+    {
+        $filepath = $this->attachmentService->storeFile(
+            $request->file('image'), 'Article'
+        );
 
         $attributes = array_merge($request->only([
-            'title', 'content'
-        ]), ['author_id' => Auth::user()->id]);
+            'title', 'content', 'created_at'
+        ]), [
+            'author_id' => Auth::user()->id,
+            'image_path' => $filepath,
+        ]);
 
         $article = $this->articlesService->create($attributes);
 
-        return $this->responseSuccess('Created', $article);
+        if (!empty($article)) {
+            $this->attachmentService->move($request->uuid, $article->id);
+
+            return redirect()
+                ->route('articles.edit', $article->id);
+        } else {
+            return $this->responseFail('failed saving article');
+        }
     }
 
-    public function update(Request $request)
+    public function update(ArticleRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'id' => ['required'],
-            'title' => ['required', 'max:255'],
-            'content' => ['required']
+        $attributes = array_merge($request->only([
+            'title', 'content', 'created_at'
+        ]), [
+            'author_id' => Auth::user()->id,
         ]);
 
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
+        if ($request->has('image')) {
+            $filepath = $this->attachmentService->storeFile(
+                $request->file('image'), 'Article'
+            );
 
-        $attributes = array_merge($request->only([
-            'title', 'content'
-        ]), ['author_id' => Auth::user()->id]);
+            $attributes['image_path'] = $filepath;
+        }
 
         $article = $this->articlesService->update(
             $request->input('id'),
             $attributes
         );
 
-        return $this->responseSuccess('Updated', $article);
+        if (!empty($article)) {
+            return redirect()
+                ->route('articles.index');
+        } else {
+            return $this->responseFail('Не удалось обновить новость');
+        }
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        if ($request->has('id')) {
-            $this->articlesService->delete($request->input('id'));
+        $deleted = $this->articlesService->delete($id);
+        if ($deleted) {
+            return redirect()->route('articles.index');
+        } else {
+            return $this->responseFail('Не удалосьу удалить');
         }
-
-        return $this->responseSuccess('Deleted');
     }
 }

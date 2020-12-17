@@ -44,11 +44,6 @@ export default {
             }),
         }
     },
-    created() {
-        if (this.$page.flash.message) {
-            this.flash(this.$page.flash.message, 'success');
-        }
-    },
     methods: {
         updateCourse() {
             this.form.post('/courses-crud/' + this.course.id);

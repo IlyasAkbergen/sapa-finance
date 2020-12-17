@@ -7,11 +7,96 @@
        	<title>Sapa</title>
 
 		<script src="https://kit.fontawesome.com/c9e46db961.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="{{asset('landing/styles/bootstrap.min.css')}}">
 		<link rel="stylesheet" href="{{asset('landing/styles/style.css')}}">
 		<link rel="stylesheet" href="{{asset('landing/slick-1.8.1/slick/slick.css')}}">
 		<link rel="stylesheet" href="{{asset('landing/slick-1.8.1/slick/slick-theme.css')}}">
 
-    </head>
+		<style>
+			.modal{
+				background-color: rgba(1, 15, 52, 0.7);
+			}
+			.modal-dialog{
+				max-width: 25%;
+				margin: 50px auto;
+			}
+			.btn-close{
+				background: url(../img/success-times-icon.png);
+				background-size: contain;
+				opacity: 1;
+				position: absolute;
+				right: -90%;
+				top: 0%;
+			}
+			.btn-close:hover{
+				cursor: pointer;
+			}
+			.modal-content {
+				background-color: #fefefe;
+				margin: auto;
+				padding: 40px 20px 20px;
+				border-radius: 10px;
+			}
+			.modal-content input[type=text], .modal-content input[type=password]{
+				width: 100%;
+				padding: 7px 15px;
+				border-radius: 24px;
+				border: 1px solid #C2C3CF;
+				margin-bottom: 20px;
+			}
+			.modal-content h3{
+				text-align: center;
+				color: #190134;
+				font-weight: bold;
+				font-size: 20px;
+			}
+			.modal-content .modal-btn{
+				width: 100%;
+				background: #0a884d;
+				border: 1px solid #0a884d;
+				border-radius: 24px;
+				color: #fff;
+				padding: 5px;
+				transition: .5s;
+				cursor: pointer;
+				font-weight: bold;
+			}
+			.modal-content .modal-btn:hover{
+				background: #fff;
+				color: #0a884d;
+				transition: .5s;
+			}
+			.modal-footer button{
+				width: 100%;
+				border: 1px solid #373777;
+				border-radius: 24px;
+				color: #373777;
+				display: block;
+				padding: 6px;
+				text-align: center;
+				text-decoration: none;
+				cursor: pointer;
+				transition: .5s;
+				font-weight: bold;
+			}
+			.modal-footer button:hover{
+				background: #373777;
+				color: #fff;
+				transition: .5s;
+			}
+			.modal-flex{
+				display: flex;
+				justify-content: space-between;
+				padding: 20px 0;
+				color: #190134;
+			}
+			.modal-flex a{
+				color: #190134;
+				text-decoration: none;
+			}
+		</style>
+
+	</head>
 <body>
 	<div class="body-wrapper">
 		<header>
@@ -98,7 +183,7 @@
 					</div>
 					<div class="community__blog__main">
 						<h1>Сообщество</h1>
-						<img src="/images/img/community-blog-img.png" alt="">
+						<img src="/images/community-blog-img.png" alt="">
 						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
 					</div>
 				</div>
@@ -476,7 +561,7 @@
 			<div class="process__inner">
 				<h1>SAPA жол</h1>
 				<h3>Сопровождение в процессе</h3>
-				<img src="{{asset('images/img/sapa-zhol-img.png')}}" alt="">
+				<img src="{{asset('images/sapa-zhol-img.png')}}" alt="">
 			</div>
 		</div>
 
@@ -507,7 +592,7 @@
 				<div class="footer__socials">
 					<p class="footer__title">Социальные сети</p>
 					<ul class="menu-horizontal">
-						<li><a href="#"><img src="{{asset('img/icons/footer-social-youtube.png')}}" alt=""></a></li>
+						<li><a href="#"><img src="{{asset('images/icons/footer-social-youtube.png')}}" alt=""></a></li>
 						<li><a href="#"><img src="{{asset('images/icons/footer-social-fb.png')}}" alt=""></a></li>
 						<li><a href="#"><img src="{{asset('images/icons/footer-social-vk.png')}}" alt=""></a></li>
 						<li><a href="#"><img src="{{asset('images/icons/footer-social-instagram.png')}}" alt=""></a></li>
@@ -525,8 +610,96 @@
 				</div>
 			</div>
 		</footer>
+
+		<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<div class="modal-content">
+					<h3>Вход в систему</h3>
+					<div class="modal-body">
+						<form action="">
+							<input type="text" placeholder="E-mail" name="name">
+							<input type="password" placeholder="Пароль" name="password">
+							<button class="modal-btn">
+								Войти
+							</button>
+							<div class="modal-flex">
+								<div>
+									<input type="checkbox" id="remember">
+									<label for="remember">Запомнить меня</label>
+								</div>
+								<button style="border: none; background: none; margin: 0; padding: 0;" type="button" data-bs-dismiss="modal" aria-label="Close"  data-bs-toggle="modal" data-bs-target="#passModal">
+									Забыл пароль?
+								</button>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" data-bs-dismiss="modal" aria-label="Close"  data-bs-toggle="modal" data-bs-target="#regModal">
+							Зарегистрироваться
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="regModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<div class="modal-content">
+					<h3>Зарегистрироваться</h3>
+					<div class="modal-body">
+						<form action="">
+							<input type="text" placeholder="Имя" name="name">
+							<input type="text" placeholder="E-mail" name="email">
+							<input type="text" placeholder="Номер телефона" name="phone">
+							<input type="password" placeholder="Пароль" name="password">
+							<input type="password" placeholder="Подтвердить пароль" name="password">
+							<button class="modal-btn">
+								Зарегистрироваться
+							</button>
+							<div class="text-center">
+								<div>
+									<label for="remember">Если уже есть аккаунт</label>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#authModal">
+							Войти
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="passModal" tabindex="-1"
+			 aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<div class="modal-content">
+					<h3>Восстановление пароля</h3>
+					<div class="modal-body">
+						<form action="">
+							<input type="text" placeholder="E-mail" name="email">
+							<div class="text-left">
+								<p>
+									Когда вы введете вашу почту, вам будет отправлено сообщение с новым паролем.
+								</p>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" data-bs-dismiss="modal" aria-label="Close">
+							Отправить
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		@stack('script')
 		<script src="{{asset('landing/scripts/jquery-3.5.1-min.js')}}"></script>
+		<script src="{{asset('landing/scripts/bootstrap.min.js')}}"></script>
 		<script src="{{asset('landing/slick-1.8.1/slick/slick.min.js')}}"></script>
 		<script type="text/javascript">
 
