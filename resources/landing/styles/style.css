@@ -288,7 +288,7 @@ nav#auth ul li a:hover
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
-	background: url(../img/icons/left.png);
+	background: url(../../images/icons/left.png);
 	background-size: contain;
 	border: none;
 	cursor: pointer;
@@ -304,7 +304,7 @@ nav#auth ul li a:hover
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
-	background: url(../img/icons/right.png) ;
+	background: url(../../images/icons/right.png) ;
 	background-size: contain;
 	border: none;
 	cursor: pointer;
@@ -390,7 +390,7 @@ nav#auth ul li a:hover
 /*----- About Start -----*/
 #about
 {
-	background-image: url(../img/slides/image1.png);
+	background-image: url(../../images/slides/image1.png);
 	background-size: cover;
 	background-position: center;
 }
@@ -490,7 +490,7 @@ nav#auth ul li a:hover
 .founder .founder__inner .founder__main .founder__slider .founder__slider__prev
 {
 	left: 5px;
-	background: url(../img/icons/left2.png);
+	background: url(../../images/icons/left2.png);
 	border: none;
 	width: 10px;
 	background-size: contain;
@@ -501,7 +501,7 @@ nav#auth ul li a:hover
 .founder .founder__inner .founder__main .founder__slider .founder__slider__next
 {
 	right: 5px;
-	background: url(../img/icons/right2.png);
+	background: url(../../images/icons/right2.png);
 	border: none;
 	width: 10px;
 	background-size: contain;
@@ -514,7 +514,7 @@ nav#auth ul li a:hover
 /*----- Academy Start -----*/
 .academy
 {
-	background: url(../img/bgs/academy-bg.png);
+	background: url(../../images/bgs/academy-bg.png);
 	background-size: cover;
 	background-position: center;
 	padding: 60px 30px;
@@ -550,7 +550,7 @@ nav#auth ul li a:hover
 	right: 0;
 	width: 40px;
 	height: 40px;
-	background: url(../img/icons/right3.png);
+	background: url(../../images/icons/right3.png);
 	background-size: contain;
 	border-radius: 50%;
 }
@@ -574,7 +574,7 @@ nav#auth ul li a:hover
 	left: auto;
 	width: 40px;
 	height: 40px;
-	background: url(../img/icons/left3.png);
+	background: url(../../images/icons/left3.png);
 	background-size: contain;
 	border-radius: 50%;
 }
@@ -623,7 +623,7 @@ nav#auth ul li a:hover
 	right: auto;
 	width: 40px;
 	height: 40px;
-	background: url(../img/icons/right3.png);
+	background: url(../../images/icons/right3.png);
 	background-size: contain;
 	border-radius: 50%;
 }
@@ -646,7 +646,7 @@ nav#auth ul li a:hover
 	left: 0;
 	width: 40px;
 	height: 40px;
-	background: url(../img/icons/left3.png);
+	background: url(../../images/icons/left3.png);
 	background-size: contain;
 	border-radius: 50%;
 }
@@ -826,7 +826,7 @@ nav#auth ul li a:hover
 /*----- Articles Start -----*/
 .articles
 {
-	background: url(../img/bgs/articles-bg.jpg);
+	background: url(../../images/bgs/articles-bg.jpg);
 	background-size: cover;
 	background-position: center;
 	padding: 50px 70px 100px 70px;
@@ -899,7 +899,7 @@ nav#auth ul li a:hover
 	left: -50px;
 	width: 30px;
 	height: 30px;
-	background: url(../img/icons/left.png);
+	background: url(../../images/icons/left.png);
 	background-size: contain;
 	border: none;
 	cursor: pointer;
@@ -908,7 +908,7 @@ nav#auth ul li a:hover
 	right: -50px;
 	width: 30px;
 	height: 30px;
-	background: url(../img/icons/right.png);
+	background: url(../../images/icons/right.png);
 	background-size: contain;
 	border: none;
 	cursor: pointer;
@@ -1011,7 +1011,7 @@ nav#auth ul li a:hover
 .consultants .consultants__inner .consultants__main .consultants__main__slider .consultants__main__slider__prev
 {
 	left: 5px;
-	background: url(../img/icons/left2.png);
+	background: url(../../images/icons/left2.png);
 	border: none;
 	width: 10px;
 	background-size: contain;
@@ -1022,7 +1022,7 @@ nav#auth ul li a:hover
 .consultants .consultants__inner .consultants__main .consultants__main__slider .consultants__main__slider__next
 {
 	right: 5px;
-	background: url(../img/icons/right2.png);
+	background: url(../../images/icons/right2.png);
 	border: none;
 	width: 10px;
 	background-size: contain;
@@ -1081,7 +1081,7 @@ nav#auth ul li a:hover
 	right: -55px;
 	width: 40px;
 	height: 40px;
-	background: url(../img/icons/right3.png) no-repeat;
+	background: url(../../images/icons/right3.png) no-repeat;
 	background-size: contain;
 	background-origin: content-box;
 	padding: 1px;
@@ -1106,7 +1106,7 @@ nav#auth ul li a:hover
 	left: -55px;
 	width: 40px;
 	height: 40px;
-	background: url(../img/icons/left3.png) no-repeat;
+	background: url(../../images/icons/left3.png) no-repeat;
 	background-size: contain;
 	background-origin: content-box;
 	padding: 1px;

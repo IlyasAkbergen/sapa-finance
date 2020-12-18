@@ -24,9 +24,13 @@ class Authenticate extends Middleware
 
     public function handle($request, Closure $next, ...$guards)
     {
-        $request->user()->loadMissing([
-            'balance', 'referrer.referral_level', 'referral_level'
-        ]);
+        $this->authenticate($request, $guards);
+
+        if (!empty($request->user())) {
+            $request->user()->loadMissing([
+                'balance', 'referrer.referral_level', 'referral_level'
+            ]);
+        }
 
         return $next($request);
     }

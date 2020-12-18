@@ -33,7 +33,7 @@ class HomeworkController extends WebBaseController
             $homework = $this->homeworkService->create(
                 array_merge(
                     $request->only(['lesson_id']),
-                    [ 'user_id' => Auth::user()->id ]
+                    ['user_id' => Auth::user()->id]
                 )
             );
 
@@ -59,7 +59,6 @@ class HomeworkController extends WebBaseController
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            dd('catch failed: '. $e->getMessage());
             return $this->responseFail('Не удалось сохранить.');
         }
     }

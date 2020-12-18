@@ -43,14 +43,14 @@ class AttachmentController extends Controller
 
     public function store(Request $request)
     {
-        $model_id   = $request->input('model_id', 0);
+        $model_id = $request->input('model_id', 0);
         $model_type = $request->input('model_type');
         $model_uuid = $request->input('uuid', null);
         $slug = $request->input('slug', null);
 
-       if(!isset($this->attachments[$model_type])) {
+        if (!isset($this->attachments[$model_type])) {
             abort(404);
-       }
+        }
 
         $model_params = $this->attachments[$model_type];
         $model_name = $model_params['model'];
@@ -74,7 +74,7 @@ class AttachmentController extends Controller
 
         $response = [
             'success' => true,
-            'data'    => $data
+            'data' => $data
         ];
 
         return response()->json($response);
@@ -84,7 +84,7 @@ class AttachmentController extends Controller
     {
         $data = $request->only('model_type', 'model_id', 'uuid', 'slug');
 
-        if(!isset($this->attachments[$data['model_type']])) {
+        if (!isset($this->attachments[$data['model_type']])) {
             abort(404);
         }
 
@@ -106,14 +106,15 @@ class AttachmentController extends Controller
 
         return response()->json([
             'count' => count($attachments),
-            'data'  => $attachments->all(),
+            'data' => $attachments->all(),
         ]);
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $model = Attachment::findOrFail($id);
         try {
-            if( true ) { // todo check
+            if (true) { // todo check
                 Storage::disk('local')->delete($model->path);
                 $model->delete();
             } else {

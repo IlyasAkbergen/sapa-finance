@@ -4,13 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
-        'title', 'content', 'author_id'
+        'title', 'content', 'author_id',
+        'created_at', 'image_path'
     ];
 
     public function author()
@@ -26,11 +29,5 @@ class Article extends Model
     public function image()
     {
         return $this->morphOne(Attachment::class, 'model');
-    }
-
-    public function getImageLinkAttribute()
-    {
-        $this->loadMissing('image');
-        return $this->image->link;
     }
 }

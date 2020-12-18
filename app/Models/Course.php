@@ -7,11 +7,13 @@ use App\Traits\Awardable;
 use App\Traits\HasUsers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model implements WithPurchase
 {
     use HasFactory;
     use Awardable;
+    use SoftDeletes;
 
     const START_COURSE_ID = 1;
 

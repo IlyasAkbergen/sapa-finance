@@ -1,9 +1,9 @@
 <template>
     <div class="course-lesson">
-        <div class="course-lesson__titles">
+        <div class="course-lesson__titles d-flex">
             <img src="../../../../img/lesson-icon.png" alt="">
-            <span id="course-doc-name">
-                {{ lesson.title }}
+            <span id="course-doc-name" class="mt-2">
+                {{ lesson.title | truncate(50) }}
             </span>
         </div>
         <div class="course-lesson__actions">

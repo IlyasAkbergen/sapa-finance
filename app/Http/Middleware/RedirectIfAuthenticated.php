@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Role;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
@@ -23,6 +24,10 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                if (Auth::user()->role_id == Role::ROLE_ADMIN) {
+                    return redirect(route('courses-crud.index'));
+                }
+
                 return redirect(RouteServiceProvider::HOME);
             }
         }

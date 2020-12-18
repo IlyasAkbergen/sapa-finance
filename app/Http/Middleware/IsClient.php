@@ -6,7 +6,7 @@ use App\Models\Role;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsAdmin
+class IsClient
 {
     /**
      * Handle an incoming request.
@@ -17,8 +17,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (empty($request->user()) || $request->user()->role_id != Role::ROLE_ADMIN) {
-            return redirect('/');
+        if ($request->user()->role_id != Role::ROLE_CLIENT) {
+            if ($request->user()->role_id == Role::ROLE_ADMIN) {
+                return redirect(route('courses-crud.index'));
+            }
         }
 
         return $next($request);

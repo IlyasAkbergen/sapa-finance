@@ -14,7 +14,7 @@
                @change="updatePhotoPreview"
                class="hidden">
 
-        <JetInputError :message="form.error('photo')" class="mt-1" />
+        <JetInputError :message="form.error('image')" class="mt-1" />
 
         <label class="profile-form__label" for="name">
             Название программы
@@ -163,7 +163,7 @@
 
         <div class="modal-wrapper js-add-lesson"
              style="display: flex; justify-content: center; align-items: center;"
-             :on="lessonFormVisible">
+             v-show="lessonFormVisible">
             <i class="fa fa-times fa-lg"></i>
             <div class="modal-body">
                 <LessonForm @submit="submitLessonForm"
@@ -173,9 +173,10 @@
         </div>
 
         <Modal :show="lessonFormVisible"
-               @close="() => lessonFormVisible = false">
+               @close="() => showLessonForm(false)">
             <LessonForm @submit="submitLessonForm"
-                                :form="lessonForm"/>
+                        v-if="lessonFormVisible"
+                        :form="lessonForm"/>
         </Modal>
     </form>
 </template>

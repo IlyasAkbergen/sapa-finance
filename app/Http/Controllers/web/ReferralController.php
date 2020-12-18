@@ -14,7 +14,8 @@ class ReferralController extends WebBaseController
 
     public function __construct(
         UserService $userService
-    ){
+    )
+    {
         $this->userService = $userService;
     }
 

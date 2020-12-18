@@ -21,7 +21,8 @@ class PurchaseController extends WebBaseController
         UserService $userService,
         PurchaseServiceContract $purchaseService,
         PaymentGateContract $paymentGate
-    ) {
+    )
+    {
         $this->userService = $userService;
         $this->purchaseService = $purchaseService;
         $this->paymentGate = $paymentGate;
@@ -55,7 +56,7 @@ class PurchaseController extends WebBaseController
             $inputData
         );
 
-        if(empty($purchase->id)) {
+        if (empty($purchase->id)) {
             return $this->responseFail('Что-то пошло не так.');
         } else {
             $this->paymentGate->initPayin();
@@ -111,7 +112,7 @@ class PurchaseController extends WebBaseController
             $params, $inputData
         );
 
-        if(empty($purchase->id)) {
+        if (empty($purchase->id)) {
             return $this->responseFail('Что-то пошло не так.');
         } else {
             if (!$request->pay_online) {

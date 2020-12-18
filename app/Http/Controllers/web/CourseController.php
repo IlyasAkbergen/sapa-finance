@@ -33,37 +33,17 @@ class CourseController extends WebBaseController
         ]);
     }
 
-    public function store(CourseRequest $request)
-    {
-        $course = $this->courseService->create($request->all());
-
-        if (!empty($course)) {
-            return $this->responseSuccess('Course saved', $course);
-        } else {
-            return $this->responseFail('failed saving');
-        }
-    }
-
     public function show($id)
     {
         $course = $this->courseService->find($id);
 
-        return Inertia::render('Courses/CourseDetail', [
-            'course' => $course
-        ]);
-    }
-
-    public function update(CourseRequest $request)
-    {
-        $course = $this->courseService->update(
-            $request->input('id'),
-            $request->all()
-        );
-
         if (!empty($course)) {
-            return $this->responseSuccess('Course saved', $course);
+            return Inertia::render('Courses/CourseDetail', [
+                'course' => $course
+            ]);
         } else {
-            return $this->responseFail('failed saving');
+            return redirect()->route('courses.index');
         }
+
     }
 }

@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 
 class WebBaseController extends Controller
 {
-    public function responseSuccess($message, $data = null) {
+    public function responseSuccess($message, $data = null)
+    {
 
         return redirect()->back()
             ->with('message', $message);
     }
 
-    public function responseFail($error, $data = null) {
+    public function responseFail($error, $data = null)
+    {
         return redirect()->back()
             ->with('error', $error);
     }
