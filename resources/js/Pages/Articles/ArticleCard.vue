@@ -24,7 +24,7 @@
                class="users__link users__link--blue">
                 <Pencil />
             </a>
-            <a href="#" @click.prevent="() => deleteArticle(article.id)"
+            <a href="#" @click.prevent="alertAcceptDelete"
                 class="users__link users__link--red new__delete">
                 <Trash />
             </a>
@@ -35,6 +35,10 @@
            class="main__content__news-flex__card__button">
             Читать новость
         </a>
+
+        <DeleteAcceptModal :show="deleteAcceptModalShow"
+                           @close="deleteAcceptModalShow = false"
+                           @accepted="deleteArticle"/>
     </div>
 </template>
 
@@ -49,15 +53,24 @@ export default {
     components: {
         Trash,
         Pencil,
-        GreenEye
+        GreenEye,
+        DeleteAcceptModal: () => import('@/Shared/DeleteAcceptModal')
     },
     mixins: [HasUser],
     props: {
       article: Object
     },
+    data(){
+      return {
+          deleteAcceptModalShow: false
+      }
+    },
     methods: {
-        deleteArticle(id) {
-            this.$inertia.delete(route('articles.destroy', id));
+        alertAcceptDelete() {
+            this.deleteAcceptModalShow = true
+        },
+        deleteArticle() {
+            this.$inertia.delete(route('articles.destroy', this.article.id));
         }
     }
 }

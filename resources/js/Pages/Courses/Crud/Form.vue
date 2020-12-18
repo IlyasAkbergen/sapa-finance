@@ -161,17 +161,6 @@
             Сохранить
         </a>
 
-        <div class="modal-wrapper js-add-lesson"
-             style="display: flex; justify-content: center; align-items: center;"
-             v-show="lessonFormVisible">
-            <i class="fa fa-times fa-lg"></i>
-            <div class="modal-body">
-                <LessonForm @submit="submitLessonForm"
-                            v-if="lessonFormVisible"
-                            :form="lessonForm"/>
-            </div>
-        </div>
-
         <Modal :show="lessonFormVisible"
                @close="() => showLessonForm(false)">
             <LessonForm @submit="submitLessonForm"
