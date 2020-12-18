@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\BriefcaseController;
 use App\Http\Controllers\web\admin\PartnerController;
 use App\Http\Controllers\web\admin\UserController;
 use App\Http\Controllers\web\ArticleController;
 use App\Http\Controllers\web\AttachmentController;
+use App\Http\Controllers\web\BriefcaseController as ClientBriefcaseController;
+use App\Http\Controllers\web\admin\BriefcaseController as AdminBriefcaseController;
 use App\Http\Controllers\web\CourseController;
 use App\Http\Controllers\web\admin\CourseController as CourseCrudController;
 use App\Http\Controllers\web\admin\LessonController as LessonCrudController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\web\PurchaseController;
 use App\Http\Controllers\web\ReferralController;
 use App\Http\Controllers\web\SaleController;
 use App\Http\Controllers\web\SupportController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,8 +46,8 @@ Route::resource(
 Route::group(['middleware' => [
     'auth:sanctum',
     'share.inertia',
-    'verified',
-    'client'
+    'client',
+    'verified'
 ]], function () {
     Route::resource('courses', CourseController::class);
 
@@ -54,9 +56,9 @@ Route::group(['middleware' => [
         [CourseController::class, 'my']
     )->name('my-courses');
 
-    Route::resource('briefcases', BriefcaseController::class);
+    Route::resource('briefcases', ClientBriefcaseController::class);
 
-    Route::get('/my-briefcases', [BriefcaseController::class, 'my'])
+    Route::get('/my-briefcases', [ClientBriefcaseController::class, 'my'])
         ->name('my-briefcases');
 
     Route::resource(
@@ -126,6 +128,8 @@ Route::group(['middleware' => [
         '/courses-stats',
         [CourseCrudController::class, 'stats']
     )->name('courses-stats');
+
+    Route::resource('briefcases-admin', AdminBriefcaseController::class);
 
     Route::resource('lessons-crud', LessonCrudController::class);
     Route::post('courses-crud/upload-image',

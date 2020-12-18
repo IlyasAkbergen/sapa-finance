@@ -120,6 +120,10 @@ class DatabaseSeeder extends Seeder
            'title' => 'Накопительный'
         ]);
 
+        BriefcaseType::create([
+            'title' => 'Разовый'
+        ]);
+
         Briefcase::create([
             'title' => 'Первый портфель',
             'type_id' => 1,

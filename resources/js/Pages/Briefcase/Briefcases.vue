@@ -55,10 +55,10 @@ export default {
     },
     computed: {
         cumulatives () {
-           return this.briefcases.filter(b => b.monthly_payment != null);
+           return this.briefcases.filter(b => b.type_id == 1);
         },
         oneTimes() {
-            return this.briefcases.filter(b => b.monthly_payment == null);
+            return this.briefcases.filter(b => b.type_id == 2);
         }
     }
 }

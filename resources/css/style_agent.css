@@ -2125,7 +2125,7 @@ body
 .main__content .main__content__sellings-wrapper
 {
     width: 100%;
-    max-width: 910px;
+    /*max-width: 910px;*/
 }
 .main__content .main__content__sellings-wrapper .clear
 {

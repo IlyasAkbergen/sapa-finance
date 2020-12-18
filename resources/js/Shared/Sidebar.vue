@@ -7,10 +7,12 @@
                     {{ username }}
                 </p>
                 <p class="sidebar__profile__client-post">
-                    {{ referralLevel != null ? referralLevel.title : "Клиент" }}
+                    {{ isAdmin ? 'Админ' : referralLevel != null
+                        ? referralLevel.title
+                        : "Клиент" }}
                 </p>
 
-                <ProfileStats />
+                <ProfileStats v-if="!isAdmin" />
 
             </div>
 
@@ -49,7 +51,9 @@
                         Мои курсы
                     </SidebarItem>
 
-                    <SidebarItem :route_name="'briefcases.index'"
+                    <SidebarItem :route_name="!isAdmin
+                            ? 'briefcases.index'
+                            : 'briefcases-admin.index'"
                                  icon="Briefcase">
                         Портфели
                     </SidebarItem>

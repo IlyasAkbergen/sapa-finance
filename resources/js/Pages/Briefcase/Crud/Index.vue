@@ -11,15 +11,9 @@
                 @input="input => search_key = input"
         />
 
-        <a class="actions__link actions__link--blue d-flex"
-           :href="route('welcome')">
-          <StatsIcon />
-          Что больше продается
-        </a>
-
         <a class="actions__link actions__link--green"
-           :href="route('courses-crud.create')">
-          <span>Добавить курс</span>
+           :href="route('briefcases-admin.create')">
+          <span>Добавить портфель</span>
         </a>
       </div>
     </template>
@@ -28,8 +22,8 @@
       <div class="users mb-3">
         <CrudTable :rows="filteredRows"
                    :headers="columns"
-                   :delete_route_name="'courses-crud.destroy'"
-                   :edit_route_name="'courses-crud.edit'"
+                   :delete_route_name="'briefcases-admin.destroy'"
+                   :edit_route_name="'briefcases-admin.edit'"
         />
       </div>
 
@@ -51,8 +45,7 @@
       MainLayout,
       SearchBar: () => import('@/Shared/SearchBar'),
       CrudTable: () => import('@/Shared/CrudTable'),
-      Pagination: () => import('@/Shared/Pagination'),
-      StatsIcon: () => import('@/assets/icons/Stats')
+      Pagination: () => import('@/Shared/Pagination')
     },
     props: {
       data: Object,
@@ -61,21 +54,37 @@
       return {
         columns: [
           {
-            title: "Название курса",
+            title: "Название",
             key: "title",
             is_title: true
           },
           {
-            title: "Цена без обратной связи",
-            key: "price_without_feedback",
+            title: "Тип",
+            key: "type_name",
           },
           {
-            title: "Цена с обратной связью",
-            key: "price_with_feedback",
+            title: "Общая сумма договора",
+            key: "sum",
           },
           {
-            title: "Онлайн",
-            key: "is_online",
+            title: "Доходность",
+            key: "profit",
+          },
+          {
+            title: "Срок накопления",
+            key: "duration",
+          },
+          {
+            title: "Ежемесячный взнос",
+            key: "monthly_payment",
+          },
+          {
+            title: "Комиссия агента",
+            key: "direct_fee"
+          },
+          {
+            title: "Вознаграждается единицами",
+            key: "awardable",
           }
         ],
         search_key: ""

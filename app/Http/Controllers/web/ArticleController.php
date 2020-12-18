@@ -128,7 +128,7 @@ class ArticleController extends WebBaseController
         if ($deleted) {
             return redirect()->route('articles.index');
         } else {
-            return $this->responseFail('Не удалосьу удалить');
+            return $this->responseFail('Не удалось удалить');
         }
     }
 }

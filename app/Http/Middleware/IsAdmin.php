@@ -17,7 +17,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->role_id != Role::ROLE_ADMIN) {
+        if (empty($request->user()) || $request->user()->role_id != Role::ROLE_ADMIN) {
             return redirect('/');
         }
 
