@@ -38,6 +38,7 @@ class AttachmentServiceImpl extends BaseServiceImpl implements AttachmentService
         $data['path'] = $fullpath;
         $data['name'] = $file->getClientOriginalName();
         $data['model_id'] = $model_id;
+        $data['user_id'] = Auth::user()->id;
         $data['model_type'] = $model_type;
         $data['uuid'] = $uuid;
         $data['slug'] = $slug;
