@@ -37,21 +37,43 @@
             </tr>
             </tbody>
         </table>
+        <DeleteAcceptModal :show="deleteAcceptModalShow"
+                @close="cancelDelete"
+                @accepted="deleteItem"/>
     </div>
 </template>
 
 <script>
 export default {
     name: "CrudTable",
+    components: {
+        DeleteAcceptModal: () => import('@/Shared/DeleteAcceptModal')
+    },
     props: {
         headers: Array,
         rows: Array,
         edit_route_name: String,
         delete_route_name: String
     },
+    data(){
+        return {
+            deleteAcceptModalShow: false,
+            itemToBeDeleted: null
+        }
+    },
     methods: {
         deleteClicked(id) {
-            this.$inertia.delete(route(this.delete_route_name, id));
+            this.itemToBeDeleted = id;
+            this.deleteAcceptModalShow = true
+        },
+        deleteItem() {
+            if (this.itemToBeDeleted) {
+                this.$inertia.delete(route(this.delete_route_name, this.itemToBeDeleted));
+            }
+        },
+        cancelDelete() {
+            this.deleteAcceptModalShow = false
+            this.itemToBeDeleted = null
         }
     }
 }

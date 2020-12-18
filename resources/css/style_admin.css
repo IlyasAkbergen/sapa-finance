@@ -1375,7 +1375,7 @@ body
 /*========== Main container Course ==========*/
 
 .js-delete-course {
-    display: none;
+    /*display: none;*/
 }
 
 .js-delete-course .modal-body {
@@ -2570,7 +2570,7 @@ body
 }
 .page .page__agent-course-modal
 {
-    display: none;
+    /*display: none;*/
     position: absolute;
     top: 0;
     left: 0;

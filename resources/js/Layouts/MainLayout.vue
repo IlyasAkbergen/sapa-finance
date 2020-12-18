@@ -59,6 +59,8 @@
       <!-- Modal Portal -->
       <portal-target name="modal" multiple>
       </portal-target>
+
+      <slot name="modals"></slot>
     </div>
 
   </div>
