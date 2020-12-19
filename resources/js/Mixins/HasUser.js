@@ -27,7 +27,9 @@ export default {
     },
 
     avatarPath() {
-      return this.getUser().profile_photo_path;
+      return this.getUser().profile_photo_path
+        ? this.getUser().profile_photo_path
+        : '/images/avatar-empty.png';
     },
 
     referrer() {

@@ -27,7 +27,7 @@
 
                     <SidebarItem
                             v-if="isAdmin"
-                            :route_name="'partners.index'"
+                            :route_name="'partners-crud.index'"
                             icon="Deal">
                         Партнеры
                     </SidebarItem>
@@ -54,8 +54,8 @@
                     <SidebarItem :route_name="!isAdmin
                             ? 'briefcases.index'
                             : 'briefcases-admin.index'"
-                                 icon="Briefcase">
-                        Портфели
+                                 icon="PartnerService">
+                        Услуги партнеров
                     </SidebarItem>
 
                     <SidebarItem
@@ -89,13 +89,6 @@
                             :route_name="'support.index'"
                             icon="Question">
                         Поддержка
-                    </SidebarItem>
-
-                    <SidebarItem
-                            v-if="isAdmin"
-                            :route_name="'welcome'"
-                            icon="PartnerService">
-                        Услуги партнеров
                     </SidebarItem>
 
                     <SidebarItem

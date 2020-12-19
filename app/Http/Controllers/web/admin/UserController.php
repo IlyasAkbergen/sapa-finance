@@ -5,7 +5,6 @@ namespace App\Http\Controllers\web\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Requests\UserFormRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Role;
 use App\Models\User;
@@ -49,13 +48,17 @@ class UserController extends Controller
 
     public function store(CreateUserRequest $request)
     {
-        $data = $request->all();
+        $data = $request->except('password');
 
         $filepath = $this->attachmentService->storeFile(
             $request->file('image'), 'User'
         );
 
         $data['profile_photo_path'] = $filepath;
+
+        if ($request->has('password') && !empty($request->password)) {
+            $data['password'] = Hash::make($request->input('password'));
+        }
 
         $user = $this->userService->create($data);
 

@@ -136,7 +136,7 @@ Route::group(['middleware' => [
         [CourseCrudController::class, 'uploadImage']
     )->name('upload-course-image');
 
-    Route::resource('partners', PartnerController::class);
+    Route::resource('partners-crud', PartnerController::class);
     Route::resource('users-crud', UserController::class);
 });
 

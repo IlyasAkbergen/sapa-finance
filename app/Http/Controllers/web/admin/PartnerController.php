@@ -3,9 +3,110 @@
 namespace App\Http\Controllers\web\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PartnerFormRequest;
+use App\Models\Partner;
+use App\Services\PartnerServiceContract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
 
 class PartnerController extends Controller
 {
-    //
+    private $partnerService;
+
+    public function __construct(PartnerServiceContract $partnerService)
+    {
+        $this->partnerService = $partnerService;
+    }
+
+    public function index(Request $request)
+    {
+        $data = Partner::where('name', 'like', "%$request->search_key%")
+            ->paginate(10);
+
+        return Inertia::render('Partner/Crud/Index', [
+            'data' => $data
+        ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Partner/Crud/Add');
+    }
+
+    public function store(PartnerFormRequest $request)
+    {
+        $data = $request->except('password');
+
+        if ($request->has('password') && !empty($request->password)) {
+            $data['password'] = Hash::make($request->input('password'));
+        }
+
+        $partner = $this->partnerService->create($data);
+
+        if (!empty($partner)) {
+            return redirect()
+                ->route('partners-crud.edit', $partner->id);
+        } else {
+            return $this->responseFail('failed saving partner');
+        }
+    }
+
+    public function edit($id)
+    {
+        $partner = $this->partnerService->find($id);
+
+        if (!empty($partner)) {
+            return Inertia::render('Partner/Crud/Edit', [
+                'partner' => $partner
+            ]);
+        } else {
+            return redirect()->route('partners-crud.index');
+        }
+    }
+
+    public function update(PartnerFormRequest $request)
+    {
+        $data = $request->except('password');
+
+        if ($request->has('password') && !empty($request->password)) {
+            $data['password'] = Hash::make($request->input('password'));
+        }
+
+        $partner = $this->partnerService->update(
+            $request->input('id'),
+            $data
+        );
+
+        if (!empty($partner)) {
+            return redirect()
+                ->route('partners-crud.index');
+        } else {
+            return $this->responseFail('failed saving partner');
+        }
+    }
+
+    public function show($id)
+    {
+        $partner = $this->partnerService->find($id);
+
+        if (!empty($partner)) {
+            return Inertia::render('Partner/Profile', [
+                'partner' => $partner
+            ]);
+        } else {
+            return redirect()->route('partners-crud.index');
+        }
+    }
+
+    public function destroy($id)
+    {
+        $deleted = $this->partnerService->delete($id);
+
+        if ($deleted) {
+            return redirect()->route('partners-crud.index');
+        } else {
+            return $this->responseFail('Не удалось удалить');
+        }
+    }
 }
