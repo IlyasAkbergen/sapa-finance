@@ -20,7 +20,7 @@
                 <ul class="sidebar__menu__nav">
                     <SidebarItem
                             v-if="isAdmin"
-                            :route_name="'users.index'"
+                            :route_name="'users-crud.index'"
                             icon="PersonCouple">
                         Пользователи
                     </SidebarItem>

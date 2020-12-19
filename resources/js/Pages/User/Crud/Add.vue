@@ -1,0 +1,94 @@
+<template>
+    <main-layout>
+        <template #back-link>
+            <a :href="route('courses-crud.index')"
+               class="navbar-brand mb-0 pb-0">
+                <img src="../../../../img/back-arrow.png">
+            </a>
+        </template>
+
+        <template #header>
+            Добавление пользователя
+        </template>
+
+        <div class="avatar">
+            <img class="avatar__img" :src="avatarPath"
+                 v-show="photoPreview == null && !form.image_path">
+            <img class="avatar__img" :src="photoPreview" v-show="photoPreview">
+            <a class="avatar__link" href="" @click.prevent="selectNewPhoto">
+                Изменить аватар
+            </a>
+            <input type="file"
+                   ref="image"
+                   @change="updatePhotoPreview"
+                   class="hidden">
+        </div>
+        <div class="profile-form">
+            <Form :form="form"
+                  :roles="roles"
+                  @submit="createUser"/>
+        </div>
+    </main-layout>
+</template>
+
+<script>
+import MainLayout from '@/Layouts/MainLayout'
+import { uuid } from 'vue-uuid'
+export default {
+    name: "Add",
+    components: {
+      Form: () => import('./Form'),
+      MainLayout
+    },
+    props: {
+        roles: Array
+    },
+    data() {
+      return {
+        photoPreview: null,
+        form: this.$inertia.form({
+            name: "",
+            email: null,
+            phone: null,
+            iin: null,
+            photoPath: null,
+            image: null,
+            password: '',
+            direct_points: 0,
+            team_points: 0,
+            '_method': 'POST',
+        }, {
+            bag: 'userForm',
+            resetOnSuccess: false,
+        })
+      }
+    },
+    methods: {
+        createUser() {
+            if (this.$refs.image) {
+                this.$set(this.form, 'image', this.$refs.image.files[0]);
+            }
+            this.form.post('/users-crud');
+        },
+        selectNewPhoto() {
+            this.$refs.image.click();
+        },
+        updatePhotoPreview() {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                this.photoPreview = e.target.result;
+            };
+
+            reader.readAsDataURL(this.$refs.image.files[0]);
+        },
+    },
+    computed: {
+        avatarPath() {
+            return this.form.profile_photo_path
+                    ? this.form.profile_photo_path
+                    : '/images/avatar-empty.png';
+        }
+    }
+}
+</script>

@@ -8,6 +8,7 @@ use App\Traits\Challengable as ChallengableTrait;
 use App\Traits\HasReferrals;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -25,6 +26,8 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
     use TwoFactorAuthenticatable;
     use HasReferrals;
     use ChallengableTrait;
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -32,7 +35,8 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
      */
     protected $fillable = [
         'name', 'email', 'phone', 'iin', 'password', 'balance_id',
-        'referrer_id', 'root_referer_id', 'referral_level_id'
+        'referrer_id', 'root_referer_id', 'referral_level_id',
+        'profile_photo_path'
     ];
 
     /**
@@ -127,5 +131,15 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
         }
 
         return $updated;
+    }
+
+    public function getDirectPointsAttribute()
+    {
+        return $this->getDirectPoints();
+    }
+
+    public function getTeamPointsAttribute()
+    {
+        return $this->getTeamPoints();
     }
 }

@@ -16,10 +16,16 @@ trait Challengable
         return $this->balance->direct_points;
     }
 
+    public function getDirectPoints()
+    {
+        $this->loadMissing('balance');
+        return $this->balance ? $this->balance->direct_points : 0;
+    }
+
     public function getTeamPoints()
     {
         $this->loadMissing('balance');
-        return $this->balance->team_points;
+        return $this->balance ? $this->balance->team_points : 0;
     }
 
     public function getAllReferrals()
