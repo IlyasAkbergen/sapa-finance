@@ -11,7 +11,7 @@ class Purchase extends Model
 {
     use HasFactory;
 
-    static $DIRECT_POINTS_PER_PURCHASE = 10;
+    static $DIRECT_POINTS_PER_PURCHASE = 20;
 
     protected $fillable = [
         'user_id', 'sum', 'purchasable_id', 'purchasable_type', 'payed', 'with_feedback'
