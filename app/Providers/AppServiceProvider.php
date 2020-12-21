@@ -27,6 +27,8 @@ use App\Services\LessonService;
 use App\Services\LessonServiceImpl;
 use App\Services\NotificationService;
 use App\Services\NotificationServiceImpl;
+use App\Services\PartnerService;
+use App\Services\PartnerServiceContract;
 use App\Services\PayoutServiceContract;
 use App\Services\PurchaseService;
 use App\Services\PurchaseServiceContract;
@@ -96,6 +98,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             AttachmentService::class,
             AttachmentServiceImpl::class
+        );
+        $this->app->bind(
+            PartnerServiceContract::class,
+            PartnerService::class
         );
     }
 

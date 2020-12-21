@@ -8,7 +8,7 @@
           <slot name="back-link"></slot>
           <slot name="header"></slot>
         </span>
-        <ul class="nav">
+        <ul class="nav ml-auto">
 
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -36,7 +36,7 @@
                data-toggle="dropdown" role="button"
                aria-haspopup="true" aria-expanded="false">
               {{ username }}
-              <img src="" class="ml-2 mr-1">
+              <img :src="avatarPath" class="ml-2 mr-1">
             </a>
             <div class="dropdown-menu">
               <a href="#" class="dropdown-item">Настройка профиля</a>

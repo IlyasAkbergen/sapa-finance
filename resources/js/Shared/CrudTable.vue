@@ -23,6 +23,11 @@
                 </td>
 
                 <td class="align-middle">
+                    <a class="users__link--sky float-right"
+                       v-if="show_route_name"
+                       :href="route(show_route_name, row.id)">
+                        Перейти
+                    </a>
                     <a class="users__link users__link--red
                         float-right courses__delete"
                         href="#"
@@ -53,7 +58,8 @@ export default {
         headers: Array,
         rows: Array,
         edit_route_name: String,
-        delete_route_name: String
+        delete_route_name: String,
+        show_route_name: String,
     },
     data(){
         return {

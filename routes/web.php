@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\web\admin\PartnerController;
+use App\Http\Controllers\web\admin\PenaltyController;
 use App\Http\Controllers\web\admin\UserController;
 use App\Http\Controllers\web\ArticleController;
 use App\Http\Controllers\web\AttachmentController;
 use App\Http\Controllers\web\BriefcaseController as ClientBriefcaseController;
 use App\Http\Controllers\web\admin\BriefcaseController as AdminBriefcaseController;
+use App\Http\Controllers\web\ComplaintController;
 use App\Http\Controllers\web\CourseController;
 use App\Http\Controllers\web\admin\CourseController as CourseCrudController;
 use App\Http\Controllers\web\admin\LessonController as LessonCrudController;
@@ -108,6 +110,8 @@ Route::group(['middleware' => [
         [AttachmentController::class, 'list']
     )->withoutMiddleware('client');
 
+    Route::post('/complaints', [ComplaintController::class, 'store'])
+        ->name('complaints.store');
 });
 
 Route::group(['middleware' => [
@@ -136,8 +140,13 @@ Route::group(['middleware' => [
         [CourseCrudController::class, 'uploadImage']
     )->name('upload-course-image');
 
-    Route::resource('partners', PartnerController::class);
-    Route::resource('users', UserController::class);
+    Route::resource('partners-crud', PartnerController::class);
+    Route::resource('users-crud', UserController::class);
+
+    Route::get('/complaints', [ComplaintController::class, 'index'])
+        ->name('complaints.index');
+
+    Route::post('/penalty', [PenaltyController::class, 'store']);
 });
 
 Route::get('/test', function () {

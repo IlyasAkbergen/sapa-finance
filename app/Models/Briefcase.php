@@ -15,7 +15,7 @@ class Briefcase extends Model implements WithPurchase
 
     protected $fillable = [
         'title', 'description', 'type_id', 'sum', 'profit', 'duration',
-        'monthly_payment', 'direct_fee', 'awardable', 'image_path'
+        'monthly_payment', 'direct_fee', 'awardable', 'image_path', 'partner_id'
     ];
 
     function purchases()
@@ -41,5 +41,10 @@ class Briefcase extends Model implements WithPurchase
     function getIsPartPaidAttribute()
     {
         return !empty($this->monthly_payment);
+    }
+
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
     }
 }

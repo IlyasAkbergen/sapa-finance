@@ -20,14 +20,14 @@
                 <ul class="sidebar__menu__nav">
                     <SidebarItem
                             v-if="isAdmin"
-                            :route_name="'users.index'"
+                            :route_name="'users-crud.index'"
                             icon="PersonCouple">
                         Пользователи
                     </SidebarItem>
 
                     <SidebarItem
                             v-if="isAdmin"
-                            :route_name="'partners.index'"
+                            :route_name="'partners-crud.index'"
                             icon="Deal">
                         Партнеры
                     </SidebarItem>
@@ -54,8 +54,8 @@
                     <SidebarItem :route_name="!isAdmin
                             ? 'briefcases.index'
                             : 'briefcases-admin.index'"
-                                 icon="Briefcase">
-                        Портфели
+                                 icon="PartnerService">
+                        Услуги партнеров
                     </SidebarItem>
 
                     <SidebarItem
@@ -68,7 +68,7 @@
 
                     <SidebarItem
                             v-if="isAdmin"
-                            :route_name="'welcome'"
+                            :route_name="'complaints.index'"
                             icon="Dislike">
                         Список жалоб
                     </SidebarItem>
@@ -79,7 +79,7 @@
                         Продажи
                     </SidebarItem>
 
-                    <SidebarItem :route_name="'articles.index'"
+                     <SidebarItem :route_name="'articles.index'"
                                  icon="Compass">
                         Новости
                     </SidebarItem>
@@ -89,13 +89,6 @@
                             :route_name="'support.index'"
                             icon="Question">
                         Поддержка
-                    </SidebarItem>
-
-                    <SidebarItem
-                            v-if="isAdmin"
-                            :route_name="'welcome'"
-                            icon="PartnerService">
-                        Услуги партнеров
                     </SidebarItem>
 
                     <SidebarItem

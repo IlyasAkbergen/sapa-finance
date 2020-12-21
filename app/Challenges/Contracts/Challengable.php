@@ -8,6 +8,8 @@ interface Challengable
 {
     function getPoints();
 
+    function getDirectPoints();
+
     function getTeamPoints();
 
     function getAllReferrals();
