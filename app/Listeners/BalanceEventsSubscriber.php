@@ -51,7 +51,7 @@ class BalanceEventsSubscriber implements ShouldQueue
 
         if (!empty($operation->direct_points)) {
             if (!empty($source_balance)) {
-                $target_balance->direct_points -= $operation->direct_points;
+                $source_balance->direct_points -= $operation->direct_points;
             }
 
             if (!empty($target_balance)) {
@@ -61,7 +61,7 @@ class BalanceEventsSubscriber implements ShouldQueue
 
         if (!empty($operation->team_points)) {
             if (!empty($source_balance)) {
-                $target_balance->team_points -= $operation->team_points;
+                $source_balance->team_points -= $operation->team_points;
             }
 
             if (!empty($target_balance)) {

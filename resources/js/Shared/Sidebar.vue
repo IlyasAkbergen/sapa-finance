@@ -68,7 +68,7 @@
 
                     <SidebarItem
                             v-if="isAdmin"
-                            :route_name="'welcome'"
+                            :route_name="'complaints.index'"
                             icon="Dislike">
                         Список жалоб
                     </SidebarItem>
@@ -79,7 +79,7 @@
                         Продажи
                     </SidebarItem>
 
-                    <SidebarItem :route_name="'articles.index'"
+                     <SidebarItem :route_name="'articles.index'"
                                  icon="Compass">
                         Новости
                     </SidebarItem>

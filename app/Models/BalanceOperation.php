@@ -15,7 +15,7 @@ class BalanceOperation extends Model
     ];
 
     protected $fillable = [
-        'target_balance_id', 'purchase_id', 'sum', 'reward_id', 'payout_id',
+        'target_balance_id', 'purchase_id', 'sum', 'reward_id', 'payout_id', 'source_balance_id',
         'direct_points', 'team_points', 'committed'
     ];
 

@@ -1779,7 +1779,7 @@ body
 }
 
 .js-change-fc {
-    display: none;
+    /*display: none;*/
 }
 
 .js-change-fc .modal-body {

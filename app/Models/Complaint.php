@@ -12,4 +12,14 @@ class Complaint extends Model
     protected $fillable = [
         'from_id', 'to_id', 'content'
     ];
+
+    public function to_user()
+    {
+        return $this->belongsTo(User::class, 'to_id');
+    }
+
+    public function from_user()
+    {
+        return $this->belongsTo(User::class, 'from_id');
+    }
 }
