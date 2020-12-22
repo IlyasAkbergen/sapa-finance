@@ -548,11 +548,15 @@
 				<div class="modal-content">
 					<h3>Вход в систему</h3>
 					<div class="modal-body">
-
                         <form method="POST" action="{{ route('login') }}">
-                            @csrf
-                            <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-                            <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+							@csrf
+							<x-jet-input class="block mt-1 w-full"
+										 placeholder="E-mail"
+										 type="text" name="email" required autofocus />
+							<x-jet-input class="block mt-1 w-full"
+										 type="password" name="password" required
+										 placeholder="Пароль"
+										 autocomplete="current-password" />
 							<button class="modal-btn">
 								Войти
 							</button>
@@ -578,7 +582,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="regModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="regModal" tabindex="-1"
+			 aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				<div class="modal-content">
@@ -590,11 +595,21 @@
 									type="text"
 									placeholder="Имя"
 									autocomplete="name"
-									name="name">
-							<x-jet-input type="text" placeholder="E-mail" name="email">
-							<x-jet-input type="text" placeholder="Номер телефона" name="phone">
-							<x-jet-input type="text" placeholder="ИИН" name="iin">
-                            <x-jet-input type="hidden" name="referrer_id" value="{{ $user->referrer_id }}">
+									:value="old('name')"
+									name="name" />
+							<x-jet-input type="text"
+										 placeholder="E-mail"
+										 :value="old('email')"
+										 name="email" />
+							<x-jet-input type="text"
+										 placeholder="Номер телефона"
+										 :value="old('phone')"
+										 name="phone" />
+							<x-jet-input type="text" placeholder="ИИН"
+										 :value="old('iin')"
+										 name="iin" />
+                            <x-jet-input type="hidden" name="referrer_id"
+										 value="{{ $user->referrer_id }}" />
 							<x-jet-input id="password"
 										 class="block mt-1 w-full"
 										 type="password"
@@ -603,7 +618,7 @@
 										 placeholder="Пароль"
 										 autocomplete="new-password" />
 
-							<<x-jet-input
+							<x-jet-input
 									id="password_confirmation"
 									class="block mt-1 w-full"
 									type="password"
@@ -640,7 +655,8 @@
                         <form method="POST" action="{{ route('password.email') }}">
                             @csrf
                             <x-jet-label for="email" value="{{ __('Email') }}" />
-                            <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
+                            <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email"
+										 required autofocus />
 							<div class="text-left">
 								<p>
 									Когда вы введете вашу почту, вам будет отправлено сообщение со ссылкой на форму обновления пароля.
@@ -662,6 +678,23 @@
 		<script src="{{asset('landing/scripts/bootstrap.min.js')}}"></script>
 		<script src="{{asset('landing/slick-1.8.1/slick/slick.min.js')}}"></script>
 		<script type="text/javascript">
+			$('#regModal').submit(function(e) {
+				e.preventDefault();
+				let $form = $(this);
+
+				const $url = $form.attr('action');
+
+				console.log($url)
+
+				$.ajax({
+					method: 'POST',
+					url: $url,
+					data: $form.serialize(),
+				})
+					.done(function() {
+						$('#regModal').modal('hide');
+					});
+			})
 
 			$(document).ready(function(){
 				$('.menu-toggle').click(function(){
@@ -844,6 +877,20 @@
 <script>
     import Button from "@/Jetstream/Button";
     export default {
-        components: {Button}
+        components: {Button},
+		data() {
+        	return {
+        		// registerForm: this.$inertia.form({
+				// 	email: null,
+				// 	iin: null,
+				// 	referrer_id: null,
+				// 	password: null,
+				// 	password_confirmation: null
+				// }, {
+				// 	preserveScroll: false,
+        		// 	bag: 'userForm',
+				// }),
+			}
+		}
     }
 </script>

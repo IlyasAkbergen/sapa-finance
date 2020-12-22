@@ -5,6 +5,7 @@ namespace App\Enums;
 use BenSampo\Enum\Enum;
 
 /**
+ * @method static static Client()
  * @method static static Agent()
  * @method static static Consultant()
  * @method static static Tutor()
@@ -13,6 +14,7 @@ use BenSampo\Enum\Enum;
  */
 final class ReferralLevelEnum extends Enum
 {
+    const Client = 0;
     const Agent = 1;
     const Consultant = 2;
     const Tutor = 3;

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserNotification extends Model
+class UserMessage extends Model
 {
     use HasFactory;
 

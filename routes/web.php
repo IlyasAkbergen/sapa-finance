@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\web\admin\MessageController;
 use App\Http\Controllers\web\admin\PartnerController;
 use App\Http\Controllers\web\admin\PenaltyController;
 use App\Http\Controllers\web\admin\UserController;
@@ -146,6 +147,8 @@ Route::group(['middleware' => [
         ->name('complaints.index');
 
     Route::post('/penalty', [PenaltyController::class, 'store']);
+
+    Route::resource('messages', MessageController::class);
 });
 
 Route::get('/test', function () {

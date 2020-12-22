@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomNotificationsTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,13 @@ class CreateCustomNotificationsTable extends Migration
     public function up()
     {
         Schema::create('notifications', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('content')
-                ->nullable();
-            $table->string('url')
-                ->nullable();
-            $table->boolean('is_public')
-                ->default(true);
+            $table->uuid('id')->primary();
+            $table->string('type');
+            $table->morphs('notifiable');
+            $table->text('data');
+            $table->timestamp('read_at')->nullable();
+            $table->string('additional_link')->nullable();
+            $table->string('file_path')->nullable();
             $table->timestamps();
         });
     }

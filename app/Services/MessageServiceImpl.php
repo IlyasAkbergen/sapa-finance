@@ -3,12 +3,12 @@
 
 namespace App\Services;
 
-use App\Models\Notification;
-use App\Models\UserNotification;
+use App\Models\Message;
+use App\Models\UserMessage;
 
-class NotificationServiceImpl extends BaseServiceImpl implements NotificationService
+class MessageServiceImpl extends BaseServiceImpl implements MessageService
 {
-    public function __construct(Notification $model)
+    public function __construct(Message $model)
     {
         parent::__construct($model);
     }
@@ -48,7 +48,7 @@ class NotificationServiceImpl extends BaseServiceImpl implements NotificationSer
 
     public function makeSeen($notification_id, $user_id)
     {
-        $pivot = UserNotification::where('notification_id', $notification_id)
+        $pivot = UserMessage::where('notification_id', $notification_id)
             ->where('user_id', $user_id)
             ->firstOrFail();
 

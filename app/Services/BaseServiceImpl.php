@@ -19,6 +19,7 @@ class BaseServiceImpl implements BaseService
     public function __construct(Model $model)
     {
         $this->model = $model;
+        $this->query = $model::query();
     }
 
     public function startQuery()
@@ -44,7 +45,7 @@ class BaseServiceImpl implements BaseService
 
     public function paginate($per_page)
     {
-        // TODO: Implement paginate() method.
+        return $this->query->paginate($per_page);
     }
 
     public function all()

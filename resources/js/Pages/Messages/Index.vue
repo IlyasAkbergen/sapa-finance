@@ -3,15 +3,18 @@
         <template #header>
             Уведомления
         </template>
-        <h3>Todo show notifications</h3>
+
     </main-layout>
 </template>
 
 <script>
-  export default {
+export default {
     name: "Index",
     components: {
-      MainLayout: () => import('@/Layouts/MainLayout')
+        MainLayout: () => import('@/Layouts/MainLayout')
+    },
+    props: {
+        messages: Array
     }
-  }
+}
 </script>
