@@ -97,6 +97,11 @@
 	</head>
 <body>
 	<div class="body-wrapper">
+        @if (session('status'))
+            <div class="mb-4 font-medium text-sm text-green-600">
+                {{ session('status') }}
+            </div>
+        @endif
 		<header>
 			<div class="inner">
 				<img src="{{asset('images/icons/logo.png')}}" alt="Logo"/>
@@ -106,7 +111,7 @@
 				<div id="navs">
 					<nav id="menu">
 						<ul>
-			q				<li><a href="#about">О компании</a></li>
+							<li><a href="#about">О компании</a></li>
 							<li><a href="#academy__inner__1">SAPA Academy</a></li>
 							<li><a href="#academy__inner__2">SAPA Market</a></li>
 							<li><a href="#">Стать партнером</a></li>
@@ -543,21 +548,25 @@
 				<div class="modal-content">
 					<h3>Вход в систему</h3>
 					<div class="modal-body">
-						<form method="POST" action="{{ route('login') }}">
-							@csrf
-							<x-jet-input type="text" placeholder="E-mail" name="name">
-							<x-jet-input type="password" placeholder="Пароль" name="password">
+
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                            <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
 							<button class="modal-btn">
 								Войти
 							</button>
 							<div class="modal-flex">
 								<div>
-									<input type="checkbox" id="remember">
+									<input type="checkbox" id="remember" name="remember">
 									<label for="remember">Запомнить меня</label>
 								</div>
-								<button style="border: none; background: none; margin: 0; padding: 0;" type="button" data-bs-dismiss="modal" aria-label="Close"  data-bs-toggle="modal" data-bs-target="#passModal">
-									Забыл пароль?
-								</button>
+                                @if (Route::has('password.request'))
+                                    <button style="border: none; background: none; margin: 0; padding: 0;" type="button" data-bs-dismiss="modal"
+                                            aria-label="Close"  data-bs-toggle="modal" data-bs-target="#passModal">
+                                        Забыл пароль?
+                                    </button>
+                                @endif
 							</div>
 						</form>
 					</div>
@@ -585,6 +594,7 @@
 							<x-jet-input type="text" placeholder="E-mail" name="email">
 							<x-jet-input type="text" placeholder="Номер телефона" name="phone">
 							<x-jet-input type="text" placeholder="ИИН" name="iin">
+                            <x-jet-input type="hidden" name="referrer_id" value="{{ $user->referrer_id }}">
 							<x-jet-input id="password"
 										 class="block mt-1 w-full"
 										 type="password"
@@ -601,6 +611,7 @@
 									required
 									placeholder="Подтверждение пароля"
 									autocomplete="new-password" />
+
 							<button class="modal-btn">
 								Зарегистрироваться
 							</button>
@@ -612,7 +623,8 @@
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#authModal">
+						<button type="button" data-bs-dismiss="modal" aria-label="Close"
+                                data-bs-toggle="modal" data-bs-target="#authModal">
 							Войти
 						</button>
 					</div>
@@ -625,11 +637,13 @@
 				<div class="modal-content">
 					<h3>Восстановление пароля</h3>
 					<div class="modal-body">
-						<form action="">
-							<input type="text" placeholder="E-mail" name="email">
+                        <form method="POST" action="{{ route('password.email') }}">
+                            @csrf
+                            <x-jet-label for="email" value="{{ __('Email') }}" />
+                            <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
 							<div class="text-left">
 								<p>
-									Когда вы введете вашу почту, вам будет отправлено сообщение с новым паролем.
+									Когда вы введете вашу почту, вам будет отправлено сообщение со ссылкой на форму обновления пароля.
 								</p>
 							</div>
 						</form>
@@ -827,3 +841,9 @@
 </body>
 
 </html>
+<script>
+    import Button from "@/Jetstream/Button";
+    export default {
+        components: {Button}
+    }
+</script>
