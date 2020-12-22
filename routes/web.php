@@ -32,9 +32,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware(['guest'])->name('welcome');
+Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
+    ->middleware(['guest'])->name('welcome');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');

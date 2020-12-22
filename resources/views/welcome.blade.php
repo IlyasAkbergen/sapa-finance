@@ -5,7 +5,6 @@
        <meta charset="UTF-8">
        	<meta name="viewport" content="width=device-width, initial-scale=1.0">
        	<title>Sapa</title>
-
 		<script src="https://kit.fontawesome.com/c9e46db961.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="{{asset('landing/styles/bootstrap.min.css')}}">
 		<link rel="stylesheet" href="{{asset('landing/styles/style.css')}}">
@@ -21,7 +20,7 @@
 				margin: 50px auto;
 			}
 			.btn-close{
-				background: url(../img/success-times-icon.png);
+				background: url(../img/icons/close.svg);
 				background-size: contain;
 				opacity: 1;
 				position: absolute;
@@ -95,7 +94,6 @@
 				text-decoration: none;
 			}
 		</style>
-
 	</head>
 <body>
 	<div class="body-wrapper">
@@ -108,7 +106,7 @@
 				<div id="navs">
 					<nav id="menu">
 						<ul>
-							<li><a href="#about">О компании</a></li>
+			q				<li><a href="#about">О компании</a></li>
 							<li><a href="#academy__inner__1">SAPA Academy</a></li>
 							<li><a href="#academy__inner__2">SAPA Market</a></li>
 							<li><a href="#">Стать партнером</a></li>
@@ -118,15 +116,15 @@
 					</nav>
 					<nav id="auth">
 						<ul>
-						  	<li>
-								<a href="{{ route('login') }}">
+							<li>
+								<button type="button" data-bs-toggle="modal" data-bs-target="#authModal">
 									Войти
-								</a>
+								</button>
 							</li>
 							<li>
-								<a href="{{ route('register') }}">
+								<button type="button" data-bs-toggle="modal" data-bs-target="#regModal">
 									Зарегистрироваться
-								</a>
+								</button>
 							</li>
 						</ul>
 					</nav>
@@ -446,38 +444,15 @@
 				<div class="consultants__consultants">
 					<h1>Выбери финансового консультанта</h1>
 					<div class="consultants__consultants__slider">
+						@foreach($consultants as $consultant)
 						<div>
-							<p>Якубова Райхан</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img1.png')}}" alt="">
+							<p>{{ $consultant->name }}</p>
+							<img src="{{
+    							$consultant->profile_photo_path
+    							?: asset('images/slides/consultants-consultants-slider-img4.png')
+							}}">
 						</div>
-						<div>
-							<p>Брасилова Акжунис</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img2.png')}}" alt="">
-						</div>
-						<div>
-							<p>Булатова Нургуль</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img3.png')}}" alt="">
-						</div>
-						<div>
-							<p>Атабаева Зарима</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img4.png')}}" alt="">
-						</div>
-						<div>
-							<p>Якубова Райхан</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img1.png')}}" alt="">
-						</div>
-						<div>
-							<p>Брасилова Акжунис</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img2.png')}}" alt="">
-						</div>
-						<div>
-							<p>Булатова Нургуль</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img3.png')}}" alt="">
-						</div>
-						<div>
-							<p>Атабаева Зарима</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img4.png')}}" alt="">
-						</div>
+						@endforeach
 					</div>
 				</div>
 			</div>
@@ -487,72 +462,23 @@
 			<div class="articles__wrapper">
 				<h1>Статьи</h1>
 				<div class="articles__slider">
+					@foreach($articles as $article)
 					<div>
 						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
+							<img src="{{
+    							!empty($article->image_path)
+									? $article->image_path
+									: asset('images/slides/articles-slider-img1.png')}}"
+								 >
 							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
+								{{ substr($article->content, 0, 65) . (strlen($article->content) > 65 ? '...' : '') }}
 							</p>
 							<a href="#">
 								Читать &#8594;
 							</a>
 						</div>
 					</div>
-					<div>
-						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
-							</p>
-							<a href="#">
-								Читать &#8594;
-							</a>
-						</div>
-					</div>
-					<div>
-						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
-							</p>
-							<a href="#">
-								Читать &#8594;
-							</a>
-						</div>
-					</div>
-					<div>
-						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
-							</p>
-							<a href="#">
-								Читать &#8594;
-							</a>
-						</div>
-					</div>
-					<div>
-						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
-							</p>
-							<a href="#">
-								Читать &#8594;
-							</a>
-						</div>
-					</div>
-					<div>
-						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
-							</p>
-							<a href="#">
-								Читать &#8594;
-							</a>
-						</div>
-					</div>
+					@endforeach
 				</div>
 			</div>
 		</div>
@@ -617,9 +543,10 @@
 				<div class="modal-content">
 					<h3>Вход в систему</h3>
 					<div class="modal-body">
-						<form action="">
-							<input type="text" placeholder="E-mail" name="name">
-							<input type="password" placeholder="Пароль" name="password">
+						<form method="POST" action="{{ route('login') }}">
+							@csrf
+							<x-jet-input type="text" placeholder="E-mail" name="name">
+							<x-jet-input type="password" placeholder="Пароль" name="password">
 							<button class="modal-btn">
 								Войти
 							</button>
@@ -648,12 +575,32 @@
 				<div class="modal-content">
 					<h3>Зарегистрироваться</h3>
 					<div class="modal-body">
-						<form action="">
-							<input type="text" placeholder="Имя" name="name">
-							<input type="text" placeholder="E-mail" name="email">
-							<input type="text" placeholder="Номер телефона" name="phone">
-							<input type="password" placeholder="Пароль" name="password">
-							<input type="password" placeholder="Подтвердить пароль" name="password">
+						<form method="POST" action="{{ route('register') }}">
+							@csrf
+							<x-jet-input
+									type="text"
+									placeholder="Имя"
+									autocomplete="name"
+									name="name">
+							<x-jet-input type="text" placeholder="E-mail" name="email">
+							<x-jet-input type="text" placeholder="Номер телефона" name="phone">
+							<x-jet-input type="text" placeholder="ИИН" name="iin">
+							<x-jet-input id="password"
+										 class="block mt-1 w-full"
+										 type="password"
+										 name="password"
+										 required
+										 placeholder="Пароль"
+										 autocomplete="new-password" />
+
+							<<x-jet-input
+									id="password_confirmation"
+									class="block mt-1 w-full"
+									type="password"
+									name="password_confirmation"
+									required
+									placeholder="Подтверждение пароля"
+									autocomplete="new-password" />
 							<button class="modal-btn">
 								Зарегистрироваться
 							</button>
@@ -672,9 +619,7 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="modal fade" id="passModal" tabindex="-1"
-			 aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="passModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				<div class="modal-content">
@@ -697,6 +642,7 @@
 				</div>
 			</div>
 		</div>
+
 		@stack('script')
 		<script src="{{asset('landing/scripts/jquery-3.5.1-min.js')}}"></script>
 		<script src="{{asset('landing/scripts/bootstrap.min.js')}}"></script>
