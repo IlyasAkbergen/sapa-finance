@@ -8,6 +8,7 @@ use App\Traits\HasUsers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Course extends Model implements WithPurchase
 {
@@ -55,6 +56,12 @@ class Course extends Model implements WithPurchase
         return $this->hasMany(UserCourse::class);
     }
 
+    public function auth_user_pivot()
+    {
+        return $this->hasOne(UserCourse::class)
+            ->where('user_id', Auth::user()->id);
+    }
+
     public function getIsPartPaidAttribute()
     {
         return false;
@@ -63,5 +70,23 @@ class Course extends Model implements WithPurchase
     public function getProgressPercentAttribute()
     {
         return !empty($this->pivot) ? $this->pivot->progress : 0;
+    }
+
+    public function getMyProgressAttribute()
+    {
+        $this->loadMissing('lessons.auth_user_homework');
+
+        $lessons_count = $this->lessons->count();
+
+        $passed_lessons_count = $this->lessons->filter(function ($item) {
+            return isset($item->auth_user_homework)
+                && !empty($item->auth_user_homework);
+        })->count();
+
+        if ($passed_lessons_count == 0 || $lessons_count == 0) {
+            return 0;
+        }
+
+        return $passed_lessons_count * 100 / $lessons_count;
     }
 }

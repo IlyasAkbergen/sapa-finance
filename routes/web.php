@@ -12,6 +12,7 @@ use App\Http\Controllers\web\ComplaintController;
 use App\Http\Controllers\web\CourseController;
 use App\Http\Controllers\web\admin\CourseController as CourseCrudController;
 use App\Http\Controllers\web\admin\LessonController as LessonCrudController;
+use App\Http\Controllers\web\LessonController;
 use App\Http\Controllers\web\NotificationController;
 use App\Http\Controllers\web\PayoutController;
 use App\Http\Controllers\web\PurchaseController;
@@ -112,6 +113,8 @@ Route::group(['middleware' => [
 
     Route::post('/complaints', [ComplaintController::class, 'store'])
         ->name('complaints.store');
+
+    Route::resource('lessons', LessonController::class);
 });
 
 Route::group(['middleware' => [

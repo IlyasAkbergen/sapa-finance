@@ -19,7 +19,12 @@ class MyCourseResource extends JsonResource
             'title' => $this->title,
             'short_description' => $this->short_description,
             'description' => $this->description,
-            'progress_percent' => $this->progressPercent,
+            'progress' => $this->my_progress,
+            'bought' => !empty($this->auth_user_pivot)
+                && $this->auth_user_pivot->paid,
+            'lessons' => $this->whenLoaded('lessons'),
+            'price_without_feedback' => $this->price_without_feedback,
+            'price_with_feedback' => $this->price_with_feedback,
         ];
     }
 }

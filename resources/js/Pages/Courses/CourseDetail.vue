@@ -10,25 +10,65 @@
       {{ course.title }}
     </template>
 
-    <div class="main__content__course-card">
-      <img src="../../../img/course-card-img.png"
-           class="main__content__course-card__img" alt="">
-      <p class="main__content__course-card__title">
-        {{ course.title }}
-      </p>
-      <p class="main__content__course-card__text">
-        {{ course.short_description }}
-      </p>
-      <p class="main__content__course-card__text">
-        {{ course.description }}
-      </p>
-      <div class="main__content__course-card__bottom">
-        <p class="main__content__course-card__bottom__price">
-          {{ course.price_without_feedback }} ₸
+    <div class="main__content__my-course__flex">
+      <div class="main__content__course-card mr-4">
+        <img src="../../../img/course-card-img.png"
+             class="main__content__course-card__img" alt="">
+        <p class="main__content__course-card__title">
+          {{ course.title }}
         </p>
-        <a href="#" @click="showModal = true" class="main__content__course-card__bottom__button">
-          Купить курс
-        </a>
+        <p class="main__content__course-card__text">
+          {{ course.short_description }}
+        </p>
+        <p class="main__content__course-card__text">
+          {{ course.description }}
+        </p>
+
+        <div v-if="course.bought">
+          <div class="main__content__my-course-card__process">
+            <p class="main__content__my-course-card__process__title">Процесс обучения</p>
+            <p class="main__content__my-course-card__process__percent">
+              {{ course.progress }}%
+            </p>
+          </div>
+          <div class="progress">
+            <div class="progress-bar bg-info"
+                 role="progressbar" :style="`width: ${course.progress}%`"
+                 aria-valuenow="50" aria-valuemin="0"
+                 aria-valuemax="100"></div>
+          </div>
+        </div>
+
+        <div class="main__content__course-card__bottom" v-else>
+          <p class="main__content__course-card__bottom__price">
+            {{ course.price_without_feedback }} ₸
+          </p>
+          <a href="#" @click="showModal = true"
+             class="main__content__course-card__bottom__button">
+            Купить курс
+          </a>
+        </div>
+      </div>
+
+      <div class="main__content__my-course-lessons" v-if="course.bought">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action disabled title">
+            Уроки
+          </a>
+
+          <a v-for="(lesson, key) in course.lessons"
+             :href="route('lessons.show', lesson.id)"
+             :class="`list-group-item
+              list-group-item-action ${lesson.enabled || key == 0
+                ? 'enabled'
+                : 'disabled'}`">
+            {{ lesson.title }}
+            <img src="../../../img/lesson-icon-passed-old.png"
+                 v-if="lesson.passed">
+            <img src="../../../img/lessons-locked.png"
+                 v-else-if="!lesson.enabled && key != 0">
+          </a>
+        </div>
       </div>
     </div>
     <template #modals>
@@ -100,11 +140,18 @@
           purchasable_type: 'App\\Models\\Course',
           with_feedback: false,
           pay_online: false
-        })
+        }),
+        passedIconPath: '/images/lesson-icon-passed-old.png',
+        lockedIconPath: '/images/lessons-locked.png'
       }
     },
 
     methods: {
+    	getIcon(lesson) {
+				return lesson.passed
+          ? this.passedIconPath
+          : this.lockedIconPath;
+      },
       submitPurchase() {
         this.createPurchaseForm.post(route('purchases.store'))
           .then(response => {

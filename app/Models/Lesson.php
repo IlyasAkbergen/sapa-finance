@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Lesson extends Model
 {
@@ -26,5 +27,22 @@ class Lesson extends Model
     public function attachments()
     {
         return $this->morphMany(Attachment::class, 'attachable');
+    }
+
+    public function auth_user_homework()
+    {
+        return $this->hasOne(Homework::class)
+            ->where('user_id', Auth::user()->id);
+    }
+
+    public function getPassedAttribute()
+    {
+        return isset($this->auth_user_homework)
+            && !empty($this->auth_user_homework->score);
+    }
+
+    public function getEnabledAttribute()
+    {
+        return isset($this->auth_user_homework);
     }
 }
