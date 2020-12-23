@@ -103,7 +103,7 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
 
     public function messages()
     {
-        return $this->belongsToMany(Message::class)
+        return $this->belongsToMany(Message::class, 'user_message')
             ->withPivot(['seen']);
     }
 

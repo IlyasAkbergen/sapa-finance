@@ -4,26 +4,26 @@
       <tbody>
       <tr>
         <th class="align-middle" scope="row">
-          {{ message.text }}
+          {{ message.title }}
         </th>
         <td class="align-middle">
           <a class="osk__action osk__action--blue actions__see-senders"
-            href="#" @click="showUsers"
+            href="#" @click.prevent="$emit('show')"
           >
             Кому отправлены уведомления
           </a>
         </td>
-        <td class="align-middle">
+        <td class="align-middle d-flex">
           <img src="../../../../img/uploaded-file.png">
           <span>
-            <a :href="message.url">
+            <a :href="message.url" target="_blank">
               {{ message.url | truncate(20)}}
             </a>
           </span>
         </td>
-        <td class="align-middle" v-for="attachment in attachments">
+        <td class="align-middle d-flex" v-for="attachment in message.attachments">
           <img src="../../../../img/uploaded-file.png">
-          <span>{{ attachment.name }}</span>
+          <span>{{ attachment.name | truncate(10) }}</span>
           <a :href="attachment.path">
             <Download />
           </a>
@@ -51,12 +51,11 @@ export default {
     message: Object
   },
   data() {
+    return {
 
+    }
   },
   methods: {
-    showUsers() {
-
-    },
     deleteMessage() {
 
     }

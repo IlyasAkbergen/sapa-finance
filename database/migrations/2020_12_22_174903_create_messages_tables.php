@@ -18,7 +18,7 @@ class CreateMessagesTables extends Migration
             $table->string('title');
             $table->text('content')
                 ->nullable();
-            $table->string('url')
+            $table->text('url')
                 ->nullable();
             $table->boolean('is_public')
                 ->default(true);

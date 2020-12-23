@@ -83,9 +83,10 @@ class MessageController extends WebBaseController
     {
         $message = $this->messageService->create(
             $request->only([
-                'text',
+                'title',
                 'content',
                 'url',
+                'levels'
             ])
         );
 
@@ -94,9 +95,10 @@ class MessageController extends WebBaseController
             $levels = collect($request->input('levels'));
 
             $users = User::whereIn('referral_level_id', $levels)
-                        ->when($levels->has(ReferralLevelEnum::Client()), function ($q) {
+                        ->when($levels->contains(ReferralLevelEnum::Client), function ($q) {
                             return $q->orWhereNull('referral_level_id');
-                        });
+                        })
+                        ->get();
 
             $message->users()->attach($users);
 
@@ -150,6 +152,12 @@ class MessageController extends WebBaseController
      */
     public function destroy($id)
     {
-        //
+        $deleted = $this->messageService->delete($id);
+
+        if ($deleted) {
+            return redirect()->route('messages.index');
+        } else {
+            return $this->responseFail('Не удалосьу удалить');
+        }
     }
 }

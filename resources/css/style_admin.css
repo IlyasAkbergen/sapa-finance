@@ -2471,7 +2471,7 @@ body
 }
 
 .js-add-notify {
-    display: none;
+    /*display: none;*/
 }
 
 .js-add-notify .modal-body {
@@ -2528,7 +2528,7 @@ body
 }
 
 .js-see-senders {
-    display: none;
+    /*display: none;*/
 }
 
 .js-see-senders .modal-body {

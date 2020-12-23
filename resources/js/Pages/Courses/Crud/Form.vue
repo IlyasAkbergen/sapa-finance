@@ -162,6 +162,7 @@
         </a>
 
         <Modal :show="lessonFormVisible"
+               :rootClass="'js-add-lesson'"
                @close="() => showLessonForm(false)">
             <LessonForm @submit="submitLessonForm"
                         v-if="lessonFormVisible"

@@ -101,8 +101,9 @@
             combinedClass() {
                 return 'fixed top-20 inset-x-0 px-4 pt-6\n' +
                         '                    sm:px-0 sm:flex sm:items-top\n' +
-                        '                    modal-wrapper js-add-lesson\n' +
-                        '                    sm:justify-center ' + this.rootClass
+                        '                    modal-wrapper\n' +
+                        '                    sm:justify-center '
+                        + this.rootClass
             }
         }
     }

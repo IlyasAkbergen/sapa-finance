@@ -21,7 +21,7 @@ class MessageFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'text.required' => 'Укажите название',
+            'title.required' => 'Укажите название',
             'content.required' => ['Укажите описание урока'],
             'levels.required' => ['Не указаны получатели'],
             'levels.filled' => ['Не указаны получатели']

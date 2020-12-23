@@ -9,7 +9,7 @@ class UserMessage extends Model
 {
     use HasFactory;
 
-    protected $table = 'user_notification';
+    protected $table = 'user_message';
 
-    protected $fillable = ['user_id', 'notification_id', 'seen'];
+    protected $fillable = ['user_id', 'message_id', 'seen'];
 }
