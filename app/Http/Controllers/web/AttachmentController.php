@@ -7,6 +7,7 @@ use App\Models\Attachment;
 use App\Models\Briefcase;
 use App\Models\Course;
 use App\Models\Lesson;
+use App\Models\Message;
 use App\Services\AttachmentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +33,11 @@ class AttachmentController extends Controller
             'model' => Lesson::class,
             'rights' => [],
             'disk' => 'public'
+        ],
+        'message' => [
+            'model' => Message::class,
+            'rights' => [],
+            'disk' => 'local'
         ]
     ];
 

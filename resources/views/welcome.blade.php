@@ -5,7 +5,6 @@
        <meta charset="UTF-8">
        	<meta name="viewport" content="width=device-width, initial-scale=1.0">
        	<title>Sapa</title>
-
 		<script src="https://kit.fontawesome.com/c9e46db961.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="{{asset('landing/styles/bootstrap.min.css')}}">
 		<link rel="stylesheet" href="{{asset('landing/styles/style.css')}}">
@@ -21,7 +20,7 @@
 				margin: 50px auto;
 			}
 			.btn-close{
-				background: url(../img/success-times-icon.png);
+				background: url(../img/icons/close.svg);
 				background-size: contain;
 				opacity: 1;
 				position: absolute;
@@ -95,10 +94,14 @@
 				text-decoration: none;
 			}
 		</style>
-
 	</head>
 <body>
 	<div class="body-wrapper">
+        @if (session('status'))
+            <div class="mb-4 font-medium text-sm text-green-600">
+                {{ session('status') }}
+            </div>
+        @endif
 		<header>
 			<div class="inner">
 				<img src="{{asset('images/icons/logo.png')}}" alt="Logo"/>
@@ -118,15 +121,15 @@
 					</nav>
 					<nav id="auth">
 						<ul>
-						  	<li>
-								<a href="{{ route('login') }}">
+							<li>
+								<button type="button" data-bs-toggle="modal" data-bs-target="#authModal">
 									Войти
-								</a>
+								</button>
 							</li>
 							<li>
-								<a href="{{ route('register') }}">
+								<button type="button" data-bs-toggle="modal" data-bs-target="#regModal">
 									Зарегистрироваться
-								</a>
+								</button>
 							</li>
 						</ul>
 					</nav>
@@ -446,38 +449,15 @@
 				<div class="consultants__consultants">
 					<h1>Выбери финансового консультанта</h1>
 					<div class="consultants__consultants__slider">
+						@foreach($consultants as $consultant)
 						<div>
-							<p>Якубова Райхан</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img1.png')}}" alt="">
+							<p>{{ $consultant->name }}</p>
+							<img src="{{
+    							$consultant->profile_photo_path
+    							?: asset('images/slides/consultants-consultants-slider-img4.png')
+							}}">
 						</div>
-						<div>
-							<p>Брасилова Акжунис</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img2.png')}}" alt="">
-						</div>
-						<div>
-							<p>Булатова Нургуль</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img3.png')}}" alt="">
-						</div>
-						<div>
-							<p>Атабаева Зарима</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img4.png')}}" alt="">
-						</div>
-						<div>
-							<p>Якубова Райхан</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img1.png')}}" alt="">
-						</div>
-						<div>
-							<p>Брасилова Акжунис</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img2.png')}}" alt="">
-						</div>
-						<div>
-							<p>Булатова Нургуль</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img3.png')}}" alt="">
-						</div>
-						<div>
-							<p>Атабаева Зарима</p>
-							<img src="{{asset('images/slides/consultants-consultants-slider-img4.png')}}" alt="">
-						</div>
+						@endforeach
 					</div>
 				</div>
 			</div>
@@ -487,72 +467,23 @@
 			<div class="articles__wrapper">
 				<h1>Статьи</h1>
 				<div class="articles__slider">
+					@foreach($articles as $article)
 					<div>
 						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
+							<img src="{{
+    							!empty($article->image_path)
+									? $article->image_path
+									: asset('images/slides/articles-slider-img1.png')}}"
+								 >
 							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
+								{{ substr($article->content, 0, 65) . (strlen($article->content) > 65 ? '...' : '') }}
 							</p>
 							<a href="#">
 								Читать &#8594;
 							</a>
 						</div>
 					</div>
-					<div>
-						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
-							</p>
-							<a href="#">
-								Читать &#8594;
-							</a>
-						</div>
-					</div>
-					<div>
-						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
-							</p>
-							<a href="#">
-								Читать &#8594;
-							</a>
-						</div>
-					</div>
-					<div>
-						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
-							</p>
-							<a href="#">
-								Читать &#8594;
-							</a>
-						</div>
-					</div>
-					<div>
-						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
-							</p>
-							<a href="#">
-								Читать &#8594;
-							</a>
-						</div>
-					</div>
-					<div>
-						<div class="articles__slider__slide__inner">
-							<img src="{{asset('images/slides/articles-slider-img1.png')}}" alt="">
-							<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown print...
-							</p>
-							<a href="#">
-								Читать &#8594;
-							</a>
-						</div>
-					</div>
+					@endforeach
 				</div>
 			</div>
 		</div>
@@ -617,20 +548,29 @@
 				<div class="modal-content">
 					<h3>Вход в систему</h3>
 					<div class="modal-body">
-						<form action="">
-							<input type="text" placeholder="E-mail" name="name">
-							<input type="password" placeholder="Пароль" name="password">
+                        <form method="POST" action="{{ route('login') }}">
+							@csrf
+							<x-jet-input class="block mt-1 w-full"
+										 placeholder="E-mail"
+										 type="text" name="email" required autofocus />
+							<x-jet-input class="block mt-1 w-full"
+										 type="password" name="password" required
+										 placeholder="Пароль"
+										 autocomplete="current-password" />
 							<button class="modal-btn">
 								Войти
 							</button>
 							<div class="modal-flex">
 								<div>
-									<input type="checkbox" id="remember">
+									<input type="checkbox" id="remember" name="remember">
 									<label for="remember">Запомнить меня</label>
 								</div>
-								<button style="border: none; background: none; margin: 0; padding: 0;" type="button" data-bs-dismiss="modal" aria-label="Close"  data-bs-toggle="modal" data-bs-target="#passModal">
-									Забыл пароль?
-								</button>
+                                @if (Route::has('password.request'))
+                                    <button style="border: none; background: none; margin: 0; padding: 0;" type="button" data-bs-dismiss="modal"
+                                            aria-label="Close"  data-bs-toggle="modal" data-bs-target="#passModal">
+                                        Забыл пароль?
+                                    </button>
+                                @endif
 							</div>
 						</form>
 					</div>
@@ -642,18 +582,51 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="regModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="regModal" tabindex="-1"
+			 aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				<div class="modal-content">
 					<h3>Зарегистрироваться</h3>
 					<div class="modal-body">
-						<form action="">
-							<input type="text" placeholder="Имя" name="name">
-							<input type="text" placeholder="E-mail" name="email">
-							<input type="text" placeholder="Номер телефона" name="phone">
-							<input type="password" placeholder="Пароль" name="password">
-							<input type="password" placeholder="Подтвердить пароль" name="password">
+						<form method="POST" action="{{ route('register') }}">
+							@csrf
+							<x-jet-input
+									type="text"
+									placeholder="Имя"
+									autocomplete="name"
+									:value="old('name')"
+									name="name" />
+							<x-jet-input type="text"
+										 placeholder="E-mail"
+										 :value="old('email')"
+										 name="email" />
+							<x-jet-input type="text"
+										 placeholder="Номер телефона"
+										 :value="old('phone')"
+										 name="phone" />
+							<x-jet-input type="text" placeholder="ИИН"
+										 :value="old('iin')"
+										 name="iin" />
+                            <x-jet-input type="hidden" name="referrer_id"
+										 value="{{ $user->referrer_id }}" />
+							<x-jet-input id="password"
+										 class="block mt-1 w-full"
+										 type="password"
+										 name="password"
+										 required
+										 placeholder="Пароль"
+										 autocomplete="new-password" />
+
+							<x-jet-input
+									id="password_confirmation"
+									class="block mt-1 w-full"
+									type="password"
+									name="password_confirmation"
+									required
+									placeholder="Подтверждение пароля"
+									autocomplete="new-password" />
+
 							<button class="modal-btn">
 								Зарегистрироваться
 							</button>
@@ -665,26 +638,28 @@
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#authModal">
+						<button type="button" data-bs-dismiss="modal" aria-label="Close"
+                                data-bs-toggle="modal" data-bs-target="#authModal">
 							Войти
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<div class="modal fade" id="passModal" tabindex="-1"
-			 aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="passModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				<div class="modal-content">
 					<h3>Восстановление пароля</h3>
 					<div class="modal-body">
-						<form action="">
-							<input type="text" placeholder="E-mail" name="email">
+                        <form method="POST" action="{{ route('password.email') }}">
+                            @csrf
+                            <x-jet-label for="email" value="{{ __('Email') }}" />
+                            <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email"
+										 required autofocus />
 							<div class="text-left">
 								<p>
-									Когда вы введете вашу почту, вам будет отправлено сообщение с новым паролем.
+									Когда вы введете вашу почту, вам будет отправлено сообщение со ссылкой на форму обновления пароля.
 								</p>
 							</div>
 						</form>
@@ -697,11 +672,29 @@
 				</div>
 			</div>
 		</div>
+
 		@stack('script')
 		<script src="{{asset('landing/scripts/jquery-3.5.1-min.js')}}"></script>
 		<script src="{{asset('landing/scripts/bootstrap.min.js')}}"></script>
 		<script src="{{asset('landing/slick-1.8.1/slick/slick.min.js')}}"></script>
 		<script type="text/javascript">
+			$('#regModal').submit(function(e) {
+				e.preventDefault();
+				let $form = $(this);
+
+				const $url = $form.attr('action');
+
+				console.log($url)
+
+				$.ajax({
+					method: 'POST',
+					url: $url,
+					data: $form.serialize(),
+				})
+					.done(function() {
+						$('#regModal').modal('hide');
+					});
+			})
 
 			$(document).ready(function(){
 				$('.menu-toggle').click(function(){
@@ -881,3 +874,23 @@
 </body>
 
 </html>
+<script>
+    import Button from "@/Jetstream/Button";
+    export default {
+        components: {Button},
+		data() {
+        	return {
+        		// registerForm: this.$inertia.form({
+				// 	email: null,
+				// 	iin: null,
+				// 	referrer_id: null,
+				// 	password: null,
+				// 	password_confirmation: null
+				// }, {
+				// 	preserveScroll: false,
+        		// 	bag: 'userForm',
+				// }),
+			}
+		}
+    }
+</script>

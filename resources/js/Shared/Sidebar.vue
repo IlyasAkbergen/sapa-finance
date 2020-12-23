@@ -112,7 +112,7 @@
                         Информация об агентах
                     </SidebarItem>
 
-                    <SidebarItem :route_name="'notifications.index'"
+                    <SidebarItem :route_name="'messages.index'"
                                  icon="Bell">
                         Увеодомления
                     </SidebarItem>

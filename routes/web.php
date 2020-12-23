@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\web\admin\MessageController;
 use App\Http\Controllers\web\admin\PartnerController;
 use App\Http\Controllers\web\admin\PenaltyController;
 use App\Http\Controllers\web\admin\UserController;
@@ -32,9 +33,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware(['guest'])->name('welcome');
+Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
+    ->middleware(['guest'])->name('welcome');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
@@ -147,6 +147,8 @@ Route::group(['middleware' => [
         ->name('complaints.index');
 
     Route::post('/penalty', [PenaltyController::class, 'store']);
+
+    Route::resource('messages', MessageController::class);
 });
 
 Route::get('/test', function () {

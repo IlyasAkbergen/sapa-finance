@@ -6,13 +6,17 @@ use App\Traits\HasUsers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notification extends Model
+class Message extends Model
 {
     use HasFactory;
     use HasUsers;
 
     protected $fillable = [
-        'text', 'url', 'content', 'is_public'
+        'title', 'url', 'content', 'is_public', 'levels'
+    ];
+
+    protected $casts = [
+        'levels' => 'array'
     ];
 
     public function attachments()
@@ -20,9 +24,14 @@ class Notification extends Model
         return $this->morphMany(Attachment::class, 'model');
     }
 
-    public function user_notifications()
+    public function user_messages()
     {
-        return $this->hasMany(UserNotification::class);
+        return $this->hasMany(UserMessage::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_message');
     }
 
     public function scopePublic($query)

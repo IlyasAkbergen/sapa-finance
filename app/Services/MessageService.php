@@ -4,20 +4,20 @@
 namespace App\Services;
 
 
-use App\Models\Notification;
+use App\Models\Message;
 use Ramsey\Collection\Collection;
 
-interface NotificationService
+interface MessageService
 {
     /**
      * @param array $attributes
-     * @return Notification
+     * @return Message
      */
     public function createPublic(array $attributes);
 
     /**
      * @param array $attributes
-     * @return Notification
+     * @return Message
      */
     public function createPrivate(array $attributes);
 
@@ -37,13 +37,13 @@ interface NotificationService
     /**
      * @param int $user_id
      * @param array $attributes
-     * @return Notification $notification
+     * @return Message $message
      */
     public function createForUser($user_id, array $attributes);
 
     /**
-     * @param Notification $notification
+     * @param Message $message
      * @param array $ids user ids to be attached
     */
-    public function attachToUsers($notification, array $ids);
+    public function attachToUsers($message, array $ids);
 }

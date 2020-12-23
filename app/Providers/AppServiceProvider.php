@@ -25,8 +25,8 @@ use App\Services\HomeworkService;
 use App\Services\HomeworkServiceImpl;
 use App\Services\LessonService;
 use App\Services\LessonServiceImpl;
-use App\Services\NotificationService;
-use App\Services\NotificationServiceImpl;
+use App\Services\MessageService;
+use App\Services\MessageServiceImpl;
 use App\Services\PartnerService;
 use App\Services\PartnerServiceContract;
 use App\Services\PayoutServiceContract;
@@ -56,8 +56,8 @@ class AppServiceProvider extends ServiceProvider
             BalanceOperationServiceImpl::class
         );
         $this->app->bind(
-            NotificationService::class,
-            NotificationServiceImpl::class
+            MessageService::class,
+            MessageServiceImpl::class
         );
         $this->app->bind(
             ArticlesService::class,

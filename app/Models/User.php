@@ -94,15 +94,17 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
         )->withPivot('score', 'status', 'progress', 'completed');
     }
 
-    public function newNotifications()
+    public function newMessages()
     {
-        return $this->notifications()
+        $this->loadMissing('messages');
+        return $this->messages
             ->wherePivot('seen', false);
     }
 
-    public function notifications()
+    public function messages()
     {
-        return $this->belongsToMany(Notification::class);
+        return $this->belongsToMany(Message::class, 'user_message')
+            ->withPivot(['seen']);
     }
 
     public function balance()
