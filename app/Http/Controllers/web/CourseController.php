@@ -35,11 +35,14 @@ class CourseController extends WebBaseController
 
     public function show($id)
     {
-        $course = $this->courseService->find($id);
+        $course = $this->courseService->findWith($id, [
+            'auth_user_pivot',
+            'lessons.auth_user_homework'
+        ]);
 
         if (!empty($course)) {
             return Inertia::render('Courses/CourseDetail', [
-                'course' => $course
+                'course' => MyCourseResource::make($course)->resolve()
             ]);
         } else {
             return redirect()->route('courses.index');
