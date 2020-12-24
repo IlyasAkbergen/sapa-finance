@@ -115,6 +115,14 @@ Route::group(['middleware' => [
         ->name('complaints.store');
 
     Route::resource('lessons', LessonController::class);
+
+    Route::get('/courses/{id}/next_lesson', [LessonController::class, 'next'])
+        ->name('next_lesson');
+
+    Route::put('/lessons/{id}/submit_homework');
+
+    Route::put('/lessons/{id}/score_homework')
+        ->middleware('can_score');
 });
 
 Route::group(['middleware' => [
