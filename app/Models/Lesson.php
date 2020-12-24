@@ -26,7 +26,12 @@ class Lesson extends Model
 
     public function attachments()
     {
-        return $this->morphMany(Attachment::class, 'attachable');
+        return $this->morphMany(Attachment::class, 'model');
+    }
+
+    public function homeworks()
+    {
+        return $this->hasMany(Homework::class);
     }
 
     public function auth_user_homework()
@@ -44,5 +49,13 @@ class Lesson extends Model
     public function getEnabledAttribute()
     {
         return isset($this->auth_user_homework);
+    }
+
+    public function getHasNextLessonAttribute()
+    {
+        $this->loadMissing('course.lessons');
+        return $this->course->lessons->contains(function($item) {
+            return $item->order > $this->order;
+        });
     }
 }

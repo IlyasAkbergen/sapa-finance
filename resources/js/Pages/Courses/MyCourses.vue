@@ -6,7 +6,8 @@
     <div class="page">
       <div class="main">
         <div class="main__content">
-          <div class="main__content__agent-my-courses-flex" v-if="courses && courses.length > 0">
+          <div class="main__content__agent-my-courses-flex"
+               v-if="courses && courses.length > 0">
              <CourseCard v-for="course in courses"
                         :course="course"
                         :bought="true"

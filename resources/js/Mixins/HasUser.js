@@ -40,6 +40,12 @@ export default {
 
     isAdmin() {
       return !!this.getUser() && this.getUser().role_id === 1
+    },
+
+    activeCourse() {
+      return !!this.getUser().active_course && this.getUser().active_course.length > 0
+        ? this.getUser().active_course[0]
+        : null;
     }
   },
 }

@@ -10,6 +10,7 @@ use App\Models\Lesson;
 use App\Services\AttachmentService;
 use App\Services\CourseService;
 use App\Services\LessonService;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class LessonController extends WebBaseController
@@ -31,7 +32,31 @@ class LessonController extends WebBaseController
 
     public function show($id)
     {
-        $lesson = $this->lessonService->findWith($id, ['auth_user_homework']);
+        $lesson = $this->lessonService->findWith($id, [
+            'course.auth_user_pivot',
+            'course.lessons.auth_user_homework',
+            'auth_user_homework'
+        ]);
+
+        if (empty($lesson->course)
+            || empty($lesson->course->auth_user_pivot)
+            || !$lesson->course->auth_user_pivot->paid) {
+            return redirect()->route('my-courses');
+        }
+
+        $is_first_lesson = !$lesson->course->lessons->some(function ($item) {
+            return !empty($item->auth_user_homework);
+        });
+
+        if (empty($lesson->auth_user_homework)
+                && $is_first_lesson
+        ) {
+            $lesson->homeworks()->create([
+                'user_id' => Auth::user()->id
+            ]);
+
+            $lesson->loadMissing('auth_user_homework');
+        }
 
         if (!empty($lesson)) {
             return Inertia::render('Lessons/LessonDetail', [
@@ -42,10 +67,14 @@ class LessonController extends WebBaseController
         }
     }
 
-    public function next($course_id)
+    public function next($course_id, $lesson_id)
     {
-        $course = $this->courseService
-            ->findWith($course_id, ['auth_user_pivot']);
+        $currentLesson = $this->lessonService->findWith($lesson_id, [
+            'course.lessons',
+            'course.auth_user_pivot',
+        ]);
+
+        $course = $currentLesson->course;
 
         if (empty($course)
             || empty($course->auth_user_pivot)
@@ -53,10 +82,19 @@ class LessonController extends WebBaseController
             return redirect()->route('my-courses');
         }
 
-        $lesson = Lesson::with(['auth_user_homework'])
+        $lesson = Lesson::with('auth_user_homework')
             ->where('course_id', $course_id)
-            ->whereDoesntHave('auth_user_homework')
-            ->get();
+            ->where('order', '>', $currentLesson->order)
+            ->orderBy('order')
+            ->first();
+
+        if (empty($lesson->auth_user_homework)) {
+            $lesson->homeworks()->create([
+                'user_id' => Auth::user()->id
+            ]);
+
+            $lesson->loadMissing('auth_user_homework');
+        }
 
         return Inertia::render('Lessons/LessonDetail', [
             'lesson' => MyLessonResource::make($lesson)->resolve()

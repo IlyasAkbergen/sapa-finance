@@ -14,9 +14,9 @@ class CourseServiceImpl extends BaseServiceImpl implements CourseService
         parent::__construct($model);
     }
 
-    function ofUser(User $user)
+    function ofUser(User $user, $with = [])
     {
-        $user->loadMissing('courses');
+        $user->loadMissing('courses.lessons.auth_user_homework');
 
         return $user->courses;
     }

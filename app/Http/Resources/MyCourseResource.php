@@ -22,7 +22,11 @@ class MyCourseResource extends JsonResource
             'progress' => $this->my_progress,
             'bought' => !empty($this->auth_user_pivot)
                 && $this->auth_user_pivot->paid,
-            'lessons' => $this->whenLoaded('lessons'),
+            'lessons' => $this->when(
+                $this->relationLoaded('lessons'),
+                MyLessonResource::collection($this->lessons)
+                    ->resolve()
+            ),
             'price_without_feedback' => $this->price_without_feedback,
             'price_with_feedback' => $this->price_with_feedback,
         ];

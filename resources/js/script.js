@@ -1,9 +1,9 @@
 $(document).ready(function() {
   /*========== Sidebar user's agent open function ==========*/
-  $('.sidebar__profile__dropdown').click(function() {
-    $('.sidebar .sidebar__agent-profile .sidebar__profile__dropdown-block').toggleClass('sidebar__profile__dropdown-block__opened');
-    $('.sidebar .sidebar__agent-profile .sidebar__profile__dropdown').toggleClass('sidebar__profile__dropdown__opened');
-  });
+  // $('.sidebar__profile__dropdown').click(function() {
+  //   $('.sidebar .sidebar__agent-profile .sidebar__profile__dropdown-block').toggleClass('sidebar__profile__dropdown-block__opened');
+  //   $('.sidebar .sidebar__agent-profile .sidebar__profile__dropdown').toggleClass('sidebar__profile__dropdown__opened');
+  // });
 
   /*========== Small screen Sidebar open function ==========*/
   $('.main .navbar .nav .nav-item .nav-link .sidebar-toggler').click(function() {

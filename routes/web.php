@@ -116,7 +116,7 @@ Route::group(['middleware' => [
 
     Route::resource('lessons', LessonController::class);
 
-    Route::get('/courses/{id}/next_lesson', [LessonController::class, 'next'])
+    Route::get('/courses/{id}/next_lesson/{lesson_id}', [LessonController::class, 'next'])
         ->name('next_lesson');
 
     Route::put('/lessons/{id}/submit_homework');
