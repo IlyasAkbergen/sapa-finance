@@ -13,12 +13,12 @@
           Процесс обучения
         </p>
         <p class="main__content__courses-flex__card__process__percent">
-          {{ course.progress_percent }}%
+          {{ course.progress }}%
         </p>
       </div>
       <div class="progress">
         <div class="progress-bar bg-info"
-             role="progressbar" :style="`width: ${course.progress_percent}%`"
+             role="progressbar" :style="`width: ${course.progress}%`"
              aria-valuenow="50"
              aria-valuemin="0" aria-valuemax="100">
 

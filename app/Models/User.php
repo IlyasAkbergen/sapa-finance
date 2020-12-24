@@ -144,4 +144,12 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
     {
         return $this->getTeamPoints();
     }
+
+    public function active_course()
+    {
+        return $this->belongsToMany(Course::class, 'user_course')
+            ->withPivot(['paid', 'completed', 'progress'])
+            ->wherePivot('paid', true)
+            ->wherePivot('completed', false);
+    }
 }

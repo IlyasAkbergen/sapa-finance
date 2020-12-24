@@ -19,9 +19,15 @@ class MyLessonResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'video_url' => $this->video_url,
+            'course_id' => $this->course_id,
+            'attachment_path' => $this->attachment_path,
+            'homework_attachment_path' => $this->homework_attachment_path,
             'user_homework' => $this->whenLoaded(
                 'auth_user_homework'
             ),
+            'passed' => $this->passed,
+            'enabled' => $this->enabled,
+            'has_next_lesson' => $this->has_next_lesson
         ];
     }
 }

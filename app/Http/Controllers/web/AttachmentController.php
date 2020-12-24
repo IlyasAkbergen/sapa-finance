@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Attachment;
 use App\Models\Briefcase;
 use App\Models\Course;
+use App\Models\Homework;
 use App\Models\Lesson;
 use App\Models\Message;
 use App\Services\AttachmentService;
@@ -31,6 +32,11 @@ class AttachmentController extends Controller
         ],
         'lesson' => [
             'model' => Lesson::class,
+            'rights' => [],
+            'disk' => 'public'
+        ],
+        'homework' => [
+            'model' => Homework::class,
             'rights' => [],
             'disk' => 'public'
         ],

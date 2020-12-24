@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!onlyShow">
     <div class="course-docs-list"
        v-for="item in list"
        :key="item.id">
@@ -7,7 +7,7 @@
         <img src="../../img/uploaded-file.png">
 
         <span id="course-doc-name" class="mt-2">
-          {{ item.name | truncate(30) }}
+          {{ item.name | truncate(20) }}
         </span>
       </div>
 
@@ -28,6 +28,14 @@
            @change="upload"
            class="hidden">
   </div>
+  <div v-else class="main__content__lesson-card__materials">
+    <a v-for="item in list"
+       :href="item.path"
+       :key="item.id"
+       class="main__content__lesson-card__materials__pdf">
+      {{ item.name | truncate(5) }}
+    </a>
+  </div>
 </template>
 
 <script>
@@ -46,6 +54,10 @@ export default {
         slug: {
           type: String,
           default: null
+        },
+        onlyShow: {
+        	type: Boolean,
+        	default: false
         }
     },
     data() {

@@ -28,7 +28,7 @@ class Authenticate extends Middleware
 
         if (!empty($request->user())) {
             $request->user()->loadMissing([
-                'balance', 'referrer.referral_level', 'referral_level'
+                'balance', 'referrer.referral_level', 'referral_level', 'active_course'
             ]);
         }
 
