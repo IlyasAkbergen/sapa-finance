@@ -8,12 +8,12 @@
         </template>
 
         <template #header>
-            Добавление партнера
+            Оставить жалобу
         </template>
 
         <div class="ptef">
             <Form :form="form"
-                  @submit="createPartner"/>
+                  @submit="createComplaint"/>
         </div>
     </main-layout>
 </template>
@@ -26,24 +26,26 @@ export default {
       Form: () => import('./Form'),
       MainLayout
     },
+    props: {
+        from_id: Number,
+        to_id: Number,
+    },
     data() {
       return {
         form: this.$inertia.form({
-            name: "",
-            email: null,
-            phone: null,
-            bin: null,
-            password: '',
+            content: '',
+            from_id: this.from_id,
+            to_id: this.to_id,
             '_method': 'POST',
         }, {
-            bag: 'partnerForm',
+            bag: 'complaintForm',
             resetOnSuccess: false,
         })
       }
     },
     methods: {
-        createPartner() {
-            this.form.post('/partners-crud');
+        createComplaint() {
+            this.form.post('/complaints-crud');
         },
     }
 }

@@ -24,25 +24,25 @@
         <input class="profile-form__input mb-0" type="password" v-model="form.password" id="password">
         <JetInputError :message="form.error('password')" class="mt-1"/>
 
-        <label class="profile-form__label mt-3" for="role">Роль</label>
-        <select class="profile-form__select mb-0" v-model="form.role_id" id="role">
+        <label class="profile-form__label mt-3" for="role" v-if="form.role_id === 1">Роль</label>
+        <select class="profile-form__select mb-0" v-if="form.role_id === 1" v-model="form.role_id" id="role">
             <option v-for="role in roles"
                     :value="role.id">{{ role.name }}</option>
         </select>
-        <JetInputError :message="form.error('role_id')" class="mt-1"/>
+        <JetInputError v-if="form.role_id === 1" :message="form.error('role_id')" class="mt-1"/>
 
-        <label class="profile-form__label mt-3" for="item">Личные единицы</label>
+        <label class="profile-form__label mt-3" for="item" v-if="form.role_id === 1">Личные единицы</label>
         <input class="profile-form__input mb-0" type="number"
-               v-model="form.direct_points" id="item">
-        <JetInputError :message="form.error('direct_points')" class="mt-1"/>
+               v-if="form.role_id === 1" v-model="form.direct_points" id="item">
+        <JetInputError v-if="form.role_id === 1" :message="form.error('direct_points')" class="mt-1"/>
 
 
-        <label class="profile-form__label mt-3" for="teamitem">Командные единицы</label>
+        <label class="profile-form__label mt-3" for="teamitem" v-if="form.role_id === 1">Командные единицы</label>
         <input class="profile-form__input" type="number"
-               v-model="form.team_points" id="teamitem">
-        <JetInputError :message="form.error('team_points')" class="mt-1"/>
+               v-if="form.role_id === 1" v-model="form.team_points" id="teamitem">
+        <JetInputError v-if="form.role_id === 1" :message="form.error('team_points')" class="mt-1"/>
 
-        <a class="profile-form__submit" type="submit" href="#"
+        <a class="profile-form__submit mt-3" type="submit" href="#"
            @click="submitForm"
            :class="{ 'opacity-25': form.processing }"
            :disabled="form.processing">

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\web;
 
+use App\Http\Resources\UserResource;
 use App\Models\Complaint;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -32,23 +34,27 @@ class ComplaintController extends WebBaseController
     public function store(Request $request)
     {
         $request->validate([
-            'to_user_id' => 'required',
-            'from_user_id' => 'required',
+            'content' => 'required',
+            'from_id' => 'required',
+            'to_id' => 'required'
         ]);
 
         $complaint = Complaint::create($request->only([
-            'to_user_id', 'from_user_id'
+            'content', 'from_id', 'to_id'
         ]));
 
         if (!empty($complaint)) {
-            return response()->json([
-                'success' => true,
-                'complaint' => $complaint,
-            ]);
+            return $this->responseSuccess('Ваше обращение сохранено');
         } else {
-            return response()->json([
-                'success' => false,
-            ]);
+            return $this->responseFail('Не удалось сохранить.');
         }
+    }
+
+    public function create($id, $referrer_id)
+    {
+        return Inertia::render('Complaint/Crud/Add', [
+            'from_id' => $id,
+            'to_id' => $referrer_id
+        ]);
     }
 }

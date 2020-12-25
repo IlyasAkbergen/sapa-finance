@@ -20,8 +20,9 @@
     <label class="profile-form__label label-doc"
            @drop="selectNewFile"
            @click="selectNewFile">
-      <img src="../../img/add_file.svg">
-      <span>Приложите документ</span>
+      <img v-if="!isSupport" src="../../img/add_file.svg">
+      <i v-else class="fas fa-plus" aria-hidden="true"></i>
+      <span>{{title}}</span>
     </label>
     <input type="file"
            ref="file"
@@ -58,7 +59,15 @@ export default {
         onlyShow: {
         	type: Boolean,
         	default: false
-        }
+        },
+        title: {
+          type: String,
+          default: 'Приложите документ'
+        },
+        isSupport: {
+          type: Boolean,
+          default: false
+        },
     },
     data() {
         return {

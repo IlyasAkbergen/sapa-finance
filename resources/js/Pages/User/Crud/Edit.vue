@@ -30,6 +30,18 @@
                   :roles="roles"
                  @submit="updateUser"/>
         </div>
+
+        <div v-if="referrer" class="avatar" style="margin-left: 20px">
+            <img src="../../../../img/profile-agent-ava.png" class="avatar__img" style="width: 50px; height: 50px" alt="">
+            <p class="referrer_name">{{referrer.name}}</p>
+            <p class="referrer_title">Мой агент</p>
+            <a class="avatar__link" :href="route('complaints.create', {
+                id: client.id,
+                referrer_id: referrer.id
+            })" style="text-align: center">
+                Пожаловаться
+            </a>
+        </div>
     </main-layout>
 </template>
 
@@ -43,7 +55,11 @@ export default {
     },
     props: {
         client: Object,
-        roles: Array
+        roles: Array,
+        referrer: {
+            type: Object,
+            default: null,
+        }
     },
     data() {
         return {

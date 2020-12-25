@@ -1,34 +1,16 @@
 <template>
     <form action="">
-        <label class="profile-form__label" for="username">Название компании</label>
-        <input class="profile-form__input mb-0" type="text" id="username"
-            v-model="form.name">
-        <JetInputError :message="form.error('name')" class="mt-1"/>
 
-        <label class="profile-form__label mt-3" for="email">Эл. почта</label>
-        <input class="profile-form__input mb-0" type="email" id="email"
-            v-model="form.email">
-        <JetInputError :message="form.error('email')" class="mt-1"/>
-
-        <label class="profile-form__label mt-3" for="phone">Номер телефона</label>
-        <input class="profile-form__input mb-0" type="text"id="phone"
-            v-model="form.phone">
-        <JetInputError :message="form.error('phone')" class="mt-1"/>
-
-        <label class="profile-form__label mt-3" for="bin">БИН</label>
-        <input class="profile-form__input mb-0" type="text" id="bin"
-            v-model="form.bin">
-        <JetInputError :message="form.error('bin')" class="mt-1"/>
-
-        <label class="profile-form__label mt-3" for="password">Пароль</label>
-        <input class="profile-form__input mb-0" type="password" v-model="form.password" id="password">
-        <JetInputError :message="form.error('password')" class="mt-1"/>
+        <label class="profile-form__label mt-3" for="content">Жалоба</label>
+        <textarea class="profile-form__input mb-0" type="text" id="content"
+                  v-model="form.content" row="5"></textarea>
+        <JetInputError :message="form.error('content')" class="mt-1"/>
 
         <a class="profile-form__submit mt-3" type="submit" href="#"
            @click="submitForm"
            :class="{ 'opacity-25': form.processing }"
            :disabled="form.processing">
-            Сохранить изменения
+            Оставить жалобу
         </a>
     </form>
 </template>
@@ -39,12 +21,10 @@ export default {
     name: "Form",
     components: {
         JetInputError: () => import('@/Jetstream/InputError'),
-        JetActionMessage: () => import('@/Jetstream/ActionMessage'),
         Attachments: () => import('@/Shared/Attachments'),
     },
     props: {
         form: Object,
-        partner: Object,
     },
     methods: {
         submitForm() {
