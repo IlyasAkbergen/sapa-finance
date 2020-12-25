@@ -23,12 +23,15 @@
             Текущий курс: {{ activeCourse.title | truncate(10) }}
           </p>
           <p class="sidebar__profile__progress__header__percent">
-            {{ activeCourse.progress }}%
+            {{ activeCourse.pivot.progress }}%
           </p>
         </div>
 
         <div class="progress">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-bar bg-info" role="progressbar"
+               :style="`width: ${activeCourse.pivot.progress}%`"
+               aria-valuenow="50" aria-valuemin="0"
+               aria-valuemax="100"></div>
         </div>
 
         <div class="sidebar__profile__stats">

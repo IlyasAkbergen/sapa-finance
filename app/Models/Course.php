@@ -80,7 +80,7 @@ class Course extends Model implements WithPurchase
 
         $passed_lessons_count = $this->lessons->filter(function ($item) {
             return isset($item->auth_user_homework)
-                && !empty($item->auth_user_homework);
+                && !empty($item->auth_user_homework->score);
         })->count();
 
         if ($passed_lessons_count == 0 || $lessons_count == 0) {
