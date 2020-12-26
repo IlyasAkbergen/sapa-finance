@@ -120,6 +120,11 @@ Route::group(['middleware' => [
     Route::get('/courses/{id}/next_lesson/{lesson_id}', [LessonController::class, 'next'])
         ->name('next_lesson');
 
+    Route::get('/courses/{id}', [LessonController::class, 'show'])
+        ->name('courses');
+    Route::get('/agent', [CourseController::class, 'getStarterCourseAgent'])
+        ->name('starter_lesson');
+    Route::put('/lessons/{id}/submit_homework');
     Route::resource(
         'homeworks',
         HomeworkController::class

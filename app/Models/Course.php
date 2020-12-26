@@ -16,7 +16,7 @@ class Course extends Model implements WithPurchase
     use Awardable;
     use SoftDeletes;
 
-    const START_COURSE_ID = 1;
+    const START_COURSE_TAG = 'is_became_agent';
 
     protected $fillable = [
         'title', 'short_description', 'description', 'direct_fee', 'direct_points', 'team_points', 'awardable',
