@@ -47,4 +47,9 @@ interface UserService
      * @param User $user
      */
     public function tryNextLevel(User $user);
+
+    /**
+     * @param User $user
+     */
+    public function getNextLevelProgress(User $user);
 }

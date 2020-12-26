@@ -173,4 +173,9 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
 
         return $deservesLevelUp;
     }
+
+    public function getNextLevelProgress(User $user)
+    {
+        // TODO: Implement getNextLevelProgress() method.
+    }
 }
