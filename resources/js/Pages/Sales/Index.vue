@@ -48,7 +48,11 @@
                     </table>
                 </div>
             </div>
-            <Pagination />
+            <Pagination
+                    :prev_page_url="data.prev_page_url"
+                    :next-page-url="data.next_page_url"
+                    :current_page="data.current_page"
+                    :links="data.links"/>
             <div class="clear"></div>
         </div>
     </main-layout>
@@ -56,13 +60,18 @@
 
 <script>
 export default {
-  name: "Index",
-  components: {
-    MainLayout: () => import('@/Layouts/MainLayout'),
-    Pagination: () => import('@/Shared/Pagination')
-  },
-  props: {
-    rewards: Array
-  }
+    name: "Index",
+    components: {
+        MainLayout: () => import('@/Layouts/MainLayout'),
+        Pagination: () => import('@/Shared/Pagination')
+    },
+    props: {
+        data: Object
+    },
+    computed: {
+        rewards() {
+            return this.data.data;
+        }
+    }
 }
 </script>

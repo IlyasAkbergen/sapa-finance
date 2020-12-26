@@ -24,7 +24,8 @@ class Purchase extends Model
 
     public function purchasable()
     {
-        return $this->morphTo();
+        return $this->morphTo()
+            ->withTrashed();
     }
 
     protected $dispatchesEvents = [

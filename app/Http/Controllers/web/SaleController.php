@@ -5,17 +5,19 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Models\Reward;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class SaleController extends Controller
 {
     public function index()
     {
-        // todo realize
-        $rewards = Reward::with(['purchase.purchasable', 'purchase.user'])->get();
+        $data = Reward::with(['purchase.purchasable', 'purchase.user'])
+            ->where('target_user_id', Auth::user()->id)
+            ->paginate(10);
 
         return Inertia::render('Sales/Index', [
-            'rewards' => $rewards
+            'data' => $data
         ]);
     }
 

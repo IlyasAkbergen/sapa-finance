@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Listeners\BalanceEventsSubscriber;
+use App\Listeners\CourseEventsSubscriber;
 use App\Listeners\LevelUpListener;
 use App\Listeners\ReferralEventsSubscriber;
 use Illuminate\Auth\Events\Registered;
@@ -25,7 +26,8 @@ class EventServiceProvider extends ServiceProvider
     protected $subscribe = [
         ReferralEventsSubscriber::class,
         BalanceEventsSubscriber::class,
-        LevelUpListener::class
+        LevelUpListener::class,
+        CourseEventsSubscriber::class
     ];
 
     /**

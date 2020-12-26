@@ -34,6 +34,11 @@ class Lesson extends Model
         return $this->hasMany(Homework::class);
     }
 
+    public function homework()
+    {
+        return $this->hasOne(Homework::class);
+    }
+
     public function auth_user_homework()
     {
         return $this->hasOne(Homework::class)
