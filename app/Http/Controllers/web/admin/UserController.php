@@ -75,11 +75,12 @@ class UserController extends Controller
     {
         $user = $this->userService->findWith($id, ['balance']);
         $roles = Role::all();
-
+        $auth_user = Auth::user();
         if (!empty($user)) {
             return Inertia::render('User/Crud/Edit', [
                 'client' => UserResource::make($user)->resolve(),
-                'roles' => $roles
+                'roles' => $roles,
+                'auth_user' => UserResource::make($user)->resolve()
             ]);
         } else {
             return redirect()->route('users-crud.index');
@@ -135,7 +136,8 @@ class UserController extends Controller
             return Inertia::render('User/Crud/Edit', [
                 'client' => UserResource::make($user)->resolve(),
                 'roles' => $roles,
-                'referrer' => UserResource::make($referer)->resolve()
+                'referrer' => UserResource::make($referer)->resolve(),
+                'auth_user' => UserResource::make($user)->resolve()
             ]);
         } else {
             return redirect()->route('users-crud.index');

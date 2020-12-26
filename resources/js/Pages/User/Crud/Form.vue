@@ -24,23 +24,23 @@
         <input class="profile-form__input mb-0" type="password" v-model="form.password" id="password">
         <JetInputError :message="form.error('password')" class="mt-1"/>
 
-        <label class="profile-form__label mt-3" for="role" v-if="form.role_id === 1">Роль</label>
-        <select class="profile-form__select mb-0" v-if="form.role_id === 1" v-model="form.role_id" id="role">
+        <label class="profile-form__label mt-3" for="role" v-if="auth_user.role_id === 1">Роль</label>
+        <select class="profile-form__select mb-0" v-if="auth_user.role_id === 1" v-model="form.role_id" id="role">
             <option v-for="role in roles"
                     :value="role.id">{{ role.name }}</option>
         </select>
         <JetInputError v-if="form.role_id === 1" :message="form.error('role_id')" class="mt-1"/>
 
-        <label class="profile-form__label mt-3" for="item" v-if="form.role_id === 1">Личные единицы</label>
+        <label class="profile-form__label mt-3" for="item" v-if="auth_user.role_id === 1">Личные единицы</label>
         <input class="profile-form__input mb-0" type="number"
-               v-if="form.role_id === 1" v-model="form.direct_points" id="item">
-        <JetInputError v-if="form.role_id === 1" :message="form.error('direct_points')" class="mt-1"/>
+               v-if="auth_user.role_id === 1" v-model="form.direct_points" id="item">
+        <JetInputError v-if="auth_user.role_id === 1" :message="form.error('direct_points')" class="mt-1"/>
 
 
-        <label class="profile-form__label mt-3" for="teamitem" v-if="form.role_id === 1">Командные единицы</label>
+        <label class="profile-form__label mt-3" for="teamitem" v-if="auth_user.role_id === 1">Командные единицы</label>
         <input class="profile-form__input" type="number"
-               v-if="form.role_id === 1" v-model="form.team_points" id="teamitem">
-        <JetInputError v-if="form.role_id === 1" :message="form.error('team_points')" class="mt-1"/>
+               v-if="auth_user.role_id === 1" v-model="form.team_points" id="teamitem">
+        <JetInputError v-if="auth_user.role_id === 1" :message="form.error('team_points')" class="mt-1"/>
 
         <a class="profile-form__submit mt-3" type="submit" href="#"
            @click="submitForm"
@@ -63,7 +63,8 @@ export default {
     props: {
         form: Object,
         user: Object,
-        roles: Array
+        roles: Array,
+        auth_user: Object
     },
     methods: {
         submitForm() {

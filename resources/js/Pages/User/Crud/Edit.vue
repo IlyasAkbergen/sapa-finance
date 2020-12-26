@@ -28,6 +28,7 @@
             <Form :form="form"
                   :user="client"
                   :roles="roles"
+                  :auth_user="auth_user"
                  @submit="updateUser"/>
         </div>
 
@@ -59,6 +60,10 @@ export default {
         referrer: {
             type: Object,
             default: null,
+        },
+        auth_user: {
+            type: Object,
+            default: null,
         }
     },
     data() {
@@ -82,7 +87,11 @@ export default {
             if (this.$refs.image) {
                 this.$set(this.form, 'image', this.$refs.image.files[0]);
             }
-            this.form.post('/users-crud/' + this.client.id);
+            if (window.location.pathname === '/users-crud/me') {
+                this.form.post('/users-crud/update/' + this.client.id);
+            } else {
+                this.form.post('/users-crud/' + this.client.id);
+            }
         },
         selectNewPhoto() {
             this.$refs.image.click();
