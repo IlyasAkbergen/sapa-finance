@@ -16,10 +16,11 @@ class HomeworkServiceImpl extends BaseServiceImpl implements HomeworkService
         parent::__construct($model);
     }
 
-    public function rate($homework_id, $score)
+    public function rate($homework_id, $score, $status = Homework::STATUS_ACCEPTED)
     {
         return $this->update($homework_id, [
-            'score' => $score
+            'score' => $score,
+            'status' => $status
         ]);
     }
 

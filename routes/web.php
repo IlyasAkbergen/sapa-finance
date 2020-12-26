@@ -12,6 +12,7 @@ use App\Http\Controllers\web\ComplaintController;
 use App\Http\Controllers\web\CourseController;
 use App\Http\Controllers\web\admin\CourseController as CourseCrudController;
 use App\Http\Controllers\web\admin\LessonController as LessonCrudController;
+use App\Http\Controllers\web\HomeworkController;
 use App\Http\Controllers\web\LessonController;
 use App\Http\Controllers\web\NotificationController;
 use App\Http\Controllers\web\PayoutController;
@@ -119,10 +120,19 @@ Route::group(['middleware' => [
     Route::get('/courses/{id}/next_lesson/{lesson_id}', [LessonController::class, 'next'])
         ->name('next_lesson');
 
-    Route::put('/lessons/{id}/submit_homework');
+    Route::resource(
+        'homeworks',
+        HomeworkController::class
+    )
+    ->withoutMiddleware('client')
+    ->middleware('rates_homework');
 
-    Route::put('/lessons/{id}/score_homework')
-        ->middleware('can_score');
+    Route::post(
+        '/rate-homework',
+        [HomeworkController::class, 'rate']
+    )
+    ->middleware('rates_homework')
+    ->withoutMiddleware('client');
 
     Route::get('/users-crud/me', [UserController::class, 'me'])->name('me');
     Route::put('/users-crud/update/{id}', [UserController::class, 'update'])->name('update');
@@ -136,6 +146,7 @@ Route::group(['middleware' => [
     'share.inertia',
     'admin'
 ]], function () {
+
     Route::resource('courses-crud', CourseCrudController::class);
     Route::post('courses-crud/upload-image',
         [CourseCrudController::class, 'uploadImage']

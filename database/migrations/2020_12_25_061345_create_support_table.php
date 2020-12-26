@@ -13,7 +13,6 @@ class CreateSupportTable extends Migration
      */
     public function up()
     {
-
         Schema::create('supports', function (Blueprint $table) {
             $table->id();
             $table->text('message')

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CanRateHomework;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsClient;
@@ -67,6 +68,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => IsAdmin::class,
         'client' => IsClient::class,
-        'share.inertia' => HandleInertiaRequests::class
+        'share.inertia' => HandleInertiaRequests::class,
+        'rates_homework' => CanRateHomework::class
     ];
 }

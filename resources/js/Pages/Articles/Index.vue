@@ -18,7 +18,7 @@
             </div>
         </template>
 
-        <div class="main__content__agent-news-flex">
+        <div class="main__content__news-flex">
             <ArticleCard v-for="article in articles"
                 :article="article"
                 :key="article.id"

@@ -11,6 +11,11 @@ class UserCourse extends Model
 
     protected $table = 'user_course';
 
+    protected $fillable = [
+        'user_id', 'course_id', 'progress',
+        'score', 'completed', 'paid', 'status'
+    ];
+
     protected $dispatchesEvents = [
         // 'completed' => todo realize
     ];

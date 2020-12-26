@@ -38,8 +38,7 @@
                     </SidebarItem>
 
                     <SidebarItem
-                            v-if="isAdmin"
-                            :route_name="'welcome'"
+                            :route_name="'homeworks.index'"
                             icon="MailOpen">
                         ШФК
                     </SidebarItem>

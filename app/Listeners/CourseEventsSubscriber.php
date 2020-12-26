@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\HomeworkCreated;
-use App\Events\HomeworkScored;
+use App\Events\HomeworkRated;
 use App\Models\UserCourse;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -24,7 +24,7 @@ class CourseEventsSubscriber implements ShouldQueue
 
     }
 
-    public function handleHomeworkScored($event)
+    public function handleHomeworkRated($event)
     {
         $homework = $event->homework;
 
@@ -73,8 +73,8 @@ class CourseEventsSubscriber implements ShouldQueue
         );
 
         $events->listen(
-            HomeworkScored::class,
-            [self::class, 'handleHomeworkScored']
+            HomeworkRated::class,
+            [self::class, 'handleHomeworkRated']
         );
     }
 }

@@ -27,7 +27,7 @@
           </p>
         </div>
 
-        <div class="progress">
+        <div class="progress" v-if="activeCourse">
           <div class="progress-bar bg-info" role="progressbar"
                :style="`width: ${activeCourse.pivot.progress}%`"
                aria-valuenow="50" aria-valuemin="0"

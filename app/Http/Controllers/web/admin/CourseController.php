@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\web\admin;
 
 use App\Http\Controllers\web\WebBaseController;
-use App\Http\Repositories\AttachmentRepository;
 use App\Http\Requests\CourseRequest;
 use App\Http\Resources\MyCourseResource;
 use App\Models\Course;
