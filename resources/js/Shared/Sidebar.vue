@@ -115,7 +115,11 @@
                                  icon="Bell">
                         Увеодомления
                     </SidebarItem>
-                    <a v-if="!isAdmin" :href="route('starter_lesson')" class="sidebar__menu__link">Стать агентом</a>
+                    <a v-if="canBecomeAgent"
+                       :href="route('starter_lesson')"
+                       class="sidebar__menu__link">
+                        Стать агентом
+                    </a>
                 </ul>
             </div>
         </div>
@@ -139,6 +143,15 @@
     data() {
       return {
         showingNavigationDropdown: false,
+      }
+    },
+
+    computed: {
+      canBecomeAgent() {
+          return !this.isAdmin && (
+                  this.getUser().referral_level_id === null
+                  || this.getUser().referral_level_id === 0
+          );
       }
     },
 
