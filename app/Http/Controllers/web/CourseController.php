@@ -51,4 +51,11 @@ class CourseController extends WebBaseController
         }
 
     }
+
+    public function getStarterCourseAgent(){
+        $course = Course::where('tag', Course::START_COURSE_TAG)->first();
+        return Inertia::render('Courses/CourseDetail', [
+            'course' => MyCourseResource::make($course)->resolve()
+        ]);
+    }
 }

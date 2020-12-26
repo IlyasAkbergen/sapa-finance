@@ -116,7 +116,7 @@
                                  icon="Bell">
                         Увеодомления
                     </SidebarItem>
-                    <a v-if="!isAdmin" :href="route('courses', 6)" class="sidebar__menu__link">Стать агентом</a>
+                    <a v-if="!isAdmin" :href="route('starter_lesson')" class="sidebar__menu__link">Стать агентом</a>
                 </ul>
             </div>
         </div>

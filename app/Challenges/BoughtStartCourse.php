@@ -18,7 +18,7 @@ class BoughtStartCourse implements Challenge
     {
         return UserCourse::where('user_id', $challengable->id)
             ->whereHas('course', function ($q) {
-                return $q->tag == Course::START_COURSE_TAG;
+                return $q->where('tag', Course::START_COURSE_TAG);
             })
             ->exists();
     }
