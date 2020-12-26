@@ -123,6 +123,12 @@ Route::group(['middleware' => [
 
     Route::put('/lessons/{id}/score_homework')
         ->middleware('can_score');
+
+    Route::get('/users-crud/me', [UserController::class, 'me'])->name('me');
+    Route::put('/users-crud/update/{id}', [UserController::class, 'update'])->name('update');
+    Route::get('/complaints/create/{id}/{referrer_id}', [ComplaintController::class, 'create'])
+        ->name('complaints.create');
+    Route::post('/complaints-crud', [ComplaintController::class, 'store']);
 });
 
 Route::group(['middleware' => [

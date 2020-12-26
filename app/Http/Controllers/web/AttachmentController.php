@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Homework;
 use App\Models\Lesson;
 use App\Models\Message;
+use App\Models\Support;
 use App\Services\AttachmentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +45,11 @@ class AttachmentController extends Controller
             'model' => Message::class,
             'rights' => [],
             'disk' => 'local'
+        ],
+        'support' => [
+            'model' => Support::class,
+            'rights' => [],
+            'disk' => 'public'
         ]
     ];
 

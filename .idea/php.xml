@@ -119,6 +119,15 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-zendframework-bridge" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-eventmanager" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
+      <path value="$PROJECT_DIR$/vendor/payboxmoney/pay" />
+      <path value="$PROJECT_DIR$/vendor/payboxmoney/core" />
+      <path value="$PROJECT_DIR$/vendor/payboxmoney/payout" />
+      <path value="$PROJECT_DIR$/vendor/payboxmoney/cardstorage" />
+      <path value="$PROJECT_DIR$/vendor/bensampo/laravel-enum" />
+      <path value="$PROJECT_DIR$/vendor/hanneskod/classtools" />
     </include_path>
   </component>
   <component name="PhpUnit">

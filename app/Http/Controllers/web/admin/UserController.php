@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Services\AttachmentService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
@@ -74,11 +75,12 @@ class UserController extends Controller
     {
         $user = $this->userService->findWith($id, ['balance']);
         $roles = Role::all();
-
+        $auth_user = Auth::user();
         if (!empty($user)) {
             return Inertia::render('User/Crud/Edit', [
                 'client' => UserResource::make($user)->resolve(),
-                'roles' => $roles
+                'roles' => $roles,
+                'auth_user' => UserResource::make($user)->resolve()
             ]);
         } else {
             return redirect()->route('users-crud.index');
@@ -123,6 +125,22 @@ class UserController extends Controller
             return redirect()->route('users-crud.index');
         } else {
             return $this->responseFail('Не удалось удалить');
+        }
+    }
+
+    public function me() {
+        $user = Auth::user();
+        $roles = Role::all();
+        $referer = User::find($user->referrer_id);
+        if (!empty($user)) {
+            return Inertia::render('User/Crud/Edit', [
+                'client' => UserResource::make($user)->resolve(),
+                'roles' => $roles,
+                'referrer' => UserResource::make($referer)->resolve(),
+                'auth_user' => UserResource::make($user)->resolve()
+            ]);
+        } else {
+            return redirect()->route('users-crud.index');
         }
     }
 }

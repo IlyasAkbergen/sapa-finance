@@ -34,6 +34,8 @@ use App\Services\PurchaseService;
 use App\Services\PurchaseServiceContract;
 use App\Services\UserService;
 use App\Services\UserServiceImpl;
+use App\Services\SupportService;
+use App\Services\SupportServiceImpl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -102,6 +104,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             PartnerServiceContract::class,
             PartnerService::class
+        );
+        $this->app->bind(
+            SupportService::class,
+            SupportServiceImpl::class
         );
     }
 

@@ -5900,3 +5900,17 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
         padding: 11.25px;
     }
 }
+.referrer_name {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 800;
+    color: #190134;
+    margin-bottom: 8px;
+}
+.referrer_title {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #190134;
+    margin-bottom: 20px;
+}

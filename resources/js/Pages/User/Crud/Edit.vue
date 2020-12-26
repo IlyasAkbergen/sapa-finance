@@ -28,7 +28,20 @@
             <Form :form="form"
                   :user="client"
                   :roles="roles"
+                  :auth_user="auth_user"
                  @submit="updateUser"/>
+        </div>
+
+        <div v-if="referrer" class="avatar" style="margin-left: 20px">
+            <img src="../../../../img/profile-agent-ava.png" class="avatar__img" style="width: 50px; height: 50px" alt="">
+            <p class="referrer_name">{{referrer.name}}</p>
+            <p class="referrer_title">Мой агент</p>
+            <a class="avatar__link" :href="route('complaints.create', {
+                id: client.id,
+                referrer_id: referrer.id
+            })" style="text-align: center">
+                Пожаловаться
+            </a>
         </div>
     </main-layout>
 </template>
@@ -43,7 +56,15 @@ export default {
     },
     props: {
         client: Object,
-        roles: Array
+        roles: Array,
+        referrer: {
+            type: Object,
+            default: null,
+        },
+        auth_user: {
+            type: Object,
+            default: null,
+        }
     },
     data() {
         return {
@@ -66,7 +87,11 @@ export default {
             if (this.$refs.image) {
                 this.$set(this.form, 'image', this.$refs.image.files[0]);
             }
-            this.form.post('/users-crud/' + this.client.id);
+            if (window.location.pathname === '/users-crud/me') {
+                this.form.post('/users-crud/update/' + this.client.id);
+            } else {
+                this.form.post('/users-crud/' + this.client.id);
+            }
         },
         selectNewPhoto() {
             this.$refs.image.click();

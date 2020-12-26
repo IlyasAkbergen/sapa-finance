@@ -152,4 +152,7 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
             ->wherePivot('paid', true)
             ->wherePivot('completed', false);
     }
+    public function getReferralLinkAttribute() {
+        return '/?referrer_id='.$this->id;
+    }
 }
