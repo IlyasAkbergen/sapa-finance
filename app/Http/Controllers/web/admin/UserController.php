@@ -129,15 +129,18 @@ class UserController extends Controller
     }
 
     public function me() {
-        $user = Auth::user();
-        $roles = Role::all();
-        $referer = User::find($user->referrer_id);
-        if (!empty($user)) {
+        if (Auth::check()) {
+            Auth::user()->load('referrer');
+            $user = UserResource::make(Auth::user())
+                ->resolve();
+            $roles = Role::all();
             return Inertia::render('User/Crud/Edit', [
-                'client' => UserResource::make($user)->resolve(),
+                'client' => $user,
                 'roles' => $roles,
-                'referrer' => UserResource::make($referer)->resolve(),
-                'auth_user' => UserResource::make($user)->resolve()
+                'referrer' => isset($user['referrer'])
+                    ? $user['referrer']
+                    : null,
+                'auth_user' => $user
             ]);
         } else {
             return redirect()->route('users-crud.index');

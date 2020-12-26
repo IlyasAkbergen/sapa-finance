@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
 use App\Events\HomeworkRated;
 use App\Models\Homework;
@@ -9,7 +9,7 @@ use App\Services\HomeworkService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
 
 class HomeworkController extends WebBaseController
 {
@@ -18,6 +18,22 @@ class HomeworkController extends WebBaseController
     public function __construct(HomeworkService $homeworkService)
     {
         $this->homeworkService = $homeworkService;
+    }
+
+    public function index(Request $request)
+    {
+        $data = Homework::query()
+            ->with([
+                'user', 'lesson', 'attachments'
+            ])
+            ->whereHas('user', function ($q) {
+                return $q->where('referrer_id', Auth::user()->id);
+            })
+            ->paginate(10);
+
+        return Inertia::render('Homework/Index', [
+            'data' => $data
+        ]);
     }
 
     public function store(Request $request)
@@ -45,13 +61,11 @@ class HomeworkController extends WebBaseController
             DB::commit();
 
             if ($homework->id == $attachment->model_id) {
-                dd('saved');
                 return $this->responseSuccess(
                     'Домашняя работа сохранена.',
                     $homework
                 );
             } else {
-                dd('failed');
                 return $this->responseFail(
                     'Что-то пошло не так.',
                     $homework
@@ -68,20 +82,21 @@ class HomeworkController extends WebBaseController
     {
         $request->validate([
             'homework_id' => ['required', 'exists:' . Homework::class . ',id'],
-            'score' => ['required', 'integer', 'min:0', 'max:100']
+            'score' => ['required', 'integer', 'min:0', 'max:100'],
+            'status' => ['required', 'integer']
         ]);
 
         $homework = $this->homeworkService->rate(
             $request->input('homework_id'),
-            $request->input('score')
+            $request->input('score'),
+            $request->input('status')
         );
-
-        event(new HomeworkRated($homework));
 
         if (empty($homework->id)) {
             return $this->responseFail('Не удалось сохранить оценку.');
         } else {
-            return $this->responseSuccess('Оценка сохранена.', $homework);
+            event(new HomeworkRated($homework));
+            return redirect()->route('homeworks.index');
         }
     }
 }

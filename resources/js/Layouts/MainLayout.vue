@@ -4,7 +4,7 @@
 
     <div class="main">
       <nav class="navbar sticky-top navbar-light bg-white">
-        <span class="navbar-brand mb-0">
+        <span class="navbar-brand mb-0 pb-0">
           <slot name="back-link"></slot>
           <slot name="header"></slot>
         </span>

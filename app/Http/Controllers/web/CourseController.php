@@ -54,6 +54,11 @@ class CourseController extends WebBaseController
 
     public function getStarterCourseAgent(){
         $course = Course::where('tag', Course::START_COURSE_TAG)->first();
+
+        if (empty($course)) {
+            return redirect()->route('courses.index');
+        }
+
         return Inertia::render('Courses/CourseDetail', [
             'course' => MyCourseResource::make($course)->resolve()
         ]);

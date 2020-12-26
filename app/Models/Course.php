@@ -21,7 +21,7 @@ class Course extends Model implements WithPurchase
     protected $fillable = [
         'title', 'short_description', 'description', 'direct_fee', 'direct_points', 'team_points', 'awardable',
         'price_without_feedback', 'price_with_feedback', 'is_online', 'is_offline',
-        'image_path'
+        'image_path', 'tag'
     ];
 
     public function lessons()

@@ -11,7 +11,7 @@ class Homework extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'lesson_id', 'score'
+        'user_id', 'lesson_id', 'score', 'status'
     ];
 
     protected $dispatchesEvents = [
@@ -19,10 +19,12 @@ class Homework extends Model
     ];
 
     const ATTACHMENT_MAIN_DIR = 'homeworks';
+    const STATUS_ACCEPTED = 1;
+    const STATUS_REJECTED = 1;
 
     public function getLinkAttribute()
     {
-        return url('/'); // todo dynamic route to homework
+        return url('/');
     }
 
     public function lesson()
@@ -49,6 +51,8 @@ class Homework extends Model
 
     public function attachments()
     {
-        return $this->morphMany(Attachment::class, 'model');
+        return $this->morphMany(
+            Attachment::class, 'model'
+        );
     }
 }

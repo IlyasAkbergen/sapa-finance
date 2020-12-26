@@ -11,9 +11,10 @@ interface HomeworkService
     /**
      * @param int $homework_id
      * @param int $score
-     * @returns Homework
+     * @param int $status
+     * @return
      */
-    public function rate($homework_id, $score);
+    public function rate($homework_id, $score, $status = Homework::STATUS_ACCEPTED);
 
     /**
      * @param $homework_id
