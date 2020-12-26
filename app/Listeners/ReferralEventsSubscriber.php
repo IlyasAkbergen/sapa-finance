@@ -40,7 +40,7 @@ class ReferralEventsSubscriber implements ShouldQueue
         );
         $this->userService->awardReferrersAfterPurchase($purchase);
 
-        if ($purchasable instanceof Course && $purchasable->id == Course::START_COURSE_ID) {
+        if ($purchasable instanceof Course && $purchasable->id == Course::START_COURSE_TAG) {
             $this->userService->tryNextLevel($purchase->user);
         }
     }

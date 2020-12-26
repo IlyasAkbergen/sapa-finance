@@ -139,5 +139,11 @@ class DatabaseSeeder extends Seeder
             'direct_fee' => 2000,
             'awardable' => true
         ]);
+
+        Course::factory(1)->create([
+            'direct_fee' => 2000,
+            'awardable' => true,
+            'tag' => 'is_became_agent',
+        ]);
     }
 }

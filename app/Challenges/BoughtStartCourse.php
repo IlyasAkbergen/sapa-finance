@@ -17,7 +17,9 @@ class BoughtStartCourse implements Challenge
     static function check(Challengable $challengable): bool
     {
         return UserCourse::where('user_id', $challengable->id)
-            ->where('course_id', Course::START_COURSE_ID)
+            ->whereHas('course', function ($q) {
+                return $q->where('tag', Course::START_COURSE_TAG);
+            })
             ->exists();
     }
 }

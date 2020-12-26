@@ -47,7 +47,7 @@
         <jet-input-error :message="form.error('price_without_feedback')" class="mt-1" />
 
         <label class="profile-form__label mt-3 mb-0">
-            Способоб проведения
+            Способ проведения
         </label>
         <input class="profile-form__checkbox" type="checkbox"
                v-model="form.is_online" id="online"
@@ -70,6 +70,18 @@
 
         <JetInputError :message="form.error('is_online')" class="mt-1"/>
         <JetInputError :message="form.error('is_offline')" class="mt-1"/>
+        <label class="profile-form__label mt-3 mb-0">
+            Стартовый курс для агента
+        </label>
+        <input class="profile-form__checkbox" type="checkbox"
+               v-model="form.tag"
+               :checked="form.tag"
+               true-value="is_became_agent"
+               false-value="null">
+        <label class="profile-form__clabel profile-form__clabel-2">
+            Да
+        </label>
+        <JetInputError :message="form.error('tag')" class="mt-1"/>
 
         <label class="profile-form__label mt-3" for="units">Личные единицы</label>
 
@@ -146,7 +158,7 @@
                 Добавить урок
             </a>
         </div>
-        
+
         <jet-action-message :on="form.recentlySuccessful">
             <label class="profile-form__label text-green">
                 <img src="../../../../img/lesson-icon-passed.png">
