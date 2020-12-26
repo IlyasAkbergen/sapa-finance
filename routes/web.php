@@ -119,6 +119,8 @@ Route::group(['middleware' => [
     Route::get('/courses/{id}/next_lesson/{lesson_id}', [LessonController::class, 'next'])
         ->name('next_lesson');
 
+    Route::get('/courses/{id}', [LessonController::class, 'show'])
+        ->name('courses');
     Route::put('/lessons/{id}/submit_homework');
 
     Route::put('/lessons/{id}/score_homework')

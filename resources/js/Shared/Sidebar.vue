@@ -116,6 +116,7 @@
                                  icon="Bell">
                         Увеодомления
                     </SidebarItem>
+                    <a v-if="!isAdmin" :href="route('courses', 6)" class="sidebar__menu__link">Стать агентом</a>
                 </ul>
             </div>
         </div>
@@ -126,7 +127,7 @@
   import SidebarItem from '@/Shared/SidebarItem'
   import ProfileStats from '@/Shared/ProfileStats'
   import HasUser from "@/Mixins/HasUser";
- 
+
   export default {
     name: "Sidebar",
     components: {
