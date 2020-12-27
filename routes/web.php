@@ -15,13 +15,11 @@ use App\Http\Controllers\web\admin\CourseController as CourseCrudController;
 use App\Http\Controllers\web\admin\LessonController as LessonCrudController;
 use App\Http\Controllers\web\HomeworkController;
 use App\Http\Controllers\web\LessonController;
-use App\Http\Controllers\web\NotificationController;
 use App\Http\Controllers\web\PayoutController;
 use App\Http\Controllers\web\PurchaseController;
 use App\Http\Controllers\web\ReferralController;
 use App\Http\Controllers\web\SaleController;
 use App\Http\Controllers\web\SupportController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -65,6 +63,10 @@ Route::group(['middleware' => [
 
     Route::get('/my-briefcases', [ClientBriefcaseController::class, 'my'])
         ->name('my-briefcases');
+
+    Route::get(
+        '/briefcase/{id}/add', [ClientBriefcaseController::class, 'attachToMe']
+    )->name('attach_briefcase');
 
     Route::resource(
         'purchases',
