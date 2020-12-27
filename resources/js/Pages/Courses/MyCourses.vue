@@ -15,7 +15,7 @@
           </div>
           <div class="main__content__agent-empty-courses" v-else>
             <p class="main__content__empty-courses__text">У вас пока нету преобретенных курсов</p>
-            <inertia-link :href="route('courses')" class="main__content__empty-courses__button">
+            <inertia-link :href="route('courses.index')" class="main__content__empty-courses__button">
               Перейти к курсам
             </inertia-link>
           </div>
