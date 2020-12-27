@@ -34,8 +34,12 @@
             </div>
             <div class="main__content__program-success__right">
                 <i class="fas fa-times fa-sm" aria-hidden="true"></i>
-                <p class="main__content__program-success__right__title">Запрос успешно отправлен</p>
-                <p class="main__content__program-success__right__text">Ожидайте ответа модератора</p>
+                <p class="main__content__program-success__right__title">
+                    Запрос успешно отправлен
+                </p>
+                <p class="main__content__program-success__right__text">
+                    Ожидайте ответа модератора
+                </p>
             </div>
         </div>
     </main-layout>

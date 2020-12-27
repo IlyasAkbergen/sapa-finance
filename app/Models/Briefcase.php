@@ -7,6 +7,7 @@ use App\Traits\Awardable;
 use App\Traits\HasUsers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Briefcase extends Model implements WithPurchase
 {
@@ -41,6 +42,12 @@ class Briefcase extends Model implements WithPurchase
     function getIsPartPaidAttribute()
     {
         return !empty($this->monthly_payment);
+    }
+
+    public function auth_user_pivot()
+    {
+        return $this->hasOne(UserBriefcase::class)
+            ->where('user_id', Auth::user()->id);
     }
 
     public function partner()

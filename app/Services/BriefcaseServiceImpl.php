@@ -32,7 +32,7 @@ class BriefcaseServiceImpl extends BaseServiceImpl implements BriefcaseService
 
     function ofUser(User $user)
     {
-        $user->loadMissing('briefcases');
+        $user->loadMissing('briefcases.auth_user_pivot');
 
         return $user->briefcases;
     }

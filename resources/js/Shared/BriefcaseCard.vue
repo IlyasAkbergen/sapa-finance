@@ -21,6 +21,7 @@
     <p class="main__content__portfels-flex__card__digit">{{ briefcase.profit }} ₸</p>
 
     <a href="#" class="main__content__portfels-flex__card__button"
+       @click.prevent="addBriefcase"
        v-show="!alreadyHave">
       Добавить программу
     </a>
@@ -39,8 +40,13 @@ export default {
     },
     computed: {
         alreadyHave() {
-            return false;
+            return this.briefcase.auth_user_pivot;
         }
+    },
+    methods: {
+    	addBriefcase() {
+    		this.$inertia.get(route('attach_briefcase', this.briefcase.id));
+      }
     }
 }
 </script>

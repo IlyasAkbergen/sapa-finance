@@ -15,9 +15,9 @@ class WebBaseController extends Controller
 
     public function responseFail($error, $data = null)
     {
-        return redirect()->back()
-            ->setStatusCode(422, ['error', $error])
-            ->withErrors(['error', $error]);
+        return request()
+            ->setStatusCode(422)
+            ->withErrors(['error']);
     }
 
     public function warning()
@@ -70,12 +70,11 @@ class WebBaseController extends Controller
             ->flash('warning', 'Не найдено!');
     }
 
-
-    public function error()
+    public function error($error_message = 'Ошибка.')
     {
         request()
             ->session()
-            ->flash('error', 'Ошибка!');
+            ->flash('error', $error_message);
     }
 
     public function makeToast($type, $message)
