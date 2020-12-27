@@ -1,9 +1,9 @@
 <template>
     <main-layout>
         <template #back-link>
-            <a :href="route('sales.index')" class="navbar-brand mb-0">
+            <inertia-link :href="route('sales.index')" class="navbar-brand mb-0">
                 <img src="../../../img/back-arrow.png" alt="">
-            </a>
+            </inertia-link>
         </template>
         <template #header>
             Мои рефераллы

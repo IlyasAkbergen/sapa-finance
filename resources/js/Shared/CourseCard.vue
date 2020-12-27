@@ -24,10 +24,10 @@
 
         </div>
       </div>
-      <a :href="route('courses.show', course.id)"
+      <inertia-link :href="route('courses.show', course.id)"
          class="main__content__courses-flex__card__button">
         Перейти на курс
-      </a>
+      </inertia-link>
     </div>
 
     <div v-else>
@@ -35,10 +35,10 @@
         <p class="main__content__courses-flex__card__bottom__price">
           {{ course.price_without_feedback }} ₸
         </p>
-        <a :href="route('courses.show', course.id)"
+        <inertia-link :href="route('courses.show', course.id)"
            class="main__content__courses-flex__card__bottom__button">
           Купить
-        </a>
+        </inertia-link>
       </div>
     </div>
   </div>

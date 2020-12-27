@@ -1,10 +1,10 @@
 <template>
     <main-layout>
         <template #back-link>
-            <a :href="route('users-crud.index')"
+            <inertia-link :href="route('users-crud.index')"
                class="navbar-brand mb-0 pb-0">
                 <img src="../../../../img/back-arrow.png">
-            </a>
+            </inertia-link>
         </template>
 
         <template #header>
@@ -26,9 +26,7 @@
 
         <div class="profile-form">
             <Form :form="form"
-                  :user="client"
                   :roles="roles"
-                  :auth_user="auth_user"
                  @submit="updateUser"/>
         </div>
 
@@ -36,7 +34,7 @@
             <img src="../../../../img/profile-agent-ava.png" class="avatar__img" style="width: 50px; height: 50px" alt="">
             <p class="referrer_name">{{referrer.name}}</p>
             <p class="referrer_title">Мой агент</p>
-            <a class="avatar__link"
+            <inertia-link class="avatar__link"
                v-if="referrer"
                :href="route('complaints.create', {
                     id: client.id,
@@ -44,7 +42,7 @@
                 })"
                style="text-align: center">
                 Оставить отзыв
-            </a>
+            </inertia-link>
         </div>
     </main-layout>
 </template>

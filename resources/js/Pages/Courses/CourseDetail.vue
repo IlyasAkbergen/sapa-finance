@@ -1,9 +1,9 @@
 <template>
   <main-layout>
     <template #back-link>
-      <a :href="route('courses.index')" class="navbar-brand mb-0">
+      <inertia-link :href="route('courses.index')" class="navbar-brand mb-0">
         <img src="../../../img/back-arrow.png" alt="">
-      </a>
+      </inertia-link>
     </template>
 
     <template #header>
@@ -56,7 +56,7 @@
             Уроки
           </a>
 
-          <a v-for="(lesson, key) in course.lessons"
+          <inertia-link v-for="(lesson, key) in course.lessons"
              :href="route('lessons.show', lesson.id)"
              :class="`list-group-item
               list-group-item-action ${lesson.enabled || key == 0
@@ -67,7 +67,7 @@
                  v-if="lesson.passed">
             <img src="../../../img/lessons-locked.png"
                  v-else-if="!lesson.enabled && key != 0">
-          </a>
+          </inertia-link>
         </div>
       </div>
     </div>

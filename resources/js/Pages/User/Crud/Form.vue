@@ -24,23 +24,23 @@
         <input class="profile-form__input mb-0" type="password" v-model="form.password" id="password">
         <JetInputError :message="form.error('password')" class="mt-1"/>
 
-        <label class="profile-form__label mt-3" for="role" v-if="auth_user.role_id === 1">Роль</label>
-        <select class="profile-form__select mb-0" v-if="auth_user.role_id === 1" v-model="form.role_id" id="role">
+        <label class="profile-form__label mt-3" for="role" v-if="isAdmin">Роль</label>
+        <select class="profile-form__select mb-0" v-if="isAdmin" v-model="form.role_id" id="role">
             <option v-for="role in roles"
                     :value="role.id">{{ role.name }}</option>
         </select>
         <JetInputError v-if="form.role_id === 1" :message="form.error('role_id')" class="mt-1"/>
 
-        <label class="profile-form__label mt-3" for="item" v-if="auth_user.role_id === 1">Личные единицы</label>
+        <label class="profile-form__label mt-3" for="item" v-if="isAdmin">Личные единицы</label>
         <input class="profile-form__input mb-0" type="number"
-               v-if="auth_user.role_id === 1" v-model="form.direct_points" id="item">
-        <JetInputError v-if="auth_user.role_id === 1" :message="form.error('direct_points')" class="mt-1"/>
+               v-if="isAdmin" v-model="form.direct_points" id="item">
+        <JetInputError v-if="isAdmin" :message="form.error('direct_points')" class="mt-1"/>
 
 
-        <label class="profile-form__label mt-3" for="teamitem" v-if="auth_user.role_id === 1">Командные единицы</label>
+        <label class="profile-form__label mt-3" for="teamitem" v-if="isAdmin">Командные единицы</label>
         <input class="profile-form__input" type="number"
-               v-if="auth_user.role_id === 1" v-model="form.team_points" id="teamitem">
-        <JetInputError v-if="auth_user.role_id === 1" :message="form.error('team_points')" class="mt-1"/>
+               v-if="isAdmin" v-model="form.team_points" id="teamitem">
+        <JetInputError v-if="isAdmin" :message="form.error('team_points')" class="mt-1"/>
 
         <a class="profile-form__submit mt-3" type="submit" href="#"
            @click="submitForm"
@@ -53,6 +53,8 @@
 
 <script>
 
+import HasUser from "@/Mixins/HasUser";
+
 export default {
     name: "Form",
     components: {
@@ -60,11 +62,10 @@ export default {
         JetActionMessage: () => import('@/Jetstream/ActionMessage'),
         Attachments: () => import('@/Shared/Attachments'),
     },
+    mixins: [HasUser],
     props: {
         form: Object,
-        user: Object,
         roles: Array,
-        auth_user: Object
     },
     methods: {
         submitForm() {

@@ -152,7 +152,9 @@ Route::group(['middleware' => [
     Route::post('/make-messages-seen', [
         MessageController::class,
         'makeSeen'
-    ])->name('make_seen');
+    ])
+    ->withoutMiddleware('client')
+    ->name('make_seen');
 });
 
 Route::group(['middleware' => [

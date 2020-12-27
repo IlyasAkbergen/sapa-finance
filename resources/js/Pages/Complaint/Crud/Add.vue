@@ -1,10 +1,10 @@
 <template>
     <main-layout>
         <template #back-link>
-            <a :href="route('partners-crud.index')"
+            <inertia-link :href="route('me')"
                class="navbar-brand mb-0 pb-0">
                 <img src="../../../../img/back-arrow.png">
-            </a>
+            </inertia-link>
         </template>
 
         <template #header>
@@ -27,8 +27,8 @@ export default {
       MainLayout
     },
     props: {
-        from_id: Number,
-        to_id: Number,
+        from_id: Number|String,
+        to_id: Number|String,
     },
     data() {
       return {
@@ -39,7 +39,7 @@ export default {
             '_method': 'POST',
         }, {
             bag: 'complaintForm',
-            resetOnSuccess: false,
+            resetOnSuccess: true,
         })
       }
     },

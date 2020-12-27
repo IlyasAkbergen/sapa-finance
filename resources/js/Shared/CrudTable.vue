@@ -23,21 +23,21 @@
                 </td>
 
                 <td class="align-middle">
-                    <a class="users__link--sky float-right"
+                    <inertia-link class="users__link--sky float-right"
                        v-if="show_route_name"
                        :href="route(show_route_name, row.id)">
                         Перейти
-                    </a>
+                    </inertia-link>
                     <a class="users__link users__link--red
                         float-right courses__delete"
                         href="#"
                         @click.prevent="() => deleteClicked(row.id)">
                         <img src="../../img/trash.svg">
                     </a>
-                    <a class="users__link users__link--blue float-right"
+                    <inertia-link class="users__link users__link--blue float-right"
                        :href="route(edit_route_name, row.id)">
                         <img src="../../img/pencil.svg">
-                    </a>
+                    </inertia-link>
                 </td>
             </tr>
             </tbody>

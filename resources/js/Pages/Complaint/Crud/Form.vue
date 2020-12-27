@@ -1,7 +1,7 @@
 <template>
     <form action="">
 
-        <label class="profile-form__label mt-3" for="content">Жалоба</label>
+        <label class="profile-form__label mt-3" for="content">Отзыв</label>
         <textarea class="profile-form__input mb-0" type="text" id="content"
                   v-model="form.content" row="5"></textarea>
         <JetInputError :message="form.error('content')" class="mt-1"/>
@@ -10,7 +10,7 @@
            @click="submitForm"
            :class="{ 'opacity-25': form.processing }"
            :disabled="form.processing">
-            Оставить жалобу
+            Оставить отзыв
         </a>
     </form>
 </template>

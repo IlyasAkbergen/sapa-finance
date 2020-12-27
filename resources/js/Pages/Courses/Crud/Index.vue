@@ -11,16 +11,16 @@
                     @input="input => search_key = input"
                 />
 
-                <a class="actions__link actions__link--blue d-flex"
+                <inertia-link class="actions__link actions__link--blue d-flex"
                    :href="route('courses-stats')">
                     <StatsIcon />
                     Что больше продается
-                </a>
+                </inertia-link>
 
-                <a class="actions__link actions__link--green"
+                <inertia-link class="actions__link actions__link--green"
                    :href="route('courses-crud.create')">
                     <span>Добавить курс</span>
-                </a>
+                </inertia-link>
             </div>
         </template>
 
@@ -34,7 +34,7 @@
             </div>
 
             <Pagination :prev_page_url="data.prev_page_url"
-                        :next-page-url="data.next_page_url"
+                        :next_page_url="data.next_page_url"
                         :current_page="data.current_page"
                         :links="data.links"
             />

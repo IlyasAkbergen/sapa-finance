@@ -2,10 +2,10 @@
   <div class="main__content__portfels-flex__card">
     <img :src="briefcase.image_path"
          class="main__content__portfels-flex__card__img">
-    <a :href="route('briefcases.show', briefcase.id)"
+    <inertia-link :href="route('briefcases.show', briefcase.id)"
        class="main__content__portfels-flex__card__title">
         {{ briefcase.title }}
-    </a>
+    </inertia-link>
     <p class="main__content__portfels-flex__card__text">
        {{ briefcase.description | truncate(80) }}
     </p>

@@ -33,6 +33,7 @@
     <a v-for="item in list"
        :href="item.path"
        :key="item.id"
+       target="_blank"
        class="main__content__lesson-card__materials__pdf">
       {{ item.name | truncate(5) }}
     </a>

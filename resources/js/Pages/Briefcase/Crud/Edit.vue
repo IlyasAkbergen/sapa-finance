@@ -1,10 +1,10 @@
 <template>
   <main-layout>
     <template #back-link>
-      <a :href="route('briefcases-admin.index')"
+      <inertia-link :href="route('briefcases-admin.index')"
          class="navbar-brand mb-0 pb-0">
         <img src="../../../../img/back-arrow.png">
-      </a>
+      </inertia-link>
     </template>
 
     <template #header>

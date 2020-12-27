@@ -1,10 +1,10 @@
 <template>
     <main-layout>
         <template #back-link>
-            <a :href="route('articles.index')"
+            <inertia-link :href="route('articles.index')"
                class="navbar-brand mb-0 pb-0">
                 <img src="../../../img/back-arrow.png" alt="">
-            </a>
+            </inertia-link>
         </template>
 
         <template #header>
@@ -23,12 +23,12 @@
             <p class="main__content__news-flex__card__text text-muted">
                 {{ article.created_at }}
             </p>
-            <a :href="route('articles.show', article.id + 1)"
+            <inertia-link :href="route('articles.show', article.id + 1)"
                class="main__agent-next-new-button d-flex">
                 <span>К следующей новости</span>
                 <img src="../../../img/next-lesson-arrow.png"
                      class="main__next-new-button__img">
-            </a>
+            </inertia-link>
         </div>
     </main-layout>
 </template>
