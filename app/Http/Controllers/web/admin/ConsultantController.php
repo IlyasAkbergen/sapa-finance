@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers\web\admin;
 
-use App\Http\Controllers\Controller;
+use App\Enums\ReferralLevelEnum;
+use App\Http\Controllers\web\WebBaseController;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Resources\UserResource;
-use App\Models\Role;
 use App\Models\User;
 use App\Services\AttachmentService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
-class UserController extends Controller
+class ConsultantController extends WebBaseController
 {
     private $userService;
     private $attachmentService;
@@ -31,20 +29,30 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $data = User::where('name', 'like', "%$request->search_key%")
+        $data = User::where('referral_level_id', ReferralLevelEnum::Consultant)
             ->paginate(10);
 
-        return Inertia::render('User/Crud/Index', [
+        return Inertia::render('Consultant/Index', [
             'data' => $data
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $consultant = User::findOrFail($id);
+
+        if ($consultant->referral_level_id != ReferralLevelEnum::Consultant) {
+            return redirect()->route('consultants-crud.index');
+        }
+
+        return Inertia::render('Consultant/Edit', [
+            'consultant' => $consultant
         ]);
     }
 
     public function create()
     {
-        $roles = Role::all();
-        return Inertia::render('User/Crud/Add', [
-            'roles' => $roles
-        ]);
+        return Inertia::render('Consultant/Add');
     }
 
     public function store(CreateUserRequest $request)
@@ -65,25 +73,9 @@ class UserController extends Controller
 
         if (!empty($user)) {
             return redirect()
-                ->route('users-crud.edit', $user->id);
+                ->route('consultants-crud.index');
         } else {
             return $this->responseFail('failed saving user');
-        }
-    }
-
-    public function edit($id)
-    {
-        $user = $this->userService->findWith($id, ['balance']);
-        $roles = Role::all();
-        $auth_user = Auth::user();
-        if (!empty($user)) {
-            return Inertia::render('User/Crud/Edit', [
-                'client' => UserResource::make($user)->resolve(),
-                'roles' => $roles,
-                'auth_user' => UserResource::make($user)->resolve()
-            ]);
-        } else {
-            return redirect()->route('users-crud.index');
         }
     }
 
@@ -111,7 +103,7 @@ class UserController extends Controller
 
         if (!empty($user)) {
             return redirect()
-                ->route('users-crud.index');
+                ->route('consultants-crud.index');
         } else {
             return $this->responseFail('Не удалось обновить пользователя');
         }
@@ -122,30 +114,9 @@ class UserController extends Controller
         $deleted = $this->userService->delete($id);
 
         if ($deleted) {
-            return redirect()->route('users-crud.index');
+            return redirect()->route('consultants-crud.index');
         } else {
             return $this->responseFail('Не удалось удалить');
-        }
-    }
-
-    public function me() {
-        if (Auth::check()) {
-            Auth::user()->load('referrer');
-            $user = UserResource::make(Auth::user())
-                ->resolve();
-
-            $roles = Role::all();
-
-            return Inertia::render('User/Crud/Edit', [
-                'client' => $user,
-                'roles' => $roles,
-                'referrer' => isset($user['referrer'])
-                    ? $user['referrer']->resolve()
-                    : null,
-                'auth_user' => $user
-            ]);
-        } else {
-            return redirect()->route('users-crud.index');
         }
     }
 }

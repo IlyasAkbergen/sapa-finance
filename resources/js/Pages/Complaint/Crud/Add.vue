@@ -8,7 +8,7 @@
         </template>
 
         <template #header>
-            Оставить жалобу
+            Оставить отзыв
         </template>
 
         <div class="ptef">

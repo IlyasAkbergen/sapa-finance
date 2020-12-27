@@ -68,6 +68,12 @@ body
 .sidebar .sidebar__agent-profile .sidebar__profile__client-ava
 {
     margin-bottom: 10px;
+    max-height: 120px;
+    max-width: 120px;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 .sidebar .sidebar__agent-profile .sidebar__profile__client-name
 {
@@ -3672,6 +3678,11 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
 
 .nav-item .nav-link img {
     max-height: 45px;
+    max-width: 45px;
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .sidebar .sidebar__agent-profile img{

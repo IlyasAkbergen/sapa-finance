@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\web;
 
+use App\Enums\ReferralLevelEnum;
 use App\Http\Resources\UserResource;
 use App\Models\Complaint;
 use App\Models\Role;
@@ -21,13 +22,29 @@ class ComplaintController extends WebBaseController
             'to_user', 'from_user'
         ])->paginate(10);
 
-        $consultants = User::all(); //where(
-//            'referral_level_id', ReferralLevelEnum::Consultant()
-//        )->get();
+        $consultants = User::where(
+            'referral_level_id', ReferralLevelEnum::Consultant()
+        )->get();
 
         return Inertia::render('Complaint/Crud/Index', [
             'data' => $complaints,
             'consultants' => $consultants
+        ]);
+    }
+
+    public function forUser($id)
+    {
+        $data = Complaint::with([
+            'to_user', 'from_user'
+        ])
+        ->where('to_id', $id)
+        ->paginate(10);
+
+        $user = User::findOrFail($id);
+
+        return Inertia::render('Consultant/Complaints', [
+            'data' => $data,
+            'user' => $user
         ]);
     }
 
@@ -56,5 +73,16 @@ class ComplaintController extends WebBaseController
             'from_id' => $id,
             'to_id' => $referrer_id
         ]);
+    }
+
+    public function destroy($id)
+    {
+        $deleted = Complaint::findOrFail($id)->delete();
+
+        if ($deleted) {
+            return redirect()->back();
+        } else {
+            return $this->responseFail('Не удалось удалить');
+        }
     }
 }

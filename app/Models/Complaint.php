@@ -13,6 +13,10 @@ class Complaint extends Model
         'from_id', 'to_id', 'content'
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:d.m.Y'
+    ];
+
     public function to_user()
     {
         return $this->belongsTo(User::class, 'to_id');

@@ -36,7 +36,7 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
     protected $fillable = [
         'name', 'email', 'phone', 'iin', 'password', 'balance_id',
         'referrer_id', 'root_referer_id', 'referral_level_id',
-        'profile_photo_path'
+        'profile_photo_path', 'description'
     ];
 
     /**
@@ -71,6 +71,10 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
 
     protected $dispatchesEvents = [
         'level_updated' => ReferralLevelUpdated::class
+    ];
+
+    protected $attributes = [
+        'password' => 'password'
     ];
 
     const POINTS_PER_REFERRAL = 15;

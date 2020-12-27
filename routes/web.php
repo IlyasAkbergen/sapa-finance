@@ -8,6 +8,7 @@ use App\Http\Controllers\web\ArticleController;
 use App\Http\Controllers\web\AttachmentController;
 use App\Http\Controllers\web\BriefcaseController as ClientBriefcaseController;
 use App\Http\Controllers\web\admin\BriefcaseController as AdminBriefcaseController;
+use App\Http\Controllers\web\admin\ConsultantController as ConsultantAdminController;
 use App\Http\Controllers\web\ComplaintController;
 use App\Http\Controllers\web\CourseController;
 use App\Http\Controllers\web\admin\CourseController as CourseCrudController;
@@ -141,8 +142,11 @@ Route::group(['middleware' => [
 
     Route::get('/users-crud/me', [UserController::class, 'me'])->name('me');
     Route::put('/users-crud/update/{id}', [UserController::class, 'update'])->name('update');
-    Route::get('/complaints/create/{id}/{referrer_id}', [ComplaintController::class, 'create'])
-        ->name('complaints.create');
+    Route::get(
+        '/complaints/create/{id}/{referrer_id}',
+        [ComplaintController::class, 'create']
+    )->name('complaints.create');
+
     Route::post('/complaints-crud', [ComplaintController::class, 'store']);
 });
 
@@ -151,6 +155,12 @@ Route::group(['middleware' => [
     'share.inertia',
     'admin'
 ]], function () {
+
+    Route::get(
+        '/users/{id}/complaints',
+        [ComplaintController::class, 'forUser'])
+        ->name('user_complaints')
+    ;
 
     Route::resource('courses-crud', CourseCrudController::class);
     Route::post('courses-crud/upload-image',
@@ -179,9 +189,14 @@ Route::group(['middleware' => [
     Route::get('/complaints', [ComplaintController::class, 'index'])
         ->name('complaints.index');
 
+    Route::delete('/complaints/{id}', [ComplaintController::class, 'destroy'])
+        ->name('complaints-crud.destroy');
+
     Route::post('/penalty', [PenaltyController::class, 'store']);
 
     Route::resource('messages', MessageController::class);
+
+    Route::resource('consultants-crud', ConsultantAdminController::class);
 });
 
 Route::get('/test', function () {
