@@ -33,6 +33,8 @@ class LoginForm extends Component
 
     protected $messages = [
         'email.required' => 'Введите email.',
+        'email.email' => 'Неверный формат email.',
+        'email.max' => 'Максимальная длина email равна 255 символам.',
         'email.exists' => 'Пользователя с таким email не существует.',
         'password.required' => 'Введите пароль.',
     ];
@@ -40,14 +42,6 @@ class LoginForm extends Component
     public function submit()
     {
         $this->validate();
-
-//        $request = new LoginRequest();
-//
-//        $request->replace([
-//            ['email' => $this->email],
-//            ['password' => $this->password],
-//            ['remember' => $this->remember]
-//        ]);
 
         if(\Auth::attempt([
             'email' => $this->email,
@@ -57,8 +51,6 @@ class LoginForm extends Component
         }else{
             $this->addError('common', 'Неправильный логин или пароль');
         }
-//        return app(AuthenticatedSessionController::class)
-//            ->store($request);
     }
 
     public function render()
