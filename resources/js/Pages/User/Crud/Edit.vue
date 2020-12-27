@@ -36,11 +36,14 @@
             <img src="../../../../img/profile-agent-ava.png" class="avatar__img" style="width: 50px; height: 50px" alt="">
             <p class="referrer_name">{{referrer.name}}</p>
             <p class="referrer_title">Мой агент</p>
-            <a class="avatar__link" :href="route('complaints.create', {
-                id: client.id,
-                referrer_id: referrer.id
-            })" style="text-align: center">
-                Пожаловаться
+            <a class="avatar__link"
+               v-if="referrer"
+               :href="route('complaints.create', {
+                    id: client.id,
+                    referrer_id: referrer.id
+                })"
+               style="text-align: center">
+                Оставить отзыв
             </a>
         </div>
     </main-layout>

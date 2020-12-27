@@ -12,6 +12,20 @@
 		<link rel="stylesheet" href="{{asset('landing/slick-1.8.1/slick/slick-theme.css')}}">
 
 		<style>
+			#auth button{
+				color: #0a884d;
+				background: none;
+				border: none;
+				padding: 5px 15px;
+				border-radius: 25px;
+				transition: .5s;
+			}
+			#auth button:hover{
+				color: #fff;
+				background: #0a884d;
+				border: none;
+				transition: .5s;
+			}
 			.modal{
 				background-color: rgba(1, 15, 52, 0.7);
 			}

@@ -38,16 +38,16 @@
                     </SidebarItem>
 
                     <SidebarItem
-                            :route_name="'homeworks.index'"
-                            icon="MailOpen">
-                        ШФК
-                    </SidebarItem>
-
-                    <SidebarItem
                             v-if="!isAdmin"
                             :route_name="'my-courses'"
                             icon="MyGraduation">
                         Мои курсы
+                    </SidebarItem>
+
+                    <SidebarItem
+                            :route_name="'homeworks.index'"
+                            icon="MailOpen">
+                        ШФК
                     </SidebarItem>
 
                     <SidebarItem :route_name="!isAdmin
@@ -99,7 +99,7 @@
 
                     <SidebarItem
                             v-if="isAdmin"
-                            :route_name="'welcome'"
+                            :route_name="'consultants-crud.index'"
                             icon="Conversation">
                         Консультанты на сайте
                     </SidebarItem>
