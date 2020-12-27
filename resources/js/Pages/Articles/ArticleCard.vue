@@ -19,7 +19,7 @@
             <inertia-link :href="route('articles.show', article.id)"
                           class="users__link users__link--green">
                 <GreenEye />
-            </inertia-link>>
+            </inertia-link>
             <inertia-link :href="route('articles.edit', article.id)"
                class="users__link users__link--blue">
                 <Pencil />

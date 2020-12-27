@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="{{asset('landing/styles/style.css')}}">
 		<link rel="stylesheet" href="{{asset('landing/slick-1.8.1/slick/slick.css')}}">
 		<link rel="stylesheet" href="{{asset('landing/slick-1.8.1/slick/slick-theme.css')}}">
-
+		@livewireStyles
 		<style>
 			#auth button{
 				color: #0a884d;
@@ -603,53 +603,7 @@
 				<div class="modal-content">
 					<h3>Зарегистрироваться</h3>
 					<div class="modal-body">
-						<form method="POST" action="{{ route('register') }}">
-							@csrf
-							<x-jet-input
-									type="text"
-									placeholder="Имя"
-									autocomplete="name"
-									:value="old('name')"
-									name="name" />
-							<x-jet-input type="text"
-										 placeholder="E-mail"
-										 :value="old('email')"
-										 name="email" />
-							<x-jet-input type="text"
-										 placeholder="Номер телефона"
-										 :value="old('phone')"
-										 name="phone" />
-							<x-jet-input type="text" placeholder="ИИН"
-										 :value="old('iin')"
-										 name="iin" />
-                            <x-jet-input type="hidden" name="referrer_id"
-										 value="{{ $user->referrer_id }}" />
-							<x-jet-input id="password"
-										 class="block mt-1 w-full"
-										 type="password"
-										 name="password"
-										 required
-										 placeholder="Пароль"
-										 autocomplete="new-password" />
-
-							<x-jet-input
-									id="password_confirmation"
-									class="block mt-1 w-full"
-									type="password"
-									name="password_confirmation"
-									required
-									placeholder="Подтверждение пароля"
-									autocomplete="new-password" />
-
-							<button class="modal-btn">
-								Зарегистрироваться
-							</button>
-							<div class="text-center">
-								<div>
-									<label for="remember">Если уже есть аккаунт</label>
-								</div>
-							</div>
-						</form>
+						<livewire:register-form :referrer_id="$referrer_id">
 					</div>
 					<div class="modal-footer">
 						<button type="button" data-bs-dismiss="modal" aria-label="Close"
@@ -687,29 +641,12 @@
 			</div>
 		</div>
 
+		@livewireScripts
 		@stack('script')
 		<script src="{{asset('landing/scripts/jquery-3.5.1-min.js')}}"></script>
 		<script src="{{asset('landing/scripts/bootstrap.min.js')}}"></script>
 		<script src="{{asset('landing/slick-1.8.1/slick/slick.min.js')}}"></script>
 		<script type="text/javascript">
-			$('#regModal').submit(function(e) {
-				e.preventDefault();
-				let $form = $(this);
-
-				const $url = $form.attr('action');
-
-				console.log($url)
-
-				$.ajax({
-					method: 'POST',
-					url: $url,
-					data: $form.serialize(),
-				})
-					.done(function() {
-						$('#regModal').modal('hide');
-					});
-			})
-
 			$(document).ready(function(){
 				$('.menu-toggle').click(function(){
 					$('#navs').toggleClass('active');
@@ -888,23 +825,3 @@
 </body>
 
 </html>
-<script>
-    import Button from "@/Jetstream/Button";
-    export default {
-        components: {Button},
-		data() {
-        	return {
-        		// registerForm: this.$inertia.form({
-				// 	email: null,
-				// 	iin: null,
-				// 	referrer_id: null,
-				// 	password: null,
-				// 	password_confirmation: null
-				// }, {
-				// 	preserveScroll: false,
-        		// 	bag: 'userForm',
-				// }),
-			}
-		}
-    }
-</script>
