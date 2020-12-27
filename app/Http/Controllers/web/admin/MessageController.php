@@ -171,6 +171,9 @@ class MessageController extends WebBaseController
     {
         $deleted = $this->messageService->delete($id);
 
+        UserMessage::where('message_id', $id)
+            ->delete();
+
         if ($deleted) {
             return redirect()->route('messages.index');
         } else {

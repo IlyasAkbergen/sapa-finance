@@ -90,12 +90,12 @@
                         Поддержка
                     </SidebarItem>
 
-                    <SidebarItem
-                            v-if="isAdmin"
-                            :route_name="'welcome'"
-                            icon="AppService">
-                        Услуги на сайте
-                    </SidebarItem>
+<!--                    <SidebarItem-->
+<!--                            v-if="isAdmin"-->
+<!--                            :route_name="'welcome'"-->
+<!--                            icon="AppService">-->
+<!--                        Услуги на сайте-->
+<!--                    </SidebarItem>-->
 
                     <SidebarItem
                             v-if="isAdmin"
@@ -104,12 +104,12 @@
                         Консультанты на сайте
                     </SidebarItem>
 
-                    <SidebarItem
-                            v-if="isAdmin"
-                            :route_name="'welcome'"
-                            icon="Info">
-                        Информация об агентах
-                    </SidebarItem>
+<!--                    <SidebarItem-->
+<!--                            v-if="isAdmin"-->
+<!--                            :route_name="'welcome'"-->
+<!--                            icon="Info">-->
+<!--                        Информация об агентах-->
+<!--                    </SidebarItem>-->
 
                     <SidebarItem
                             v-if="isAdmin"
