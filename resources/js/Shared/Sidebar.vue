@@ -125,7 +125,7 @@
                     </SidebarItem>
                     <a v-if="canBecomeAgent"
                        :href="route('starter_lesson')"
-                       class="sidebar__menu__link">
+                       class="sidebar__menu__link mt-4">
                         Стать агентом
                     </a>
                 </ul>

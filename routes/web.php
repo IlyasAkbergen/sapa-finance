@@ -148,6 +148,11 @@ Route::group(['middleware' => [
     )->name('complaints.create');
 
     Route::post('/complaints-crud', [ComplaintController::class, 'store']);
+
+    Route::post('/make-messages-seen', [
+        MessageController::class,
+        'makeSeen'
+    ])->name('make_seen');
 });
 
 Route::group(['middleware' => [
