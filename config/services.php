@@ -39,7 +39,7 @@ return [
         'payout_result_url' => env('PAYBOX_PAYOUT_RESULT_URL', 'api/payout/result'),
         'site_url' => env('APP_URL'),
         'check_url' => env('PAYBOX_CHECK_URL', 'must-be-check-url'),
-        'pay_success_url' => env('PAYBOX_PAY_SUCCESS_URL', '/'),
+        'pay_success_url' => env('PAYBOX_PAY_SUCCESS_URL', ''),
         'payout_success_url' => env('PAYBOX_PAYOUT_SUCCESS_URL', 'payout/success'),
     ]
 ];
