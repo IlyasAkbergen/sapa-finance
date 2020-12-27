@@ -111,9 +111,17 @@
                         Информация об агентах
                     </SidebarItem>
 
-                    <SidebarItem :route_name="'messages.index'"
-                                 icon="Bell">
-                        Увеодомления
+                    <SidebarItem
+                            v-if="isAdmin"
+                            :route_name="'messages.index'"
+                            icon="Bell">
+                        Уведомления
+                    </SidebarItem>
+                    <SidebarItem
+                            v-if="!isAdmin"
+                            :route_name="'my_notify'"
+                            icon="Bell">
+                        Уведомления
                     </SidebarItem>
                     <a v-if="canBecomeAgent"
                        :href="route('starter_lesson')"

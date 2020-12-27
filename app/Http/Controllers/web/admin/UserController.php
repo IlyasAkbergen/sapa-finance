@@ -80,7 +80,7 @@ class UserController extends Controller
             return Inertia::render('User/Crud/Edit', [
                 'client' => UserResource::make($user)->resolve(),
                 'roles' => $roles,
-                'auth_user' => UserResource::make($user)->resolve()
+                'auth_user' => UserResource::make($auth_user)->resolve()
             ]);
         } else {
             return redirect()->route('users-crud.index');
@@ -138,7 +138,7 @@ class UserController extends Controller
                 'client' => $user,
                 'roles' => $roles,
                 'referrer' => isset($user['referrer'])
-                    ? $user['referrer']
+                    ? UserResource::make($user['referrer'])->resolve()
                     : null,
                 'auth_user' => $user
             ]);
