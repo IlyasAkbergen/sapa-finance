@@ -25,17 +25,20 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item dropdown" style="display: block; padding: .5rem 1rem;">
+            <a class="icon-button dropdown-toggle-bell" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <BellIcon />
+              <span class="icon-button__badge"></span>
             </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a v-for="notification in $page.notifications" class="dropdown-item" href="#">{{notification.title}}</a>
+            </div>
           </li>
-
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle d-flex"
                data-toggle="dropdown" role="button"
                aria-haspopup="true" aria-expanded="false">
-              {{ username }}
+              <span style="display: block; padding: .5rem 1rem;">{{ username }}</span>
               <img :src="avatarPath" class="ml-2 mr-1">
             </a>
             <div class="dropdown-menu">
@@ -114,4 +117,40 @@
   .add-client {
     display: block !important;
   }
+  .dropdown-toggle::after {
+      margin-top: 1rem;
+  }
+
+  .icon-button__badge {
+      position: absolute;
+      top: -3px;
+      right: 0;
+      width: 10px;
+      height: 10px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+  }
+
+  .icon-button {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  .dropdown-toggle-bell {
+      white-space: nowrap;
+  }
+  .dropdown-toggle-bell::after {
+       display: inline-block;
+       margin-left: .255em;
+       vertical-align: .255em;
+       border-top: .3em solid;
+       border-right: .3em solid transparent;
+       border-bottom: 0;
+       border-left: .3em solid transparent;
+    }
 </style>

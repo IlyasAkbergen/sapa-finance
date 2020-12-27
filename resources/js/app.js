@@ -7,6 +7,7 @@ import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import VueFlashMessage from 'vue-flash-message';
 import UUID from "vue-uuid";
+import interceptors from './interceptors'
 
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaApp);
@@ -14,7 +15,7 @@ Vue.use(InertiaForm);
 Vue.use(PortalVue);
 Vue.use(VueFlashMessage);
 Vue.use(UUID);
-
+interceptors();
 const app = document.getElementById('app');
 
 Vue.filter('truncate', function (value, size) {

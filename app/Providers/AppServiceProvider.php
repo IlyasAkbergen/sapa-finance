@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Resources\AuthUserResource;
+use App\Models\Message;
 use App\Models\Purchase;
 use App\Models\User;
 use App\Observers\PurchaseObserver;
@@ -122,7 +123,15 @@ class AppServiceProvider extends ServiceProvider
         Purchase::observe(PurchaseObserver::class);
 
         // todo practice tutorial from here: https://www.itsolutionstuff.com/post/laravel-8-inertia-js-crud-with-jetstream-tailwind-cssexample.html
-
+        Inertia::share([
+            'notifications' => function () {
+                return Message::with('attachments')
+                    ->whereHas('users', function ($query) {
+                        return $query->where('user_id', Auth::user()->id);
+                    })
+                    ->orderBy('created_at')->get();
+            }
+        ]);
         Inertia::share([
             'errors' => function () {
                 return Session::get('errors')

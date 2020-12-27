@@ -101,7 +101,7 @@ Route::group(['middleware' => [
 
     Route::resource('support', SupportController::class);
 
-    Route::resource('notifications', NotificationController::class);
+    Route::get('notifications', [MessageController::class, 'my'])->name('my_notify');
 
     Route::resource(
         'attachments',
