@@ -53,8 +53,14 @@
               <img :src="avatarPath" class="ml-2 mr-1">
             </a>
             <div class="dropdown-menu">
-              <a :href="route('me')" class="dropdown-item">Настройка профиля</a>
-              <a :href="route('support.index')" class="dropdown-item">Поддержка</a>
+              <inertia-link :href="route('me')"
+                            class="dropdown-item">
+                Настройка профиля
+              </inertia-link>
+              <inertia-link :href="route('support.index')"
+                            class="dropdown-item">
+                Поддержка
+              </inertia-link>
               <a href="#"
                  class="dropdown-item text-danger"
                  @click.prevent="logout">
