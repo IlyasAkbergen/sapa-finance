@@ -122,14 +122,10 @@ class AppServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
         Purchase::observe(PurchaseObserver::class);
 
-        // todo practice tutorial from here: https://www.itsolutionstuff.com/post/laravel-8-inertia-js-crud-with-jetstream-tailwind-cssexample.html
         Inertia::share([
             'notifications' => function () {
-                return Message::with('attachments')
-                    ->whereHas('users', function ($query) {
-                        return $query->where('user_id', Auth::user()->id);
-                    })
-                    ->orderBy('created_at')->get();
+                Auth::user()->load('newMessages');
+                return Auth::user()->newMessages;
             }
         ]);
         Inertia::share([

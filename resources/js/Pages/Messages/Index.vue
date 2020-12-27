@@ -17,23 +17,26 @@
                         </thead>
                         <tbody>
                             <tr v-for="message in messages.data">
-                                <td class="align-middle" scope="row">
-                                    {{ message.title }}
+                                <td class="align-middle">
+                                    <div class="w-50">
+                                        {{ message.title }}
+                                    </div>
                                 </td>
-                                <td class="align-middle d-flex">
-                                    <img src="../../../img/uploaded-file.png">
-                                    <span>
+                                <td class="align-middle">
+                                    <span class="ml-1">
                                         <a :href="message.url" target="_blank">
                                           {{ message.url | truncate(20)}}
                                         </a>
                                     </span>
                                 </td>
-                                <td class="align-middle d-flex" v-for="attachment in message.attachments">
-                                    <img src="../../../img/uploaded-file.png">
-                                    <span>{{ attachment.name | truncate(10) }}</span>
-                                    <a :href="attachment.path">
-                                        <Download />
-                                    </a>
+                                <td class="align-middle">
+                                    <div class="d-flex" v-for="attachment in message.attachments">
+                                        <img src="../../../img/uploaded-file.png">
+                                        <span class="ml-2 pt-2">{{ attachment.name | truncate(10) }}</span>
+                                        <a :href="attachment.path" class="ml-2 pt-2">
+                                            <Download />
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -54,7 +57,8 @@
         name: "Index",
         components: {
             Pagination: () => import('@/Shared/Pagination'),
-            MainLayout: () => import('@/Layouts/MainLayout')
+            MainLayout: () => import('@/Layouts/MainLayout'),
+            Download: () => import('@/assets/icons/Download')
         },
         props: {
             messages: Object

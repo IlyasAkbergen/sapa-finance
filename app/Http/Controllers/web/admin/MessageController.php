@@ -8,6 +8,7 @@ use App\Http\Controllers\web\WebBaseController;
 use App\Http\Requests\MessageFormRequest;
 use App\Models\Message;
 use App\Models\User;
+use App\Models\UserMessage;
 use App\Services\AttachmentService;
 use App\Services\MessageService;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class MessageController extends WebBaseController
         $this->attachmentService = $attachmentService;
         $this->messageService = $messageService;
         $this->middleware('admin')
-            ->except(['my', 'show']);
+            ->except(['my', 'show', 'makeSeen']);
     }
 
     /**
@@ -61,6 +62,22 @@ class MessageController extends WebBaseController
         return Inertia::render('Messages/Index', [
             'messages'=> $messages
         ]);
+    }
+
+    public function makeSeen(Request $request)
+    {
+        $request->validate([
+            'ids' => 'array'
+        ]);
+
+
+        UserMessage::where('user_id', Auth::user()->id)
+            ->whereIn('message_id', $request->input('ids'))
+            ->update([
+                'seen' => true
+            ]);
+
+        return $this->responseSuccess('OK');
     }
 
     /**

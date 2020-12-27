@@ -26,12 +26,23 @@
           </li>
 
           <li class="nav-item dropdown" style="display: block; padding: .5rem 1rem;">
-            <a class="icon-button dropdown-toggle-bell" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="icon-button dropdown-toggle-bell" type="button"
+               id="dropdownMenuButton" data-toggle="dropdown"
+               @click.capture="makeNewMessagesSeen"
+               aria-haspopup="true" aria-expanded="false">
               <BellIcon />
-              <span class="icon-button__badge"></span>
+              <span class="icon-button__badge"
+                    v-if="notifications.length > 0" />
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a v-for="notification in $page.notifications" class="dropdown-item" href="#">{{notification.title}}</a>
+              <a v-for="notification in notifications"
+                 class="dropdown-item" href="#">
+                {{notification.title}}
+              </a>
+              <a href="#" class="dropdown-item"
+                 v-if="notifications.length == 0">
+                Нет новых уведомлений
+              </a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -103,12 +114,28 @@
       }
     },
 
+    computed: {
+    	notifications() {
+				return this.$page.notifications;
+      }
+    },
+
     methods: {
       logout() {
         axios.post(route('logout').url()).then(response => {
           window.location = '/';
         })
       },
+			makeNewMessagesSeen() {
+      	if (this.notifications.length > 0) {
+          axios.post(route('make_seen').url(), {
+            ids: this.notifications.map(n => n.id),
+            _method: 'POST'
+          }).then(r => {
+            console.log(r);
+          })
+        }
+      }
     }
   }
 </script>

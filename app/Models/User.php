@@ -100,8 +100,7 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
 
     public function newMessages()
     {
-        $this->loadMissing('messages');
-        return $this->messages
+        return $this->messages()
             ->wherePivot('seen', false);
     }
 
