@@ -562,31 +562,7 @@
 				<div class="modal-content">
 					<h3>Вход в систему</h3>
 					<div class="modal-body">
-                        <form method="POST" action="{{ route('login') }}">
-							@csrf
-							<x-jet-input class="block mt-1 w-full"
-										 placeholder="E-mail"
-										 type="text" name="email" required autofocus />
-							<x-jet-input class="block mt-1 w-full"
-										 type="password" name="password" required
-										 placeholder="Пароль"
-										 autocomplete="current-password" />
-							<button class="modal-btn">
-								Войти
-							</button>
-							<div class="modal-flex">
-								<div>
-									<input type="checkbox" id="remember" name="remember">
-									<label for="remember">Запомнить меня</label>
-								</div>
-                                @if (Route::has('password.request'))
-                                    <button style="border: none; background: none; margin: 0; padding: 0;" type="button" data-bs-dismiss="modal"
-                                            aria-label="Close"  data-bs-toggle="modal" data-bs-target="#passModal">
-                                        Забыл пароль?
-                                    </button>
-                                @endif
-							</div>
-						</form>
+						<livewire:login-form />
 					</div>
 					<div class="modal-footer">
 						<button type="button" data-bs-dismiss="modal" aria-label="Close"  data-bs-toggle="modal" data-bs-target="#regModal">
@@ -603,7 +579,7 @@
 				<div class="modal-content">
 					<h3>Зарегистрироваться</h3>
 					<div class="modal-body">
-						<livewire:register-form :referrer_id="$referrer_id">
+						<livewire:register-form :referrer_id="$referrer_id" />
 					</div>
 					<div class="modal-footer">
 						<button type="button" data-bs-dismiss="modal" aria-label="Close"
