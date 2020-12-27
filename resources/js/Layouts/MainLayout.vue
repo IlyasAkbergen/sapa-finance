@@ -16,13 +16,24 @@
             </a>
           </li>
 
-          <li class="nav-item add-client"
+          <li class="nav-item add-client mr-2"
               v-if="hasSomeLevel([
                 'agent', 'consultant', 'mentor', 'tutor', 'partner'
               ])">
-            <a href="#" class="nav-link">
-              <p>Добавить клиента&nbsp;&nbsp;<i class="fas fa-user-plus"></i></p>
-            </a>
+            <JetDropdown :width="500" :align="'right'">
+              <template #trigger>
+                <a href="#" class="nav-link">
+                  <p>Добавить клиента&nbsp;&nbsp;<i class="fas fa-user-plus"></i></p>
+                </a>
+              </template>
+              <template #content>
+                <div>
+                  <p class="text-center py-4 px-1 mr-2">
+                     Реферальная ссылка: <span class="text-muted">{{ getReferralLink() }}</span>
+                  </p>
+                </div>
+              </template>
+            </JetDropdown>
           </li>
 
           <li class="nav-item dropdown" style="display: block; padding: .5rem 1rem;">
@@ -141,7 +152,10 @@
             console.log(r);
           })
         }
-      }
+      },
+      async copyReferralLink() {
+				await navigator.clipboard.writeText(this.getReferralLink);
+		  }
     }
   }
 </script>

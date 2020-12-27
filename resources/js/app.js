@@ -18,20 +18,21 @@ Vue.use(UUID);
 interceptors();
 const app = document.getElementById('app');
 
-import NProgress from 'nprogress'
-import { Inertia } from '@inertiajs/inertia'
+import { InertiaProgress } from '@inertiajs/progress'
 
-Inertia.on('start', () => NProgress.start())
+InertiaProgress.init({
+  // The delay after which the progress bar will
+  // appear during navigation, in milliseconds.
+  delay: 250,
 
-Inertia.on('finish', (event) => {
-  if (event.detail.visit.completed) {
-    NProgress.done()
-  } else if (event.detail.visit.interrupted) {
-    NProgress.set(0)
-  } else if (event.detail.visit.cancelled) {
-    NProgress.done()
-    NProgress.remove()
-  }
+  // The color of the progress bar.
+  color: '#29d',
+
+  // Whether to include the default NProgress styles.
+  includeCSS: true,
+
+  // Whether the NProgress spinner will be shown.
+  showSpinner: false,
 })
 
 Vue.filter('truncate', function (value, size) {

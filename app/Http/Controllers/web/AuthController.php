@@ -12,7 +12,6 @@ class AuthController extends Controller
     public function index(Request $request)
     {
         $referrer_id = $request->input('referrer_id', null);
-
         $consultants = User::all(); // todo retrieve consultants
 
         $articles = Article::orderBy('created_at')

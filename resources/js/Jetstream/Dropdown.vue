@@ -18,8 +18,7 @@
             <div v-show="open"
                     class="absolute z-50 mt-2 rounded-md shadow-lg"
                     :class="[widthClass, alignmentClasses]"
-                    style="display: none;"
-                    @click="open = false">
+                    style="display: none;">
                 <div class="rounded-md shadow-xs" :class="contentClasses">
                     <slot name="content"></slot>
                 </div>
@@ -71,16 +70,14 @@
 
         computed: {
             widthClass() {
-                return {
-                    '48': 'w-48',
-                }[this.width.toString()]
+                return 'w-' + this.width.toString()
             },
 
             alignmentClasses() {
                 if (this.align == 'left') {
                     return 'origin-top-left left-0'
                 } else if (this.align == 'right') {
-                    return 'origin-top-right right-0'
+                    return 'origin-top-right right-0 float-right'
                 } else {
                     return 'origin-top'
                 }
@@ -88,3 +85,8 @@
         }
     }
 </script>
+<style scoped>
+    .w-500 {
+        width: 500px !important;
+    }
+</style>

@@ -579,7 +579,7 @@
 				<div class="modal-content">
 					<h3>Зарегистрироваться</h3>
 					<div class="modal-body">
-						<livewire:register-form :referrer_id="$referrer_id" />
+						@livewire('register-form', ['referrer_id' => $referrer_id])
 					</div>
 					<div class="modal-footer">
 						<button type="button" data-bs-dismiss="modal" aria-label="Close"

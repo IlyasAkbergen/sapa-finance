@@ -24,7 +24,7 @@ class RegisterForm extends Component
     public $email;
     public $iin;
     public $phone;
-    public $referrer_id = null;
+    public $referrer_id;
     public $password;
     public $password_confirmation;
     public $user;

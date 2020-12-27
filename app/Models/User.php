@@ -156,6 +156,6 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
             ->wherePivot('completed', false);
     }
     public function getReferralLinkAttribute() {
-        return '/?referrer_id='.$this->id;
+        return url('/?referrer_id='.$this->id);
     }
 }

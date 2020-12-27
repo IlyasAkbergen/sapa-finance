@@ -126,7 +126,10 @@ class AppServiceProvider extends ServiceProvider
             'notifications' => function () {
                 Auth::user()->load('newMessages');
                 return Auth::user()->newMessages;
-            }
+            },
+            'referral_link' => function () {
+                return Auth::user()->referral_link;
+            },
         ]);
         Inertia::share([
             'errors' => function () {
