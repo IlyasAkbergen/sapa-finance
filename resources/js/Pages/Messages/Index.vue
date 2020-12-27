@@ -33,7 +33,7 @@
                                     <div class="d-flex" v-for="attachment in message.attachments">
                                         <img src="../../../img/uploaded-file.png">
                                         <span class="ml-2 pt-2">{{ attachment.name | truncate(10) }}</span>
-                                        <a :href="attachment.path" class="ml-2 pt-2">
+                                        <a :href="attachment.path" class="ml-2 pt-2" target="_blank">
                                             <Download />
                                         </a>
                                     </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <Pagination :prev_page_url="messages.prev_page_url"
-                        :next-page-url="messages.next_page_url"
+                        :next_page_url="messages.next_page_url"
                         :current_page="messages.current_page"
                         :links="messages.links"
             />

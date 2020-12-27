@@ -11,10 +11,10 @@
                         @input="input => search_key = input"
                 />
 
-                <a class="actions__link actions__link--green"
+                <inertia-link class="actions__link actions__link--green"
                    :href="route('articles.create')">
                     <span>Добавить новость</span>
-                </a>
+                </inertia-link>
             </div>
         </template>
 

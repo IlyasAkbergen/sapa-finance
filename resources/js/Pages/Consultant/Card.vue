@@ -6,14 +6,14 @@
       <span>{{ consultant.name }}</span>
     </div>
     <div class="consultants__bottom">
-      <a :href="route('user_complaints', consultant.id)"
+      <inertia-link :href="route('user_complaints', consultant.id)"
          class="consultants__feedback">
         Отзывы
-      </a>
-      <a :href="route('consultants-crud.edit', consultant.id)"
+      </inertia-link>
+      <inertia-link :href="route('consultants-crud.edit', consultant.id)"
          class="users__link users__link--blue">
         <Pencil />
-      </a>
+      </inertia-link>
       <a class="users__link users__link--red consultant__delete"
         href="#" @click.prevent="$emit('delete')"
       >

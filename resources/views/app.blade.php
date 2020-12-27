@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="{{ mix('css/style_client.css') }}">
         <link rel="stylesheet" href="{{ mix('css/style_consaltant.css') }}">
         <link rel="stylesheet" href="{{ mix('css/style_admin.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
 
         <!-- Scripts -->
         <script src="https://kit.fontawesome.com/c9e46db961.js" crossorigin="anonymous"></script>

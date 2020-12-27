@@ -17,10 +17,10 @@
                         </a>
                     </li>
                     </ul>
-                    <a :href="route('my-referrals')"
+                    <inertia-link :href="route('my-referrals')"
                        class="main__content__sellings-wrapper__sellings__top__button">
                         Посмотреть своих рефералов
-                    </a>
+                    </inertia-link>
                 </div>
                 <div class="main__content__sellings-wrapper__sellings__table">
                     <table class="table">
@@ -50,7 +50,7 @@
             </div>
             <Pagination
                     :prev_page_url="data.prev_page_url"
-                    :next-page-url="data.next_page_url"
+                    :next_page_url="data.next_page_url"
                     :current_page="data.current_page"
                     :links="data.links"/>
             <div class="clear"></div>

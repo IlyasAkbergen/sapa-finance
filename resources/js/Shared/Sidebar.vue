@@ -123,11 +123,11 @@
                             icon="Bell">
                         Уведомления
                     </SidebarItem>
-                    <a v-if="canBecomeAgent"
+                    <inertia-link v-if="canBecomeAgent"
                        :href="route('starter_lesson')"
                        class="sidebar__menu__link mt-4">
                         Стать агентом
-                    </a>
+                    </inertia-link>
                 </ul>
             </div>
         </div>

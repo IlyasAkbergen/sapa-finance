@@ -29,7 +29,7 @@
             </div>
 
             <Pagination :prev_page_url="data.prev_page_url"
-                        :next-page-url="data.next_page_url"
+                        :next_page_url="data.next_page_url"
                         :current_page="data.current_page"
                         :links="data.links"
             />

@@ -46,7 +46,7 @@
                 </div>
             </div>
             <Pagination :prev_page_url="data.prev_page_url"
-                        :next-page-url="data.next_page_url"
+                        :next_page_url="data.next_page_url"
                         :current_page="data.current_page"
                         :links="data.links"
             />
@@ -58,7 +58,7 @@
             <div class="modal-body" v-if="penaltyFormVisible">
                 <p class="complaint__title">
                     Укажите сумму штрафа для пользователя
-                    <a :href="route('users-crud.edit', penaltyForm.user.id)"> {{ penaltyForm.user.name }}</a>
+                    <inertia-link :href="route('users-crud.edit', penaltyForm.user.id)"> {{ penaltyForm.user.name }}</inertia-link>
                 </p>
                 <form>
                     <label class="profile-form__label" for="units">Личные единицы</label>
@@ -84,9 +84,9 @@
                @close="() => newConsultantFormVisible = false">
             <div class="modal-body" v-if="newConsultantFormVisible">
                 <p>Укажите нового финансового консультанта для пользователя
-                    <a :href="route('users-crud.edit', newConsultantForm.user_id)">
+                    <inertia-link :href="route('users-crud.edit', newConsultantForm.user_id)">
                         {{ newConsultantForm.user.name }}
-                    </a>
+                    </inertia-link>
                 </p>
                 <div class="fc-slider">
                     <div v-for="consultant in consultants">

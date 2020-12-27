@@ -1,10 +1,10 @@
 <template>
     <main-layout>
         <template #back-link>
-            <a :href="route('courses-crud.index')"
+            <inertia-link :href="route('users-crud.index')"
                class="navbar-brand mb-0 pb-0">
                 <img src="../../../../img/back-arrow.png">
-            </a>
+            </inertia-link>
         </template>
 
         <template #header>
@@ -54,6 +54,7 @@ export default {
             photoPath: null,
             image: null,
             password: '',
+            role_id: 2,
             direct_points: 0,
             team_points: 0,
             '_method': 'POST',

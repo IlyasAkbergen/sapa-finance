@@ -16,25 +16,25 @@
         </p>
 
         <div class="text-center" v-if="isAdmin">
-            <a :href="route('articles.show', article.id)"
-               class="users__link users__link--green">
+            <inertia-link :href="route('articles.show', article.id)"
+                          class="users__link users__link--green">
                 <GreenEye />
-            </a>
-            <a :href="route('articles.edit', article.id)"
+            </inertia-link>>
+            <inertia-link :href="route('articles.edit', article.id)"
                class="users__link users__link--blue">
                 <Pencil />
-            </a>
+            </inertia-link>
             <a href="#" @click.prevent="alertAcceptDelete"
                 class="users__link users__link--red new__delete">
                 <Trash />
             </a>
         </div>
 
-        <a :href="route('articles.show', article.id)"
+        <inertia-link :href="route('articles.show', article.id)"
            v-else
            class="main__content__news-flex__card__button">
             Читать новость
-        </a>
+        </inertia-link>
 
         <DeleteAcceptModal :show="deleteAcceptModalShow"
                            @close="deleteAcceptModalShow = false"
