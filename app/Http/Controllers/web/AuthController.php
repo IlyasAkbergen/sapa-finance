@@ -11,11 +11,7 @@ class AuthController extends Controller
 {
     public function index(Request $request)
     {
-        $user = new User();
-
-        if ($request->has('referrer_id')) {
-            $user->referrer_id = $request->input('referrer_id');
-        }
+        $referrer_id = $request->input('referrer_id', null);
 
         $consultants = User::all(); // todo retrieve consultants
 
@@ -24,7 +20,7 @@ class AuthController extends Controller
             ->get();
 
         return view('welcome', compact([
-            'user', 'consultants', 'articles'
+            'referrer_id', 'consultants', 'articles'
         ]));
     }
 }

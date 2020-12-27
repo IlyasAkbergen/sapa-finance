@@ -23,25 +23,25 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'referrer_id' => ['numeric', 'exists:' . User::class . ',id'],
-            'password' => $this->passwordRules(),
-        ])->validate();
+//        Validator::make($input, [
+//            'name' => ['required', 'string', 'max:255'],
+//            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+//            'iin' => ['required', 'string', 'max:12', 'unique:users'],
+//            'phone' => ['required', 'string', 'max:12', 'unique:users'],
+//            'referrer_id' => ['numeric', 'exists:' . User::class . ',id'],
+//            'password' => $this->passwordRules(),
+//        ])->validate();
 
         return DB::transaction(function () use ($input) {
-            return tap(User::create([
+            return User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
-                'iin' => $input['iin'] ?? Factory::create()->bankAccountNumber,
-                'phone' => $input['phone'] ?? Factory::create()->phoneNumber,
-                'referrer_id' => $input['referrer_id'] ?? null,
+                'iin' => $input['iin'],
+                'phone' => $input['phone'],
+                'referrer_id' => $input['referrer_id'],
                 'role_id' => Role::ROLE_CLIENT,
                 'password' => Hash::make($input['password']),
-            ]), function (User $user) {
-                $this->createTeam($user);
-            });
+            ]);
         });
     }
 
