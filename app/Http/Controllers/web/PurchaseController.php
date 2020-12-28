@@ -116,7 +116,7 @@ class PurchaseController extends WebBaseController
             return $this->responseFail('Что-то пошло не так.');
         } else {
             if (!$request->pay_online) {
-                return $this->responseSuccess('Запрос успешно отправлен');
+                return redirect()->route('my-courses');
             }
 
             $this->paymentGate->initPayin();
