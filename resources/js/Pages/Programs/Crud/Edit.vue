@@ -1,61 +1,54 @@
 <template>
     <main-layout>
         <template #back-link>
-            <a :href="route('partners-crud.index')"
-               class="navbar-brand mb-0 pb-0">
+            <inertia-link :href="route('briefcases-admin.index')"
+                          class="navbar-brand mb-0 pb-0">
                 <img src="../../../../img/back-arrow.png">
-            </a>
+            </inertia-link>
         </template>
 
         <template #header>
-            Профиль компании
+            Редактирование портфеля {{ briefcase.title }}
         </template>
 
-        <div class="ptef">
+        <div class="cec">
             <Form :form="form"
-                  :partner="partner"
-                  @submit="updatePartner" />
+                  :course="briefcase"
+                  @submit="updateBriefcase"/>
         </div>
     </main-layout>
 </template>
 
 <script>
-import MainLayout from '@/Layouts/MainLayout'
-export default {
-    name: "Edit",
-    components: {
-        Form: () => import('./Form'),
-        MainLayout,
-    },
-    props: {
-        partner: {
-            type: Object,
-            default: {
+    import MainLayout from "@/Layouts/MainLayout";
 
+    export default {
+        name: "Edit",
+        components: {
+            Form: () => import('./Form'),
+            MainLayout,
+        },
+        props: {
+            briefcase: Object,
+        },
+        data() {
+            return {
+                form: this.$inertia.form({
+                    ...this.briefcase,
+                    ...{
+                        image: null,
+                        '_method': 'PUT',
+                    }
+                }, {
+                    bag: 'briefcaseForm',
+                    resetOnSuccess: true,
+                }),
             }
         },
-    },
-    data() {
-        return {
-            form: this.$inertia.form({
-                ...this.partner,
-                ...{
-                    password: null,
-                    '_method': 'POST',
-                }
-            }, {
-                bag: 'partnerForm',
-                resetOnSuccess: true,
-            }),
+        methods: {
+            updateBriefcase() {
+                this.form.post('/programs-crud/' + this.briefcase.id);
+            },
         }
-    },
-    methods: {
-        updatePartner() {
-            if (this.$refs.image) {
-                this.$set(this.form, 'image', this.$refs.image.files[0]);
-            }
-            this.form.post('/partner-cabinet/update');
-        }
-    },
-}
+    }
 </script>

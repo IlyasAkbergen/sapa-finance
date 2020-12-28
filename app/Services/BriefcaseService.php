@@ -28,4 +28,6 @@ interface BriefcaseService
     public function createType(array $attributes): BriefcaseType;
 
     function ofUser(User $user);
+
+    function getPurchases(User $user);
 }
