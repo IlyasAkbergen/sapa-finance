@@ -29,7 +29,7 @@ class Purchase extends Model
     }
 
     protected $dispatchesEvents = [
-        'created' => PurchaseMade::class,
+//        'created' => PurchaseMade::class,
         'payed' => PurchasePayed::class
     ];
 
