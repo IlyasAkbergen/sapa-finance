@@ -26,6 +26,11 @@ class UserCourse extends Model
         return $this->belongsTo(Purchase::class);
     }
 
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
     function makeCompleted()
     {
         $this->update([
