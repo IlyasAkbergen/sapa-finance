@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\web;
 
-use App\Http\Requests\CourseRequest;
 use App\Http\Resources\MyCourseResource;
 use App\Models\Course;
 use App\Services\CourseService;
