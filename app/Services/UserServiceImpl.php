@@ -68,7 +68,7 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
             $all_referrers = Helper::flat_all_referrers($purchase->user);
 
             $is_start_course = $purchasable instanceof Course
-                && $purchasable->id == Course::START_COURSE_ID;
+                && $purchasable->tag == Course::START_COURSE_TAG;
 
             $consultant = $all_referrers->firstWhere('referral_level_id', ReferralLevelEnum::Consultant);
 

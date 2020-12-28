@@ -53,28 +53,6 @@ class ReferralEventsSubscriber implements ShouldQueue
         }
     }
 
-    public function handleRewardCreated($event)
-    {
-        $reward = $event->reward;
-
-        if ($reward->handled) return;
-
-        DB::beginTransaction();
-
-        try {
-
-            $operation = $this->balanceService->createOperationForReward($reward);
-
-            if (!empty($operation)) {
-                $reward->makeHandled();
-            }
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
-    }
-
     public function handleUserRegistered($event)
     {
         $user = $event->user;
@@ -108,11 +86,6 @@ class ReferralEventsSubscriber implements ShouldQueue
         $events->listen(
             PurchasePayed::class,
             [self::class, 'handlePurchasePaid']
-        );
-
-        $events->listen(
-            RewardCreated::class,
-            [self::class, 'handleRewardCreated']
         );
 
         $events->listen(

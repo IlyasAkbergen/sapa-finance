@@ -6,6 +6,7 @@ use App\Listeners\BalanceEventsSubscriber;
 use App\Listeners\CourseEventsSubscriber;
 use App\Listeners\LevelUpListener;
 use App\Listeners\ReferralEventsSubscriber;
+use App\Listeners\RewardEventsSubscriber;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,7 +28,8 @@ class EventServiceProvider extends ServiceProvider
         ReferralEventsSubscriber::class,
         BalanceEventsSubscriber::class,
         LevelUpListener::class,
-        CourseEventsSubscriber::class
+        CourseEventsSubscriber::class,
+        RewardEventsSubscriber::class
     ];
 
     /**
