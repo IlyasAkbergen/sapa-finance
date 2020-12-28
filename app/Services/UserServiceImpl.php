@@ -60,6 +60,7 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
             $purchase->loadMissing('user.referrer_recursive', 'purchasable');
 
             if (empty($purchase->user->referrer)) {
+                DB::commit();
                 return;
             }
 
@@ -128,6 +129,7 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
 //            }
 
             DB::commit();
+            dump('committed awardReferrersAfterPurchase');
         } catch (\Exception $e) {
             DB::rollBack();
         }
