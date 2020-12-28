@@ -22,38 +22,39 @@ class PurchaseController extends ApiBaseController
 
     public function makePayed(ResultRequest $request)
     {
+        $this->paymentGate->initPayin();
+        if (!$this->paymentGate->parseRequest($request) ) {
+            return $this->failedResponse([
+                'message' => 'could not parse request.'
+            ]);
+        }
+
+        if (!$this->paymentGate->isStatusOk()) {
+            return $this->failedResponse([
+                'message' => 'Payment is not OK.'
+            ]);
+        }
+        $purchase = $this->purchaseService->findWith(
+            $this->paymentGate->getOrder()->id,
+            ['purchasable', 'payments']
+        );
+
+
+        if (!isset($purchase)) {
+            return $this->failedResponse([
+                'message' => 'Not found.'
+            ]);
+        } else if($purchase->payed && !$purchase->purchasable->isPartPaid) {
+            return $this->failedResponse([
+                'message' => 'Already payed.'
+            ]);
+        }
+
+        $payment_id = $request->input('pg_payment_id', null);
+        $payed_sum = $request->input('pg_amount', null);
+
         try {
             DB::beginTransaction();
-            $this->paymentGate->initPayin();
-            if (!$this->paymentGate->parseRequest($request) ) {
-                return $this->failedResponse([
-                    'message' => 'could not parse request.'
-                ]);
-            }
-
-            if (!$this->paymentGate->isStatusOk()) {
-                return $this->failedResponse([
-                    'message' => 'Payment is not OK.'
-                ]);
-            }
-            $purchase = $this->purchaseService->findWith(
-                $this->paymentGate->getOrder()->id,
-                ['purchasable', 'payments']
-            );
-
-
-            if (!isset($purchase)) {
-                return $this->failedResponse([
-                    'message' => 'Not found.'
-                ]);
-            } else if($purchase->payed && !$purchase->purchasable->isPartPaid) {
-                return $this->failedResponse([
-                    'message' => 'Already payed.'
-                ]);
-            }
-
-            $payment_id = $request->input('pg_payment_id', null);
-            $payed_sum = $request->input('pg_amount', null);
 
             $purchase->payments()->updateOrCreate([
                 'eid' => $payment_id,
@@ -62,12 +63,7 @@ class PurchaseController extends ApiBaseController
                 'sum' => $payed_sum
             ]);
 
-//            $part_payments_sum = $purchase->payments->where('status', PaymentGateContract::PAYMENT_STATUS_OK)
-//                ->sum('sum');
-//
-//            if (!$purchase->purchasable->isPartPaid || $purchase->sum <= $part_payments_sum) {
-                $purchase->setPayed();
-//            }
+            $purchase->setPayed();
 
             $this->paymentGate->accept();
 
