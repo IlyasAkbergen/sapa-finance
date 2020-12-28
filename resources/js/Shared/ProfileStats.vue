@@ -48,6 +48,12 @@
             </p>
           </div>
         </div>
+        <div class="sidebar__profile__stats">
+          <p class="sidebar__profile__stats__right__title">Баланс: </p>
+          <p class="sidebar__profile__stats__right__text">
+            {{ balance != null ? balance.sum : 0 }} ₸
+          </p>
+        </div>
         <div class="sidebar__profile__agent" v-if="!!referrer">
           <img :src="referrer.profile_photo_path" class="sidebar__profile__agent__ava" alt="">
           <p class="sidebar__profile__agent__name">
