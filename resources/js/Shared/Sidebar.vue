@@ -16,7 +16,7 @@
 
             </div>
 
-            <div class="sidebar__menu">
+            <div class="sidebar__menu" v-if="!isPartner">
                 <ul class="sidebar__menu__nav">
                     <SidebarItem
                             v-if="isAdmin"
@@ -130,6 +130,16 @@
                     </inertia-link>
                 </ul>
             </div>
+            <div class="sidebar__menu" v-if="isPartner">
+                <ul class="sidebar__menu__nav">
+                    <SidebarItem
+                        v-for="route in partnerRouteList"
+                        :route_name="route.url"
+                        :icon="route.icon">
+                        {{route.name}}
+                    </SidebarItem>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -151,6 +161,38 @@
     data() {
       return {
         showingNavigationDropdown: false,
+        partnerRouteList: [
+          {
+            url: 'partner-cabinet.index',
+            name: 'Личный кабинет',
+            icon: 'PersonCouple',
+          },
+          {
+            url: 'programs-crud.index',
+            name: 'Программы',
+            icon: 'Graduation',
+          },
+          // {
+          //   url: 'partner-sells',
+          //   name: 'Продажи',
+          //   icon: '',
+          // },
+          // {
+          //   url: 'partner-requests',
+          //   name: 'Заявки',
+          //   icon: '',
+          // },
+          // {
+          //   url: 'partner-month-pay',
+          //   name: 'Еж. оплаты',
+          //   icon: '',
+          // },
+          // {
+          //   url: 'partner-stats',
+          //   name: 'Статистика продаж',
+          //   icon: '',
+          // }
+        ]
       }
     },
 

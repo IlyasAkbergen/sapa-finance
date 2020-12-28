@@ -8,7 +8,7 @@
         </template>
 
         <template #header>
-            Профиль компании {{ partner.name }}
+            Профиль компании
         </template>
 
         <div class="ptef">
@@ -28,7 +28,12 @@ export default {
         MainLayout,
     },
     props: {
-        partner: Object,
+        partner: {
+            type: Object,
+            default: {
+
+            }
+        },
     },
     data() {
         return {

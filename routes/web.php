@@ -15,6 +15,9 @@ use App\Http\Controllers\web\admin\CourseController as CourseCrudController;
 use App\Http\Controllers\web\admin\LessonController as LessonCrudController;
 use App\Http\Controllers\web\HomeworkController;
 use App\Http\Controllers\web\LessonController;
+use App\Http\Controllers\web\NotificationController;
+use App\Http\Controllers\web\partner\CabinetController;
+use App\Http\Controllers\web\partner\ProgramsController;
 use App\Http\Controllers\web\PayoutController;
 use App\Http\Controllers\web\PurchaseController;
 use App\Http\Controllers\web\ReferralController;
@@ -207,7 +210,17 @@ Route::group(['middleware' => [
 
     Route::resource('consultants-crud', ConsultantAdminController::class);
 });
-
+Route::group(['middleware' => [
+    'auth:sanctum',
+    'share.inertia',
+    'partner'
+]], function () {
+    Route::get('/partner-cabinet', [CabinetController::class, 'index'])->name('partner-cabinet.index');
+    Route::get('/partner-cabinet/edit', [CabinetController::class, 'edit'])->name('partner-cabinet.edit');
+    Route::post('/partner-cabinet/update', [CabinetController::class, 'update']);
+    Route::get('/programs-crud', [ProgramsController::class, 'index'])->name('programs-crud.index');
+    Route::get('/programs-crud/{id}', [ProgramsController::class, 'edit'])->name('programs-crud.edit');
+});
 Route::get('/test', function () {
 //    $user = User::with('balance')->findOrFail(5);
 //
