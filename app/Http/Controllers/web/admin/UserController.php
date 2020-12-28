@@ -117,7 +117,14 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $deleted = $this->userService->delete($id);
+        $user = $this->userService->find($id);
+        $user->update([
+           'iin' => '_del_' . $user->iin,
+           'email' => '_del_' . $user->email,
+           'phone' => '_del_' . $user->phone,
+        ]);
+
+        $deleted = $user->delete($id);
 
         if ($deleted) {
             return redirect()->route('users-crud.index');
