@@ -48,6 +48,7 @@ class PayboxGate implements PaymentGateContract
             $this->api->config->setResultUrl(
                 $this->config['site_url'] . '/' . $this->config['pay_result_url']
             );
+            $this->api->config->setSuccessUrlMethod('GET');
             $this->setSuccessUrl(
                 $this->config['site_url'] . '/' . $this->config['pay_success_url']
             );
