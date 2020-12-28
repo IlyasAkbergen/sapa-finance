@@ -21,6 +21,7 @@
         "livewire/livewire": "^2.3",
         "payboxmoney/pay": "^1.2",
         "payboxmoney/payout": "^1.2",
+        "predis/predis": "^1.1",
         "tightenco/ziggy": "^0.9.4"
     },
     "require-dev": {
