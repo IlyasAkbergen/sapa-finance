@@ -3,13 +3,14 @@
 namespace App\Events;
 
 use App\Models\Purchase;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 class PurchaseMade implements ShouldQueue
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable, Queueable, SerializesModels;
 
     public $purchase;
 
