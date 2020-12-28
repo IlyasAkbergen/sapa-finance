@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Services\AttachmentService;
 use App\Services\UserService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -119,9 +120,9 @@ class UserController extends Controller
     {
         $user = $this->userService->find($id);
         $user->update([
-           'iin' => '_del_' . $user->iin,
-           'email' => '_del_' . $user->email,
-           'phone' => '_del_' . $user->phone,
+           'iin' => '_del_' . Carbon::now() . $user->iin,
+           'email' => '_del_' . Carbon::now() . $user->email,
+           'phone' => '_del_' . Carbon::now() . $user->phone,
         ]);
 
         $deleted = $user->delete($id);
