@@ -35,7 +35,6 @@ class Purchase extends Model
 
     public function setPayed()
     {
-        // todo вынести в сервис
         $this->update([
             'payed' => true
         ]);

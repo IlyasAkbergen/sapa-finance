@@ -36,7 +36,6 @@ class PurchaseController extends ApiBaseController
                     'message' => 'Payment is not OK.'
                 ]);
             }
-
             $purchase = $this->purchaseService->findWith(
                 $this->paymentGate->getOrder()->id,
                 ['purchasable', 'payments']
@@ -82,7 +81,7 @@ class PurchaseController extends ApiBaseController
             DB::rollBack();
 
             return $this->failedResponse([
-                'message' => 'Something went wrong.'
+                'message' => $e->getMessage()
             ]);
         }
     }

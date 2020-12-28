@@ -2,10 +2,12 @@
 
 namespace App\Listeners;
 
+use App\Enums\ReferralLevelEnum;
 use App\Events\PurchasePayed;
 use App\Events\RewardCreated;
 use App\Models\Balance;
 use App\Models\Course;
+use App\Models\User;
 use App\Services\BalanceOperationService;
 use App\Services\PurchaseServiceContract;
 use App\Services\UserService;
@@ -37,6 +39,11 @@ class ReferralEventsSubscriber implements ShouldQueue
         $purchasable = $purchase->purchasable;
         $this->purchaseService->addUsersToPurchasable(
             [$purchase->user_id], $purchasable, $purchase->user->referrer_id
+                ?: User::where(
+                    'referral_level_id',
+                    ReferralLevelEnum::Consultant
+                )
+                ->first()->id
         );
         $this->userService->awardReferrersAfterPurchase($purchase);
 
