@@ -478,7 +478,7 @@ body
 /*========== Main container Course Buy modal 2 ==========*/
 .page .page__agent-course-modal .page__course-modal__body .page__course-modal__body__nav-2
 {
-    display: none;
+    /*display: none;*/
     width: 100%;
     list-style: none;
     padding-left: 0;

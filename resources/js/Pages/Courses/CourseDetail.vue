@@ -43,7 +43,7 @@
           <p class="main__content__course-card__bottom__price">
             {{ course.price_without_feedback }} ₸
           </p>
-          <a href="#" @click="showModal = true"
+          <a href="#" @click="buy"
              class="main__content__course-card__bottom__button">
             Купить курс
           </a>
@@ -73,13 +73,13 @@
     </div>
     <template #modals>
       <div class="page__agent-course-modal" v-show="showModal">
-        <i class="fas fa-times fa-2x" @click="showModal = false"></i>
+        <i class="fas fa-times fa-2x" @click="hideModal"></i>
         <div class="page__course-modal__body">
-          <ul class="page__course-modal__body__nav">
+          <ul class="page__course-modal__body__nav" v-show="showPriceSelection">
             <li class="page__course-modal__body__nav__item">
               <a href="#"
                  class="page__course-modal__body__nav__link"
-                 @click="createPurchaseForm.with_feedback = true">
+                 @click="createPurchaseForm.with_feedback = true; nextStep()">
                 Курсы с обратной связью
                 <img src="../../../img/modal-arrow.png" alt="">
               </a>
@@ -87,13 +87,13 @@
             <li class="page__course-modal__body__nav__item">
               <a href="#"
                  class="page__course-modal__body__nav__link"
-                 @click="createPurchaseForm.with_feedback = false">
+                 @click="createPurchaseForm.with_feedback = false; nextStep()">
                 Курсы без обратной связи
                 <img src="../../../img/modal-arrow.png" alt="">
               </a>
             </li>
           </ul>
-          <ul class="page__course-modal__body__nav-2">
+          <ul class="page__course-modal__body__nav-2" v-show="showPaymentSelection">
             <li class="page__course-modal__body__nav__item">
               <a href="#"
                  class="page__course-modal__body__nav__link"
@@ -142,11 +142,27 @@
           pay_online: false
         }),
         passedIconPath: '/images/lesson-icon-passed-old.png',
-        lockedIconPath: '/images/lessons-locked.png'
+        lockedIconPath: '/images/lessons-locked.png',
+				showPriceSelection: false,
+				showPaymentSelection: true
       }
     },
 
     methods: {
+    	buy() {
+    		this.showModal = true;
+    		this.showPriceSelection = true;
+    		this.showPaymentSelection = false;
+      },
+      nextStep() {
+				this.showPriceSelection = false;
+				this.showPaymentSelection = true;
+      },
+      hideModal() {
+				this.showModal = false;
+				this.showPriceSelection = false;
+				this.showPaymentSelection = false;
+      },
     	getIcon(lesson) {
 				return lesson.passed
           ? this.passedIconPath

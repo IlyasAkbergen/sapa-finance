@@ -11,24 +11,24 @@ $(document).ready(function() {
   });
 
   /*========== User add course button open modal function ==========*/
-  $('.main__content__agent-course-card .main__content__course-card__bottom__button').click(function() {
-    $('.page__agent-course-modal').css("display", "block");
-  });
-
-  $('.page__agent-course-modal .page__course-modal__body__nav .page__course-modal__body__nav__link').click(function() {
-    $('.page__agent-course-modal .page__course-modal__body__nav').css("display", "none");
-    $('.page__agent-course-modal .page__course-modal__body__nav-2').css("display", "block");
-  });
-
-  $('.page__agent-course-modal .page__course-modal__body__nav-2 .page__course-modal__body__nav__link').click(function() {
-    $('.page__agent-course-modal .page__course-modal__body__nav-2').css("display", "none");
-    $('.page__agent-course-modal .page__course-modal__body__nav').css("display", "block");
-    $('.page__agent-course-modal').css("display", "none");
-    $('.main__content__agent-course-success').css("display", "flex");
-    setTimeout(function(){
-      $('.main__content__agent-course-success').css("display", "none");
-    }, 3000);
-  });
+  // $('.main__content__agent-course-card .main__content__course-card__bottom__button').click(function() {
+  //   $('.page__agent-course-modal').css("display", "block");
+  // });
+  // //
+  // $('.page__agent-course-modal .page__course-modal__body__nav .page__course-modal__body__nav__link').click(function() {
+  //   $('.page__agent-course-modal .page__course-modal__body__nav').css("display", "none");
+  //   $('.page__agent-course-modal .page__course-modal__body__nav-2').css("display", "block");
+  // });
+  //
+  // $('.page__agent-course-modal .page__course-modal__body__nav-2 .page__course-modal__body__nav__link').click(function() {
+  //   $('.page__agent-course-modal .page__course-modal__body__nav-2').css("display", "none");
+  //   $('.page__agent-course-modal .page__course-modal__body__nav').css("display", "block");
+  //   $('.page__agent-course-modal').css("display", "none");
+  //   $('.main__content__agent-course-success').css("display", "flex");
+  //   setTimeout(function(){
+  //     $('.main__content__agent-course-success').css("display", "none");
+  //   }, 3000);
+  // });
 
   /*========== User add course modal close button function ==========*/
   $('.page__agent-course-modal .fa-times').click(function() {
