@@ -17,14 +17,8 @@ class CreateUserNotificationTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
 
             $table->unsignedBigInteger('notification_id');
-            $table->foreign('notification_id')
-                ->references('id')
-                ->on('notifications');
 
             $table->boolean('seen')
                 ->default(false);
