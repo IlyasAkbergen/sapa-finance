@@ -35,7 +35,7 @@ class RegisterForm extends Component
         'iin' => ['required', 'string', 'max:12', 'min:12', 'unique:users'],
         'phone' => ['required', 'string', 'max:12', 'unique:users'],
         'referrer_id' => ['nullable', 'exists:' . User::class . ',id'],
-        'password' => ['required', 'string', 'same:password_confirmation'],
+        'password' => ['required', 'string', 'same:password_confirmation', 'min:6'],
         'password_confirmation' => ['required', 'string'],
     ];
 
@@ -48,6 +48,7 @@ class RegisterForm extends Component
         'phone.required' => 'Введите номер телефона.',
         'password.same' => 'Пароли не совпадают.',
         'password.required' => 'Введите пароль.',
+        'password.min' => 'Пароль должен состоять из 6 или более символов.',
         'password_confirmation.required' => 'Повторите пароль.',
         'email.unique' => 'Введенный email занят другим пользователем.',
         'phone.unique' => 'Введенный номер телефона занят другим пользователем.',
@@ -67,7 +68,7 @@ class RegisterForm extends Component
             'phone' => $this->phone,
             'referrer_id' => $this->referrer_id ?? null,
             'role_id' => Role::ROLE_CLIENT,
-            'password' => Hash::make($this->password),
+            'password' => bcrypt($this->password),
         ]);
 
         if (!env('APP_DEBUG')) {
