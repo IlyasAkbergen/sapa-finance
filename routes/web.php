@@ -36,6 +36,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('/', function () {
+   return redirect()->route('my-courses');
+});
 
 Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
     ->middleware(['guest'])->name('welcome');
