@@ -68,7 +68,7 @@ class RegisterForm extends Component
             'phone' => $this->phone,
             'referrer_id' => $this->referrer_id ?? null,
             'role_id' => Role::ROLE_CLIENT,
-            'password' => bcrypt($this->password),
+            'password' => $this->password,
         ]);
 
         if (!env('APP_DEBUG')) {
