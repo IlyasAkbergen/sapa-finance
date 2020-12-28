@@ -4,13 +4,14 @@ namespace App\Events;
 
 use App\Models\Reward;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 class RewardCreated implements ShouldQueue
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, Queueable, SerializesModels;
 
     public $reward;
 
