@@ -14,9 +14,9 @@
 <!--          <p class="sidebar__profile__progress__header__course">Финансовый консультант</p>-->
 <!--          <p class="sidebar__profile__progress__header__percent">70%</p>-->
 <!--        </div>-->
-        <div class="progress">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 70%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
+<!--        <div class="progress">-->
+<!--          <div class="progress-bar bg-info" role="progressbar" style="width: 70%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--        </div>-->
 
         <div class="sidebar__profile__progress__header" v-if="activeCourse">
           <p class="sidebar__profile__progress__header__course">
