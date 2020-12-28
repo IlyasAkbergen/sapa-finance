@@ -2,8 +2,9 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
 
-       <meta charset="UTF-8">
+        <meta charset="UTF-8">
        	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="yandex-verification" content="86c9f5bf65e2fb5c" />
        	<title>Sapa</title>
 		<script src="https://kit.fontawesome.com/c9e46db961.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="{{asset('landing/styles/bootstrap.min.css')}}">

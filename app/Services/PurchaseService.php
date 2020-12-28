@@ -19,7 +19,8 @@ class PurchaseService extends BaseServiceImpl implements PurchaseServiceContract
         $purchasable->users()->detach($user_ids);
 
         return $purchasable->users()->attach($user_ids, [
-            'consultant_id' => $consultant_id
+            'consultant_id' => $consultant_id,
+            'paid' => true
         ]);
     }
 
