@@ -3,13 +3,14 @@
 namespace App\Events;
 
 use App\Models\Payout;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 class PayoutCreated implements ShouldQueue
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable, Queueable, SerializesModels;
 
     public $payout;
 
