@@ -1,50 +1,58 @@
 <template>
     <main-layout>
         <template #back-link>
-            <a :href="route('partners-crud.index')"
-               class="navbar-brand mb-0 pb-0">
+            <inertia-link :href="route('briefcases-admin.index')"
+                          class="navbar-brand mb-0 pb-0">
                 <img src="../../../../img/back-arrow.png">
-            </a>
+            </inertia-link>
         </template>
 
         <template #header>
-            Добавление партнера
+            Добавление программы
         </template>
 
-        <div class="ptef">
+        <div class="cec">
             <Form :form="form"
-                  @submit="createPartner"/>
+                  @submit="createBriefcase"/>
         </div>
     </main-layout>
 </template>
 
 <script>
-import MainLayout from '@/Layouts/MainLayout'
-export default {
-    name: "Add",
-    components: {
-      Form: () => import('./Form'),
-      MainLayout
-    },
-    data() {
-      return {
-        form: this.$inertia.form({
-            name: "",
-            email: null,
-            phone: null,
-            bin: null,
-            password: '',
-            '_method': 'POST',
-        }, {
-            bag: 'partnerForm',
-            resetOnSuccess: false,
-        })
-      }
-    },
-    methods: {
-        createPartner() {
-            this.form.post('/partners-crud');
+    import MainLayout from '@/Layouts/MainLayout'
+    export default {
+        name: "Add",
+        components: {
+            Form: () => import('./Form'),
+            MainLayout
         },
+        props: {
+            type: Number
+        },
+        data() {
+            return {
+                form: this.$inertia.form({
+                    title: "",
+                    type_id: this.type,
+                    description: null,
+                    direct_fee: null,
+                    sum: null,
+                    profit: null,
+                    duration: null,
+                    monthly_payment: 0,
+                    awardable: false,
+                    image: null,
+                    '_method': 'POST',
+                }, {
+                    bag: 'briefcaseForm',
+                    resetOnSuccess: false,
+                })
+            }
+        },
+        methods: {
+            createBriefcase() {
+                this.form.post('/programs-crud')
+            }
+        }
     }
-}
 </script>

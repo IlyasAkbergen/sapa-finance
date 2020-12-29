@@ -15,9 +15,11 @@ class BriefcaseServiceImpl extends BaseServiceImpl implements BriefcaseService
         parent::__construct($model);
     }
 
-    public function attachToUsers($briefcase, array $ids)
+    public function attachToUsers($briefcase, array $ids, $consultant_id = null)
     {
-        return $briefcase->users()->attach($ids);
+        return $briefcase->users()->attach($ids, [
+            'consultant_id' => $consultant_id,
+        ]);
     }
 
     public function detachFromUsers($briefcase, array $ids)
@@ -35,5 +37,10 @@ class BriefcaseServiceImpl extends BaseServiceImpl implements BriefcaseService
         $user->loadMissing('briefcases.auth_user_pivot');
 
         return $user->briefcases;
+    }
+    function getPurchases(User $user) {
+        $user->loadMissing('briefcases.auth_user_pivot');
+
+        return $user->purchases;
     }
 }

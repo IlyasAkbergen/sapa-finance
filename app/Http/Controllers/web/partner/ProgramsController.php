@@ -2,45 +2,108 @@
 
 namespace App\Http\Controllers\web\partner;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\MyCourseResource;
+use App\Http\Controllers\web\WebBaseController;
+use App\Http\Requests\BriefcaseRequest;
+use App\Models\Briefcase;
+use App\Models\BriefcaseType;
+use App\Models\Purchase;
+use App\Models\User;
 use App\Services\AttachmentService;
-use App\Services\CourseService;
+use App\Services\BriefcaseService;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
-class ProgramsController extends Controller
+class ProgramsController extends WebBaseController
 {
-    private $courseService;
+
+    private $briefcaseService;
     private $attachmentService;
 
     public function __construct(
-        CourseService $courseService,
+        BriefcaseService $briefcaseService,
         AttachmentService $attachmentService
     )
     {
-        $this->courseService = $courseService;
+        $this->briefcaseService = $briefcaseService;
         $this->attachmentService = $attachmentService;
     }
 
     public function index()
     {
-        $courses = $this->courseService->ofUser(Auth::user());
+        $briefcases = $this->briefcaseService->ofUser(Auth::user());
         return Inertia::render('Programs/Index', [
-            'courses' => MyCourseResource::collection($courses)->resolve()
+            'briefcases' => $briefcases,
+            'types' => BriefcaseType::all()
         ]);
     }
 
-    public function edit($id)
+    public function create($id)
     {
-        $course = $this->courseService->findWith($id, ['lessons']);
+        return Inertia::render('Programs/Crud/Add',[
+            'type' => intval($id)
+        ]);
+    }
 
-        if (!empty($course)) {
+    public function show($id)
+    {
+        $briefcase = $this->briefcaseService->find($id);
+
+        if (!empty($briefcase)) {
             return Inertia::render('Programs/Crud/Edit', [
-                'course' => $course
+                'briefcase' => $briefcase,
             ]);
         } else {
             return redirect()->route('programs-crud.index');
         }
     }
+
+    // PUT /programs-crud/{id}
+    public function update(BriefcaseRequest $request)
+    {
+        $data = $request->all();
+
+        if ($request->has('image')) {
+            $filepath = $this->attachmentService->storeFile(
+                $request->file('image'),
+                'Briefcase'
+            );
+
+            $data['image_path'] = $filepath;
+        }
+
+        $briefcase = $this->briefcaseService->update(
+            $request->input('id'),
+            $data
+        );
+
+        if (!empty($briefcase)) {
+            return redirect()
+                ->route('programs-crud.index');
+        } else {
+            return $this->responseFail('Не удалось обновить портфель');
+        }
+    }
+
+    // POST /programs-crud
+    public function store(BriefcaseRequest $request)
+    {
+        $data = $request->all();
+
+        $filepath = $this->attachmentService->storeFile(
+            $request->file('image'), 'Briefcase'
+        );
+
+        $data['image_path'] = $filepath;
+
+        $briefcase = $this->briefcaseService->create($data);
+        $this->briefcaseService->attachToUsers($briefcase, [Auth::id()], Auth::id());
+        if (!empty($briefcase)) {
+            return redirect()
+                ->route('programs-crud.index');
+        } else {
+            return $this->responseFail('failed saving briefcase');
+        }
+    }
+
 }

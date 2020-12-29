@@ -221,8 +221,11 @@ Route::group(['middleware' => [
     Route::get('/partner-cabinet', [CabinetController::class, 'index'])->name('partner-cabinet.index');
     Route::get('/partner-cabinet/edit', [CabinetController::class, 'edit'])->name('partner-cabinet.edit');
     Route::post('/partner-cabinet/update', [CabinetController::class, 'update']);
-    Route::get('/programs-crud', [ProgramsController::class, 'index'])->name('programs-crud.index');
-    Route::get('/programs-crud/{id}', [ProgramsController::class, 'edit'])->name('programs-crud.edit');
+    Route::get(
+        '/programs/create/{id}',
+        [ProgramsController::class, 'create']
+    )->name('programs.create');
+    Route::resource('/programs-crud', ProgramsController::class);
 });
 Route::get('/test', function () {
 //    $user = User::with('balance')->findOrFail(5);
