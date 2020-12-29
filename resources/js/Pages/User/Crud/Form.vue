@@ -31,11 +31,17 @@
         </select>
         <JetInputError v-if="form.role_id === 1" :message="form.error('role_id')" class="mt-1"/>
 
+        <label class="profile-form__label mt-3" for="teamitem" v-if="isAdmin">Реферальный уровень</label>
+        <select class="profile-form__select mb-0" v-if="isAdmin" v-model="form.referral_level_id" id="referral">
+            <option v-for="referral in referral_level"
+                    :value="referral.id">{{ referral.title }}</option>
+        </select>
+        <JetInputError v-if="isAdmin" :message="form.error('referral_level_id')" class="mt-1"/>
+
         <label class="profile-form__label mt-3" for="item" v-if="isAdmin">Личные единицы</label>
         <input class="profile-form__input mb-0" type="number"
                v-if="isAdmin" v-model="form.direct_points" id="item">
         <JetInputError v-if="isAdmin" :message="form.error('direct_points')" class="mt-1"/>
-
 
         <label class="profile-form__label mt-3" for="teamitem" v-if="isAdmin">Командные единицы</label>
         <input class="profile-form__input" type="number"
@@ -66,6 +72,7 @@ export default {
     props: {
         form: Object,
         roles: Array,
+        referral_level: Array,
     },
     methods: {
         submitForm() {

@@ -27,6 +27,7 @@
         <div class="profile-form">
             <Form :form="form"
                   :roles="roles"
+                  :referral_level="referral_level"
                  @submit="updateUser"/>
         </div>
 
@@ -65,6 +66,10 @@ export default {
         auth_user: {
             type: Object,
             default: null,
+        },
+        referral_level: {
+            type: Array,
+            default: null
         }
     },
     data() {

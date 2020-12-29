@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\web\admin;
 
+use App\Enums\ReferralLevelEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
+use App\Models\ReferralLevel;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\AttachmentService;
@@ -44,7 +46,8 @@ class UserController extends Controller
     {
         $roles = Role::all();
         return Inertia::render('User/Crud/Add', [
-            'roles' => $roles
+            'roles' => $roles,
+            'referral_level' => ReferralLevel::all()
         ]);
     }
 
@@ -80,6 +83,7 @@ class UserController extends Controller
             return Inertia::render('User/Crud/Edit', [
                 'client' => UserResource::make($user)->resolve(),
                 'roles' => $roles,
+                'referral_level' => ReferralLevel::all(),
             ]);
         } else {
             return redirect()->route('users-crud.index');

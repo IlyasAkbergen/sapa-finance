@@ -26,6 +26,7 @@
         <div class="profile-form">
             <Form :form="form"
                   :roles="roles"
+                  :referral_level="referral_level"
                   @submit="createUser"/>
         </div>
     </main-layout>
@@ -41,7 +42,11 @@ export default {
       MainLayout
     },
     props: {
-        roles: Array
+        roles: Array,
+        referral_level: {
+            type: Array,
+            default: null
+        }
     },
     data() {
       return {
