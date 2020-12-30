@@ -24,7 +24,6 @@ class LessonFormRequest extends FormRequest
             'title.required' => 'Укажите название',
             'video_url.required' => ['Укажите ссылку на видео'],
             'content.required' => ['Укажите описание урока'],
-            'homework_content.required' => ['Укажите описание домашнего задания'],
         ];
     }
 
@@ -39,7 +38,6 @@ class LessonFormRequest extends FormRequest
             'title' => ['required', 'max:255'],
             'content' => ['required'],
             'video_url'=> ['required', 'max:255'],
-            'homework_content' => ['required'],
             'uuid' => ['required_without:id']
         ];
     }
