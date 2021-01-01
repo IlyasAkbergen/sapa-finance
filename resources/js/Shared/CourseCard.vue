@@ -1,6 +1,6 @@
 <template>
   <div class="main__content__courses-flex__card">
-    <img src="../../img/course-card-img.png"
+    <img :src="imagePath"
          class="main__content__courses-flex__card__img"
          alt="">
     <p class="main__content__courses-flex__card__title">
@@ -37,7 +37,7 @@
         </p>
         <inertia-link :href="route('courses.show', course.id)"
            class="main__content__courses-flex__card__bottom__button">
-          Купить
+          Подробнее
         </inertia-link>
       </div>
     </div>
@@ -52,6 +52,13 @@
       bought: {
         type: Boolean,
         default: false
+      }
+    },
+    computed: {
+    	imagePath() {
+    		return this.course.image_path
+          ? this.course.image_path
+          : '/images/course-card-img.png';
       }
     }
   }

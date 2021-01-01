@@ -11,11 +11,11 @@ class Homework extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'lesson_id', 'score', 'status'
+        'user_id', 'lesson_id', 'score', 'status', 'content'
     ];
 
     protected $dispatchesEvents = [
-        'created' => HomeworkCreated::class
+//        'created' => HomeworkCreated::class
     ];
 
     const ATTACHMENT_MAIN_DIR = 'homeworks';

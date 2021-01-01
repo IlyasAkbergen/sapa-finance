@@ -50,6 +50,24 @@
               :model-type="'homework'"
               :uuid="null"
           />
+
+          <div class="js-add-lesson">
+            <form>
+              <div class="lesson-homework">
+              <textarea id="lessondesc"
+                        cols="30" rows="5"
+                        v-model="homework_form.content"
+                        placeholder="Ответ на ДЗ"></textarea>
+
+                <JetInputError :message="homework_form.error('content')" />
+
+                <input type="submit"
+                       v-show="!homework_form.processing"
+                       @click.prevent="submitHomework"
+                       value="Сохранить">
+              </div>
+            </form>
+          </div>
         </div>
         <div class="main__content__lesson-flex__task__grade">
           <p class="main__content__lesson-flex__task__grade__title">Оценка</p>
@@ -92,13 +110,24 @@ export default {
   components: {
 		MainLayout,
 		Attachments: () => import('@/Shared/Attachments'),
+		JetInputError: () => import('@/Jetstream/InputError'),
   },
   props: {
   	lesson: Object,
   },
   data() {
   	return {
-
+      homework_form: this.$inertia.form({
+        ...this.lesson.user_homework
+      }, {
+				bag: 'homeworkForm',
+        resetOnSuccess: false
+      })
+    }
+  },
+  methods: {
+  	submitHomework() {
+      this.homework_form.post('/homeworks');
     }
   }
 }

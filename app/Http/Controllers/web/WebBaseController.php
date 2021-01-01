@@ -56,11 +56,11 @@ class WebBaseController extends Controller
             ->flash('success', 'Операция успешна!');
     }
 
-    public function edited()
+    public function edited($message = null)
     {
         request()
             ->session()
-            ->flash('success', 'Обновлено!');
+            ->flash('success', !!$message ? $message : 'Обновлено!');
     }
 
     public function notFound()
