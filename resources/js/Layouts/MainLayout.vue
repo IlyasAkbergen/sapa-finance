@@ -132,9 +132,9 @@
     },
 
     computed: {
-    	notifications() {
-				return this.$page.notifications;
-      }
+        notifications() {
+            return this.$page.notifications ? this.$page.notifications : [];
+        }
     },
 
     methods: {

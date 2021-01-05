@@ -10,7 +10,7 @@ export default {
     getReferralLink() {
       return this.$page.referral_link
         ? this.$page.referral_link
-        : 'must by url';
+        : '';
     }
   },
 
