@@ -8,6 +8,9 @@
             </inertia-link>
         </template>
 
+        <template #header>
+            Программы
+        </template>
 
         <template #actions>
             <div class="actions">

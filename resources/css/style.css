@@ -3688,3 +3688,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
 .sidebar .sidebar__agent-profile img{
     max-width: 200px;
 }
+
+img {
+    display: initial;
+}

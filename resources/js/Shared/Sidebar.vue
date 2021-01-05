@@ -2,7 +2,7 @@
     <div class="page">
         <div class="sidebar">
             <div class="sidebar__agent-profile">
-                <img :src="avatarPath" class="sidebar__profile__client-ava" alt="">
+                <img :src="avatarPath" class="sidebar__profile__client-ava">
                 <p class="sidebar__profile__client-name">
                     {{ username }}
                 </p>

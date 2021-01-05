@@ -32,11 +32,11 @@
                         float-right courses__delete"
                         href="#"
                         @click.prevent="() => deleteClicked(row.id)">
-                        <img src="../../img/trash.svg">
+                        <Trash />
                     </a>
                     <inertia-link class="users__link users__link--blue float-right"
                        :href="route(edit_route_name, row.id)">
-                        <img src="../../img/pencil.svg">
+                        <Pencil />
                     </inertia-link>
                 </td>
             </tr>
@@ -52,7 +52,9 @@
 export default {
     name: "CrudTable",
     components: {
-        DeleteAcceptModal: () => import('@/Shared/DeleteAcceptModal')
+        DeleteAcceptModal: () => import('@/Shared/DeleteAcceptModal'),
+        Trash: () => import('@/assets/icons/Trash'),
+        Pencil: () => import('@/assets/icons/Pencil'),
     },
     props: {
         headers: Array,
