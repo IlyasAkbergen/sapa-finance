@@ -48,7 +48,7 @@ export default {
     },
 
     isPartner() {
-        return !!this.getUser() && this.getUser().referral_level_id === 5
+        return !!this.getUser() && this.getUser().role_id === 3
     },
 
     activeCourse() {
