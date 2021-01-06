@@ -60,7 +60,7 @@ class CabinetController extends Controller
             return redirect()
                 ->route(
                     Auth::user()->role_id == Role::ROLE_ADMIN
-                        ? 'partner-crud.index'
+                        ? 'partners-crud.index'
                         : 'partner-cabinet.index'
                 );
         } else {
