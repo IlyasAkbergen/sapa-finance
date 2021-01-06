@@ -33,6 +33,7 @@ export default {
             email: null,
             phone: null,
             bin: null,
+            role_id: 3,
             password: '',
             '_method': 'POST',
         }, {

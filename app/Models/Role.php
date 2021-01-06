@@ -11,6 +11,7 @@ class Role extends Model
 
     const ROLE_ADMIN = 1;
     const ROLE_CLIENT = 2;
+    const ROLE_PARTNER = 3;
 
     public $timestamps = false;
 

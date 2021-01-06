@@ -14,8 +14,7 @@ class Partner extends User
     protected $table = 'users';
 
     protected $attributes = [
-        'role_id' => Role::ROLE_CLIENT,
-        'referral_level_id' => ReferralLevelEnum::Partner
+        'role_id' => Role::ROLE_PARTNER,
     ];
 
     protected static function boot()
