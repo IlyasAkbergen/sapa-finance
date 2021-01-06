@@ -7,9 +7,7 @@
                     {{ username }}
                 </p>
                 <p class="sidebar__profile__client-post">
-                    {{ isAdmin ? 'Админ' : referralLevel != null
-                        ? referralLevel.title
-                        : "Клиент" }}
+                    {{ userTitle }}
                 </p>
 
                 <ProfileStats v-if="!isAdmin" />
@@ -198,10 +196,19 @@
 
     computed: {
       canBecomeAgent() {
-          return !this.isAdmin && (
-                  this.getUser().referral_level_id === null
-                  || this.getUser().referral_level_id === 0
-          );
+        return !this.isAdmin && (
+          this.getUser().referral_level_id === null
+          || this.getUser().referral_level_id === 0
+        );
+      },
+      userTitle() {
+          if (isPartner) return 'Партнер';
+
+          if (isAdmin) return 'Админ';
+
+          return referralLevel != null
+              ? referralLevel.title
+              : "Клиент"
       }
     },
 
