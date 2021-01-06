@@ -202,12 +202,12 @@
         );
       },
       userTitle() {
-          if (isPartner) return 'Партнер';
+          if (this.isPartner) return 'Партнер';
 
-          if (isAdmin) return 'Админ';
+          if (this.isAdmin) return 'Админ';
 
-          return referralLevel != null
-              ? referralLevel.title
+          return this.referralLevel != null
+              ? this.referralLevel.title
               : "Клиент"
       }
     },
