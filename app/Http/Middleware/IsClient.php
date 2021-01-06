@@ -23,7 +23,7 @@ class IsClient
                 return redirect(route('courses-crud.index'));
             }
         }
-        if ($request->user()->referral_level_id == ReferralLevelEnum::Partner) {
+        if ($request->user()->role_id == Role::ROLE_PARTNER) {
             return redirect(route('partner-cabinet.index'));
         }
 
