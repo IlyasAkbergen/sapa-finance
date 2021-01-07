@@ -122,15 +122,17 @@ class AppServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
         Purchase::observe(PurchaseObserver::class);
 
+
         Inertia::share([
             'notifications' => function () {
                 Auth::user()->load('newMessages');
-                return Auth::user()->newMessages;
+                return Auth::check() ? Auth::user()->newMessages : [];
             },
             'referral_link' => function () {
-                return Auth::user()->referral_link;
+                return Auth::check() ? Auth::user()->referral_link : null;
             },
         ]);
+
         Inertia::share([
             'errors' => function () {
                 return Session::get('errors')

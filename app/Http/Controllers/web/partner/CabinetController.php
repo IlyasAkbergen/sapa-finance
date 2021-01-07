@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web\partner;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdatePartnerRequest;
 use App\Http\Resources\PartnerResource;
+use App\Models\Role;
 use App\Services\AttachmentService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
@@ -57,7 +58,11 @@ class CabinetController extends Controller
         );
         if (!empty($user)) {
             return redirect()
-                ->route('partner-cabinet.index');
+                ->route(
+                    Auth::user()->role_id == Role::ROLE_ADMIN
+                        ? 'partners-crud.index'
+                        : 'partner-cabinet.index'
+                );
         } else {
             return $this->responseFail('Не удалось обновить пользователя');
         }

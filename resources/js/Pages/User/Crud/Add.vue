@@ -15,13 +15,16 @@
             <img class="avatar__img" :src="avatarPath"
                  v-show="photoPreview == null && !form.image_path">
             <img class="avatar__img" :src="photoPreview" v-show="photoPreview">
-            <a class="avatar__link" href="" @click.prevent="selectNewPhoto">
+            <a class="avatar__link"
+               href="#"
+               @click.prevent="selectNewPhoto">
                 Изменить аватар
             </a>
             <input type="file"
                    ref="image"
                    @change="updatePhotoPreview"
                    class="hidden">
+            <JetInputError :message="form.error('image')" class="mt-1"/>
         </div>
         <div class="profile-form">
             <Form :form="form"
@@ -38,8 +41,9 @@ import { uuid } from 'vue-uuid'
 export default {
     name: "Add",
     components: {
-      Form: () => import('./Form'),
-      MainLayout
+        Form: () => import('./Form'),
+        MainLayout,
+        JetInputError: () => import('@/Jetstream/InputError'),
     },
     props: {
         roles: Array,

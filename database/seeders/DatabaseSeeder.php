@@ -42,6 +42,10 @@ class DatabaseSeeder extends Seeder
             [
                 'id'   => Role::ROLE_CLIENT,
                 'name' => 'Клиент'
+            ],
+            [
+                'id'   => Role::ROLE_PARTNER,
+                'name' => 'Партнер'
             ]
         ]);
 

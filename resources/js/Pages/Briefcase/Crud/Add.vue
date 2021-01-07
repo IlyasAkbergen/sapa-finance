@@ -4,7 +4,7 @@
       <inertia-link :href="route('briefcases-admin.index')"
          class="navbar-brand mb-0 pb-0">
         <img src="../../../../img/back-arrow.png">
-      </inertia-link>>
+      </inertia-link>
     </template>
 
     <template #header>

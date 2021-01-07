@@ -34,6 +34,13 @@
                aria-valuemax="100"></div>
         </div>
 
+        <div class="sidebar__profile__progress__header">
+          <p class="sidebar__profile__stats__right__title">Баланс: </p>
+          <p class="sidebar__profile__stats__right__text">
+            {{ balance != null ? balance.sum : 0 }} ₸
+          </p>
+        </div>
+
         <div class="sidebar__profile__stats">
           <div class="sidebar__profile__stats__left">
             <p class="sidebar__profile__stats__left__title">Единицы</p>
@@ -48,14 +55,10 @@
             </p>
           </div>
         </div>
-        <div class="sidebar__profile__stats">
-          <p class="sidebar__profile__stats__right__title">Баланс: </p>
-          <p class="sidebar__profile__stats__right__text">
-            {{ balance != null ? balance.sum : 0 }} ₸
-          </p>
-        </div>
+
         <div class="sidebar__profile__agent" v-if="!!referrer">
-          <img :src="referrer.profile_photo_path" class="sidebar__profile__agent__ava" alt="">
+          <img :src="referrer.profile_photo_path"
+               class="sidebar__profile__client-ava">
           <p class="sidebar__profile__agent__name">
             {{ referrer.name }}
           </p>

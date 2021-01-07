@@ -36,7 +36,7 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
     protected $fillable = [
         'name', 'email', 'phone', 'iin', 'password', 'balance_id',
         'referrer_id', 'root_referer_id', 'referral_level_id',
-        'profile_photo_path', 'description', 'bin'
+        'profile_photo_path', 'description', 'bin', 'role_id'
     ];
 
     /**

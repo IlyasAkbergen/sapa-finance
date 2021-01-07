@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\web;
 
+use App\Events\HomeworkCreated;
 use App\Events\HomeworkRated;
 use App\Models\Homework;
 use App\Models\Lesson;
@@ -40,37 +41,38 @@ class HomeworkController extends WebBaseController
     {
         $request->validate([
             'lesson_id' => ['required', 'exists:' . Lesson::class . ',id'],
-            'file' => ['required', 'file', 'mimes:pdf,doc,docx,txt,png,jpg,jpeg,zip']
+            'content' => ['required_without:file'],
+            'file' => [
+                'required_without:content',
+                'file',
+                'mimes:pdf,doc,docx,txt,png,jpg,jpeg,zip'
+            ]
         ]);
 
         DB::beginTransaction();
 
         try {
-            $homework = $this->homeworkService->create(
-                array_merge(
-                    $request->only(['lesson_id']),
-                    ['user_id' => Auth::user()->id]
-                )
+            $homework = $this->homeworkService->updateOrCreate(
+                [
+                    'lesson_id' => data_get($request, 'lesson_id'),
+                    'user_id' => Auth::user()->id
+                ], [
+                    'content' => data_get($request, 'content')
+                ]
             );
 
-            $attachment = $this->homeworkService->saveAttachment(
-                $homework->id,
-                $request->file('file')
-            );
+            if ($request->has('file')) {
+                $this->homeworkService->saveAttachment(
+                    $homework->id,
+                    $request->file('file')
+                );
+            }
 
             DB::commit();
 
-            if ($homework->id == $attachment->model_id) {
-                return $this->responseSuccess(
-                    'Домашняя работа сохранена.',
-                    $homework
-                );
-            } else {
-                return $this->responseFail(
-                    'Что-то пошло не так.',
-                    $homework
-                );
-            }
+            event(new HomeworkCreated($homework));
+
+            return redirect()->route('lessons', $homework->lesson_id);
         } catch (\Exception $e) {
             DB::rollBack();
             return $this->responseFail('Не удалось сохранить.');

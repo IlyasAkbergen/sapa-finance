@@ -7,7 +7,9 @@
         <img src="../../img/uploaded-file.png">
 
         <span id="course-doc-name" class="mt-2">
-          {{ item.name | truncate(20) }}
+          <a :href="item.path">
+            {{ item.name | truncate(20) }}
+          </a>
         </span>
       </div>
 
