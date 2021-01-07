@@ -287,8 +287,8 @@ body
 
 .users .table tbody th,
 .users .table tbody td {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     white-space: nowrap;
 }
 
