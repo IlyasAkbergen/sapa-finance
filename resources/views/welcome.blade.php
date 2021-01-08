@@ -16,15 +16,18 @@
 			#auth button{
 				color: #0a884d;
 				background: none;
-				border: none;
+				border: 1px solid transparent;
 				padding: 5px 15px;
 				border-radius: 25px;
 				transition: .5s;
+
+			}
+			#auth ul li:last-child button{
+				border: 1px solid #0a884d;
 			}
 			#auth button:hover{
 				color: #fff;
 				background: #0a884d;
-				border: none;
 				transition: .5s;
 			}
 			.modal{
@@ -107,6 +110,31 @@
 			.modal-flex a{
 				color: #190134;
 				text-decoration: none;
+			}
+			@media (max-width: 1199px){
+				#auth ul li{
+					padding-left: 15px;
+				}
+				#auth button{
+					color: #fff;
+    				background: #0a884d;
+    				margin-bottom: 5px;
+				}
+
+			}
+
+			@media (max-width: 991px){
+				.modal-dialog {
+				    max-width: 60%;
+				    margin: 1.75rem auto;
+				}	
+				
+			}
+			@media (max-width: 576px){
+				.modal-dialog {
+				    max-width: 80%;
+				    margin: 1.75rem auto;
+				}	
 			}
 		</style>
 	</head>

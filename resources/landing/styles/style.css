@@ -32,7 +32,7 @@ header
 }
 header .inner
 {
-	padding: 20px 0;
+	padding: 20px 0 10px;
 	max-width: 1130px;
 	margin: 0 auto;
 }
@@ -497,6 +497,7 @@ nav#auth ul li a:hover
 	cursor: pointer;
 	height: 30px;
 	z-index: 1;
+	background-repeat: no-repeat;
 }
 .founder .founder__inner .founder__main .founder__slider .founder__slider__next
 {
@@ -508,6 +509,7 @@ nav#auth ul li a:hover
 	cursor: pointer;
 	height: 30px;
 	z-index: 1;
+	background-repeat: no-repeat;
 }
 /*----- Founder End -----*/
 
@@ -1743,7 +1745,7 @@ footer .footer__mail img
 	.menu-toggle
 	{
 		position: absolute;
-		right: 20px;
+		right: 40px;
 		top: 0;
 		height: 76px;
 		line-height: 76px;
