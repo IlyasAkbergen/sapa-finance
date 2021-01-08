@@ -23,7 +23,6 @@ class UpdateUserRequest extends FormRequest
         return [
             'name.required' => 'Укажите ФИО',
             'phone.required' => ['Укажите номер телефона'],
-            'phone.unique' => ['Номер занят другим пользователем'],
             'email.required' => ['Укажите email'],
             'email.unique' => ['email занят другим пользователем'],
             'iin.required' => ['Укажите ИИН'],
@@ -44,7 +43,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => ['required', 'max:255'],
             'email' => ['required', 'max:255', 'unique:users,email,'.$this->id],
-            'phone' => ['required', 'unique:users,phone,'.$this->id],
+            'phone' => ['required'],
             'image' => ['required_without:id'],
             'iin' => ['required', 'numeric', 'unique:users,iin,'.$this->id],
             'direct_points' => ['integer'],

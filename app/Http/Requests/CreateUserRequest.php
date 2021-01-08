@@ -23,7 +23,6 @@ class CreateUserRequest extends FormRequest
         return [
             'name.required' => 'Укажите ФИО',
             'phone.required' => ['Укажите номер телефона'],
-            'phone.unique' => ['Номер занят другим пользователем'],
             'email.required' => ['Укажите email'],
             'email.unique' => ['email занят другим пользователем'],
             'iin.required' => ['Укажите ИИН'],
@@ -45,7 +44,7 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => ['required', 'max:255'],
             'email' => ['required', 'max:255', 'unique:users'],
-            'phone' => ['required', 'unique:users'],
+            'phone' => ['required'],
             'image' => ['required_without:id'],
             'role_id' => ['required'],
             'iin' => ['required', 'numeric', 'unique:users'],

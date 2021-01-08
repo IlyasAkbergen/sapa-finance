@@ -12,8 +12,8 @@
 
     <div class="main__content__my-course__flex">
       <div class="main__content__course-card mr-4">
-        <img src="../../../img/course-card-img.png"
-             class="main__content__course-card__img" alt="">
+        <img :src="imagePath"
+             class="main__content__course-card__img">
         <p class="main__content__course-card__title">
           {{ course.title }}
         </p>
@@ -148,20 +148,28 @@
       }
     },
 
+    computed: {
+      imagePath() {
+        return this.course.image_path
+          ? this.course.image_path
+          : '/images/course-card-img.png'
+      }
+    },
+
     methods: {
-    	buy() {
-    		this.showModal = true;
-    		this.showPriceSelection = true;
-    		this.showPaymentSelection = false;
+      buy() {
+        this.showModal = true;
+        this.showPriceSelection = true;
+        this.showPaymentSelection = false;
       },
       nextStep() {
-				this.showPriceSelection = false;
-				this.showPaymentSelection = true;
+        this.showPriceSelection = false;
+        this.showPaymentSelection = true;
       },
       hideModal() {
-				this.showModal = false;
-				this.showPriceSelection = false;
-				this.showPaymentSelection = false;
+        this.showModal = false;
+        this.showPriceSelection = false;
+        this.showPaymentSelection = false;
       },
     	getIcon(lesson) {
 				return lesson.passed

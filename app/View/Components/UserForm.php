@@ -32,7 +32,7 @@ class UserForm extends Component
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'iin' => ['required', 'string', 'max:12', 'unique:users'],
-        'phone' => ['required', 'string', 'max:12', 'unique:users'],
+        'phone' => ['required', 'string', 'max:12'],
         'referrer_id' => ['numeric', 'exists:' . User::class . ',id'],
         'password' => ['required', 'string', 'confirmed']
     ];

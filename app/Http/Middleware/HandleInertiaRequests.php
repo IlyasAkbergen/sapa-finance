@@ -15,8 +15,12 @@ class HandleInertiaRequests extends Middleware
         $request->user()->load('active_course.auth_user_pivot');
         return array_merge(parent::share($request), [
             'flash' => [
-                'message' => fn () => $request->session()->get('message'),
-                'sub_message' => fn () => $request->session()->get('sub_message'),
+                'message' => function () use ($request) {
+                    return $request->session()->get('message');
+                },
+                'sub_message' => function () use ($request) {
+                    return $request->session()->get('sub_message');
+                }
             ],
             'errors' => function () {
                 return Session::get('errors')
