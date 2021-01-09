@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\web;
 
+use App\Enums\ReferralLevelEnum;
 use App\Http\Resources\MyCourseResource;
 use App\Models\Course;
 use App\Services\CourseService;
@@ -55,6 +56,13 @@ class CourseController extends WebBaseController
         $course = Course::where('tag', Course::START_COURSE_TAG)->first();
 
         if (empty($course)) {
+            if (Auth::user()->referral_level_id < ReferralLevelEnum::Agent
+                || empty(Auth::user()->referral_level_id)
+            ) {
+                Auth::user()->update([
+                    'referral_level_id' => ReferralLevelEnum::Agent
+                ]);
+            }
             return redirect()->route('courses.index');
         }
 
