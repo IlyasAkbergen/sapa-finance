@@ -4,7 +4,7 @@
     @csrf
     <x-jet-input
             type="text"
-            placeholder="Имя"
+            placeholder="ФИО"
             autocomplete="name"
             :value="old('name')"
             id="name"

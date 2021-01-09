@@ -4,6 +4,7 @@
     @csrf
     <x-jet-input class="block mt-1 w-full"
                  placeholder="E-mail"
+                 id="email"
                  type="text"
                  wire:model="email"
                  autofocus />

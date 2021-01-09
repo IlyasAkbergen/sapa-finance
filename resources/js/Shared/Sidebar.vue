@@ -44,8 +44,9 @@
 
                     <SidebarItem
                             :route_name="'homeworks.index'"
+                            v-if="isAdmin"
                             icon="MailOpen">
-                        ШФК
+                        ДЗ
                     </SidebarItem>
 
                     <SidebarItem :route_name="!isAdmin

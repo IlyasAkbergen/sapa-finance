@@ -1,7 +1,10 @@
 <template>
     <form action="">
-        <label class="profile-form__label" for="username">Название компании</label>
-        <input class="profile-form__input mb-0" type="text" id="username"
+        <label class="profile-form__label"
+               for="partnername">Название компании</label>
+        <input class="profile-form__input mb-0"
+               type="text"
+               id="partnername"
             v-model="form.name">
         <JetInputError :message="form.error('name')" class="mt-1"/>
 
