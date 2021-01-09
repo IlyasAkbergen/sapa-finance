@@ -107,7 +107,7 @@
          class="main__content__lesson-flex">
       <div class="main__content__lesson-card">
         <p class="main__content__lesson-card__title">
-
+          Урок недоступен, пока домашнее задание за предыдущий урок не будет оценено и принято.
         </p>
       </div>
     </div>
