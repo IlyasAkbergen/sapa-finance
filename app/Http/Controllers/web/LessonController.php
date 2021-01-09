@@ -93,7 +93,7 @@ class LessonController extends WebBaseController
                 'user_id' => Auth::user()->id
             ]);
 
-            $lesson->loadMissing('auth_user_homework');
+            $lesson->load('auth_user_homework');
         }
 
         return Inertia::render('Lessons/LessonDetail', [

@@ -46,7 +46,9 @@
           </p>
 
           <Attachments
-              :model-id="lesson.user_homework.id"
+              :model-id="lesson.user_homework
+                ? lesson.user_homework.id
+                : null"
               :model-type="'homework'"
               :uuid="null"
           />
