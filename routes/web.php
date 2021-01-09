@@ -138,8 +138,7 @@ Route::group(['middleware' => [
         'homeworks',
         HomeworkController::class
     )
-    ->withoutMiddleware('client')
-    ->middleware('rates_homework');
+    ->withoutMiddleware('client');
 
     Route::post(
         '/rate-homework',

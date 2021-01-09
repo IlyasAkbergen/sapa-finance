@@ -71,6 +71,7 @@ class LessonController extends WebBaseController
     {
         $currentLesson = $this->lessonService->findWith($lesson_id, [
             'course.lessons',
+            'auth_user_homework',
             'course.auth_user_pivot',
         ]);
 
@@ -88,7 +89,34 @@ class LessonController extends WebBaseController
             ->orderBy('order')
             ->first();
 
-        if (empty($lesson->auth_user_homework)) {
+        $with_feedback = data_get(
+            $course,
+            'auth_user_pivot.with_feedback'
+        );
+
+        if (!$with_feedback
+            && !empty($currentLesson->auth_user_homework)
+            && (
+                !$currentLesson->auth_user_homework->accepted
+                || $currentLesson->score < 100
+            )
+        ) {
+            $currentLesson->auth_user_homework->update([
+                'status' => Homework::STATUS_ACCEPTED,
+                'score' => 100
+            ]);
+        }
+
+        if (
+            empty($lesson->auth_user_homework) && (
+                !$with_feedback || (
+                    $with_feedback
+                        && $currentLesson
+                            ->auth_user_homework
+                            ->accepted
+                )
+            )
+        ) {
             $lesson->homeworks()->create([
                 'user_id' => Auth::user()->id
             ]);

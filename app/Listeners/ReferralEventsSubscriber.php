@@ -43,7 +43,8 @@ class ReferralEventsSubscriber implements ShouldQueue
                     'referral_level_id',
                     ReferralLevelEnum::Consultant
                 )
-                ->first()->id
+                ->first()->id,
+            $purchase
         );
         $this->userService->awardReferrersAfterPurchase($purchase);
 

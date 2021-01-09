@@ -20,7 +20,7 @@ class Homework extends Model
 
     const ATTACHMENT_MAIN_DIR = 'homeworks';
     const STATUS_ACCEPTED = 1;
-    const STATUS_REJECTED = 1;
+    const STATUS_REJECTED = 2;
 
     public function getLinkAttribute()
     {
@@ -54,5 +54,10 @@ class Homework extends Model
         return $this->morphMany(
             Attachment::class, 'model'
         );
+    }
+
+    public function getAcceptedAttribute()
+    {
+        return $this->status == Homework::STATUS_ACCEPTED;
     }
 }
