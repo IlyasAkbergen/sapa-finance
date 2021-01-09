@@ -23,7 +23,7 @@ class LessonFormRequest extends FormRequest
         return [
             'title.required' => 'Укажите название',
             'video_url.required' => ['Укажите ссылку на видео'],
-            'content.required' => ['Укажите описание урока'],
+//            'content.required' => ['Укажите описание урока'],
         ];
     }
 
@@ -36,7 +36,7 @@ class LessonFormRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:255'],
-            'content' => ['required'],
+//            'content' => ['required'],
             'video_url'=> ['required', 'max:255'],
             'uuid' => ['required_without:id']
         ];
