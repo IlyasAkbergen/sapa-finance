@@ -19,4 +19,6 @@ interface WithPurchase
     function getPurchaseSum($with_feedback);
 
     function getIsPartPaidAttribute();
+
+    function getLinkAttribute();
 }

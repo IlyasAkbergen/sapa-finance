@@ -89,4 +89,11 @@ class Course extends Model implements WithPurchase
 
         return $passed_lessons_count * 100 / $lessons_count;
     }
+
+    function getLinkAttribute()
+    {
+        return Auth::user()->role_id == Role::ROLE_ADMIN
+            ? route('courses-crud.edit', $this->id)
+            : route('courses.show', $this->id);
+    }
 }

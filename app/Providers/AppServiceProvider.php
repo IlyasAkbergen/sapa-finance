@@ -30,6 +30,9 @@ use App\Services\MessageService;
 use App\Services\MessageServiceImpl;
 use App\Services\PartnerService;
 use App\Services\PartnerServiceContract;
+use App\Services\PaymentService;
+use App\Services\PaymentServiceContract;
+use App\Services\PayoutService;
 use App\Services\PayoutServiceContract;
 use App\Services\PurchaseService;
 use App\Services\PurchaseServiceContract;
@@ -95,8 +98,12 @@ class AppServiceProvider extends ServiceProvider
             PayboxGate::class
         );
         $this->app->bind(
+            PaymentServiceContract::class,
+            PaymentService::class
+        );
+        $this->app->bind(
             PayoutServiceContract::class,
-            PayoutServiceContract::class
+            PayoutService::class
         );
         $this->app->bind(
             AttachmentService::class,

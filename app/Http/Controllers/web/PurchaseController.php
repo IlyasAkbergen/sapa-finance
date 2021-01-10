@@ -131,7 +131,8 @@ class PurchaseController extends WebBaseController
             $purchase->payments()->create([
                 'eid' => $this->paymentGate->getPaymentId(),
                 'redirect_url' => $this->paymentGate->getRedirectUrl(),
-                'status' => PaymentGateContract::PAYMENT_STATUS_CREATED
+                'status' => PaymentGateContract::PAYMENT_STATUS_CREATED,
+                'user_id' => Auth::user()->id
             ]);
 
             return Inertia::location(

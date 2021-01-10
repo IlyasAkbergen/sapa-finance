@@ -63,12 +63,18 @@
                         Мой портфель
                     </SidebarItem>
 
-
                     <SidebarItem
                             v-if="isAdmin"
                             :route_name="'complaints.index'"
                             icon="Dislike">
                         Список жалоб
+                    </SidebarItem>
+
+                    <SidebarItem
+                            v-if="!isAdmin"
+                            :route_name="'payments.my'"
+                            icon="Dislike">
+                        Платежи
                     </SidebarItem>
 
                     <SidebarItem :route_name="'sales.index'"

@@ -54,4 +54,11 @@ class Briefcase extends Model implements WithPurchase
     {
         return $this->belongsTo(Partner::class);
     }
+
+    function getLinkAttribute()
+    {
+        return Auth::user()->role_id == Role::ROLE_ADMIN
+            ? route('briefcases-admin.edit', $this->id)
+            : route('briefcases.show', $this->id);
+    }
 }

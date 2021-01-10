@@ -18,6 +18,7 @@ use App\Http\Controllers\web\LessonController;
 use App\Http\Controllers\web\NotificationController;
 use App\Http\Controllers\web\partner\CabinetController;
 use App\Http\Controllers\web\partner\ProgramsController;
+use App\Http\Controllers\web\PaymentController;
 use App\Http\Controllers\web\PayoutController;
 use App\Http\Controllers\web\PurchaseController;
 use App\Http\Controllers\web\ReferralController;
@@ -162,6 +163,10 @@ Route::group(['middleware' => [
     ])
     ->withoutMiddleware('client')
     ->name('make_seen');
+
+    Route::resource('/payments', PaymentController::class);
+    Route::get('/my-payments', [PaymentController::class, 'my'])
+        ->name('payments.my');
 });
 
 Route::group(['middleware' => [
