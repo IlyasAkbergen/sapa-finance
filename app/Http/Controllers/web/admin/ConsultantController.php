@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\AttachmentService;
 use App\Services\UserService;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
@@ -72,6 +73,7 @@ class ConsultantController extends WebBaseController
         $user = $this->userService->create($data);
 
         if (!empty($user)) {
+            event(new Registered($user));
             return redirect()
                 ->route('consultants-crud.index');
         } else {

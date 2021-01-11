@@ -11,6 +11,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Services\AttachmentService;
 use App\Services\UserService;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -69,6 +70,7 @@ class PartnerUserController extends Controller
         $user = $this->userService->create($data);
 
         if (!empty($user)) {
+            event(new Registered($user));
             return redirect()
                 ->route('partner-users.index');
         } else {

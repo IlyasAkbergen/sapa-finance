@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PartnerFormRequest;
 use App\Models\Partner;
 use App\Services\PartnerServiceContract;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
@@ -45,6 +46,7 @@ class PartnerController extends Controller
         $partner = $this->partnerService->create($data);
 
         if (!empty($partner)) {
+            event(new Registered($partner));
             return redirect()
                 ->route('partners-crud.edit', $partner->id);
         } else {

@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Services\AttachmentService;
 use App\Services\UserService;
 use Carbon\Carbon;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -68,6 +69,7 @@ class UserController extends Controller
         $user = $this->userService->create($data);
 
         if (!empty($user)) {
+            event(new Registered($user));
             return redirect()
                 ->route('users-crud.edit', $user->id);
         } else {
