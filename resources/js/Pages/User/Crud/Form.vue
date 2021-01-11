@@ -42,15 +42,17 @@
         <JetInputError v-if="isAdmin || isPartnersUser"
                        :message="form.error('referral_level_id')" class="mt-1"/>
 
-        <label class="profile-form__label mt-3" for="item" v-if="isAdmin">Личные единицы</label>
-        <input class="profile-form__input mb-0" type="number"
-               v-if="isAdmin" v-model="form.direct_points" id="item">
-        <JetInputError v-if="isAdmin" :message="form.error('direct_points')" class="mt-1"/>
+        <div v-if="form.id">
+            <label class="profile-form__label mt-3" for="item" v-if="isAdmin">Личные единицы</label>
+            <input class="profile-form__input mb-0" type="number"
+                   v-if="isAdmin" v-model="form.direct_points" id="item">
+            <JetInputError v-if="isAdmin" :message="form.error('direct_points')" class="mt-1"/>
 
-        <label class="profile-form__label mt-3" for="teamitem" v-if="isAdmin">Командные единицы</label>
-        <input class="profile-form__input" type="number"
-               v-if="isAdmin" v-model="form.team_points" id="teamitem">
-        <JetInputError v-if="isAdmin" :message="form.error('team_points')" class="mt-1"/>
+            <label class="profile-form__label mt-3" for="teamitem" v-if="isAdmin">Командные единицы</label>
+            <input class="profile-form__input" type="number"
+                   v-if="isAdmin" v-model="form.team_points" id="teamitem">
+            <JetInputError v-if="isAdmin" :message="form.error('team_points')" class="mt-1"/>
+        </div>
 
         <a class="profile-form__submit mt-3" type="submit" href="#"
            @click="submitForm"

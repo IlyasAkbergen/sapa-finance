@@ -114,6 +114,11 @@ class UserController extends Controller
             $data
         );
 
+        $user->balance()->update([
+            'direct_points' => data_get($request, 'direct_points'),
+            'team_points' => data_get($request, 'team_points')
+        ]);
+
         if (!empty($user)) {
             return redirect()
                 ->route('users-crud.index');

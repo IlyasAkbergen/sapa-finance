@@ -104,7 +104,7 @@ export default {
       },
       editRouteName() {
           if (this.isAdmin) {
-              return 'users-crud.create'
+              return 'users-crud.edit'
           } else if (this.isPartner) {
               return 'partner-users.edit'
           } else {
