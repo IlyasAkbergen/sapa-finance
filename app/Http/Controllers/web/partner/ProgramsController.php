@@ -106,4 +106,15 @@ class ProgramsController extends WebBaseController
         }
     }
 
+    public function destroy($id)
+    {
+        $deleted = $this->briefcaseService->delete($id);
+
+        if ($deleted) {
+            return redirect()
+                ->route('programs-crud.index');
+        } else {
+            return $this->responseFail('failed deleting briefcase');
+        }
+    }
 }

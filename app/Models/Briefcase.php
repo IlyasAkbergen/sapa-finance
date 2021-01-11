@@ -7,17 +7,36 @@ use App\Traits\Awardable;
 use App\Traits\HasUsers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Briefcase extends Model implements WithPurchase
 {
     use HasFactory;
     use Awardable;
+    use SoftDeletes;
 
     protected $fillable = [
-        'title', 'description', 'type_id', 'sum', 'profit', 'duration',
-        'monthly_payment', 'direct_fee', 'awardable', 'image_path', 'partner_id'
+        'title', 'description', 'type_id',
+//        'sum', 'profit', 'duration',
+//        'monthly_payment', 'direct_fee', 'awardable',
+        'image_path', 'partner_id'
     ];
+
+    protected $attributes = [
+        'awardable' => true,
+        'direct_fee' => 0
+    ];
+
+    public function getAwardableAttribute()
+    {
+        return true;
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(BriefcaseType::class);
+    }
 
     function purchases()
     {
@@ -36,12 +55,12 @@ class Briefcase extends Model implements WithPurchase
 
     function getPurchaseSum($with_feedback)
     {
-        return  $this->sum;
+        return 0;
     }
 
     function getIsPartPaidAttribute()
     {
-        return !empty($this->monthly_payment);
+        return $this->type_id == 1;
     }
 
     public function auth_user_pivot()

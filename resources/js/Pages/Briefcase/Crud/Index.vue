@@ -49,6 +49,7 @@
     },
     props: {
       data: Object,
+      items: Array
     },
     data() {
       return {
@@ -62,30 +63,30 @@
             title: "Тип",
             key: "type_name",
           },
-          {
-            title: "Общая сумма договора",
-            key: "sum",
-          },
-          {
-            title: "Доходность",
-            key: "profit",
-          },
-          {
-            title: "Срок накопления",
-            key: "duration",
-          },
-          {
-            title: "Ежемесячный взнос",
-            key: "monthly_payment",
-          },
-          {
-            title: "Комиссия агента",
-            key: "direct_fee"
-          },
-          {
-            title: "Вознаграждается единицами",
-            key: "awardable",
-          }
+          // {
+          //   title: "Общая сумма договора",
+          //   key: "sum",
+          // },
+          // {
+          //   title: "Доходность",
+          //   key: "profit",
+          // },
+          // {
+          //   title: "Срок накопления",
+          //   key: "duration",
+          // },
+          // {
+          //   title: "Ежемесячный взнос",
+          //   key: "monthly_payment",
+          // },
+          // {
+          //   title: "Комиссия агента",
+          //   key: "direct_fee"
+          // },
+          // {
+          //   title: "Вознаграждается единицами",
+          //   key: "awardable",
+          // }
         ],
         search_key: ""
       }
@@ -93,8 +94,8 @@
     computed: {
       filteredRows() {
         return this.search_key != null && this.search_key != ""
-          ? this.data.data.filter((r) => r.title.indexOf(this.search_key) > -1)
-          : this.data.data;
+          ? this.items.filter((r) => r.title.indexOf(this.search_key) > -1)
+          : this.items;
       }
     }
   }

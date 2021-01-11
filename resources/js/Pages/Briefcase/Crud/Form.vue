@@ -44,69 +44,69 @@
 
     <JetInputError :message="form.error('type_id')" class="mt-1"/>
 
-    <div v-show="isCumulative">
-      <label class="profile-form__label mt-3"
-             for="monthly_payment">Размер ежемесячного взноса</label>
+<!--    <div v-show="isCumulative">-->
+<!--      <label class="profile-form__label mt-3"-->
+<!--             for="monthly_payment">Размер ежемесячного взноса</label>-->
 
-      <input class="profile-form__input mb-0" type="number"
-             id="monthly_payment"
-             v-model="form.monthly_payment"
-             placeholder="Введите размер ежемесячного взноса">
-      <JetInputError :message="form.error('monthly_payment')" class="mt-1"/>
-    </div>
+<!--      <input class="profile-form__input mb-0" type="number"-->
+<!--             id="monthly_payment"-->
+<!--             v-model="form.monthly_payment"-->
+<!--             placeholder="Введите размер ежемесячного взноса">-->
+<!--      <JetInputError :message="form.error('monthly_payment')" class="mt-1"/>-->
+<!--    </div>-->
 
-    <label class="profile-form__label mt-3" for="duration">
-      Срок накопления
-    </label>
+<!--    <label class="profile-form__label mt-3" for="duration">-->
+<!--      Срок накопления-->
+<!--    </label>-->
 
-    <input class="profile-form__input mb-0"
-           type="number"
-           v-model="form.duration"
-           id="duration" placeholder="Введите cрок накопления">
+<!--    <input class="profile-form__input mb-0"-->
+<!--           type="number"-->
+<!--           v-model="form.duration"-->
+<!--           id="duration" placeholder="Введите cрок накопления">-->
 
-    <JetInputError :message="form.error('duration')" class="mt-1"/>
+<!--    <JetInputError :message="form.error('duration')" class="mt-1"/>-->
 
-    <label class="profile-form__label mt-3" for="units">
-      Общая сумма договора
-    </label>
+<!--    <label class="profile-form__label mt-3" for="units">-->
+<!--      Общая сумма договора-->
+<!--    </label>-->
 
-    <input class="profile-form__input mb-0"
-           type="number"
-           v-model="form.sum"
-           id="units" placeholder="Введите общую сумму договора">
+<!--    <input class="profile-form__input mb-0"-->
+<!--           type="number"-->
+<!--           v-model="form.sum"-->
+<!--           id="units" placeholder="Введите общую сумму договора">-->
 
-    <JetInputError :message="form.error('sum')" class="mt-1"/>
+<!--    <JetInputError :message="form.error('sum')" class="mt-1"/>-->
 
-    <label class="profile-form__label mt-3"
-           for="commandunits">Доходность</label>
+<!--    <label class="profile-form__label mt-3"-->
+<!--           for="commandunits">Доходность</label>-->
 
-    <input class="profile-form__input mb-0" type="number"
-           id="commandunits"
-           v-model="form.profit"
-           placeholder="Введите доходность">
-    <JetInputError :message="form.error('profit')" class="mt-1"/>
+<!--    <input class="profile-form__input mb-0" type="number"-->
+<!--           id="commandunits"-->
+<!--           v-model="form.profit"-->
+<!--           placeholder="Введите доходность">-->
+<!--    <JetInputError :message="form.error('profit')" class="mt-1"/>-->
 
 
-    <label class="profile-form__label mt-3" for="comission">
-      Комиссия агента
-    </label>
-    <input class="profile-form__input mb-0" type="text"
-           id="comission"
-           v-model="form.direct_fee"
-           placeholder="Введите комиссионные агента">
-    <JetInputError :message="form.error('direct_fee')" class="mt-1"/>
+<!--    <label class="profile-form__label mt-3" for="comission">-->
+<!--      Комиссия агента-->
+<!--    </label>-->
+<!--    <input class="profile-form__input mb-0" type="text"-->
+<!--           id="comission"-->
+<!--           v-model="form.direct_fee"-->
+<!--           placeholder="Введите комиссионные агента">-->
+<!--    <JetInputError :message="form.error('direct_fee')" class="mt-1"/>-->
 
-    <input class="profile-form__checkbox mt-2" type="checkbox"
-           v-model="form.awardable" id="online"
-           :checked="form.awardable"
-           true-value="1"
-           false-value="0">
-    <label class="profile-form__clabel mt-2">
-      Вознаграждается единицами
-    </label><br>
+<!--    <input class="profile-form__checkbox mt-2" type="checkbox"-->
+<!--           v-model="form.awardable" id="online"-->
+<!--           :checked="form.awardable"-->
+<!--           true-value="1"-->
+<!--           false-value="0">-->
+<!--    <label class="profile-form__clabel mt-2">-->
+<!--      Вознаграждается единицами-->
+<!--    </label><br>-->
 
     <label class="profile-form__label mt-3" for="description">
-      Полное описание
+      Описание
     </label>
     <textarea class="profile-form__textarea mb-0"
               id="description" cols="30" rows="6"

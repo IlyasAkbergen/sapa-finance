@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web\admin;
 
 use App\Http\Controllers\web\WebBaseController;
 use App\Http\Requests\BriefcaseRequest;
+use App\Http\Resources\BriefcaseResource;
 use App\Models\Briefcase;
 use App\Models\BriefcaseType;
 use App\Services\AttachmentService;
@@ -28,10 +29,15 @@ class BriefcaseController extends WebBaseController
     public function index(Request $request)
     {
         $data = Briefcase::where('title', 'like', "%$request->search_key%")
+            ->with('type')
             ->paginate(10);
 
+        $items = BriefcaseResource::collection($data->items())
+            ->resolve();
+
         return Inertia::render('Briefcase/Crud/Index', [
-            'data' => $data
+            'data' => $data,
+            'items' => $items
         ]);
     }
 

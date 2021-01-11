@@ -15,14 +15,17 @@
         <template #actions>
             <div class="actions">
                 <span>Список программ</span>
-                <a class="actions__link actions__link--green" @click="showModal=true">
+                <a class="actions__link actions__link--green"
+                   @click="showModal=true">
                     <span>Добавить программу на сайт</span>
                 </a>
             </div>
         </template>
         <Modal :show="showModal" :max-width="'sm'" :closeable="true" @close="showModal=false">
             <inertia-link class="modal-link" v-for="type in types"
-                          :href="route('programs.create', {id: type.id})">{{type.title}}</inertia-link>
+                          :href="route('programs.create', {id: type.id})">
+                {{type.title}}
+            </inertia-link>
         </Modal>
         <div class="main__content__agent-portfels-flex">
             <BriefcaseCard v-for="briefcase in briefcases"
