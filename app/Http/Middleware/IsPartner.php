@@ -18,6 +18,10 @@ class IsPartner
      */
     public function handle(Request $request, Closure $next)
     {
+        if ($request->user()->role_id != Role::ROLE_PARTNER) {
+            return redirect('/');
+        }
+
         return $next($request);
     }
 }

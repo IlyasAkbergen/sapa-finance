@@ -12,7 +12,7 @@
                 />
 
                 <inertia-link class="actions__link actions__link--green"
-                   :href="route('users-crud.create')">
+                   :href="createRouteName">
                     <span>Добавить пользователя</span>
                 </inertia-link>
             </div>
@@ -22,8 +22,8 @@
             <div class="users mb-3">
                 <CrudTable :rows="filteredRows"
                            :headers="columns"
-                           :delete_route_name="'users-crud.destroy'"
-                           :edit_route_name="'users-crud.edit'"
+                           :delete_route_name="deleteRouteName"
+                           :edit_route_name="editRouteName"
                 />
             </div>
 
@@ -39,6 +39,7 @@
 
 <script>
 import MainLayout from '@/Layouts/MainLayout'
+import HasUser from "@/Mixins/HasUser";
 export default {
     name: "Index",
     components: {
@@ -48,6 +49,7 @@ export default {
         Pagination: () => import('@/Shared/Pagination'),
         StatsIcon: () => import('@/assets/icons/Stats')
     },
+    mixins: [HasUser],
     props: {
       data: Object,
     },
@@ -83,6 +85,31 @@ export default {
                     this.search_key.toLowerCase()
                 ) > -1)
           : this.data.data;
+      },
+      createRouteName() {
+          if (this.isAdmin) {
+              return route('users-crud.create')
+          } else if (this.isPartner) {
+              return route('partner-users.create')
+          } else {
+              return route('/')
+          }
+      },
+      deleteRouteName() {
+          if (this.isAdmin) {
+              return 'users-crud.destroy';
+          } else {
+              return null;
+          }
+      },
+      editRouteName() {
+          if (this.isAdmin) {
+              return 'users-crud.create'
+          } else if (this.isPartner) {
+              return 'partner-users.edit'
+          } else {
+              return null
+          }
       }
     }
   }

@@ -35,7 +35,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $data = User::where('name', 'like', "%$request->search_key%")
-            ->paginate(10);
+            ->paginate(20);
 
         return Inertia::render('User/Crud/Index', [
             'data' => $data

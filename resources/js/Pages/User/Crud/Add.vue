@@ -1,7 +1,7 @@
 <template>
     <main-layout>
         <template #back-link>
-            <inertia-link :href="route('users-crud.index')"
+            <inertia-link :href="backRoute"
                class="navbar-brand mb-0 pb-0">
                 <img src="../../../../img/back-arrow.png">
             </inertia-link>
@@ -30,6 +30,7 @@
             <Form :form="form"
                   :roles="roles"
                   :referral_level="referral_level"
+                  :is-partners-user="!!partner_id"
                   @submit="createUser"/>
         </div>
     </main-layout>
@@ -37,7 +38,7 @@
 
 <script>
 import MainLayout from '@/Layouts/MainLayout'
-import { uuid } from 'vue-uuid'
+import HasUser from "@/Mixins/HasUser";
 export default {
     name: "Add",
     components: {
@@ -45,10 +46,15 @@ export default {
         MainLayout,
         JetInputError: () => import('@/Jetstream/InputError'),
     },
+    mixins: [HasUser],
     props: {
         roles: Array,
         referral_level: {
             type: Array,
+            default: null
+        },
+        partner_id: {
+            type: Number,
             default: null
         }
     },
@@ -66,6 +72,7 @@ export default {
             role_id: 2,
             direct_points: 0,
             team_points: 0,
+            partner_id: this.partner_id,
             '_method': 'POST',
         }, {
             bag: 'userForm',
@@ -78,7 +85,7 @@ export default {
             if (this.$refs.image) {
                 this.$set(this.form, 'image', this.$refs.image.files[0]);
             }
-            this.form.post('/users-crud');
+            this.form.post(this.storeRouteName);
         },
         selectNewPhoto() {
             this.$refs.image.click();
@@ -98,6 +105,24 @@ export default {
             return this.form.profile_photo_path
                     ? this.form.profile_photo_path
                     : '/images/avatar-empty.png';
+        },
+        backRoute() {
+            if (this.isAdmin) {
+                return route('users-crud.index')
+            } else if (this.isPartner) {
+                return route('partner-users.index')
+            } else {
+                return route('/')
+            }
+        },
+        storeRouteName() {
+            if (this.isAdmin) {
+                return '/users-crud';
+            } else if (this.isPartner) {
+                return '/partner-users';
+            } else {
+                return null;
+            }
         }
     }
 }

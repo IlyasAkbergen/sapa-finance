@@ -1,7 +1,7 @@
 <template>
     <main-layout>
         <template #back-link>
-            <inertia-link :href="route('users-crud.index')"
+            <inertia-link :href="backRoute"
                class="navbar-brand mb-0 pb-0">
                 <img src="../../../../img/back-arrow.png">
             </inertia-link>
@@ -28,6 +28,7 @@
             <Form :form="form"
                   :roles="roles"
                   :referral_level="referral_level"
+                  :is-partners-user="!!partner_id"
                  @submit="updateUser"/>
         </div>
 
@@ -70,6 +71,10 @@ export default {
         referral_level: {
             type: Array,
             default: null
+        },
+        partner_id: {
+            type: Number,
+            default: null
         }
     },
     data() {
@@ -78,6 +83,7 @@ export default {
             form: this.$inertia.form({
                 ...this.client,
                 ...{
+                    partner_id: this.partner_id,
                     image: null,
                     password: null,
                     '_method': 'PUT',
@@ -93,11 +99,9 @@ export default {
             if (this.$refs.image) {
                 this.$set(this.form, 'image', this.$refs.image.files[0]);
             }
-            if (window.location.pathname === '/users-crud/me') {
-                this.form.post('/users-crud/update/' + this.client.id);
-            } else {
-                this.form.post('/users-crud/' + this.client.id);
-            }
+            console.log('is partner: ' + this.isPartner);
+            console.log('route: ' + this.updateRouteName);
+            this.form.post(this.updateRouteName + this.client.id);
         },
         selectNewPhoto() {
             this.$refs.image.click();
@@ -115,8 +119,34 @@ export default {
     computed: {
         avatarPath() {
             return this.form.profile_photo_path
-                    ? this.form.profile_photo_path
-                    : '/images/avatar-empty.png';
+                ? this.form.profile_photo_path
+                : '/images/avatar-empty.png';
+        },
+        updateRouteName() {
+            if (this.isAdmin) {
+                return window.location.pathname === '/users-crud/me'
+                    ? '/users-crud/update/'
+                    : '/users-crud/';
+            } else if (this.isPartner) {
+                return '/partner-users/'
+            } else {
+                return ''
+            }
+        },
+        backRoute() {
+            if (this.isAdmin) {
+                return route('users-crud.index')
+            } else if (this.isPartner) {
+                return route('partner-users.index')
+            } else {
+                return route('')
+            }
+        },
+        isAdmin() {
+            return this.$page.user.role_id === 1;
+        },
+        isPartner() {
+            return this.$page.user.role_id === 3;
         }
     }
 }

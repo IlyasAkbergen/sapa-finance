@@ -177,11 +177,11 @@
             name: 'Программы',
             icon: 'Graduation',
           },
-          // {
-          //   url: 'partner-sells',
-          //   name: 'Продажи',
-          //   icon: '',
-          // },
+          {
+            url: 'partner-users.index',
+            name: 'Пользователи',
+            icon: 'PersonCouple',
+          },
           // {
           //   url: 'partner-requests',
           //   name: 'Заявки',

@@ -31,10 +31,12 @@
                     <a class="users__link users__link--red
                         float-right courses__delete"
                         href="#"
+                        v-if="delete_route_name"
                         @click.prevent="() => deleteClicked(row.id)">
                         <Trash />
                     </a>
                     <inertia-link class="users__link users__link--blue float-right"
+                       v-if="edit_route_name"
                        :href="route(edit_route_name, row.id)">
                         <Pencil />
                     </inertia-link>

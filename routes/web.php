@@ -15,8 +15,8 @@ use App\Http\Controllers\web\admin\CourseController as CourseCrudController;
 use App\Http\Controllers\web\admin\LessonController as LessonCrudController;
 use App\Http\Controllers\web\HomeworkController;
 use App\Http\Controllers\web\LessonController;
-use App\Http\Controllers\web\NotificationController;
 use App\Http\Controllers\web\partner\CabinetController;
+use App\Http\Controllers\web\partner\PartnerUserController;
 use App\Http\Controllers\web\partner\ProgramsController;
 use App\Http\Controllers\web\PaymentController;
 use App\Http\Controllers\web\PayoutController;
@@ -217,40 +217,22 @@ Route::group(['middleware' => [
 
     Route::resource('consultants-crud', ConsultantAdminController::class);
 });
+
 Route::group(['middleware' => [
     'auth:sanctum',
     'share.inertia',
     'partner'
 ]], function () {
-    Route::get('/partner-cabinet', [CabinetController::class, 'index'])->name('partner-cabinet.index');
-    Route::get('/partner-cabinet/edit', [CabinetController::class, 'edit'])->name('partner-cabinet.edit');
+    Route::get('/partner-cabinet', [CabinetController::class, 'index'])
+        ->name('partner-cabinet.index');
+    Route::get('/partner-cabinet/edit', [CabinetController::class, 'edit'])
+        ->name('partner-cabinet.edit');
     Route::post('/partner-cabinet/update', [CabinetController::class, 'update']);
     Route::get(
         '/programs/create/{id}',
         [ProgramsController::class, 'create']
     )->name('programs.create');
     Route::resource('/programs-crud', ProgramsController::class);
-});
-Route::get('/test', function () {
-//    $user = User::with('balance')->findOrFail(5);
-//
-//    if ($user->referral_level_id == ReferralLevelEnum::Partner) {
-//        return;
-//    }
-//
-//    $next_level_id = empty($user->referral_level_id)
-//        ? ReferralLevelEnum::Agent
-//        : $user->referral_level_id + 1;
-//
-//    $next_level = ReferralLevel::findOrFail($next_level_id);
-//
-//    $deservesLevelUp = true;
-//
-//    foreach ($next_level->achieve_challenges as $challenge) {
-//        $deservesLevelUp = $deservesLevelUp && $challenge::check($user);
-//    }
-//
-//    if ($deservesLevelUp) {
-//        $user->updateReferralLevel($next_level_id);
-//    }
+
+    Route::resource('partner-users', PartnerUserController::class);
 });
