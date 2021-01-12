@@ -273,4 +273,9 @@ Route::group(['middleware' => [
         'partner-user-payments',
         [PartnerUserController::class, 'payments']
     )->name('partner-users.payments');
+
+    Route::post(
+      'partner-user-payment',
+      [PartnerUserController::class, 'storePayment']
+    );
 });

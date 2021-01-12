@@ -38,7 +38,7 @@ class BriefcasePaymentRequest extends FormRequest
         return [
             'sum' => ['required', 'integer'],
             'user_id' => ['required', 'integer'],
-            'order_id' => ['requried']
+            'order_id' => ['required']
 //            'payable_id' => ['required'],
 //            'payable_type' => ['required'],
         ];

@@ -9,12 +9,25 @@
 
     <template #header>
       Договор {{ order.contract_number }}
+        <a class="actions__link actions__link--green ml-2"
+            href="#" @click.prevent="addPayment">
+            <span>Добавить платеж</span>
+        </a>
     </template>
 
     <div class="ptef">
       <Form :form="form"
             @submit="updateOrder" />
     </div>
+
+    <Modal :show="showModal"
+           :closeable="true"
+           @close="showModal=false">
+      <PaymentForm
+        :form="paymentForm"
+        @submit="paymentSubmit"
+      />
+    </Modal>
   </main-layout>
 </template>
 
@@ -25,6 +38,8 @@
 		components: {
 			Form: () => import('./Form'),
 			MainLayout,
+      Modal: () => import('@/Jetstream/Modal'),
+      PaymentForm: () => import('@/Pages/Payments/Form')
 		},
 		props: {
 			order: Object,
@@ -40,12 +55,34 @@
 					bag: 'orderForm',
 					resetOnSuccess: true,
 				}),
+        showModal: false,
+        paymentForm: null
 			}
 		},
 		methods: {
 			updateOrder() {
 				this.form.post('/partner-user-order/update');
-			}
+			},
+      addPayment() {
+        this.paymentForm = this.$inertia.form({
+          '_method': 'POST',
+          sum: 0,
+          user_id: this.order.user.id,
+          order_id: this.order.id,
+        }, {
+          bag: 'paymentForm',
+          resetOnSuccess: true,
+        });
+
+        this.showModal = true
+      },
+      closeModal() {
+			  this.paymentForm = null;
+			  this.showModal = false
+      },
+      paymentSubmit() {
+			  this.paymentForm.post('/partner-user-payment');
+      }
 		},
 	}
 </script>

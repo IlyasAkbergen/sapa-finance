@@ -309,7 +309,7 @@ class PartnerUserController extends Controller
         ]);
 
         $payment = Payment::create([
-            'status' => data_get($request, 'status'),
+            'status' => Payment::PAYMENT_STATUS_OK,
             'sum' => data_get($request, 'sum'),
             'user_id' => data_get($request, 'user_id'),
             'payable_id' => $payable->id,
@@ -318,7 +318,7 @@ class PartnerUserController extends Controller
 
         if (!empty($payment)) {
             return redirect()
-                ->route('partner-users.payments');
+                ->route('partner-users-order.edit', $order->id);
         } else {
             return $this->responseFail('failed saving briefcase');
         }

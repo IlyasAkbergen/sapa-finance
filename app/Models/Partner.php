@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Enums\ReferralLevelEnum;
 use App\Scopes\PartnerLevelScope;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
 
-class Partner extends User
+class Partner extends User implements MustVerifyEmail
 {
     use HasFactory;
 
