@@ -5,7 +5,9 @@ namespace App\Http\Controllers\web;
 use App\Enums\ReferralLevelEnum;
 use App\Http\Controllers\web\WebBaseController;
 use App\Http\Middleware\IsAdmin;
+use App\Models\Briefcase;
 use App\Models\BriefcaseType;
+use App\Models\Purchase;
 use App\Models\User;
 use App\Services\BriefcaseService;
 use Illuminate\Http\Request;
@@ -54,6 +56,15 @@ class BriefcaseController extends WebBaseController
                         ReferralLevelEnum::Consultant)
                         ->first()->id
             ]
+        ]);
+
+        Purchase::create([
+           'user_id' => Auth::user()->id,
+            'sum' => 0,
+            'purchasable_id' => $id,
+            'purchasable_type' => Briefcase::class,
+            'payed' => true,
+            'with_feedback' => true,
         ]);
 
         return redirect()->route('my-briefcases');

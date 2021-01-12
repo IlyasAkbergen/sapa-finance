@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\web\partner;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BriefcasePaymentRequest;
 use App\Http\Requests\BriefcaseUserRequest;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\BriefcaseUserResourse;
+use App\Http\Resources\PaymentResource;
 use App\Http\Resources\UserResource;
+use App\Models\Briefcase;
+use App\Models\Payment;
+use App\Models\Purchase;
 use App\Models\ReferralLevel;
 use App\Models\Role;
 use App\Models\User;
@@ -260,6 +265,62 @@ class PartnerUserController extends Controller
             return redirect()->route('partner-users.briefcases');
         } else {
             return redirect()->route('partner-users.briefcases');
+        }
+    }
+
+    public function payments()
+    {
+        $data = Payment::query()
+            ->whereHas('user', function ($q) {
+                return $q->where('partner_id', Auth::user()->id);
+            })
+            ->with('payable.purchasable')
+            ->where(
+                'status',
+                Payment::PAYMENT_STATUS_OK
+            )
+            ->paginate(20);
+
+        return Inertia::render('Payments/Index', [
+            'data' => $data,
+            'payments' => PaymentResource::collection(
+                $data->items()
+            )
+            ->resolve()
+        ]);
+    }
+
+    public function storePayment(BriefcasePaymentRequest $request)
+    {
+        $order = UserBriefcase::with('user', 'briefcase')
+            ->find(data_get($request, 'order_id'));
+
+        if (
+            $order->user->partner_id != Auth::user()->id
+            || $order->briefcase->partner_id != Auth::user()->id
+        ) {
+            return $this->responseFail('failed saving briefcase');
+        }
+
+        $payable = Purchase::firstOrCreate([
+            'user_id' => data_get($request, 'user_id'),
+            'purchasable_id' => $order->briefcase->id,
+            'purchasable_type' => Briefcase::class,
+        ]);
+
+        $payment = Payment::create([
+            'status' => data_get($request, 'status'),
+            'sum' => data_get($request, 'sum'),
+            'user_id' => data_get($request, 'user_id'),
+            'payable_id' => $payable->id,
+            'payable_type' => Purchase::class,
+        ]);
+
+        if (!empty($payment)) {
+            return redirect()
+                ->route('partner-users.payments');
+        } else {
+            return $this->responseFail('failed saving briefcase');
         }
     }
 }
