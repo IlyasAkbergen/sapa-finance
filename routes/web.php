@@ -234,5 +234,43 @@ Route::group(['middleware' => [
     )->name('programs.create');
     Route::resource('/programs-crud', ProgramsController::class);
 
-    Route::resource('partner-users', PartnerUserController::class);
+    Route::resource(
+        'partner-users',
+        PartnerUserController::class
+    );
+
+    Route::get(
+        'partner-user-orders',
+        [PartnerUserController::class, 'orders']
+    )->name('partner-users.orders');
+
+    Route::put(
+        '/partner/user-briefcase/accept/{id}',
+        [PartnerUserController::class, 'acceptOrder']
+    );
+
+    Route::put(
+        '/partner/user-briefcase/reject/{id}',
+        [PartnerUserController::class, 'rejectOrder']
+    );
+
+    Route::get(
+        'partner-user-active-briefcases',
+        [PartnerUserController::class, 'activeOrders']
+    )->name('partner-users.briefcases');
+
+    Route::get(
+        'partner-users-order/{id}/edit',
+        [PartnerUserController::class, 'editOrder']
+    )->name('partner-users-order.edit');
+
+    Route::post(
+        '/partner-user-order/update',
+        [PartnerUserController::class, 'updateOrder']
+    )->name('partner-users-order.update');
+
+    Route::get(
+        'partner-user-payments',
+        [PartnerUserController::class, 'payments']
+    )->name('partner-users.payments');
 });

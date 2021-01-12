@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\web\partner;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BriefcaseUserRequest;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\BriefcaseUserResourse;
 use App\Http\Resources\UserResource;
 use App\Models\ReferralLevel;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\UserBriefcase;
 use App\Services\AttachmentService;
 use App\Services\UserService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class PartnerUserController extends Controller
@@ -67,6 +71,10 @@ class PartnerUserController extends Controller
         $data['partner_id'] = $request->user()->id;
         $data['role_id'] = Role::ROLE_CLIENT;
 
+        if (!$request->has('referrer_id')) {
+            $data['referrer_id'] = env('SAPA_USER_ID');
+        }
+
         $user = $this->userService->create($data);
 
         if (!empty($user)) {
@@ -113,6 +121,10 @@ class PartnerUserController extends Controller
                 $data['password'] = Hash::make($request->input('password'));
             }
 
+            if (!$request->has('referrer_id')) {
+                $data['referrer_id'] = env('SAPA_USER_ID');
+            }
+
             $user = $this->userService->update(
                 $request->input('id'),
                 $data
@@ -132,6 +144,122 @@ class PartnerUserController extends Controller
         } else {
             return redirect()
                 ->route('partner-users.index');
+        }
+    }
+
+    public function orders(Request $request)
+    {
+        $data = UserBriefcase::where(
+            'status', UserBriefcase::STATUS_PENDING
+        )
+        ->whereHas('user', function ($q) {
+            return $q->where('partner_id', Auth::user()->id);
+        })
+        ->has('briefcase')
+        ->with('user', 'briefcase')
+        ->paginate(20);
+
+        $orders = BriefcaseUserResourse::collection($data->items())
+            ->resolve();
+
+        return Inertia::render('Partner/Order/Orders', [
+            'orders' => $orders,
+            'data' => $data
+        ]);
+    }
+
+    public function acceptOrder($id)
+    {
+        $data = [
+            'contract_number' => strtoupper(Str::random(10)),
+            'status' => UserBriefcase::STATUS_ACCEPTED
+        ];
+
+        return $this->__updateOrder($id, $data);
+    }
+
+    public function rejectOrder($id)
+    {
+        $data = [
+            'status' => UserBriefcase::STATUS_REJECTED
+        ];
+
+        return $this->__updateOrder($id, $data);
+    }
+
+    private function __updateOrder($id, $data)
+    {
+        $order = UserBriefcase::find($id);
+
+        if ($order) {
+            $order->update($data);
+
+            return redirect()->route('partner-users.orders');
+        } else {
+            return $this->responseFail('Не удалось сохранить оценку.');
+        }
+    }
+
+    public function activeOrders()
+    {
+        $data = UserBriefcase::where(
+            'status', UserBriefcase::STATUS_ACCEPTED
+        )
+            ->whereHas('user', function ($q) {
+                return $q->where('partner_id', Auth::user()->id);
+            })
+            ->has('briefcase')
+            ->with('user', 'briefcase')
+            ->paginate(20);
+
+        $orders = BriefcaseUserResourse::collection($data->items())
+            ->resolve();
+
+        return Inertia::render('Partner/Order/Deals', [
+            'orders' => $orders,
+            'data' => $data
+        ]);
+    }
+
+    public function editOrder($id)
+    {
+        $order = UserBriefcase::with(
+            'briefcase',
+            'user'
+        )->find($id);
+
+        if (!empty($order)
+            && $order->briefcase->partner_id == Auth::user()->id
+            && $order->user->partner_id == Auth::user()->id
+        ) {
+            return Inertia::render('Partner/Order/Edit', [
+                'order' => BriefcaseUserResourse::make($order)->resolve(),
+            ]);
+        } else {
+            return redirect()->route('partner-users.briefcases');
+        }
+    }
+
+    public function updateOrder(BriefcaseUserRequest $request)
+    {
+        $order = UserBriefcase::with('user', 'briefcase')
+            ->find(data_get($request, 'id'));
+
+        if (!empty($order)
+            && $order->briefcase->partner_id == Auth::user()->id
+            && $order->user->partner_id == Auth::user()->id
+        ) {
+            $order->update([
+                'contract_number' => data_get($request, 'contract_number'),
+                'sum' => data_get($request, 'sum'),
+                'profit' => data_get($request, 'profit'),
+                'duration' => data_get($request, 'duration'),
+                'monthly_payment' => data_get($request, 'monthly_payment'),
+            ]);
+
+            return redirect()->route('partner-users.briefcases');
+        } else {
+            return redirect()->route('partner-users.briefcases');
         }
     }
 }

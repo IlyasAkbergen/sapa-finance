@@ -31,7 +31,9 @@ class ProgramsController extends WebBaseController
 
     public function index()
     {
-        $briefcases = $this->briefcaseService->ofUser(Auth::user());
+        $briefcases = Briefcase::where('partner_id', Auth::user()->id)
+            ->get();
+
         return Inertia::render('Programs/Index', [
             'briefcases' => $briefcases,
             'types' => BriefcaseType::all()
@@ -49,7 +51,7 @@ class ProgramsController extends WebBaseController
     {
         $briefcase = $this->briefcaseService->find($id);
 
-        if (!empty($briefcase)) {
+        if (!empty($briefcase) && $briefcase->partner_id == Auth::user()->id) {
             return Inertia::render('Programs/Crud/Edit', [
                 'briefcase' => $briefcase,
             ]);
@@ -71,6 +73,8 @@ class ProgramsController extends WebBaseController
 
             $data['image_path'] = $filepath;
         }
+
+        $data['partner_id'] = Auth::user()->id;
 
         $briefcase = $this->briefcaseService->update(
             $request->input('id'),
@@ -96,8 +100,9 @@ class ProgramsController extends WebBaseController
 
         $data['image_path'] = $filepath;
 
+        $data['partner_id'] = Auth::user()->id;
+
         $briefcase = $this->briefcaseService->create($data);
-        $this->briefcaseService->attachToUsers($briefcase, [Auth::id()], Auth::id());
         if (!empty($briefcase)) {
             return redirect()
                 ->route('programs-crud.index');

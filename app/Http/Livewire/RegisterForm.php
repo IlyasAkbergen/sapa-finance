@@ -66,7 +66,8 @@ class RegisterForm extends Component
             'email' => $this->email,
             'iin' => $this->iin,
             'phone' => $this->phone,
-            'referrer_id' => $this->referrer_id ?? null,
+            'referrer_id' => $this->referrer_id
+                ?: env('SAPA_USER_ID'),
             'role_id' => Role::ROLE_CLIENT,
             'password' => $this->password,
         ]);

@@ -21,14 +21,13 @@
 <!--    <p class="main__content__portfels-flex__card__digit">{{ briefcase.profit }} ₸</p>-->
 
     <a href="#" class="main__content__portfels-flex__card__button"
-       @click.prevent="addBriefcase"
-       v-show="!alreadyHave">
+       @click.prevent="addBriefcase">
       Добавить программу
     </a>
-    <a href="#" class="main__content__portfels-flex__card__button sent"
-       v-show="alreadyHave">
-      Запрос отправлен
-    </a>
+<!--    <a href="#" class="main__content__portfels-flex__card__button sent"-->
+<!--       v-show="alreadyHave">-->
+<!--      Запрос отправлен-->
+<!--    </a>-->
   </div>
 </template>
 

@@ -66,6 +66,10 @@ class UserController extends Controller
             $data['password'] = Hash::make($request->input('password'));
         }
 
+        if (!$request->has('referrer_id')) {
+            $data['referrer_id'] = env('SAPA_USER_ID');
+        }
+
         $user = $this->userService->create($data);
 
         if (!empty($user)) {
@@ -107,6 +111,10 @@ class UserController extends Controller
 
         if ($request->has('password') && !empty($request->password)) {
             $data['password'] = Hash::make($request->input('password'));
+        }
+
+        if (!$request->has('referrer_id')) {
+            $data['referrer_id'] = env('SAPA_USER_ID');
         }
 
         $user = $this->userService->update(
