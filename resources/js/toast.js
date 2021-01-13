@@ -9,7 +9,7 @@ const toast = {
             position: 'bottomRight',
         })
     },
-    success: (message= 'Ваши данные сохранены', title = 'Успешно') => {
+    success: (message= 'Данные сохранены', title = 'Успешно') => {
         return iZtoast.success({
             title: title,
             message: message,

@@ -21,10 +21,10 @@ class BriefcasePaymentRequest extends FormRequest
     public function messages()
     {
         return [
-            'sum.required' => ['Не указана сумма договора'],
+            'sum.required' => ['Не указана сумма платежа'],
             'sum.integer' => ['Значение должно быть числовым'],
             'user_id.required' => ['Укажите пользователя'],
-            'created_at.required' => ['Укажите дату'],
+            'paid_at.required' => ['Укажите дату'],
         ];
     }
 
@@ -38,7 +38,8 @@ class BriefcasePaymentRequest extends FormRequest
         return [
             'sum' => ['required', 'integer'],
             'user_id' => ['required', 'integer'],
-            'order_id' => ['required']
+            'order_id' => ['required'],
+            'paid_at' => ['required', 'date']
 //            'payable_id' => ['required'],
 //            'payable_type' => ['required'],
         ];

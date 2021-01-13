@@ -12,6 +12,17 @@
         >
         <JetInputError :message="form.error('sum')" class="mt-1"/>
 
+        <label class="profile-form__label mt-3"
+               for="paid_at">
+            Дата оплаты
+        </label>
+        <input class="profile-form__input mb-0"
+               type="date"
+               id="paid_at"
+               v-model="form.paid_at"
+        >
+        <JetInputError :message="form.error('paid_at')" class="mt-1"/>
+
         <a class="profile-form__submit mt-3" type="submit" href="#"
            @click="submitForm"
            :class="{ 'opacity-25': form.processing }"

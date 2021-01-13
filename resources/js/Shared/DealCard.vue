@@ -6,9 +6,6 @@
        class="main__content__portfels-flex__card__title">
         {{ deal.briefcase.title }}
     </inertia-link>
-    <p class="main__content__portfels-flex__card__text">
-       {{ deal.briefcase.description | truncate(80) }}
-    </p>
     <p class="main__content__portfels-flex__card__subtitle">Номер договора</p>
     <p class="main__content__portfels-flex__card__digit">
       {{ deal.contract_number }}</p>
@@ -22,6 +19,9 @@
     <p class="main__content__portfels-flex__card__digit">{{ deal.sum }} ₸</p>
     <p class="main__content__portfels-flex__card__subtitle">Доходность</p>
     <p class="main__content__portfels-flex__card__digit">{{ deal.profit }} ₸</p>
+
+    <p class="main__content__portfels-flex__card__subtitle">Накоплено</p>
+    <p class="main__content__portfels-flex__card__digit">{{ deal.paid_sum }} ₸</p>
 
   </div>
 </template>

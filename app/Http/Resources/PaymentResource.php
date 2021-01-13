@@ -22,6 +22,8 @@ class PaymentResource extends JsonResource
                             )->resolve(),
             'updated_at' => Carbon::parse($this->updated_at)
                 ->format('d.m.Y H:i'),
+            'paid_at' => Carbon::parse($this->paid_at)
+                ->format('d.m.Y H:i'),
             'sum' => $this->sum
         ];
     }

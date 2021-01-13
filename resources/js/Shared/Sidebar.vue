@@ -180,6 +180,11 @@
             name: 'Заявки на программы',
             icon: 'Question',
           },
+					{
+						url: 'partner-users.deals',
+						name: 'Договоры',
+						icon: 'Deal',
+					},
         ],
 				partnerRouteList: [
 					{
@@ -198,7 +203,7 @@
 					// 	icon: 'PersonCouple',
 					// },
 					{
-						url: 'partner-users.briefcases',
+						url: 'partner-users.deals',
 						name: 'Договоры',
 						icon: 'Deal',
 					},

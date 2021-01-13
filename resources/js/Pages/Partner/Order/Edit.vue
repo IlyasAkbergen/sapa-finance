@@ -1,7 +1,7 @@
 <template>
   <main-layout>
     <template #back-link>
-      <inertia-link :href="route('partner-users.briefcases')"
+      <inertia-link :href="route('partner-users.deals')"
                     class="navbar-brand mb-0 pb-0">
         <img src="../../../../img/back-arrow.png">
       </inertia-link>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+	import toast from '@/toast'
 	import MainLayout from '@/Layouts/MainLayout'
 	export default {
 		name: "Edit",
@@ -47,10 +48,9 @@
 		},
     watch: {
       formSuccessfull(newValue) {
-        console.log('changed')
         if (newValue) {
-          console.log('changed to true')
-          this.closeModal()
+					  toast.success("Платеж сохранен.")
+            this.closeModal()
         }
       }
     },
@@ -84,6 +84,7 @@
           sum: 0,
           user_id: this.order.user.id,
           order_id: this.order.id,
+          paid_at: new Date().toLocaleDateString()
         }, {
           bag: 'paymentForm',
           resetOnSuccess: true,

@@ -270,7 +270,7 @@ Route::group(['middleware' => [
     Route::get(
         'partner-user-active-briefcases',
         [PartnerUserController::class, 'activeOrders']
-    )->name('partner-users.briefcases');
+    )->name('partner-users.deals');
 
     Route::get(
         'partner-users-order/{id}/edit',
