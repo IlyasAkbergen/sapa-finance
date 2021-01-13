@@ -173,7 +173,7 @@ class PartnerUserController extends Controller
     public function acceptOrder($id)
     {
         $data = [
-            'contract_number' => strtoupper(Str::random(10)),
+            'contract_number' => strtoupper(Str::random(10)), // todo increment prev contract
             'status' => UserBriefcase::STATUS_ACCEPTED
         ];
 
