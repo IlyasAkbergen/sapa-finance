@@ -81,7 +81,7 @@ class BriefcaseController extends WebBaseController
                 'briefcase' => $briefcase,
             ]);
         } else {
-            return redirect()->route('briefcase-crud.index');
+            return redirect()->route('briefcases-admin.index');
         }
     }
 

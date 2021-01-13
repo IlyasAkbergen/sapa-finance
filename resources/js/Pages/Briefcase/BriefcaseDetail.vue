@@ -8,7 +8,7 @@
         </template>
 
         <template #header>
-            Редактирование портфеля {{ briefcase.title }}
+            Просмотр {{ briefcase.title }}
         </template>
 
         <div class="cec">
