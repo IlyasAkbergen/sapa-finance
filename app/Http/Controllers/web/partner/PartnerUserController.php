@@ -157,9 +157,6 @@ class PartnerUserController extends Controller
         $data = UserBriefcase::where(
             'status', UserBriefcase::STATUS_PENDING
         )
-        ->whereHas('user', function ($q) {
-            return $q->where('partner_id', Auth::user()->id);
-        })
         ->has('briefcase')
         ->with('user', 'briefcase')
         ->paginate(20);
@@ -199,7 +196,7 @@ class PartnerUserController extends Controller
         if ($order) {
             $order->update($data);
 
-            return redirect()->route('partner-users.orders');
+            return redirect()->route('admin.briefcase-orders');
         } else {
             return $this->responseFail('Не удалось сохранить оценку.');
         }
@@ -210,10 +207,9 @@ class PartnerUserController extends Controller
         $data = UserBriefcase::where(
             'status', UserBriefcase::STATUS_ACCEPTED
         )
-            ->whereHas('user', function ($q) {
+            ->whereHas('briefcase', function ($q) {
                 return $q->where('partner_id', Auth::user()->id);
             })
-            ->has('briefcase')
             ->with('user', 'briefcase')
             ->paginate(20);
 
@@ -271,10 +267,9 @@ class PartnerUserController extends Controller
     public function payments()
     {
         $data = Payment::query()
-            ->whereHas('user', function ($q) {
-                return $q->where('partner_id', Auth::user()->id);
-            })
-            ->with('payable.purchasable')
+            ->with([
+                'payable.purchasable', 'user'
+            ])
             ->where(
                 'status',
                 Payment::PAYMENT_STATUS_OK
@@ -296,8 +291,8 @@ class PartnerUserController extends Controller
             ->find(data_get($request, 'order_id'));
 
         if (
-            $order->user->partner_id != Auth::user()->id
-            || $order->briefcase->partner_id != Auth::user()->id
+            $order->briefcase->partner_id != Auth::user()->id
+            || Auth::user()->role_id == Role::ROLE_ADMIN
         ) {
             return $this->responseFail('failed saving briefcase');
         }

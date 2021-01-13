@@ -57,6 +57,14 @@
           </SidebarItem>
 
           <SidebarItem
+            v-if="isAdmin"
+            v-for="route in adminRouteList"
+            :route_name="route.url"
+            :icon="route.icon">
+            {{route.name}}
+          </SidebarItem>
+
+          <SidebarItem
                   v-if="!isAdmin"
                   :route_name="'my-briefcases'"
                   icon="MyBriefcase">
@@ -166,6 +174,13 @@
 		data() {
 			return {
 				showingNavigationDropdown: false,
+        adminRouteList: [
+          {
+            url: 'admin.briefcase-orders',
+            name: 'Заявки на программы',
+            icon: 'Question',
+          },
+        ],
 				partnerRouteList: [
 					{
 						url: 'partner-cabinet.index',
@@ -177,26 +192,21 @@
 						name: 'Программы',
 						icon: 'Graduation',
 					},
-					{
-						url: 'partner-users.index',
-						name: 'Пользователи',
-						icon: 'PersonCouple',
-					},
-					{
-						url: 'partner-users.orders',
-						name: 'Заявки',
-						icon: 'Question',
-					},
+					// {
+					// 	url: 'partner-users.index',
+					// 	name: 'Пользователи',
+					// 	icon: 'PersonCouple',
+					// },
 					{
 						url: 'partner-users.briefcases',
 						name: 'Договоры',
 						icon: 'Deal',
 					},
-					{
-						url: 'partner-users.payments',
-						name: 'Платежи',
-						icon: 'Cart',
-					}
+					// {
+					// 	url: 'partner-users.payments',
+					// 	name: 'Платежи',
+					// 	icon: 'Cart',
+					// }
 					// {
 					//   url: 'partner-requests',
 					//   name: 'Заявки',

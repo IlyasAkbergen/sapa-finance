@@ -1,9 +1,12 @@
 <template>
     <div class="main__content__portfels-flex__card">
         <img :src="imagePath" class="main__content__portfels-flex__card__img" alt="">
-        <inertia-link :href="route('briefcases.show', briefcase.id)"
-                      class="main__content__portfels-flex__card__title">
-            {{ briefcase.title }}</inertia-link>
+<!--        <inertia-link :href="route('briefcases.show', briefcase.id)"-->
+<!--                      class="main__content__portfels-flex__card__title">-->
+<!--            {{ briefcase.title }}</inertia-link>-->
+        <p class="title">
+          {{ briefcase.title }}
+        </p>
         <p class="main__content__portfels-flex__card__text">
             {{ briefcase.description | truncate(80) }}
         </p>

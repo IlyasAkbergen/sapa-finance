@@ -106,7 +106,7 @@ export default {
           if (this.isAdmin) {
               return 'users-crud.edit'
           } else if (this.isPartner) {
-              return 'partner-users.edit'
+              return 'users.show'
           } else {
               return null
           }

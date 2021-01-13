@@ -24,6 +24,7 @@
            :closeable="true"
            @close="showModal=false">
       <PaymentForm
+        v-if="paymentForm"
         :form="paymentForm"
         @submit="paymentSubmit"
       />
@@ -44,6 +45,15 @@
 		props: {
 			order: Object,
 		},
+    watch: {
+      formSuccessfull(newValue) {
+        console.log('changed')
+        if (newValue) {
+          console.log('changed to true')
+          this.closeModal()
+        }
+      }
+    },
 		data() {
 			return {
 				form: this.$inertia.form({
@@ -59,6 +69,11 @@
         paymentForm: null
 			}
 		},
+    computed: {
+		  formSuccessfull() {
+		    return this.paymentForm && this.paymentForm.recentlySuccessful;
+      }
+    },
 		methods: {
 			updateOrder() {
 				this.form.post('/partner-user-order/update');
@@ -81,7 +96,8 @@
 			  this.showModal = false
       },
       paymentSubmit() {
-			  this.paymentForm.post('/partner-user-payment');
+			  this.paymentForm
+          .post('/partner-user-payment');
       }
 		},
 	}

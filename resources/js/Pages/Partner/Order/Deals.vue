@@ -1,7 +1,7 @@
 <template>
   <main-layout>
     <template #header>
-      Заявки
+      Договоры
     </template>
     <div class="main__content__sellings-wrapper">
       <div class="osk mb-3">

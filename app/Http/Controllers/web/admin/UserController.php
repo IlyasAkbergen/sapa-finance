@@ -173,4 +173,17 @@ class UserController extends Controller
             return redirect()->route('users-crud.index');
         }
     }
+
+    public function show($id)
+    {
+        $client = User::find($id);
+
+        if ($client) {
+            return Inertia::render('User/Show', [
+                'client' => $client
+            ]);
+        } else {
+            return $this->responseFail('Не удалось найти пользователя');
+        }
+    }
 }

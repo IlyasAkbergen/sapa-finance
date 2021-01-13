@@ -24,6 +24,7 @@ use App\Http\Controllers\web\PurchaseController;
 use App\Http\Controllers\web\ReferralController;
 use App\Http\Controllers\web\SaleController;
 use App\Http\Controllers\web\SupportController;
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 
@@ -66,7 +67,10 @@ Route::group(['middleware' => [
         [CourseController::class, 'my']
     )->name('my-courses');
 
-    Route::resource('briefcases', ClientBriefcaseController::class);
+    Route::resource(
+        'briefcases',
+        ClientBriefcaseController::class
+    )->withoutMiddleware('client');
 
     Route::get('/my-briefcases', [ClientBriefcaseController::class, 'my'])
         ->name('my-briefcases');
@@ -167,6 +171,10 @@ Route::group(['middleware' => [
     Route::resource('/payments', PaymentController::class);
     Route::get('/my-payments', [PaymentController::class, 'my'])
         ->name('payments.my');
+
+    Route::get('/users/{id}', [UserController::class, 'show'])
+        ->name('users.show')
+        ->withoutMiddleware('client');
 });
 
 Route::group(['middleware' => [
@@ -216,12 +224,32 @@ Route::group(['middleware' => [
     Route::resource('messages', MessageController::class);
 
     Route::resource('consultants-crud', ConsultantAdminController::class);
+
+    Route::get(
+      'briefcase-orders',
+      [PartnerUserController::class, 'orders']
+    )->name('admin.briefcase-orders');
+
+    Route::put(
+      '/user-briefcase/accept/{id}',
+      [PartnerUserController::class, 'acceptOrder']
+    );
+
+    Route::put(
+      '/user-briefcase/reject/{id}',
+      [PartnerUserController::class, 'rejectOrder']
+    );
+
+    Route::get(
+        'user-briefcase-payments',
+        [PartnerUserController::class, 'payments']
+    )->name('user-briefcase-payments');
 });
 
 Route::group(['middleware' => [
     'auth:sanctum',
     'share.inertia',
-    'partner'
+    'roles:'.Role::ROLE_ADMIN.','.Role::ROLE_PARTNER
 ]], function () {
     Route::get('/partner-cabinet', [CabinetController::class, 'index'])
         ->name('partner-cabinet.index');
@@ -234,25 +262,10 @@ Route::group(['middleware' => [
     )->name('programs.create');
     Route::resource('/programs-crud', ProgramsController::class);
 
-    Route::resource(
-        'partner-users',
-        PartnerUserController::class
-    );
-
-    Route::get(
-        'partner-user-orders',
-        [PartnerUserController::class, 'orders']
-    )->name('partner-users.orders');
-
-    Route::put(
-        '/partner/user-briefcase/accept/{id}',
-        [PartnerUserController::class, 'acceptOrder']
-    );
-
-    Route::put(
-        '/partner/user-briefcase/reject/{id}',
-        [PartnerUserController::class, 'rejectOrder']
-    );
+//    Route::resource(
+//        'partner-users',
+//        PartnerUserController::class
+//    );
 
     Route::get(
         'partner-user-active-briefcases',
@@ -270,7 +283,7 @@ Route::group(['middleware' => [
     )->name('partner-users-order.update');
 
     Route::get(
-        'partner-user-payments',
+        'user-briefcase-payments',
         [PartnerUserController::class, 'payments']
     )->name('partner-users.payments');
 

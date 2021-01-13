@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\CanRateHomework;
+use App\Http\Middleware\CheckUserRoles;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsClient;
@@ -71,6 +72,7 @@ class Kernel extends HttpKernel
         'client' => IsClient::class,
         'partner' => IsPartner::class,
         'share.inertia' => HandleInertiaRequests::class,
-        'rates_homework' => CanRateHomework::class
+        'rates_homework' => CanRateHomework::class,
+        'roles' => CheckUserRoles::class
     ];
 }

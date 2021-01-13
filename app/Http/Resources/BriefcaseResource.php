@@ -18,10 +18,12 @@ class BriefcaseResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'type_id' => $this->type_id,
+            'image_path' => $this->image_path,
             'type_name' => $this->whenLoaded(
                 'type',
                 $this->type->title
-            )
+            ),
         ];
     }
 }

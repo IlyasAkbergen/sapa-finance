@@ -9,7 +9,7 @@
           </inertia-link>
         </th>
         <th class="align-middle" scope="row">
-          <inertia-link :href="route('partner-users.edit', order.user.id)">
+          <inertia-link :href="route('users.show', order.user.id)">
             {{ order.user.name }}
           </inertia-link>
         </th>
@@ -65,10 +65,10 @@ export default {
   },
   methods: {
     accept() {
-      this.$inertia.put('/partner/user-briefcase/accept/' + this.order.id)
+      this.$inertia.put('/user-briefcase/accept/' + this.order.id)
     },
     reject() {
-      this.$inertia.put('/partner/user-briefcase/reject/' + this.order.id)
+      this.$inertia.put('/user-briefcase/reject/' + this.order.id)
     }
   }
 }

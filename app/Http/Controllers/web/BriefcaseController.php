@@ -5,10 +5,12 @@ namespace App\Http\Controllers\web;
 use App\Enums\ReferralLevelEnum;
 use App\Http\Controllers\web\WebBaseController;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Resources\DealResource;
 use App\Models\Briefcase;
 use App\Models\BriefcaseType;
 use App\Models\Purchase;
 use App\Models\User;
+use App\Models\UserBriefcase;
 use App\Services\BriefcaseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,32 +41,36 @@ class BriefcaseController extends WebBaseController
     // GET /my-briefcases
     public function my()
     {
-        $briefcases = $this->briefcaseService->ofUser(Auth::user());
+        $deals = UserBriefcase::query()
+            ->where('user_id', Auth::user()->id)
+            ->with('briefcase')
+            ->get();
 
-        return Inertia('Briefcase/Briefcases', [
-            'briefcases' => $briefcases
+        return Inertia('Briefcase/Deals', [
+            'deals' => DealResource::collection($deals)->resolve()
         ]);
     }
 
     public function attachToMe($id)
     {
-        Auth::user()->briefcases()->syncWithoutDetaching([
+        $purchase = Purchase::create([
+            'user_id' => Auth::user()->id,
+            'sum' => 0,
+            'purchasable_id' => $id,
+            'purchasable_type' => Briefcase::class,
+            'payed' => true,
+            'with_feedback' => true,
+        ]);
+
+        Auth::user()->briefcases()->attach([
             $id => [
+                'purchase_id' => $purchase->id,
                 'consultant_id' => Auth::user()->referrer_id
                     ?: User::where(
                         'referral_level_id',
                         ReferralLevelEnum::Consultant)
                         ->first()->id
             ]
-        ]);
-
-        Purchase::create([
-           'user_id' => Auth::user()->id,
-            'sum' => 0,
-            'purchasable_id' => $id,
-            'purchasable_type' => Briefcase::class,
-            'payed' => true,
-            'with_feedback' => true,
         ]);
 
         return redirect()->route('my-briefcases');
