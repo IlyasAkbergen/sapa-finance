@@ -85,4 +85,9 @@ class ComplaintController extends WebBaseController
             return $this->responseFail('Не удалось удалить');
         }
     }
+
+    public function changeReferral(Request $request) {
+        User::updateReferral($request->user_id, $request->id);
+        return response()->json(['success'=>true]);
+    }
 }

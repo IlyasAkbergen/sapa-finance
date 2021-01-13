@@ -120,4 +120,18 @@ class BriefcaseController extends WebBaseController
             return $this->responseFail('Не удалосьу удалить');
         }
     }
+    // GET /briefcases/{id}
+    public function show($id)
+    {
+        $briefcase = $this->briefcaseService->find($id);
+
+        if (!empty($briefcase)) {
+            return Inertia::render('Briefcase/BriefcaseDetail', [
+                'briefcase' => $briefcase,
+                'types' => BriefcaseType::all()
+            ]);
+        } else {
+            return redirect()->route('briefcase-crud.index');
+        }
+    }
 }

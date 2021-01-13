@@ -13,6 +13,7 @@ use App\Services\BriefcaseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
 
 class BriefcaseController extends WebBaseController
 {
@@ -73,7 +74,15 @@ class BriefcaseController extends WebBaseController
     // GET /briefcases/{id}
     public function show($id)
     {
-        return null;
+        $briefcase = $this->briefcaseService->find($id);
+
+        if (!empty($briefcase)) {
+            return Inertia::render('Briefcase/BriefcaseDetail', [
+                'briefcase' => $briefcase,
+            ]);
+        } else {
+            return redirect()->route('briefcase-crud.index');
+        }
     }
 
     // PUT /briefcases/{id}
