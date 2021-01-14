@@ -31,6 +31,7 @@ class PaymentController extends Controller
                 'status',
                 Payment::PAYMENT_STATUS_OK
             )
+            ->orderByDesc('paid_at')
             ->paginate(20);
 
         return Inertia::render('Payments/Index', [
