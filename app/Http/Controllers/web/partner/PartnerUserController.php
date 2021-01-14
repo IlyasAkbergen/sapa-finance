@@ -233,13 +233,102 @@ class PartnerUserController extends WebBaseController
             'user'
         )->find($id);
 
+        $briefcases = $users = null;
+
+        if (Auth::user()->isAdmin) {
+            $briefcases = Briefcase::all()
+                ->map(function ($item) {
+                    return [
+                        'value' => $item->id,
+                        'text' => $item->title
+                    ];
+                });
+            $users = User::all()
+                ->map(function ($item) {
+                    return [
+                        'value' => $item->id,
+                        'text' => $item->name
+                    ];
+                });
+        }
+
         if (!empty($order)
             && ($order->briefcase->partner_id == Auth::user()->id
                 || Auth::user()->isAdmin)
         ) {
             return Inertia::render('Partner/Order/Edit', [
                 'order' => BriefcaseUserResourse::make($order)->resolve(),
+                'users' => $users,
+                'briefcases' => $briefcases
             ]);
+        } else {
+            return redirect()->route('partner-users.deals');
+        }
+    }
+
+    public function createOrder()
+    {
+        if (!Auth::user()->isAdmin) {
+            return redirect()->back();
+        }
+
+        $briefcases = Briefcase::all()
+            ->map(function ($item) {
+                return [
+                    'value' => $item->id,
+                    'text' => $item->title
+                ];
+            });
+
+        $users = User::all()
+            ->map(function ($item) {
+                return [
+                    'value' => $item->id,
+                    'text' => $item->name
+                ];
+            });
+
+        return Inertia::render('Partner/Order/Create', [
+            'briefcases' => $briefcases,
+            'users' => $users
+        ]);
+    }
+
+    public function storeOrder(BriefcaseUserRequest $request)
+    {
+        $briefcase = Briefcase::findOrFail(
+            data_get($request, 'briefcase_id')
+        );
+
+        if ($briefcase->partner_id == Auth::user()->id
+            || Auth::user()->isAdmin
+        ) {
+            $user = User::findOrFail(data_get($request, 'user_id'));
+
+            $purchase = Purchase::create([
+                'user_id' => data_get($request, 'user_id'),
+                'sum' => 0,
+                'purchasable_id' => data_get($request, 'briefcase_id'),
+                'purchasable_type' => Briefcase::class,
+                'payed' => true,
+                'with_feedback' => true,
+            ]);
+
+            UserBriefcase::create([
+                'contract_number' => UserBriefcase::nextContractNumber(),
+                'purchase_id' => data_get($purchase, 'id'),
+                'user_id' => data_get($request, 'user_id'),
+                'briefcase_id' => data_get($request, 'briefcase_id'),
+                'sum' => data_get($request, 'sum'),
+                'profit' => data_get($request, 'profit'),
+                'duration' => data_get($request, 'duration'),
+                'monthly_payment' => data_get($request, 'monthly_payment'),
+                'status' => UserBriefcase::STATUS_ACCEPTED,
+                'consultant_id' => data_get($request, 'user_id')
+                    ?: env('SAPA_USER_ID')
+            ]);
+
+            return redirect()->route('partner-users.deals');
         } else {
             return redirect()->route('partner-users.deals');
         }

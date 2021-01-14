@@ -9,14 +9,16 @@
 
     <template #header>
       Договор {{ order.contract_number }}
-        <a class="actions__link actions__link--green ml-2"
-            href="#" @click.prevent="addPayment">
-            <span>Добавить платеж</span>
-        </a>
+      <a class="actions__link actions__link--green ml-2"
+          href="#" @click.prevent="addPayment">
+          <span>Добавить платеж</span>
+      </a>
     </template>
 
     <div class="ptef">
       <Form :form="form"
+            :users="users"
+            :briefcases="briefcases"
             @submit="updateOrder" />
     </div>
 
@@ -45,6 +47,8 @@
 		},
 		props: {
 			order: Object,
+      briefcases: Array,
+      users: Array
 		},
     watch: {
       formSuccessfull(newValue) {

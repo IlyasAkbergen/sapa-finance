@@ -8,6 +8,7 @@ import PortalVue from 'portal-vue';
 import VueFlashMessage from 'vue-flash-message';
 import UUID from "vue-uuid";
 import interceptors from './interceptors'
+import 'vue-search-select/dist/VueSearchSelect.css'
 
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaApp);

@@ -273,6 +273,11 @@ Route::group(['middleware' => [
     )->name('partner-users.deals');
 
     Route::get(
+        'partner-users-order/create',
+        [PartnerUserController::class, 'createOrder']
+    )->name('partner-users-order.create');
+
+    Route::get(
         'partner-users-order/{id}/edit',
         [PartnerUserController::class, 'editOrder']
     )->name('partner-users-order.edit');
@@ -281,6 +286,11 @@ Route::group(['middleware' => [
         '/partner-user-order/update',
         [PartnerUserController::class, 'updateOrder']
     )->name('partner-users-order.update');
+
+    Route::post(
+        '/partner-user-order',
+        [PartnerUserController::class, 'storeOrder']
+    )->name('partner-users-order.store');
 
     Route::get(
         'user-briefcase-payments',

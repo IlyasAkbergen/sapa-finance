@@ -29,6 +29,7 @@
         "@inertiajs/progress": "^0.2.4",
         "izitoast": "^1.4.0",
         "vue-flash-message": "^0.7.2",
+        "vue-search-select": "^2.9.3",
         "vue-uuid": "^2.0.2"
     }
 }

@@ -17,7 +17,9 @@ class UserBriefcase extends Model
     const STATUS_CLOSED = 4;
 
     protected $fillable = [
-      'user_id', 'briefcase_id', 'consultant_id', 'status', 'contract_number', 'sum', 'profit', 'duration', 'monthly_payment'
+        'user_id', 'briefcase_id', 'consultant_id', 'status',
+        'contract_number', 'sum', 'profit', 'duration',
+        'monthly_payment', 'purchase_id'
     ];
 
     public function purchase()
@@ -33,5 +35,13 @@ class UserBriefcase extends Model
     public function briefcase()
     {
         return $this->belongsTo(Briefcase::class);
+    }
+
+    public static function nextContractNumber()
+    {
+        return self::whereNotNull('contract_number')
+            ->orderByDesc('contract_number')
+            ->first()
+            ->contract_number + 1;
     }
 }

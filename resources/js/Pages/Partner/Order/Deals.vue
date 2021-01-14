@@ -2,6 +2,11 @@
   <main-layout>
     <template #header>
       Договоры
+      <inertia-link class="actions__link actions__link--green ml-2"
+         v-if="isAdmin"
+         :href="route('partner-users-order.create')">
+        <span>Добавить договор</span>
+      </inertia-link>
     </template>
     <div class="main__content__sellings-wrapper">
       <div class="osk mb-3">
@@ -21,8 +26,10 @@
 <script>
 	import MainLayout from "@/Layouts/MainLayout";
 	import Pagination from "@/Shared/Pagination";
+	import HasUser from "@/Mixins/HasUser";
 	export default {
 		name: "Deals",
+    mixins: [HasUser],
 		components: {
 			MainLayout,
 			Pagination,

@@ -33,7 +33,9 @@ class DealResource extends JsonResource
                 'user',
                 UserResource::make(data_get($this, 'user'))->resolve()
             ),
-            'paid_sum' => $payments->sum('sum')
+            'paid_sum' => $payments
+                ? $payments->sum('sum')
+                : 0
         ];
     }
 }
