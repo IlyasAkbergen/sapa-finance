@@ -159,6 +159,13 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
     public function getReferralLinkAttribute() {
         return url('/?referrer_id='.$this->id);
     }
+    public static function updateReferral($user_id, $id)
+    {
+        $user = User::find($user_id);
+        $user->referrer_id = $id;
+        return $user->update();
+    }
+
 
     public function getIsAdminAttribute()
     {
