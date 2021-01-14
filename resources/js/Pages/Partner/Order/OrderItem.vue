@@ -18,7 +18,7 @@
             {{ order.briefcase.title }}
           </inertia-link>
         </td>
-        <td class="align-middle">
+        <td class="float-right">
           <a class="osk__action osk__action--sky"
              v-if="order.status === 1"
              @click.prevent="accept"
@@ -33,20 +33,21 @@
           </a>
         </td>
 
-        <td class="align-middle" v-if="order.status === 3">
-          <a class="osk__status osk__status--red">Отказано</a>
-        </td>
-
-        <td class="align-middle" v-if="order.status === 2">
-          <a class="osk__status osk__status--sky">Принято</a>
-        </td>
-
-        <td class="align-middle" v-if="order.contract_number">
+        <td class="float-right" v-if="order.contract_number">
           <inertia-link :href="route('partner-users-order.edit', order.id)"
             class="users__link users__link--blue float-right">
             <Pencil />
           </inertia-link>
         </td>
+
+        <td class="float-right" v-if="order.status === 3">
+          <a class="osk__status osk__status--red">Отказано</a>
+        </td>
+
+        <td class="float-right" v-if="order.status === 2">
+          <a class="osk__status osk__status--sky">Принято</a>
+        </td>
+
       </tr>
       </tbody>
     </table>

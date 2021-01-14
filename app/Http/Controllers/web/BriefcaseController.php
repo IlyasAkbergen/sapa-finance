@@ -44,7 +44,7 @@ class BriefcaseController extends WebBaseController
     {
         $deals = UserBriefcase::query()
             ->where('user_id', Auth::user()->id)
-            ->with('briefcase')
+            ->with(['briefcase', 'purchase.payments'])
             ->get();
 
         return Inertia('Briefcase/Deals', [

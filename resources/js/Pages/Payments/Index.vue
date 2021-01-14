@@ -24,7 +24,7 @@
               <td>
                 {{ payment.sum }} ₸
               </td>
-              <td>{{ payment.updated_at }}</td>
+              <td>{{ payment.paid_at }}</td>
             </tr>
             </tbody>
           </table>

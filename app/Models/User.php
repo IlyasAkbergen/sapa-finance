@@ -155,6 +155,7 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
             ->wherePivot('paid', true)
             ->wherePivot('completed', false);
     }
+
     public function getReferralLinkAttribute() {
         return url('/?referrer_id='.$this->id);
     }
@@ -165,4 +166,14 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
         return $user->update();
     }
 
+
+    public function getIsAdminAttribute()
+    {
+        return $this->role_id == Role::ROLE_ADMIN;
+    }
+
+    public function getIsPartnerAttribute()
+    {
+        return $this->role_id == Role::ROLE_PARTNER;
+    }
 }

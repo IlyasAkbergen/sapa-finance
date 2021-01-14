@@ -14,6 +14,10 @@ class DealResource extends JsonResource
      */
     public function toArray($request)
     {
+        $payments = $this->relationLoaded('purchase')
+            ? data_get($this->purchase, 'payments')
+            : collect([]);
+
         return [
             'contract_number' => $this->contract_number ?: 'Не подтвержден',
             'status' => $this->status,
@@ -28,7 +32,10 @@ class DealResource extends JsonResource
             'user' => $this->whenLoaded(
                 'user',
                 UserResource::make(data_get($this, 'user'))->resolve()
-            )
+            ),
+            'paid_sum' => $payments
+                ? $payments->sum('sum')
+                : 0
         ];
     }
 }

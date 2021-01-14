@@ -1,7 +1,7 @@
 <template>
   <main-layout>
     <template #back-link>
-      <inertia-link :href="route('partner-users.briefcases')"
+      <inertia-link :href="route('partner-users.deals')"
                     class="navbar-brand mb-0 pb-0">
         <img src="../../../../img/back-arrow.png">
       </inertia-link>
@@ -9,14 +9,16 @@
 
     <template #header>
       Договор {{ order.contract_number }}
-        <a class="actions__link actions__link--green ml-2"
-            href="#" @click.prevent="addPayment">
-            <span>Добавить платеж</span>
-        </a>
+      <a class="actions__link actions__link--green ml-2"
+          href="#" @click.prevent="addPayment">
+          <span>Добавить платеж</span>
+      </a>
     </template>
 
     <div class="ptef">
       <Form :form="form"
+            :users="users"
+            :briefcases="briefcases"
             @submit="updateOrder" />
     </div>
 
@@ -33,6 +35,7 @@
 </template>
 
 <script>
+	import toast from '@/toast'
 	import MainLayout from '@/Layouts/MainLayout'
 	export default {
 		name: "Edit",
@@ -44,13 +47,14 @@
 		},
 		props: {
 			order: Object,
+      briefcases: Array,
+      users: Array
 		},
     watch: {
       formSuccessfull(newValue) {
-        console.log('changed')
         if (newValue) {
-          console.log('changed to true')
-          this.closeModal()
+					  toast.success("Платеж сохранен.")
+            this.closeModal()
         }
       }
     },
@@ -84,6 +88,7 @@
           sum: 0,
           user_id: this.order.user.id,
           order_id: this.order.id,
+          paid_at: new Date().toLocaleDateString()
         }, {
           bag: 'paymentForm',
           resetOnSuccess: true,

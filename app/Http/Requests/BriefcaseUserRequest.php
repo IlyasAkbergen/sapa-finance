@@ -21,13 +21,15 @@ class BriefcaseUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'contract_number.required' => ['Не указан номер договора'],
+//            'contract_number.required' => ['Не указан номер договора'],
             'contract_number.integer' => ['Значение должно быть числовым'],
             'sum.required' => ['Не указана сумма договора'],
             'sum.integer' => ['Значение должно быть числовым'],
             'profit.integer' => ['Значение должно быть числовым'],
             'duration.integer' => ['Значение должно быть числовым'],
             'monthly_payment.integer' => ['Значение должно быть числовым'],
+            'user_id.required' => ['Укажите клиента'],
+            'briefcase_id.required' => ['Укажите программу'],
         ];
     }
 
@@ -39,8 +41,13 @@ class BriefcaseUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required'],
-            'contract_number' => ['required', 'max:255'],
+            'user_id' => ['required'],
+            'briefcase_id' => ['required'],
+            'contract_number' => [
+                'nullable',
+                'max:255',
+                'unique:user_briefcase,contract_number,' . data_get($this, 'id')
+            ],
             'sum' => ['required', 'integer'],
             'profit' => ['integer'],
             'duration' => ['integer'],

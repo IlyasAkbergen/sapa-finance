@@ -1,6 +1,34 @@
 <template>
   <form>
-    <div>
+    <div v-if="users && isAdmin">
+      <label class="profile-form__label mt-3"
+             for="user">
+        Клиент
+      </label>
+
+      <model-select class="profile-form__input mb-0"
+             id="user"
+             v-model="form.user_id"
+             :options="users"
+             placeholder="Укажите клиента" />
+      <JetInputError :message="form.error('user')" class="mt-1"/>
+    </div>
+
+    <div v-if="briefcases && isAdmin">
+      <label class="profile-form__label mt-3"
+             for="briefcase">
+        Программа
+      </label>
+
+      <model-select class="profile-form__input mb-0"
+                    id="briefcase"
+                    v-model="form.briefcase_id"
+                    :options="briefcases"
+                    placeholder="Укажите программу" />
+      <JetInputError :message="form.error('briefcase')" class="mt-1"/>
+    </div>
+
+    <div v-if="form.id">
       <label class="profile-form__label mt-3"
              for="contract_number">
         Номер договора
@@ -75,14 +103,20 @@
 </template>
 
 <script>
+	import { ModelSelect } from 'vue-search-select'
+	import HasUser from "@/Mixins/HasUser";
 	export default {
 		name: "Form",
+    mixins: [HasUser],
 		components: {
 			JetInputError: () => import('@/Jetstream/InputError'),
 			JetActionMessage: () => import('@/Jetstream/ActionMessage'),
+      ModelSelect
 		},
 		props: {
 			form: Object,
+      users: Array,
+      briefcases: Array
 		},
 		data() {
 			return {
