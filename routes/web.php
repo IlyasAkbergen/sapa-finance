@@ -221,6 +221,8 @@ Route::group(['middleware' => [
 
     Route::post('/penalty', [PenaltyController::class, 'store']);
 
+    Route::post('/change-referral', [ComplaintController::class, 'changeReferral']);
+
     Route::resource('messages', MessageController::class);
 
     Route::resource('consultants-crud', ConsultantAdminController::class);

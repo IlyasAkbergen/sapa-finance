@@ -130,7 +130,8 @@ export default {
     },
     methods: {
         setConsultant(id) {
-            this.$set(this.newConsultantForm, 'referrer_id', id)
+            axios.post('/change-referral', {...this.newConsultantForm, id})
+                .then(() => this.newConsultantFormVisible = false)
         },
 
         hidePenaltyForm() {
@@ -165,10 +166,6 @@ export default {
                 }
             )
             this.newConsultantFormVisible = true;
-        },
-
-        submitNewConsultantForm() {
-
         },
 
         submitPenaltyForm() {
