@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "@inertiajs/progress": "^0.2.4",
+        "he-tree-vue": "^2.0.7",
         "izitoast": "^1.4.0",
         "vue-flash-message": "^0.7.2",
         "vue-search-select": "^2.9.3",

@@ -186,4 +186,17 @@ class UserController extends Controller
             return $this->responseFail('Не удалось найти пользователя');
         }
     }
+
+    public function referralTree($id)
+    {
+        $client = User::find($id);
+
+        if ($client) {
+            return Inertia::render('User/ReferralTree', [
+                'client' => $client
+            ]);
+        } else {
+            return $this->responseFail('Не удалось найти пользователя');
+        }
+    }
 }
