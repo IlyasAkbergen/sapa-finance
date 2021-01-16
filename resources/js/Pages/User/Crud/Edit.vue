@@ -11,153 +11,190 @@
       Профиль пользователя {{ client.name }}
     </template>
 
-    <div class="avatar">
-      <img class="avatar__img" :src="avatarPath"
-           v-show="photoPreview == null && !form.image_path">
-      <img class="avatar__img" :src="photoPreview" v-show="photoPreview">
-      <a class="avatar__link" href="" @click.prevent="selectNewPhoto">
-        Изменить аватар
-      </a>
-      <input type="file"
-             ref="image"
-             @change="updatePhotoPreview"
-             class="hidden">
-    </div>
+    <b-tabs content-class="mt-3" align="center">
+      <b-tab title="Основные данные">
+        <div class="avatar">
+          <img class="avatar__img" :src="avatarPath"
+               v-show="photoPreview == null && !form.image_path">
+          <img class="avatar__img" :src="photoPreview" v-show="photoPreview">
+          <a class="avatar__link" href="" @click.prevent="selectNewPhoto">
+            Изменить аватар
+          </a>
+          <input type="file"
+                 ref="image"
+                 @change="updatePhotoPreview"
+                 class="hidden">
+        </div>
 
-    <div class="profile-form">
-      <Form :form="form"
-            :roles="roles"
-            :referral_level="referral_level"
-            :is-partners-user="!!partner_id"
-            @submit="updateUser"/>
-    </div>
+        <div class="profile-form">
+          <Form :form="form"
+                :roles="roles"
+                :referral_level="referral_level"
+                :is-partners-user="!!partner_id"
+                :all_clients="all_clients"
+                @submit="updateUser"/>
+        </div>
 
-    <div class="column" v-if="isAdmin">
-      <ReferralTree :data="referral_tree" />
-    </div>
+        <div v-if="referrer" class="avatar" style="margin-left: 20px">
+          <img src="../../../../img/profile-agent-ava.png"
+               class="avatar__img" style="width: 50px; height: 50px"
+               alt="">
+          <p class="referrer_name">{{ referrer.name }}</p>
+          <p class="referrer_title">Мой агент</p>
+          <inertia-link class="avatar__link"
+                        v-if="referrer"
+                        :href="route('complaints.create', {
+                id: client.id,
+                referrer_id: referrer.id
+            })"
+                        style="text-align: center">
+            Оставить отзыв
+          </inertia-link>
+        </div>
+      </b-tab>
 
-    <div v-if="referrer" class="avatar" style="margin-left: 20px">
-      <img src="../../../../img/profile-agent-ava.png" class="avatar__img" style="width: 50px; height: 50px" alt="">
-      <p class="referrer_name">{{ referrer.name }}</p>
-      <p class="referrer_title">Мой агент</p>
-      <inertia-link class="avatar__link"
-                    v-if="referrer"
-                    :href="route('complaints.create', {
-                    id: client.id,
-                    referrer_id: referrer.id
-                })"
-                    style="text-align: center">
-        Оставить отзыв
-      </inertia-link>
-    </div>
+      <b-tab title="Рефераллы" active v-if="isAdmin">
+          <ReferralItem v-for="referral in referral_tree"
+                        :referral="referral"
+                        @change="(data) => referralTreeChanged(data)"
+                        :key="referral.id" />
+      </b-tab>
+    </b-tabs>
+
+    <AcceptModal :show="acceptModalShow"
+                 :text="'Вы уверены?'"
+                 @close="cancelReferralTreeChange"
+                 @accepted="submitReferralTreeChange" />
   </main-layout>
 </template>
 
 <script>
-import MainLayout from '@/Layouts/MainLayout'
-
-export default {
-  name: "Edit",
-  components: {
-    Form: () => import('./Form'),
-    MainLayout,
-    ReferralTree: () => import('../ReferralTree')
-  },
-  props: {
-    client: Object,
-    roles: Array,
-    referrer: {
-      type: Object,
-      default: null,
+  import MainLayout from '@/Layouts/MainLayout'
+  export default {
+    name: "Edit",
+    components: {
+      Form: () => import('./Form'),
+      MainLayout,
+      ReferralItem: () => import('@/Shared/ReferralItem'),
+      AcceptModal: () => import('@/Shared/AcceptModal'),
     },
-    auth_user: {
-      type: Object,
-      default: null,
+    props: {
+      client: Object,
+      roles: Array,
+      all_clients: {
+        type: Array,
+        default: null
+      },
+      referrer: {
+        type: Object,
+        default: null,
+      },
+      auth_user: {
+        type: Object,
+        default: null,
+      },
+      referral_level: {
+        type: Array,
+        default: null
+      },
+      partner_id: {
+        type: Number,
+        default: null
+      },
+      referral_tree: {
+        type: Array,
+        default: null
+      }
     },
-    referral_level: {
-      type: Array,
-      default: null
+    data() {
+      return {
+        photoPreview: null,
+        form: this.$inertia.form({
+          ...this.client,
+          ...{
+            partner_id: this.partner_id,
+            image: null,
+            password: null,
+            '_method': 'PUT',
+          }
+        }, {
+          bag: 'userForm',
+          resetOnSuccess: true,
+        }),
+        acceptModalShow: false,
+        referralChangeData: null
+      }
     },
-    partner_id: {
-      type: Number,
-      default: null
-    },
-    referral_tree: {
-      type: Object,
-      default: null
-    }
-  },
-  data() {
-    return {
-      photoPreview: null,
-      form: this.$inertia.form({
-        ...this.client,
-        ...{
-          partner_id: this.partner_id,
-          image: null,
-          password: null,
-          '_method': 'PUT',
+    methods: {
+      updateUser() {
+        if (this.$refs.image) {
+          this.$set(this.form, 'image', this.$refs.image.files[0]);
         }
-      }, {
-        bag: 'userForm',
-        resetOnSuccess: true,
-      }),
-    }
-  },
-  methods: {
-    updateUser() {
-      if (this.$refs.image) {
-        this.$set(this.form, 'image', this.$refs.image.files[0]);
-      }
-      console.log('is partner: ' + this.isPartner);
-      console.log('route: ' + this.updateRouteName);
-      this.form.post(this.updateRouteName + this.client.id);
-    },
-    selectNewPhoto() {
-      this.$refs.image.click();
-    },
-    updatePhotoPreview() {
-      const reader = new FileReader();
+        console.log('is partner: ' + this.isPartner);
+        console.log('route: ' + this.updateRouteName);
+        this.form.post(this.updateRouteName + this.client.id);
+      },
+      selectNewPhoto() {
+        this.$refs.image.click();
+      },
+      updatePhotoPreview() {
+        const reader = new FileReader();
 
-      reader.onload = (e) => {
-        this.photoPreview = e.target.result;
-      };
+        reader.onload = (e) => {
+          this.photoPreview = e.target.result;
+        };
 
-      reader.readAsDataURL(this.$refs.image.files[0]);
-    },
-  },
-  computed: {
-    avatarPath() {
-      return this.form.profile_photo_path
-        ? this.form.profile_photo_path
-        : '/images/avatar-empty.png';
-    },
-    updateRouteName() {
-      if (this.isAdmin) {
-        return window.location.pathname === '/users-crud/me'
-          ? '/users-crud/update/'
-          : '/users-crud/';
-      } else if (this.isPartner) {
-        return '/partner-users/'
-      } else {
-        return ''
+        reader.readAsDataURL(this.$refs.image.files[0]);
+      },
+      referralTreeChanged(data) {
+        this.referralChangeData = {
+          ...data,
+          '_method': 'POST'
+        };
+        this.acceptModalShow = true;
+      },
+      submitReferralTreeChange() {
+        this.$inertia.post(
+          route('user-referrer-change', this.referralChangeData)
+        ).then(() => this.cancelReferralTreeChange());
+      },
+      cancelReferralTreeChange() {
+        this.referralChangeData = null;
+        this.acceptModalShow = false;
       }
     },
-    backRoute() {
-      if (this.isAdmin) {
-        return route('users-crud.index')
-      } else if (this.isPartner) {
-        return route('partner-users.index')
-      } else {
-        return route('')
+    computed: {
+      avatarPath() {
+        return this.form.profile_photo_path
+          ? this.form.profile_photo_path
+          : '/images/avatar-empty.png';
+      },
+      updateRouteName() {
+        if (this.isAdmin) {
+          return window.location.pathname === '/users-crud/me'
+            ? '/users-crud/update/'
+            : '/users-crud/';
+        } else if (this.isPartner) {
+          return '/partner-users/'
+        } else {
+          return ''
+        }
+      },
+      backRoute() {
+        if (this.isAdmin) {
+          return route('users-crud.index')
+        } else if (this.isPartner) {
+          return route('partner-users.index')
+        } else {
+          return route('')
+        }
+      },
+      isAdmin() {
+        return this.$page.user.role_id === 1;
+      },
+      isPartner() {
+        return this.$page.user.role_id === 3;
       }
-    },
-    isAdmin() {
-      return this.$page.user.role_id === 1;
-    },
-    isPartner() {
-      return this.$page.user.role_id === 3;
     }
   }
-}
 </script>

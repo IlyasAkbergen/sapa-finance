@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\web\admin;
 
 use App\Enums\ReferralLevelEnum;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangeReferrerRequest;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
@@ -16,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
@@ -83,13 +86,26 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = $this->userService->findWith($id, ['balance']);
+        $user = User::with(['balance', 'all_referrals'])->findOrFail($id);
         $roles = Role::all();
+        $all_clients = User::isClient()
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'value' => $item->id,
+                    'text' => $item->name
+                ];
+            });
+
+        $referral_tree = data_get($user, 'all_referrals');
+
         if (!empty($user)) {
             return Inertia::render('User/Crud/Edit', [
                 'client' => UserResource::make($user)->resolve(),
+                'all_clients' => $all_clients,
                 'roles' => $roles,
                 'referral_level' => ReferralLevel::all(),
+                'referral_tree' => $referral_tree
             ]);
         } else {
             return redirect()->route('users-crud.index');
@@ -198,5 +214,26 @@ class UserController extends Controller
         } else {
             return $this->responseFail('Не удалось найти пользователя');
         }
+    }
+
+    public function changeReferrer(ChangeReferrerRequest $request)
+    {
+        $parent_id = data_get($request, 'parent_id');
+        $child = User::with('all_referrals')->findOrFail(data_get($request, 'child_id'));
+        $all_childs_of_child = Helper::flat_all_referrals($child);
+
+        if (!$all_childs_of_child->contains(function ($item) use ($parent_id) {
+            return data_get($item, 'id') == $parent_id;
+        })) {
+            if (data_get($request, 'child_id') != data_get($request, 'parent')) {
+                $user = User::findOrFail(data_get($request, 'child_id'));
+
+                $user->update([
+                    'referrer_id' => $parent_id
+                ]);
+            }
+        }
+
+        return redirect()->back();
     }
 }

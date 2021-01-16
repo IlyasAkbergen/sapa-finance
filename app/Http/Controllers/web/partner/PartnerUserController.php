@@ -410,7 +410,8 @@ class PartnerUserController extends WebBaseController
             'user_id' => data_get($request, 'user_id'),
             'payable_id' => $payable->id,
             'payable_type' => Purchase::class,
-            'paid_at' => $paid_at
+            'paid_at' => $paid_at,
+            'note' => data_get($request, 'note')
         ]);
 
         if (!empty($payment)) {
