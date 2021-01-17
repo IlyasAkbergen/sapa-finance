@@ -39,9 +39,9 @@ class UserBriefcase extends Model
 
     public static function nextContractNumber()
     {
-        return self::whereNotNull('contract_number')
+        $last_briefcase = self::whereNotNull('contract_number')
             ->orderByDesc('contract_number')
-            ->first()
-            ->contract_number + 1;
+            ->first();
+        return data_get($last_briefcase, 'contract_number') + 1;
     }
 }
