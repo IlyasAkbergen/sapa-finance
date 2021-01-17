@@ -174,12 +174,21 @@ class PartnerUserController extends WebBaseController
 
     public function acceptOrder($id)
     {
-        $data = [
-            'contract_number' => strtoupper(Str::random(10)), // todo increment prev contract
-            'status' => UserBriefcase::STATUS_ACCEPTED
-        ];
+        $order = UserBriefcase::findOrFail($id);
 
-        return $this->__updateOrder($id, $data);
+        if (data_get($order, 'status') != UserBriefcase::STATUS_ACCEPTED
+            || !data_get($order, 'contract_number')
+        ) {
+            $data = [
+                'contract_number' => UserBriefcase::nextContractNumber(),
+                'status' => UserBriefcase::STATUS_ACCEPTED
+            ];
+
+            $order->update($data);
+        }
+
+        return redirect()->back();
+//        return $this->__updateOrder($id, $data);
     }
 
     public function rejectOrder($id)
