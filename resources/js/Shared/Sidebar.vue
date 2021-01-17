@@ -86,7 +86,7 @@
           </SidebarItem>
 
           <SidebarItem :route_name="'sales.index'"
-                       v-if="!isAdmin && hasSomeLevel(['Agent', 'Mentor', 'Tutor'])"
+                       v-if="!isAdmin && hasSomeLevel(['Agent', 'Consultant', 'Mentor', 'Tutor'])"
                        icon="Cart">
             Продажи
           </SidebarItem>

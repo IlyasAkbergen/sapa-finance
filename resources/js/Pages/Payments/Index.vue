@@ -11,6 +11,7 @@
             <tr>
               <th>Что оплатил</th>
               <th>Сумма</th>
+              <th>Примечание</th>
               <th>Дата</th>
             </tr>
             </thead>
@@ -24,6 +25,7 @@
               <td>
                 {{ payment.sum }} ₸
               </td>
+              <td>{{ payment.note }}</td>
               <td>{{ payment.paid_at }}</td>
             </tr>
             </tbody>

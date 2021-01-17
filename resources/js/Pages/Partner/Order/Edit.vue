@@ -88,7 +88,8 @@
           sum: 0,
           user_id: this.order.user.id,
           order_id: this.order.id,
-          paid_at: new Date().toLocaleDateString()
+          paid_at: new Date().toLocaleDateString(),
+          note: null
         }, {
           bag: 'paymentForm',
           resetOnSuccess: true,

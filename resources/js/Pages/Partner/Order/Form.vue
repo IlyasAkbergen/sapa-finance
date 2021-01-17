@@ -11,7 +11,7 @@
              v-model="form.user_id"
              :options="users"
              placeholder="Укажите клиента" />
-      <JetInputError :message="form.error('user')" class="mt-1"/>
+      <JetInputError :message="form.error('user_id')" class="mt-1"/>
     </div>
 
     <div v-if="briefcases && isAdmin">

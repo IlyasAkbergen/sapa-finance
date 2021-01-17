@@ -21,7 +21,6 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
-    use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasReferrals;
@@ -166,7 +165,6 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
         return $user->update();
     }
 
-
     public function getIsAdminAttribute()
     {
         return $this->role_id == Role::ROLE_ADMIN;
@@ -175,5 +173,15 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
     public function getIsPartnerAttribute()
     {
         return $this->role_id == Role::ROLE_PARTNER;
+    }
+
+    public function getIsClientAttribute()
+    {
+        return $this->role_id == Role::ROLE_CLIENT;
+    }
+
+    public function scopeIsClient($q)
+    {
+        return $q->where('role_id', Role::ROLE_CLIENT);
     }
 }

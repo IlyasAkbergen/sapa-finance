@@ -212,6 +212,10 @@ Route::group(['middleware' => [
 
     Route::resource('partners-crud', PartnerController::class);
     Route::resource('users-crud', UserController::class);
+    Route::get('users-referral-tree', [UserController::class, 'referralTree'])
+        ->name('users-referral-tree');
+    Route::post('user-referrer-change', [UserController::class, 'changeReferrer'])
+        ->name('user-referrer-change');
 
     Route::get('/complaints', [ComplaintController::class, 'index'])
         ->name('complaints.index');

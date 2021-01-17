@@ -36,10 +36,10 @@ class UserResource extends JsonResource
                 'role',
                 $this->role
             ),
-            'referrer' => $this->whenLoaded(
-                'referrer',
-                UserResource::make($this->referrer)
-            ),
+            'referrer' => $this->relationLoaded('referrer')
+                ? UserResource::make(data_get($this, 'referrer'))
+                : null,
+            'referrer_id' => data_get($this, 'referrer_id'),
             'direct_points' => $this->directPoints,
             'team_points' => $this->teamPoints,
         ];

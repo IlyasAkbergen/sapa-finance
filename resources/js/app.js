@@ -19,22 +19,16 @@ Vue.use(UUID);
 interceptors();
 const app = document.getElementById('app');
 
-// import { InertiaProgress } from '@inertiajs/progress'
-//
-// InertiaProgress.init({
-//   // The delay after which the progress bar will
-//   // appear during navigation, in milliseconds.
-//   delay: 250,
-//
-//   // The color of the progress bar.
-//   color: '#29d',
-//
-//   // Whether to include the default NProgress styles.
-//   includeCSS: true,
-//
-//   // Whether the NProgress spinner will be shown.
-//   showSpinner: false,
-// })
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+// Import Bootstrap an BootstrapVue CSS files (order is important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 
 Vue.filter('truncate', function (value, size) {
   if (!value) return '';
