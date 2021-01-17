@@ -6,13 +6,13 @@
        :id="referral.id"
        @dragenter="isDraggedOver = true"
        @dragleave="isDraggedOver = false"
-       @drop.stop="(e) => drop(e)"
-       @dragover.stop
-       @dragenter.prevent
-       @dragover.prevent
   >
     <div class="panel-heading border-bottom-1" role="tab"
          :id="referral.id"
+         @drop.stop="(e) => drop(e)"
+         @dragover.stop
+         @dragenter.prevent
+         @dragover.prevent
     >
       <a :class="`panel-title accordion-toggle collapsed
                   panel-${hasChild ? 'agent' : 'client'}
@@ -22,7 +22,6 @@
          role="button" data-toggle="collapse"
          @click="expand = !expand"
          href="#" aria-expanded="true"
-         @drop.stop="(e) => drop(e)"
       >
         <div class="panel-heading-flex">
           <p class="panel-heading-flex__name">
@@ -59,6 +58,7 @@
           <ReferralItem
             v-for="referral in referral.all_referrals"
             :key="referral.id"
+            @change="(data) => $emit('change', data)"
             :referral="referral"/>
         </div>
       </div>
@@ -96,11 +96,13 @@
       drop(e) {
         const child_id = e.dataTransfer.getData('child_id');
         const parent_id = this.referral.id;
+
         if (child_id !== parent_id) {
           this.$emit('change', {
             parent_id,
             child_id
           })
+          this.isDraggedOver = false
         }
       },
       dragStart: e => {
@@ -116,6 +118,12 @@
 </script>
 
 <style scoped>
+  .panel-collapse {
+    z-index: 1;
+  }
+  a.panel-title {
+    z-index: 9999;
+  }
   .border-bottom-1 {
     border-bottom: 1px solid #dee2e6;
   }

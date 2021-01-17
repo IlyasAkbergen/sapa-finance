@@ -54,17 +54,40 @@
       </b-tab>
 
       <b-tab title="Рефераллы" active v-if="isAdmin">
-          <ReferralItem v-for="referral in referral_tree"
-                        :referral="referral"
-                        @change="(data) => referralTreeChanged(data)"
-                        :key="referral.id" />
+        <div :class="`panel panel-default  dotted-border mb-3
+                ${isDraggedOver ? 'isDraggedOver' : ''}`"
+             @drop.stop="(e) => drop(e)"
+             @dragover.stop
+             @dragenter.prevent
+             @dragover.prevent
+        >
+          <div class="panel-heading border-bottom-1" role="tab"
+               @dragenter="isDraggedOver = true"
+               @dragleave="isDraggedOver = false"
+          >
+            <a data-v-46cb73ac="" id="6" role="button" data-toggle="collapse"
+               href="#" aria-expanded="true"
+               class="panel-title accordion-toggle collapsed panel-client">
+              <div class="panel-heading-flex justify-content-center">
+                <p class="panel-heading-flex__name text-center">
+                  {{ client.name }}
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <ReferralItem v-for="referral in referral_tree"
+                      :referral="referral"
+                      @change="(data) => referralTreeChanged(data)"
+                      :key="referral.id" />
+
       </b-tab>
     </b-tabs>
 
     <AcceptModal :show="acceptModalShow"
                  :text="'Вы уверены?'"
-                 @close="cancelReferralTreeChange"
-                 @accepted="submitReferralTreeChange" />
+                 @close="() => cancelReferralTreeChange()"
+                 @accepted="() => submitReferralTreeChange()" />
   </main-layout>
 </template>
 
@@ -108,6 +131,7 @@
     },
     data() {
       return {
+        isDraggedOver: false,
         photoPreview: null,
         form: this.$inertia.form({
           ...this.client,
@@ -126,6 +150,17 @@
       }
     },
     methods: {
+      drop(e) {
+        const child_id = e.dataTransfer.getData('child_id');
+        const parent_id = this.client.id;
+
+        if (child_id !== parent_id) {
+          this.referralTreeChanged({
+            child_id, parent_id
+          });
+        }
+        this.isDraggedOver = false
+      },
       updateUser() {
         if (this.$refs.image) {
           this.$set(this.form, 'image', this.$refs.image.files[0]);
@@ -147,11 +182,13 @@
         reader.readAsDataURL(this.$refs.image.files[0]);
       },
       referralTreeChanged(data) {
+        console.log(data);
         this.referralChangeData = {
           ...data,
           '_method': 'POST'
         };
         this.acceptModalShow = true;
+        console.log(this.acceptModalShow)
       },
       submitReferralTreeChange() {
         this.$inertia.post(
@@ -198,3 +235,10 @@
     }
   }
 </script>
+
+<style scoped>
+  .dotted-border {
+    border: 3px dotted #dee2e6;
+    background-color: rgba(2, 2, 2, 0.15) !important;
+  }
+</style>
