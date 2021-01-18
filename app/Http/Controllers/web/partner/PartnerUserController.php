@@ -159,7 +159,7 @@ class PartnerUserController extends WebBaseController
         $data = UserBriefcase::where(
             'status', UserBriefcase::STATUS_PENDING
         )
-        ->has('briefcase')
+        ->has('briefcase', 'user')
         ->with('user', 'briefcase')
         ->paginate(20);
 
@@ -223,6 +223,7 @@ class PartnerUserController extends WebBaseController
                     return $q->where('partner_id', Auth::user()->id);
                 });
             })
+            ->has('user', 'briefcase')
             ->with('user', 'briefcase')
             ->paginate(20);
 

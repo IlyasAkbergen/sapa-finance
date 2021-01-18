@@ -66,7 +66,7 @@ export default {
             key: "iin",
           },
           {
-            title: "Почти",
+            title: "Почта",
             key: "email",
           },
           {
