@@ -27,7 +27,7 @@ class CreateUserRequest extends FormRequest
             'email.unique' => ['email занят другим пользователем'],
             'iin.required' => ['Укажите ИИН'],
             'iin.unique' => ['ИИН занят другим пользователем'],
-            'image.required_without' => ['Не загружено изображение профиля'],
+//            'image.required_without' => ['Не загружено изображение профиля'],
             'role_id.required' => ['Укажите роль'],
             'direct_points.integer' => ['Значение должно быть числом'],
             'team_points.integer' => ['Значение должно быть числом']
@@ -45,7 +45,7 @@ class CreateUserRequest extends FormRequest
             'name' => ['required', 'max:255'],
             'email' => ['required', 'max:255', 'unique:users'],
             'phone' => ['required'],
-            'image' => ['required_without:id'],
+//            'image' => ['required_without:id'],
             'role_id' => ['required'],
             'iin' => ['required', 'numeric', 'unique:users'],
             'direct_points' => ['integer'],
