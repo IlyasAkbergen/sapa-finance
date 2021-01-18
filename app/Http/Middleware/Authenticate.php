@@ -24,6 +24,9 @@ class Authenticate extends Middleware
 
     public function handle($request, Closure $next, ...$guards)
     {
+        if (auth()->guest()) {
+            return redirect()->route('welcome')->setStatusCode(401);
+        }
         $this->authenticate($request, $guards);
 
         if (!empty($request->user())) {
