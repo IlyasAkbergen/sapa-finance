@@ -59,11 +59,13 @@ class UserController extends Controller
     {
         $data = $request->except('password');
 
-        $filepath = $this->attachmentService->storeFile(
-            $request->file('image'), 'User'
-        );
+        if ($request->has('image')) {
+            $filepath = $this->attachmentService->storeFile(
+                $request->file('image'), 'User'
+            );
 
-        $data['profile_photo_path'] = $filepath;
+            $data['profile_photo_path'] = $filepath;
+        }
 
         if ($request->has('password') && !empty($request->password)) {
             $data['password'] = Hash::make($request->input('password'));
