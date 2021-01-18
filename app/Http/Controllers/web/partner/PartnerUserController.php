@@ -424,6 +424,8 @@ class PartnerUserController extends WebBaseController
             'note' => data_get($request, 'note')
         ]);
 
+        // todo award peferrers after payment
+
         if (!empty($payment)) {
             return redirect()
                 ->route('partner-users-order.edit', $order->id);
