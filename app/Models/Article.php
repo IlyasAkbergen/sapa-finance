@@ -13,7 +13,7 @@ class Article extends Model
 
     protected $fillable = [
         'title', 'content', 'author_id',
-        'created_at', 'image_path'
+        'created_at', 'image_path', 'video_url'
     ];
 
     public function author()
