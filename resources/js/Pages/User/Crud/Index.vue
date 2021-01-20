@@ -52,6 +52,7 @@ export default {
     mixins: [HasUser],
     props: {
       data: Object,
+      items: Array
     },
     data() {
       return {
@@ -72,6 +73,10 @@ export default {
           {
             title: "Телефон",
             key: "phone",
+          },
+          {
+            title: "Роль",
+            key: "role_name"
           }
         ],
         search_key: ""
@@ -80,11 +85,11 @@ export default {
     computed: {
       filteredRows() {
         return this.search_key != null && this.search_key != ""
-          ? this.data.data.filter((r) => r.name.toLowerCase()
+          ? this.items.filter((r) => r.name.toLowerCase()
                 .indexOf(
                     this.search_key.toLowerCase()
                 ) > -1)
-          : this.data.data;
+          : this.items;
       },
       createRouteName() {
           if (this.isAdmin) {

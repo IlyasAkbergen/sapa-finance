@@ -53,7 +53,7 @@
                             ? 'briefcases.index'
                             : 'briefcases-admin.index'"
                        icon="PartnerService">
-            Услуги партнеров
+            Портфели
           </SidebarItem>
 
           <SidebarItem

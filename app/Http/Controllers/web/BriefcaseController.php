@@ -52,8 +52,23 @@ class BriefcaseController extends WebBaseController
         ]);
     }
 
-    public function attachToMe($id)
+    public function attachToMe(Request $request)
     {
+        Validator::make($request->all(), [
+            'briefcase_id' => 'required|integer',
+            'monthly_payment' => 'required|integer',
+            'duration' => 'required|integer',
+        ], [
+            'monthly_payment.required' => 'Укажите размер ежемесячного взноса',
+            'monthly_payment.integer' => 'Значение должно быть числом',
+            'duration.required' => 'Укажите срок',
+            'duration.integer' => 'Значение должно быть числом',
+        ])->validate();
+
+        $id = data_get($request, 'briefcase_id');
+        $monthly_payment = data_get($request, 'monthly_payment');
+        $duration = data_get($request, 'duration');
+
         $purchase = Purchase::create([
             'user_id' => Auth::user()->id,
             'sum' => 0,
@@ -70,7 +85,10 @@ class BriefcaseController extends WebBaseController
                     ?: User::where(
                         'referral_level_id',
                         ReferralLevelEnum::Consultant)
-                        ->first()->id
+                        ->first()->id,
+                'monthly_payment' => $monthly_payment,
+                'duration' => $duration,
+                'sum' => $monthly_payment * $duration
             ]
         ]);
 

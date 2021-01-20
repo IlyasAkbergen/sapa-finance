@@ -85,7 +85,7 @@
               {{ lesson.user_homework.score }}%
             </div>
           </div>
-          <div class="align-content-center">
+          <div class="align-content-center" v-else>
             Не оценено
           </div>
         </div>

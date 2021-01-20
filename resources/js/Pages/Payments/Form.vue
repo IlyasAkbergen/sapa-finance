@@ -35,7 +35,7 @@
     <JetInputError :message="form.error('note')" class="mt-1"/>
 
     <a class="profile-form__submit mt-3" type="submit" href="#"
-       @click="submitForm"
+       @click.prevent="submitForm"
        :class="{ 'opacity-25': form.processing }"
        :disabled="form.processing">
       Сохранить

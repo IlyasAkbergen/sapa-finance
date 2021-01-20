@@ -6,23 +6,37 @@
        class="main__content__portfels-flex__card__title">
         {{ deal.briefcase.title }}
     </inertia-link>
-    <p class="main__content__portfels-flex__card__subtitle">Номер договора</p>
+    <div v-if="deal.contract_number">
+      <p class="main__content__portfels-flex__card__subtitle">Номер договора</p>
+      <p class="main__content__portfels-flex__card__digit">
+        {{ deal.contract_number }}
+      </p>
+    </div>
+
+    <p class="main__content__portfels-flex__card__subtitle">Общая сумма договора</p>
+    <p class="main__content__portfels-flex__card__digit">{{ deal.sum }} ₸</p>
+
+    <p class="main__content__portfels-flex__card__subtitle">Накопленная сумма</p>
+    <p class="main__content__portfels-flex__card__digit">{{ deal.paid_sum }} ₸</p>
+
+    <p class="main__content__portfels-flex__card__subtitle">Сколько осталось накопить</p>
     <p class="main__content__portfels-flex__card__digit">
-      {{ deal.contract_number }}</p>
+      {{ deal.rest_sum }} ₸
+    </p>
+
     <div v-if="deal.briefcase.type_id == 1">
       <p class="main__content__portfels-flex__card__subtitle">Размер ежемесячного взноса</p>
       <p class="main__content__portfels-flex__card__digit">{{ deal.monthly_payment }} ₸</p>
     </div>
-    <p class="main__content__portfels-flex__card__subtitle">Срок накопления</p>
+
+    <p class="main__content__portfels-flex__card__subtitle">Срок накопления (Количество месяцев)</p>
     <p class="main__content__portfels-flex__card__digit">{{ deal.duration }}</p>
-    <p class="main__content__portfels-flex__card__subtitle">Общая сумма договора</p>
-    <p class="main__content__portfels-flex__card__digit">{{ deal.sum }} ₸</p>
-    <p class="main__content__portfels-flex__card__subtitle">Доходность</p>
-    <p class="main__content__portfels-flex__card__digit">{{ deal.profit }} ₸</p>
 
-    <p class="main__content__portfels-flex__card__subtitle">Накоплено</p>
-    <p class="main__content__portfels-flex__card__digit">{{ deal.paid_sum }} ₸</p>
-
+    <a href="#"
+       v-if="!deal.contract_number"
+       class="main__content__portfels-flex__card__button sent">
+      Запрос отправлен
+    </a>
   </div>
 </template>
 

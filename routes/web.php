@@ -75,8 +75,8 @@ Route::group(['middleware' => [
     Route::get('/my-briefcases', [ClientBriefcaseController::class, 'my'])
         ->name('my-briefcases');
 
-    Route::get(
-        '/briefcase/{id}/add', [ClientBriefcaseController::class, 'attachToMe']
+    Route::post(
+        '/briefcase/add', [ClientBriefcaseController::class, 'attachToMe']
     )->name('attach_briefcase');
 
     Route::resource(

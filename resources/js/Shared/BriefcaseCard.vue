@@ -3,54 +3,110 @@
     <img :src="imagePath"
          class="main__content__portfels-flex__card__img">
     <inertia-link :href="route('briefcases.show', briefcase.id)"
-       class="main__content__portfels-flex__card__title">
-        {{ briefcase.title }}
+                  class="main__content__portfels-flex__card__title">
+      {{ briefcase.title }}
     </inertia-link>
     <p class="main__content__portfels-flex__card__text">
-       {{ briefcase.description | truncate(80) }}
+      {{ briefcase.description | truncate(80) }}
     </p>
-<!--    <div v-if="briefcase.type_id == 1">-->
-<!--      <p class="main__content__portfels-flex__card__subtitle">Размер ежемесячного взноса</p>-->
-<!--      <p class="main__content__portfels-flex__card__digit">{{ briefcase.monthly_payment }} ₸</p>-->
-<!--    </div>-->
-<!--    <p class="main__content__portfels-flex__card__subtitle">Срок накопления</p>-->
-<!--    <p class="main__content__portfels-flex__card__digit">{{ briefcase.duration }} ₸</p>-->
-<!--    <p class="main__content__portfels-flex__card__subtitle">Общая сумма договора</p>-->
-<!--    <p class="main__content__portfels-flex__card__digit">{{ briefcase.sum }} ₸</p>-->
-<!--    <p class="main__content__portfels-flex__card__subtitle">Доходность</p>-->
-<!--    <p class="main__content__portfels-flex__card__digit">{{ briefcase.profit }} ₸</p>-->
-
     <a href="#" class="main__content__portfels-flex__card__button"
        @click.prevent="addBriefcase">
       Добавить программу
     </a>
-<!--    <a href="#" class="main__content__portfels-flex__card__button sent"-->
-<!--       v-show="alreadyHave">-->
-<!--      Запрос отправлен-->
-<!--    </a>-->
+
+    <Modal :show="showModal"
+           :closeable="true"
+           @close="closeModal">
+      <form action="#" v-if="userBriefcaseForm">
+        <label class="profile-form__label mt-3"
+               for="monthly_payment">Размер ежемесячного взноса</label>
+
+        <input class="profile-form__input mb-0" type="number"
+               id="monthly_payment"
+               v-model="userBriefcaseForm.monthly_payment"
+               placeholder="Введите размер ежемесячного взноса">
+        <JetInputError :message="userBriefcaseForm.error('monthly_payment')" class="mt-1"/>
+
+        <label class="profile-form__label mt-3" for="duration">
+          Срок накопления
+        </label>
+
+        <input class="profile-form__input mb-0"
+               type="number"
+               v-model="userBriefcaseForm.duration"
+               id="duration" placeholder="Введите cрок накопления">
+
+        <JetInputError :message="userBriefcaseForm.error('duration')" class="mt-1"/>
+
+        <a class="profile-form__submit mt-3" type="submit" href="#"
+           @click.prevent="submitForm"
+           :class="{ 'opacity-25': userBriefcaseForm.processing }"
+           :disabled="userBriefcaseForm.processing">
+          Сохранить
+        </a>
+      </form>
+    </Modal>
   </div>
 </template>
 
 <script>
-export default {
+  import toast from '@/toast'
+  export default {
     name: "BriefcaseCard",
     props: {
       briefcase: Object
     },
-    computed: {
-        alreadyHave() {
-            return this.briefcase.auth_user_pivot;
-        },
-        imagePath() {
-        	return this.briefcase.image_path
-            ? this.briefcase.image_path
-            : 'images/course-card-img.png';
+    watch: {
+      formSuccessfull(newValue) {
+        if (newValue) {
+          toast.success("Платеж сохранен.")
+          this.closeModal()
         }
+      }
+    },
+    components: {
+      Modal: () => import('@/Jetstream/Modal'),
+      JetInputError: () => import('@/Jetstream/InputError'),
+    },
+    data() {
+      return {
+        userBriefcaseForm: null,
+        showModal: false,
+      }
+    },
+    computed: {
+      alreadyHave() {
+        return this.briefcase.auth_user_pivot;
+      },
+      imagePath() {
+        return this.briefcase.image_path
+          ? this.briefcase.image_path
+          : 'images/course-card-img.png';
+      },
+      formSuccessfull() {
+        return this.userBriefcaseForm && this.userBriefcaseForm.recentlySuccessful;
+      }
     },
     methods: {
-    	addBriefcase() {
-    		this.$inertia.get(route('attach_briefcase', this.briefcase.id));
+      addBriefcase() {
+        this.userBriefcaseForm = this.$inertia.form({
+          monthly_payment: null,
+          duration: null,
+          briefcase_id: this.briefcase.id,
+          '_method': 'POST'
+        }, {
+          resetOnSuccess: true
+        })
+        this.showModal = true;
+      },
+      closeModal() {
+        this.userBriefcaseForm = null;
+        this.showModal = false;
+      },
+      submitForm() {
+        this.userBriefcaseForm
+          .post(route('attach_briefcase'));
       }
     }
-}
+  }
 </script>

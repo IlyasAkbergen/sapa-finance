@@ -18,13 +18,17 @@ class DealResource extends JsonResource
             ? data_get($this->purchase, 'payments')
             : collect([]);
 
+        $paid_sum = $payments
+            ? $payments->sum('sum')
+            : 0;
+
         return [
-            'contract_number' => $this->contract_number ?: 'Не подтвержден',
+            'contract_number' => $this->contract_number,
             'status' => $this->status,
             'sum' => $this->sum,
             'profit' => $this->profit,
             'duration' => $this->duration,
-            'monthly_payment' => $this->duration,
+            'monthly_payment' => data_get($this, 'monthly_payment'),
             'briefcase' => $this->whenLoaded(
                 'briefcase',
                 BriefcaseResource::make(data_get($this, 'briefcase'))->resolve()
@@ -33,9 +37,8 @@ class DealResource extends JsonResource
                 'user',
                 UserResource::make(data_get($this, 'user'))->resolve()
             ),
-            'paid_sum' => $payments
-                ? $payments->sum('sum')
-                : 0
+            'paid_sum' => $paid_sum,
+            'rest_sum' => $this->sum - $paid_sum
         ];
     }
 }

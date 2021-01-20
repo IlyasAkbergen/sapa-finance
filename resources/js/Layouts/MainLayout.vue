@@ -37,24 +37,24 @@
           </li>
 
           <li class="nav-item dropdown" style="display: block; padding: .5rem 1rem;">
-            <a class="icon-button dropdown-toggle-bell" type="button"
+            <inertia-link class="icon-button dropdown-toggle-bell" type="button"
                id="dropdownMenuButton" data-toggle="dropdown"
-               @click.capture="makeNewMessagesSeen"
+               :href="route(isAdmin ? 'messages.index' : 'my_notify')"
                aria-haspopup="true" aria-expanded="false">
               <BellIcon />
               <span class="icon-button__badge"
                     v-if="notifications.length > 0" />
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a v-for="notification in notifications"
-                 class="dropdown-item" href="#">
-                {{notification.title}}
-              </a>
-              <a href="#" class="dropdown-item"
-                 v-if="notifications.length == 0">
-                Нет новых уведомлений
-              </a>
-            </div>
+            </inertia-link>
+<!--            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--              <a v-for="notification in notifications"-->
+<!--                 class="dropdown-item" href="#">-->
+<!--                {{notification.title}}-->
+<!--              </a>-->
+<!--              <a href="#" class="dropdown-item"-->
+<!--                 v-if="notifications.length == 0">-->
+<!--                Нет новых уведомлений-->
+<!--              </a>-->
+<!--            </div>-->
           </li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle d-flex"
