@@ -13,8 +13,7 @@
             Кому отправлены уведомления
           </a>
         </td>
-        <td class="align-middle d-flex">
-          <img src="../../../../img/uploaded-file.png">
+        <td class="align-middle">
           <span>
             <inertia-link :href="message.url" target="_blank">
               {{ message.url | truncate(20)}}
@@ -22,7 +21,6 @@
           </span>
         </td>
         <td class="align-middle d-flex" v-for="attachment in message.attachments">
-          <img src="../../../../img/uploaded-file.png">
           <span>{{ attachment.name | truncate(10) }}</span>
           <a :href="attachment.path" target="_blank">
             <Download />

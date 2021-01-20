@@ -11,6 +11,7 @@
                         <thead>
                         <tr>
                             <th scope="col">Заголовок</th>
+                            <th scope="col">Содержание</th>
                             <th scope="col">Дополнительная ссылка</th>
                             <th scope="col">Документы для скачивания</th>
                         </tr>

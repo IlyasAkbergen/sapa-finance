@@ -127,14 +127,14 @@
 				.modal-dialog {
 				    max-width: 60%;
 				    margin: 1.75rem auto;
-				}	
-				
+				}
+
 			}
 			@media (max-width: 576px){
 				.modal-dialog {
 				    max-width: 80%;
 				    margin: 1.75rem auto;
-				}	
+				}
 			}
 		</style>
 	</head>
@@ -518,6 +518,9 @@
 									? $article->image_path
 									: asset('images/slides/articles-slider-img1.png')}}"
 								 >
+                            <p>
+                                {{ substr($article->title, 0, 65) . (strlen($article->title) > 65 ? '...' : '') }}
+                            </p>
 							<p>
 								{{ substr($article->content, 0, 65) . (strlen($article->content) > 65 ? '...' : '') }}
 							</p>

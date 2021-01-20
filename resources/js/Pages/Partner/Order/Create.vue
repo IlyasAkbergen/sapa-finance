@@ -42,6 +42,7 @@
 					monthly_payment: 0,
 					profit: 0,
 					sum: null,
+          created_at: null,
 					'_method': 'POST',
 				}, {
 					bag: 'orderForm',

@@ -23,6 +23,7 @@ class BriefcaseUserRequest extends FormRequest
         return [
 //            'contract_number.required' => ['Не указан номер договора'],
             'contract_number.integer' => ['Значение должно быть числовым'],
+            'contract_number.unique' => ['Договор с таким номером уже создан'],
             'sum.required' => ['Не указана сумма договора'],
             'sum.integer' => ['Значение должно быть числовым'],
             'profit.integer' => ['Значение должно быть числовым'],

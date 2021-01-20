@@ -19,7 +19,7 @@ class UserBriefcase extends Model
     protected $fillable = [
         'user_id', 'briefcase_id', 'consultant_id', 'status',
         'contract_number', 'sum', 'profit', 'duration',
-        'monthly_payment', 'purchase_id'
+        'monthly_payment', 'purchase_id', 'created_at'
     ];
 
     public function purchase()

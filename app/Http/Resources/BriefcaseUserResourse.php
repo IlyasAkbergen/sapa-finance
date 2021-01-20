@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BriefcaseUserResourse extends JsonResource
@@ -35,6 +36,8 @@ class BriefcaseUserResourse extends JsonResource
             'profit' => $this->profit,
             'duration' => $this->duration,
             'monthly_payment' => $this->monthly_payment,
+            'created_at' => Carbon::parse($this->created_at)
+                              ->isoFormat('Y-MM-DD')
         ];
     }
 }

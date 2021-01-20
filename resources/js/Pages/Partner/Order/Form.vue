@@ -28,18 +28,27 @@
       <JetInputError :message="form.error('briefcase')" class="mt-1"/>
     </div>
 
-    <div v-if="form.id">
-      <label class="profile-form__label mt-3"
-             for="contract_number">
-        Номер договора
-      </label>
+    <label class="profile-form__label mt-3"
+           for="contract_number">
+      Номер договора
+    </label>
 
-      <input class="profile-form__input mb-0" type="text"
-             id="contract_number"
-             v-model="form.contract_number"
-             placeholder="Введите размер ежемесячного взноса">
-      <JetInputError :message="form.error('contract_number')" class="mt-1"/>
-    </div>
+    <input class="profile-form__input mb-0" type="text"
+           id="contract_number"
+           v-model="form.contract_number"
+           placeholder="Введите размер ежемесячного взноса">
+    <JetInputError :message="form.error('contract_number')" class="mt-1"/>
+
+    <label class="profile-form__label mt-3"
+           for="created_at">
+      Дата заключения
+    </label>
+    <input class="profile-form__input mb-0"
+           type="date"
+           id="created_at"
+           v-model="form.created_at"
+    >
+    <JetInputError :message="form.error('paid_at')" class="mt-1"/>
 
     <div>
         <label class="profile-form__label mt-3"

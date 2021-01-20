@@ -327,7 +327,7 @@ class PartnerUserController extends WebBaseController
             ]);
 
             UserBriefcase::create([
-                'contract_number' => UserBriefcase::nextContractNumber(),
+                'contract_number' => data_get($request, 'contract_number') ?: UserBriefcase::nextContractNumber(),
                 'purchase_id' => data_get($purchase, 'id'),
                 'user_id' => data_get($request, 'user_id'),
                 'briefcase_id' => data_get($request, 'briefcase_id'),
@@ -337,7 +337,10 @@ class PartnerUserController extends WebBaseController
                 'monthly_payment' => data_get($request, 'monthly_payment'),
                 'status' => UserBriefcase::STATUS_ACCEPTED,
                 'consultant_id' => data_get($request, 'user_id')
-                    ?: env('SAPA_USER_ID')
+                    ?: env('SAPA_USER_ID'),
+                'created_at' => data_get($request, 'created_at')
+                    ? Carbon::parse(data_get($request, 'created_at'))
+                    : Carbon::now()
             ]);
 
             return redirect()->route('partner-users.deals');
@@ -361,6 +364,9 @@ class PartnerUserController extends WebBaseController
                 'profit' => data_get($request, 'profit'),
                 'duration' => data_get($request, 'duration'),
                 'monthly_payment' => data_get($request, 'monthly_payment'),
+                'created_at' => data_get($request, 'created_at')
+                    ? Carbon::parse(data_get($request, 'created_at'))
+                    : Carbon::now()
             ]);
 
             return redirect()->route('partner-users.deals');
