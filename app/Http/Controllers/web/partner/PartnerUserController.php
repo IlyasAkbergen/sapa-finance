@@ -12,6 +12,7 @@ use App\Http\Resources\BriefcaseUserResourse;
 use App\Http\Resources\PaymentResource;
 use App\Http\Resources\UserResource;
 use App\Models\Briefcase;
+use App\Models\Message;
 use App\Models\Payment;
 use App\Models\Purchase;
 use App\Models\ReferralLevel;
@@ -175,7 +176,8 @@ class PartnerUserController extends WebBaseController
 
     public function acceptOrder($id)
     {
-        $order = UserBriefcase::findOrFail($id);
+        $order = UserBriefcase::with('briefcase')
+            ->findOrFail($id);
 
         if (data_get($order, 'status') != UserBriefcase::STATUS_ACCEPTED
             || !data_get($order, 'contract_number')
@@ -186,32 +188,43 @@ class PartnerUserController extends WebBaseController
             ];
 
             $order->update($data);
+
+            $message = Message::create([
+                'title' => 'Заявка на программу подтверждена',
+                'content' => 'Админ подтвердил Вашу заявку на программу "'
+                    . data_get($order, 'briefcase.title') . '"',
+                'url' => route('my-briefcases'),
+                'is_public' => false
+            ]);
+
+            $message->users()->attach(data_get($order, 'user_id'));
         }
 
         return redirect()->back();
-//        return $this->__updateOrder($id, $data);
     }
 
     public function rejectOrder($id)
     {
+        $order = UserBriefcase::with('briefcase')
+            ->findOrFail($id);
+
         $data = [
             'status' => UserBriefcase::STATUS_REJECTED
         ];
 
-        return $this->__updateOrder($id, $data);
-    }
+        $order->update($data);
 
-    private function __updateOrder($id, $data)
-    {
-        $order = UserBriefcase::find($id);
+        $message = Message::create([
+            'title' => 'Заявка на программу отказана.',
+            'content' => 'Админ отказал на Вашу заявку на программу "'
+                . data_get($order, 'briefcase.title') . '"',
+            'url' => null,
+            'is_public' => false
+        ]);
 
-        if ($order) {
-            $order->update($data);
+        $message->users()->attach(data_get($order, 'user_id'));
 
-            return redirect()->route('admin.briefcase-orders');
-        } else {
-            return $this->responseFail('Не удалось сохранить оценку.');
-        }
+        return redirect()->back();
     }
 
     public function activeOrders()
@@ -435,6 +448,14 @@ class PartnerUserController extends WebBaseController
         // todo award peferrers after payment
 
         if (!empty($payment)) {
+            $order->user->messages()->create([
+                'title' => 'Добавлен платеж',
+                'content' => 'Добавлен платеж по Вашему договору №'
+                    . data_get($order, 'contract_number'),
+                'url' => route('payments.my'),
+                'is_public' => false
+            ]);
+
             return redirect()
                 ->route('partner-users-order.edit', $order->id);
         } else {

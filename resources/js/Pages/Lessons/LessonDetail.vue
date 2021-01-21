@@ -46,6 +46,10 @@
             Домашнее задание
           </p>
 
+          <p class="main__content__lesson-flex__task__homework__content">
+            {{ lesson.homework_content }}
+          </p>
+
           <Attachments
               :model-id="lesson.user_homework
                 ? lesson.user_homework.id

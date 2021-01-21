@@ -6,6 +6,7 @@ use App\Events\HomeworkCreated;
 use App\Events\HomeworkRated;
 use App\Models\Homework;
 use App\Models\Lesson;
+use App\Models\Message;
 use App\Services\HomeworkService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class HomeworkController extends WebBaseController
     public function __construct(HomeworkService $homeworkService)
     {
         $this->homeworkService = $homeworkService;
+        $this->middleware('admin')->only(['index']);
     }
 
     public function index(Request $request)
@@ -27,9 +29,6 @@ class HomeworkController extends WebBaseController
             ->with([
                 'user', 'lesson', 'attachments'
             ])
-            ->whereHas('user', function ($q) {
-                return $q->where('referrer_id', Auth::user()->id);
-            })
             ->paginate(10);
 
         return Inertia::render('Homework/Index', [
@@ -72,7 +71,7 @@ class HomeworkController extends WebBaseController
 
             event(new HomeworkCreated($homework));
 
-            return redirect()->route('lessons', $homework->lesson_id);
+            return redirect()->route('lessons.show', $homework->lesson_id);
         } catch (\Exception $e) {
             DB::rollBack();
             return $this->responseFail('Не удалось сохранить.');
@@ -98,6 +97,16 @@ class HomeworkController extends WebBaseController
             return $this->responseFail('Не удалось сохранить оценку.');
         } else {
             event(new HomeworkRated($homework));
+            $lesson = Lesson::find(data_get($homework, 'lesson_id'));
+            $message = Message::create([
+                'title' => 'ДЗ проверено.',
+                'content' => 'Админ поставил оценку на ДЗ урока: "'
+                    . data_get($lesson, 'title') . '"',
+                'url' => route('lessons.show', data_get($homework, 'lesson_id')),
+                'is_public' => false
+            ]);
+
+            $message->users()->attach(data_get($homework, 'user_id'));
             return redirect()->route('homeworks.index');
         }
     }
