@@ -33,6 +33,7 @@
         "v-mask": "^2.2.3",
         "vue-flash-message": "^0.7.2",
         "vue-search-select": "^2.9.3",
+        "vue-slick-carousel": "^1.0.6",
         "vue-uuid": "^2.0.2"
     }
 }

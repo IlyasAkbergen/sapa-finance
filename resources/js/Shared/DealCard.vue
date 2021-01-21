@@ -16,13 +16,16 @@
     <p class="main__content__portfels-flex__card__subtitle">Общая сумма договора</p>
     <p class="main__content__portfels-flex__card__digit">{{ deal.sum }} ₸</p>
 
-    <p class="main__content__portfels-flex__card__subtitle">Накопленная сумма</p>
-    <p class="main__content__portfels-flex__card__digit">{{ deal.paid_sum }} ₸</p>
-
-    <p class="main__content__portfels-flex__card__subtitle">Сколько осталось накопить</p>
-    <p class="main__content__portfels-flex__card__digit">
-      {{ deal.rest_sum }} ₸
-    </p>
+    <div v-if="deal.briefcase.type_id == 1">
+      <p class="main__content__portfels-flex__card__subtitle">Накопленная сумма</p>
+      <p class="main__content__portfels-flex__card__digit">{{ deal.paid_sum }} ₸</p>
+    </div>
+    <div v-if="deal.briefcase.type_id == 1">
+      <p class="main__content__portfels-flex__card__subtitle">Сколько осталось накопить</p>
+      <p class="main__content__portfels-flex__card__digit">
+        {{ deal.rest_sum }} ₸
+      </p>
+    </div>
 
     <div v-if="deal.briefcase.type_id == 1">
       <p class="main__content__portfels-flex__card__subtitle">Размер ежемесячного взноса</p>

@@ -14,4 +14,7 @@ class BriefcaseType extends Model
     protected $fillable = [
         'title', 'description'
     ];
+
+    const TYPE_CUMULATIVE = 1;
+    const TYPE_ONE_TIME = 2;
 }

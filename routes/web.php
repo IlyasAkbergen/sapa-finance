@@ -215,6 +215,7 @@ Route::group(['middleware' => [
     Route::get('users-referral-tree', [UserController::class, 'referralTree'])
         ->name('users-referral-tree');
     Route::post('user-referrer-change', [UserController::class, 'changeReferrer'])
+        ->withoutMiddleware('admin')
         ->name('user-referrer-change');
 
     Route::get('/complaints', [ComplaintController::class, 'index'])

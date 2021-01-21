@@ -18,14 +18,31 @@
            :closeable="true"
            @close="closeModal">
       <form action="#" v-if="userBriefcaseForm">
-        <label class="profile-form__label mt-3"
-               for="monthly_payment">Размер ежемесячного взноса</label>
+        <div v-if="briefcase.type_id == 1">
+          <label class="profile-form__label mt-3"
+                 for="monthly_payment">
+            Размер ежемесячного взноса
+          </label>
 
-        <input class="profile-form__input mb-0" type="number"
-               id="monthly_payment"
-               v-model="userBriefcaseForm.monthly_payment"
-               placeholder="Введите размер ежемесячного взноса">
-        <JetInputError :message="userBriefcaseForm.error('monthly_payment')" class="mt-1"/>
+          <input class="profile-form__input mb-0" type="number"
+                 id="monthly_payment"
+                 v-model="userBriefcaseForm.monthly_payment"
+                 placeholder="Введите размер ежемесячного взноса">
+          <JetInputError :message="userBriefcaseForm.error('monthly_payment')" class="mt-1"/>
+        </div>
+
+        <div v-if="briefcase.type_id == 2">
+          <label class="profile-form__label mt-3"
+                 for="sum">
+            Общая сумма договора
+          </label>
+
+          <input class="profile-form__input mb-0" type="number"
+                 id="sum"
+                 v-model="userBriefcaseForm.sum"
+                 placeholder="Введите общую сумму договора">
+          <JetInputError :message="userBriefcaseForm.error('sum')" class="mt-1"/>
+        </div>
 
         <label class="profile-form__label mt-3" for="duration">
           Срок накопления
@@ -51,10 +68,12 @@
 
 <script>
   import toast from '@/toast'
+  import HasUser from "@/Mixins/HasUser";
   export default {
     name: "BriefcaseCard",
+    mixins: [HasUser],
     props: {
-      briefcase: Object
+      briefcase: Object,
     },
     watch: {
       formSuccessfull(newValue) {
@@ -89,10 +108,16 @@
     },
     methods: {
       addBriefcase() {
+        if (!this.referrer) {
+          this.$emit('showReferrers')
+          return;
+        }
         this.userBriefcaseForm = this.$inertia.form({
           monthly_payment: null,
+          sum: null,
           duration: null,
           briefcase_id: this.briefcase.id,
+          type_id: this.briefcase.type_id,
           '_method': 'POST'
         }, {
           resetOnSuccess: true

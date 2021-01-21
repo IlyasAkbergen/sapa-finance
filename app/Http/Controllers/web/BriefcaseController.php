@@ -34,8 +34,13 @@ class BriefcaseController extends WebBaseController
     public function index()
     {
         $briefcases = $this->briefcaseService->allWith(['auth_user_pivot']);
+        $consultants = User::query()
+            ->where('referral_level_id', ReferralLevelEnum::Consultant)
+            ->get();
+
         return Inertia('Briefcase/Briefcases', [
-            'briefcases' => $briefcases
+            'briefcases' => $briefcases,
+            'consultants' => $consultants
         ]);
     }
 
@@ -54,24 +59,30 @@ class BriefcaseController extends WebBaseController
 
     public function attachToMe(Request $request)
     {
+        $type_id = data_get($request, 'type_id');
         Validator::make($request->all(), [
             'briefcase_id' => 'required|integer',
-            'monthly_payment' => 'required|integer',
+            'monthly_payment' => $type_id == BriefcaseType::TYPE_CUMULATIVE
+                ? '|required' : '',
             'duration' => 'required|integer',
+            'sum' => $type_id == BriefcaseType::TYPE_ONE_TIME
+                ? '|required' : ''
         ], [
             'monthly_payment.required' => 'Укажите размер ежемесячного взноса',
             'monthly_payment.integer' => 'Значение должно быть числом',
             'duration.required' => 'Укажите срок',
+            'sum.required' => 'Укажите общую сумму договора',
             'duration.integer' => 'Значение должно быть числом',
         ])->validate();
 
         $id = data_get($request, 'briefcase_id');
         $monthly_payment = data_get($request, 'monthly_payment');
         $duration = data_get($request, 'duration');
+        $sum = data_get($request, 'sum');
 
         $purchase = Purchase::create([
             'user_id' => Auth::user()->id,
-            'sum' => 0,
+            'sum' => $sum ?: 0,
             'purchasable_id' => $id,
             'purchasable_type' => Briefcase::class,
             'payed' => true,
@@ -88,7 +99,7 @@ class BriefcaseController extends WebBaseController
                         ->first()->id,
                 'monthly_payment' => $monthly_payment,
                 'duration' => $duration,
-                'sum' => $monthly_payment * $duration
+                'sum' => $sum ?: ($monthly_payment * $duration)
             ]
         ]);
 
