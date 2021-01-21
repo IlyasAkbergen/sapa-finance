@@ -3,7 +3,7 @@
 {
     box-sizing: border-box;
 }
-html 
+html
 {
     width: 100%;
     height: 100%;
@@ -214,7 +214,7 @@ body
     font-size: 16px;
     font-weight: 400;
     color: #C2C3CF;
-} 
+}
 .sidebar .sidebar__agent-menu .sidebar__menu__nav .sidebar__menu__nav__link:hover
 {
     background-color: rgba(255, 255, 255, 0.1);
@@ -267,7 +267,7 @@ body
     border-radius: 24px;
     text-decoration: none;
 }
-.main .navbar .nav .add-client .nav-link p 
+.main .navbar .nav .add-client .nav-link p
 {
     color: #fff;
     margin: 0;
@@ -731,7 +731,7 @@ body
     color: #92929E;
     margin-bottom: 0;
 }
-.main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__process .main__content__courses-flex__card__process__percent 
+.main .main__content .main__content__consultant-my-courses-flex .main__content__courses-flex__card .main__content__courses-flex__card__process .main__content__courses-flex__card__process__percent
 {
     font-size: 14px;
     font-weight: 700;
@@ -2402,36 +2402,36 @@ body
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
     background-color: #fff;
 }
-.panel-title 
+.panel-title
 {
     color: #333333;
     font-weight: bold;
     display: block;
     padding: 10px 16px;
 }
-a.panel-title 
+a.panel-title
 {
     background-color: #fff;
     color: #333333;
 }
 a.panel-title:hover,
-a.panel-title:focus 
+a.panel-title:focus
 {
     color: #333333;
     text-decoration: none;
 }
-.panel-group .panel-title 
+.panel-group .panel-title
 {
     background-color: #fff;
     transition: color, 0.5s, ease;
 }
-.panel-group .panel-title:hover 
+.panel-group .panel-title:hover
 {
     color: #333333;
     text-decoration: none;
     background: #777777;
 }
-.panel-group .panel + .panel 
+.panel-group .panel + .panel
 {
     margin-top: 0;
 }
@@ -2448,7 +2448,7 @@ a.panel-agent .panel-heading-flex p
 {
     color: #fff;
 }
-a.panel-agent .panel-heading-flex p:last-child 
+a.panel-agent .panel-heading-flex p:last-child
 {
     position: relative;
 }
@@ -2533,7 +2533,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
 }
 .page .page__consultant-settings-program-modal
 {
-    display: none;
+    /*display: none;*/
     position: absolute;
     top: 0;
     left: 0;
@@ -3128,7 +3128,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     {
         flex-direction: column;
     }
-    
+
     .main__content .main__content__consultant-program-card
     {
         border-radius: 0;
@@ -3137,7 +3137,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     {
         padding: 8px 20px;
     }
-    
+
     .main .main__content .main__content__consultant-my-portfels-flex .main__content__portfels-flex__card
     {
         border-radius: 0;
@@ -3186,7 +3186,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     .page, .main {
         height: auto;
     }
-    .main .navbar .nav .add-client .nav-link p 
+    .main .navbar .nav .add-client .nav-link p
     {
         display: none;
     }
@@ -3339,7 +3339,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
         padding-right: 20px;
         max-width: 270px;
     }
-    
+
     .main__content .main__content__consultant-program-card
     {
         padding: 10px;
@@ -3378,7 +3378,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     {
         padding: 10px;
         margin-left: 0;
-        margin-right: 0;    
+        margin-right: 0;
     }
 
     .main__content .main__content__consultant-new-card
@@ -3396,7 +3396,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     {
         max-width: 275px !important;
     }
-    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__right > div 
+    .main__content .main__content__consultant-settings-flex .main__content__settings-flex__right > div
     {
         max-width: 275px !important;
         margin: 0 auto 20px !important;
@@ -3568,7 +3568,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     .main .main__content .main__content__consultant-courses-flex {
         justify-content: center;
     }
-    
+
     .main__content .main__content__program-card
     {
         margin: 0 auto;
@@ -3670,7 +3670,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     {
         order: 1;
     }
-    .main__content .main__content__lesson-flex .main__content__lesson-flex__task .main__content__lesson-flex__task__homework 
+    .main__content .main__content__lesson-flex .main__content__lesson-flex__task .main__content__lesson-flex__task__homework
     {
         order: 2;
     }
@@ -3701,7 +3701,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
     }
     .main__content .main__content__consultant-settings-flex .main__content__settings-flex__right > div
     {
-        margin-right: 20px;        
+        margin-right: 20px;
     }
     .main__content .main__content__consultant-settings-flex
     {

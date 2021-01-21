@@ -31,7 +31,9 @@ class PayoutController extends WebBaseController
         );
 
         if (empty($payout->id)) {
-            return $this->responseFail('Вывод средств на данную сумму невозможен.');
+            return redirect()->withErrors([
+                'Вывод средств на данную сумму невозможен.'
+            ]);
         }
 
         $this->paymentGate->initPayout();
@@ -49,23 +51,23 @@ class PayoutController extends WebBaseController
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        Validator::make($request->all(), [
             'sum' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->responseFail(
-                'Вывод средств на данную сумму невозможен.'
-            );
-        }
+        ], [
+            'sum.required' => 'Укажите сумму для вывода средств'
+        ])->validate();
 
         $payout = $this->userService->addPayout(
             Auth::user()->id,
-            ['sum' => $request->only('sum')]
+            $request->only('sum')
         );
 
         if (empty($payout->id)) {
-            return $this->responseFail('Вывод средств на данную сумму невозможен.');
+            return redirect()
+                ->back()
+                ->withErrors([
+                    'sum' => 'Вывод средств на данную сумму невозможен.'
+                ]);
         }
 
         $this->paymentGate->initPayout();

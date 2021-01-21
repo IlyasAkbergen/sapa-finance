@@ -17,7 +17,7 @@ class WebBaseController extends Controller
     {
         return redirect()
             ->back()
-            ->withErrors(['error']);
+            ->withErrors(['error' => $error]);
     }
 
     public function warning()
