@@ -18,6 +18,7 @@ class MyLessonResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content,
+            'homework_content' => $this->homework_content,
             'video_url' => $this->video_url,
             'course_id' => $this->course_id,
             'attachment_path' => $this->attachment_path,

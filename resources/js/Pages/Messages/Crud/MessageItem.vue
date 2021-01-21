@@ -8,10 +8,15 @@
         </th>
         <td class="align-middle">
           <a class="osk__action osk__action--blue actions__see-senders"
-            href="#" @click.prevent="$emit('show')"
+            href="#"
+            @click.prevent="$emit('show')"
+            v-if="message.levels"
           >
             Кому отправлены уведомления
           </a>
+          <span v-else>
+            Персональное
+          </span>
         </td>
         <td class="align-middle">
           <span>

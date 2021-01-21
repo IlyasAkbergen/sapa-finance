@@ -15,9 +15,9 @@ class WebBaseController extends Controller
 
     public function responseFail($error, $data = null)
     {
-        return request()
-            ->setStatusCode(422)
-            ->withErrors(['error']);
+        return redirect()
+            ->back()
+            ->withErrors(['error' => $error]);
     }
 
     public function warning()

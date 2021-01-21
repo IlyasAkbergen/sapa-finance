@@ -37,7 +37,9 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
     public function addPayout($id, array $payout_attributes) {
         $user = $this->findWith($id, ['balance']);
 
-        if ($payout_attributes['sum'] > $user->balance->sum) {
+        $available_sum = data_get($user, 'balance.sum');
+
+        if (data_get($payout_attributes, 'sum') > $available_sum) {
             return null;
         }
 

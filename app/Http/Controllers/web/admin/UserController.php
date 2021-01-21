@@ -189,7 +189,7 @@ class UserController extends Controller
             return Inertia::render('User/Crud/Edit', [
                 'client' => $user,
                 'roles' => $roles,
-                'referrer' => isset($user['referrer'])
+                'client_referrer' => isset($user['referrer'])
                     ? $user['referrer']->resolve()
                     : null,
                 'auth_user' => $user

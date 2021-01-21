@@ -13,43 +13,82 @@
 
     <b-tabs content-class="mt-3" align="center">
       <b-tab title="Основные данные">
-        <div class="avatar">
-          <img class="avatar__img" :src="avatarPath"
-               v-show="photoPreview == null && !form.image_path">
-          <img class="avatar__img" :src="photoPreview" v-show="photoPreview">
-          <a class="avatar__link" href="" @click.prevent="selectNewPhoto">
-            Изменить аватар
-          </a>
-          <input type="file"
-                 ref="image"
-                 @change="updatePhotoPreview"
-                 class="hidden">
-        </div>
+        <div class="main__content__consultant-settings-flex">
+          <div class="main__content__settings-flex__ava">
+            <img class="avatar__img" :src="avatarPath"
+                 v-show="photoPreview == null && !form.image_path">
+            <img class="avatar__img" :src="photoPreview" v-show="photoPreview">
+            <a class="avatar__link" href="" @click.prevent="selectNewPhoto">
+              Изменить аватар
+            </a>
+            <input type="file"
+                   ref="image"
+                   @change="updatePhotoPreview"
+                   class="hidden">
+          </div>
 
-        <div class="profile-form">
-          <Form :form="form"
-                :roles="roles"
-                :referral_level="referral_level"
-                :is-partners-user="!!partner_id"
-                :all_clients="all_clients"
-                @submit="updateUser"/>
-        </div>
+          <div class="main__content__settings-flex__form">
+            <Form :form="form"
+                  :roles="roles"
+                  :referral_level="referral_level"
+                  :is-partners-user="!!partner_id"
+                  :all_clients="all_clients"
+                  @submit="updateUser"/>
+          </div>
 
-        <div v-if="referrer" class="avatar" style="margin-left: 20px">
-          <img src="../../../../img/profile-agent-ava.png"
-               class="avatar__img" style="width: 50px; height: 50px"
-               alt="">
-          <p class="referrer_name">{{ referrer.name }}</p>
-          <p class="referrer_title">Мой агент</p>
-          <inertia-link class="avatar__link"
-                        v-if="referrer"
-                        :href="route('complaints.create', {
-                id: client.id,
-                referrer_id: referrer.id
-            })"
-                        style="text-align: center">
-            Оставить отзыв
-          </inertia-link>
+          <div class="main__content__settings-flex__right" v-if="client.id === getUser().id">
+            <div class="main__content__settings-flex__stats">
+              <div class="main__content__settings-flex__stats__top">
+                <div class="main__content__settings-flex__stats__top__item">
+                  <p>Единицы</p>
+                  <p>{{ balance.direct_points }}</p>
+                </div>
+                <div class="main__content__settings-flex__stats__top__item">
+                  <p>Командные единицы</p>
+                  <p>{{ balance.team_points }}</p>
+                </div>
+                <div class="main__content__settings-flex__stats__top__item">
+                  <p>Финансовый консультант </p>
+                  <p>70% todo</p>
+                </div>
+              </div>
+              <a href="#"
+                 @click.prevent="showAboutPointsModal = true"
+                 class="main__content__settings-flex__stats__button">
+                Подробнее
+              </a>
+            </div>
+            <div class="main__content__settings-flex__comission">
+              <p class="main__content__settings-flex__comission__title">Комиссионные</p>
+              <p class="main__content__settings-flex__comission__price">{{ balance.sum }} ₸</p>
+              <a href="#"
+                 @click.prevent="showSellsModal = true"
+                 class="main__content__settings-flex__comission__btn-1">
+                История продаж
+              </a>
+              <a href="#"
+                 @click.prevent="showPayoutSumModal = true"
+                 class="main__content__settings-flex__comission__btn-2">
+                Вывести средства
+              </a>
+            </div>
+            <div v-if="referrer" class="main__content__settings-flex__agent">
+              <img src="../../../../img/profile-agent-ava.png"
+                   class="avatar__img" style="width: 50px; height: 50px"
+                   alt="">
+              <p class="referrer_name">{{ referrer.name }}</p>
+              <p class="referrer_title">Мой агент</p>
+              <inertia-link class="avatar__link"
+                            v-if="referrer"
+                            :href="route('complaints.create', {
+                                id: client.id,
+                                referrer_id: referrer.id
+                            })"
+                            style="text-align: center">
+                Оставить отзыв
+              </inertia-link>
+            </div>
+          </div>
         </div>
       </b-tab>
 
@@ -88,18 +127,149 @@
                  :text="'Вы уверены?'"
                  @close="() => cancelReferralTreeChange()"
                  @accepted="() => submitReferralTreeChange()" />
+
+    <div class="page__consultant-settings-program-modal" v-show="showSellsModal">
+      <i class="fas fa-times fa-2x" @click="showSellsModal = false"></i>
+      <div class="page__program-modal__body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Имя покупателя</th>
+            <th>Что продал</th>
+            <th>Цена</th>
+            <th>Комиссионные</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">
+              <img src="../../../../img/avatar-mini.png" alt="">
+              Бауржанулы Акжан
+            </th>
+            <td>Какое то название курса если оно длинное то 2 строку</td>
+            <td>45 000 ₸</td>
+            <td>2 000 ₸</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <img src="../../../../img/avatar-mini.png" alt="">
+              Бауржанулы Акжан
+            </th>
+            <td>Какое то название курса</td>
+            <td>45 000 ₸</td>
+            <td>2 000 ₸</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <img src="../../../../img/avatar-mini.png" alt="">
+              Бауржанулы Акжан
+            </th>
+            <td>Какое то название курса если оно длинное то 2 строку</td>
+            <td>45 000 ₸</td>
+            <td>2 000 ₸</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <img src="../../../../img/avatar-mini.png" alt="">
+              Бауржанулы Акжан
+            </th>
+            <td>Какое то название курса</td>
+            <td>45 000 ₸</td>
+            <td>2 000 ₸</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <img src="../../../../img/avatar-mini.png" alt="">
+              Бауржанулы Акжан
+            </th>
+            <td>Какое то название курса если оно длинное то 2 строку</td>
+            <td>45 000 ₸</td>
+            <td>2 000 ₸</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <img src="../../../../img/avatar-mini.png" alt="">
+              Бауржанулы Акжан
+            </th>
+            <td>Какое то название курса если оно длинное то 2 строку</td>
+            <td>45 000 ₸</td>
+            <td>2 000 ₸</td>
+          </tr>
+          </tbody>
+        </table>
+        <a href="#"
+           class="page__program-modal__body__button">
+          Посмотреть все продажи
+        </a>
+      </div>
+    </div>
+
+    <div class="page__consultant-settings-program-modal-2" v-show="showAboutPointsModal">
+      <i class="fas fa-times fa-2x" @click="showAboutPointsModal = false"></i>
+      <div class="page__program-modal__body">
+        <p class="page__program-modal__body__text">
+          <b>Единицы это:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        </p>
+        <p class="page__program-modal__body__text">
+          <b>Командные единицы это:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        </p>
+        <p class="page__program-modal__body__text">
+          <b>Чтобы стать «Финансовым консультантом (ФК)» необходимо:</b>
+        </p>
+        <ol>
+          <li>ФК присваивается при сумме единиц 100 Е</li>
+          <li>Сертификация</li>
+          <li>Собранный КЕ будут добавляться, но не имеют отношения к карьерному росту.</li>
+        </ol>
+        <p class="page__program-modal__body__text">
+          ФК вправе продавать и зарабатывать комиссионные вознаграждение от продажи образовательных продуктов и финансовых инструментов.
+        </p>
+        <a href="#"
+           @click.prevent="showAboutPointsModal = false"
+           class="page__program-modal__body__button">Понятно</a>
+      </div>
+    </div>
+
+    <Modal :show="showPayoutSumModal"
+           :closeable="true"
+           @close="showPayoutSumModal = false">
+      <form action="#">
+        <label class="profile-form__label mt-3"
+               for="monthly_payment">
+          Сумма для вывода средств
+        </label>
+
+        <input class="profile-form__input mb-0" type="number"
+               id="monthly_payment"
+               v-model="payoutForm.sum"
+               placeholder="Введите сумму для вывода средств">
+        <JetInputError :message="payoutForm.error('sum')" class="mt-1"/>
+
+        <a class="profile-form__submit mt-3 clickable"
+           type="submit" href="#"
+           @click.prevent="submitPayoutForm"
+           :class="{ 'opacity-25': payoutForm.processing }"
+           :disabled="payoutForm.processing">
+          Сохранить
+        </a>
+      </form>
+    </Modal>
   </main-layout>
 </template>
 
 <script>
   import MainLayout from '@/Layouts/MainLayout'
+  import HasUser from "@/Mixins/HasUser";
   export default {
     name: "Edit",
+    mixins: [HasUser],
     components: {
       Form: () => import('./Form'),
       MainLayout,
       ReferralItem: () => import('@/Shared/ReferralItem'),
       AcceptModal: () => import('@/Shared/AcceptModal'),
+      Modal: () => import('@/Jetstream/Modal'),
+      JetInputError: () => import('@/Jetstream/InputError'),
     },
     props: {
       client: Object,
@@ -108,7 +278,7 @@
         type: Array,
         default: null
       },
-      referrer: {
+      client_referrer: {
         type: Object,
         default: null,
       },
@@ -145,8 +315,18 @@
           bag: 'userForm',
           resetOnSuccess: true,
         }),
+        payoutForm: this.$inertia.form({
+          sum: null,
+          '_method': 'POST',
+        }, {
+          //bag: 'userForm',
+          resetOnSuccess: true,
+        }),
         acceptModalShow: false,
-        referralChangeData: null
+        referralChangeData: null,
+        showAboutPointsModal: false,
+        showSellsModal: false,
+        showPayoutSumModal: false
       }
     },
     methods: {
@@ -198,6 +378,9 @@
       cancelReferralTreeChange() {
         this.referralChangeData = null;
         this.acceptModalShow = false;
+      },
+      submitPayoutForm() {
+        this.payoutForm.post(route('payouts.store'));
       }
     },
     computed: {
