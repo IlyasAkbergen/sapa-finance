@@ -12,7 +12,7 @@
 
     <label class="profile-form__label mt-3" for="phone">Номер телефона</label>
     <input class="profile-form__input mb-0" type="text" id="phone"
-           v-model="form.phone">
+           v-model="form.phone" v-mask="'+7(###)-###-##-##'">
     <JetInputError :message="form.error('phone')" class="mt-1"/>
 
     <label class="profile-form__label mt-3" for="iin">ИИН</label>

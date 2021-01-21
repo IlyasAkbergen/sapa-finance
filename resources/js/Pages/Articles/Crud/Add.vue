@@ -35,6 +35,7 @@ export default {
         content: null,
         uuid: uuid.v1(),
         image: null,
+        video_url: null,
         created_at: null,
         '_method': 'POST',
       }, {

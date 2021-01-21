@@ -9,6 +9,9 @@ import VueFlashMessage from 'vue-flash-message';
 import UUID from "vue-uuid";
 import interceptors from './interceptors'
 import 'vue-search-select/dist/VueSearchSelect.css'
+import VueMask from 'v-mask'
+import { VueMaskDirective } from 'v-mask'
+import { VueMaskFilter } from 'v-mask'
 
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaApp);
@@ -16,6 +19,9 @@ Vue.use(InertiaForm);
 Vue.use(PortalVue);
 Vue.use(VueFlashMessage);
 Vue.use(UUID);
+Vue.use(VueMask);
+Vue.directive('mask', VueMaskDirective);
+Vue.filter('VMask', VueMaskFilter);
 interceptors();
 const app = document.getElementById('app');
 

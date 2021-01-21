@@ -37,6 +37,15 @@
               placeholder="Введите описание новости" />
     <JetInputError :message="form.error('content')" class="mt-1"/>
 
+    <label class="profile-form__label" for="date">Видео</label>
+    <input class="profile-form__input"
+           type="text"
+           id="videourl"
+           placeholder="Приложите ссылку на видео"
+           v-model="form.video_url"
+    >
+    <JetInputError v-if="isAdmin" :message="form.error('video_url')" />
+
     <label class="profile-form__label" for="date">Дата</label>
     <input class="profile-form__input"
            type="date"
@@ -54,12 +63,14 @@
 </template>
 
 <script>
+import HasUser from "@/Mixins/HasUser";
 export default {
   name: "Form",
   components: {
     JetInputError: () => import('@/Jetstream/InputError'),
     JetActionMessage: () => import('@/Jetstream/ActionMessage'),
   },
+  mixins: [HasUser],
   props: {
     form: Object,
     article: Object

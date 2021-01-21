@@ -75,7 +75,7 @@ class ArticleController extends WebBaseController
         );
 
         $attributes = array_merge($request->only([
-            'title', 'content', 'created_at'
+            'title', 'content', 'video_url', 'created_at'
         ]), [
             'author_id' => Auth::user()->id,
             'image_path' => $filepath,
@@ -96,7 +96,7 @@ class ArticleController extends WebBaseController
     public function update(ArticleRequest $request)
     {
         $attributes = array_merge($request->only([
-            'title', 'content', 'created_at'
+            'title', 'content', 'video_url', 'created_at'
         ]), [
             'author_id' => Auth::user()->id,
         ]);

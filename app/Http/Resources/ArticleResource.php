@@ -20,6 +20,7 @@ class ArticleResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'image_path' => $this->image_path,
+            'video_url' => $this->video_url,
             'created_at' => Carbon::parse($this->created_at)
                 ->isoFormat('DD.MM.YYYY')
         ];

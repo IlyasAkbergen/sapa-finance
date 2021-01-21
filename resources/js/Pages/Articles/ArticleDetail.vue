@@ -20,6 +20,10 @@
             <p class="main__content__new-card__text">
                 {{ article.content }}
             </p>
+
+            <p class="profile-form__label">Видео</p>
+            <iframe width="300" height="180" :src="article.video_url"></iframe>
+
             <p class="main__content__news-flex__card__text text-muted">
                 {{ article.created_at }}
             </p>
