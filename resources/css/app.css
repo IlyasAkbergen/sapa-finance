@@ -6,3 +6,5 @@
 @import 'style_consaltant';
 @import 'style_agent';
 @import 'style_admin';
+@import 'vue-slick-carousel/dist/vue-slick-carousel.css';
+@import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';

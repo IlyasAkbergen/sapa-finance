@@ -34,8 +34,13 @@ class BriefcaseController extends WebBaseController
     public function index()
     {
         $briefcases = $this->briefcaseService->allWith(['auth_user_pivot']);
+        $consultants = User::query()
+            ->where('referral_level_id', ReferralLevelEnum::Consultant)
+            ->get();
+
         return Inertia('Briefcase/Briefcases', [
-            'briefcases' => $briefcases
+            'briefcases' => $briefcases,
+            'consultants' => $consultants
         ]);
     }
 

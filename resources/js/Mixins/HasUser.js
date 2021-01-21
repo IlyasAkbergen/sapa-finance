@@ -1,11 +1,13 @@
 export default {
   methods: {
     getUser() {
-      return this.$page.user
+      return this.$page.user;
     },
     hasSomeLevel(levels) {
       return this.referralLevel != null
-        && levels.some(level => this.referralLevel.slug.toLowerCase() === level.toLowerCase())
+        && levels.some(
+          (level) => this.referralLevel.slug.toLowerCase() === level.toLowerCase()
+        );
     },
     getReferralLink() {
       return this.$page.referral_link
@@ -16,7 +18,7 @@ export default {
 
   computed: {
     username() {
-      return this.getUser().name
+      return this.getUser().name;
     },
 
     referralLevel() {
@@ -44,11 +46,11 @@ export default {
     },
 
     isAdmin() {
-      return !!this.getUser() && this.getUser().role_id === 1
+      return !!this.getUser() && this.getUser().role_id === 1;
     },
 
     isPartner() {
-        return !!this.getUser() && this.getUser().role_id === 3
+        return !!this.getUser() && this.getUser().role_id === 3;
     },
 
     activeCourse() {

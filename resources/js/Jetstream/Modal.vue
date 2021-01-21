@@ -24,7 +24,7 @@
                         leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
                     <div v-show="show"
                          class="bg-white rounded-lg overflow-hidden
-                         modal-body
+                         modal-body modal-wrapper
                          shadow-xl transform transition-all sm:w-full"
                          :class="maxWidthClass">
                         <slot></slot>

@@ -68,10 +68,12 @@
 
 <script>
   import toast from '@/toast'
+  import HasUser from "@/Mixins/HasUser";
   export default {
     name: "BriefcaseCard",
+    mixins: [HasUser],
     props: {
-      briefcase: Object
+      briefcase: Object,
     },
     watch: {
       formSuccessfull(newValue) {
@@ -106,6 +108,10 @@
     },
     methods: {
       addBriefcase() {
+        if (!this.referrer) {
+          this.$emit('showReferrers')
+          return;
+        }
         this.userBriefcaseForm = this.$inertia.form({
           monthly_payment: null,
           sum: null,
