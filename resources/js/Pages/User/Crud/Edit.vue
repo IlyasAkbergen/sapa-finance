@@ -408,12 +408,6 @@
         } else {
           return route('')
         }
-      },
-      isAdmin() {
-        return this.$page.user.role_id === 1;
-      },
-      isPartner() {
-        return this.$page.user.role_id === 3;
       }
     }
   }
