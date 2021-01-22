@@ -144,9 +144,9 @@
             <label class="profile-form__label">Уроки</label>
             <div class="course-lessons-list">
                 <LessonItem
-                    v-for="lesson in course.lessons"
+                    v-for="(lesson, index) in course.lessons"
                     :lesson="lesson"
-                    :key="lesson.id"
+                    :key="index"
                     @edit="() => editLesson(lesson)"
                     @delete="() => deleteLesson(lesson)"
                 />

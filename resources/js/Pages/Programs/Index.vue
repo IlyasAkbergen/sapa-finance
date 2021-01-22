@@ -22,7 +22,9 @@
             </div>
         </template>
         <Modal :show="showModal" :max-width="'sm'" :closeable="true" @close="showModal=false">
-            <inertia-link class="modal-link" v-for="type in types"
+            <inertia-link class="modal-link"
+                          v-for="(type, index) in types"
+                          :key="index"
                           :href="route('programs.create', {id: type.id})">
                 {{type.title}}
             </inertia-link>
