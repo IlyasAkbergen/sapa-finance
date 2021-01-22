@@ -32,7 +32,7 @@
     </select>
     <JetInputError v-if="form.role_id === 1" :message="form.error('role_id')" class="mt-1"/>
 
-    <div v-if="isAdmin">
+    <div v-if="isAdmin && all_clients">
       <label class="profile-form__label mt-3">
         Реферрер
       </label>
@@ -94,7 +94,10 @@
     props: {
       form: Object,
       roles: Array,
-      all_clients: Array,
+      all_clients: {
+        type: Array,
+        default: null
+      },
       referral_level: Array,
       isPartnersUser: Boolean
     },
