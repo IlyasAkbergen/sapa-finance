@@ -46,6 +46,16 @@ Vue.filter('truncate', function (value, size) {
     return value.substr(0, size) + '...';
 });
 
+Vue.filter('price', (value) => {
+  if (!value) return '';
+
+  return value + ' ₸';
+});
+
+Vue.filter('defaultValue', (value, defaul_value) => {
+  return value ? value : defaul_value;
+});
+
 new Vue({
     render: (h) =>
         h(InertiaApp, {

@@ -163,6 +163,11 @@ class PartnerUserController extends WebBaseController
         ->has('briefcase')
         ->has('user')
         ->with('user', 'briefcase')
+        ->when($request->has('partner_id'), function ($q) use ($request) {
+            return $q->whereHas('briefcase', function ($q) use ($request) {
+               return $q->where('partner_id', data_get($request, 'partner_id'));
+            });
+        })
         ->paginate(20);
 
         $orders = BriefcaseUserResourse::collection($data->items())
@@ -227,7 +232,7 @@ class PartnerUserController extends WebBaseController
         return redirect()->back();
     }
 
-    public function activeOrders()
+    public function activeOrders(Request $request)
     {
         $data = UserBriefcase::where(
                 'status', UserBriefcase::STATUS_ACCEPTED
@@ -238,6 +243,11 @@ class PartnerUserController extends WebBaseController
                 });
             })
             ->has('briefcase')
+            ->when($request->has('partner_id'), function ($q) use ($request) {
+                return $q->whereHas('briefcase', function ($q) use ($request) {
+                    return $q->where('partner_id', data_get($request, 'partner_id'));
+                });
+            })
             ->has('user')
             ->with('user', 'briefcase')
             ->paginate(20);
@@ -388,7 +398,7 @@ class PartnerUserController extends WebBaseController
         }
     }
 
-    public function payments()
+    public function payments(Request $request)
     {
         $data = Payment::query()
             ->with([
@@ -398,6 +408,9 @@ class PartnerUserController extends WebBaseController
                 'status',
                 Payment::PAYMENT_STATUS_OK
             )
+            ->when($request->has('partner_id'), function ($q) use ($request) {
+                return $q->where('partner_id', data_get($request, 'partner_id'));
+            })
             ->paginate(20);
 
         return Inertia::render('Payments/Index', [
@@ -442,7 +455,8 @@ class PartnerUserController extends WebBaseController
             'payable_id' => $payable->id,
             'payable_type' => Purchase::class,
             'paid_at' => $paid_at,
-            'note' => data_get($request, 'note')
+            'note' => data_get($request, 'note'),
+            'partner_id' => data_get($order, 'briefcase.partner_id')
         ]);
 
         // todo award peferrers after payment
@@ -461,5 +475,16 @@ class PartnerUserController extends WebBaseController
         } else {
             return $this->responseFail('failed saving briefcase');
         }
+    }
+
+    public function deletePayment($id)
+    {
+        Payment::findOrFail($id)->delete();
+
+        return redirect()
+            ->back()
+            ->with([
+                'message' => 'Платеж удален.'
+            ]);
     }
 }

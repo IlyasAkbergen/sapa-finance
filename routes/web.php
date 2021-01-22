@@ -308,4 +308,9 @@ Route::group(['middleware' => [
       'partner-user-payment',
       [PartnerUserController::class, 'storePayment']
     );
+
+    Route::delete(
+        'partner-user-payment/{id}',
+        [PartnerUserController::class, 'deletePayment']
+    )->name('deletePayment');
 });

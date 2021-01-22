@@ -35,7 +35,8 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
     protected $fillable = [
         'name', 'email', 'phone', 'iin', 'password', 'balance_id',
         'referrer_id', 'root_referer_id', 'referral_level_id',
-        'profile_photo_path', 'description', 'bin', 'role_id', 'partner_id'
+        'profile_photo_path', 'description', 'bin', 'role_id', 'partner_id',
+        'next_level_progress'
     ];
 
     /**
@@ -127,7 +128,8 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
     public function updateReferralLevel($new_level_id)
     {
         $updated = $this->update([
-            'referral_level_id' => $new_level_id
+            'referral_level_id' => $new_level_id,
+            'next_level_progress' => 0
         ]);
 
         if ($updated) {
@@ -155,9 +157,11 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
             ->wherePivot('completed', false);
     }
 
-    public function getReferralLinkAttribute() {
-        return url('/?referrer_id='.$this->id);
+    public function getReferralLinkAttribute()
+    {
+        return url('/?referrer_id=' . $this->id);
     }
+
     public static function updateReferral($user_id, $referrer_id)
     {
         $user = User::find($user_id);
@@ -183,5 +187,24 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
     public function scopeIsClient($q)
     {
         return $q->where('role_id', Role::ROLE_CLIENT);
+    }
+
+    public function sales()
+    {
+        return $this->rewards();
+    }
+
+    public function rewards()
+    {
+        return $this->hasMany(
+            Reward::class,
+            'target_user_id',
+            'id'
+        );
+    }
+
+    public function calculate()
+    {
+        $referral = $this->referral_level();
     }
 }

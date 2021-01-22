@@ -180,11 +180,19 @@ class UserController extends Controller
 
     public function me() {
         if (Auth::check()) {
-            Auth::user()->load('referrer');
+            Auth::user()->load([
+                'referrer',
+                'sales.purchase.purchasable',
+                'sales.purchase.user',
+            ]);
             $user = UserResource::make(Auth::user())
                 ->resolve();
 
             $roles = Role::all();
+
+            $next_level = ReferralLevel::find(
+                data_get($user, 'referral_level_id', 0) + 1
+            );
 
             return Inertia::render('User/Crud/Edit', [
                 'client' => $user,
@@ -192,7 +200,8 @@ class UserController extends Controller
                 'client_referrer' => isset($user['referrer'])
                     ? $user['referrer']->resolve()
                     : null,
-                'auth_user' => $user
+                'auth_user' => $user,
+                'next_level' => $next_level
             ]);
         } else {
             return redirect()->route('users-crud.index');
