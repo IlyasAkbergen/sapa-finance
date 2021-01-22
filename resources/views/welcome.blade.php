@@ -154,6 +154,10 @@
                 margin: 1.75rem auto;
             }
         }
+
+        html {
+            overflow-x: hidden;
+        }
     </style>
 </head>
 <body>
@@ -751,7 +755,8 @@
                 infinite: true,
                 autoplay: true,
                 pauseOnHover: false,
-                dots: true
+                dots: true,
+                arrows: false,
             });
 
             $('.community__blog-slider__for').slick({
@@ -887,7 +892,7 @@
                         }
                     }
                 ]
-            })
+            });
         })
     </script>
 </div>
