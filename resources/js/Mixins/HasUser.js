@@ -1,7 +1,7 @@
 export default {
   methods: {
     getUser() {
-      return this.$page.props.user;
+      return this.$page.user;
     },
     hasSomeLevel(levels) {
       return this.referralLevel != null
