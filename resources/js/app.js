@@ -2,18 +2,18 @@ require('./bootstrap');
 
 import Vue from 'vue';
 
-import { InertiaApp } from '@inertiajs/inertia-vue';
-import { InertiaForm } from 'laravel-jetstream';
+import {InertiaApp} from '@inertiajs/inertia-vue';
+import {InertiaForm} from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import VueFlashMessage from 'vue-flash-message';
 import UUID from "vue-uuid";
 import interceptors from './interceptors'
 import 'vue-search-select/dist/VueSearchSelect.css'
 import VueMask from 'v-mask'
-import { VueMaskDirective } from 'v-mask'
-import { VueMaskFilter } from 'v-mask'
+import {VueMaskDirective} from 'v-mask'
+import {VueMaskFilter} from 'v-mask'
 
-Vue.mixin({ methods: { route } });
+Vue.mixin({methods: {route}});
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);
 Vue.use(PortalVue);
@@ -25,7 +25,7 @@ Vue.filter('VMask', VueMaskFilter);
 interceptors();
 const app = document.getElementById('app');
 
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -37,13 +37,13 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 Vue.filter('truncate', function (value, size) {
-  if (!value) return '';
-  value = value.toString();
+    if (!value) return '';
+    value = value.toString();
 
-  if (value.length <= size) {
-    return value;
-  }
-  return value.substr(0, size) + '...';
+    if (value.length <= size) {
+        return value;
+    }
+    return value.substr(0, size) + '...';
 });
 
 new Vue({
