@@ -23,6 +23,7 @@ class UserResource extends JsonResource
             'profile_photo_url' => $this->profile_photo_url,
             'profile_photo_path' => $this->profile_photo_path,
             'referral_level_id' => $this->referral_level_id,
+            'next_level_progress' => $this->next_level_progress,
             'referral_level' => $this->whenLoaded(
                 'referral_level',
                 $this->referral_level
@@ -42,6 +43,10 @@ class UserResource extends JsonResource
             'referrer_id' => data_get($this, 'referrer_id'),
             'direct_points' => $this->directPoints,
             'team_points' => $this->teamPoints,
+            'sales' => $this->when(
+                $this->relationLoaded('sales'),
+                $this->sales
+            )
         ];
     }
 }

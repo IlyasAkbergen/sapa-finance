@@ -36,7 +36,8 @@
                   @submit="updateUser"/>
           </div>
 
-          <div class="main__content__settings-flex__right" v-if="client.id === getUser().id">
+          <div class="main__content__settings-flex__right"
+               v-if="client.id === getUser().id && getUser().referral_level_id">
             <div class="main__content__settings-flex__stats">
               <div class="main__content__settings-flex__stats__top">
                 <div class="main__content__settings-flex__stats__top__item">
@@ -47,9 +48,10 @@
                   <p>Командные единицы</p>
                   <p>{{ balance.team_points }}</p>
                 </div>
-                <div class="main__content__settings-flex__stats__top__item">
-                  <p>Финансовый консультант </p>
-                  <p>70% todo</p>
+                <div class="main__content__settings-flex__stats__top__item"
+                     v-if="next_level">
+                  <p>{{ next_level.title }}</p>
+                  <p>{{ client.next_level_progress }}%</p>
                 </div>
               </div>
               <a href="#"
@@ -130,7 +132,7 @@
 
     <div class="page__consultant-settings-program-modal" v-show="showSellsModal">
       <i class="fas fa-times fa-2x" @click="showSellsModal = false"></i>
-      <div class="page__program-modal__body">
+      <div class="page__program-modal__body scrollable">
         <table class="table">
           <thead>
           <tr>
@@ -141,66 +143,19 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <th scope="row">
-              <img src="../../../../img/avatar-mini.png" alt="">
-              Бауржанулы Акжан
-            </th>
-            <td>Какое то название курса если оно длинное то 2 строку</td>
-            <td>45 000 ₸</td>
-            <td>2 000 ₸</td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <img src="../../../../img/avatar-mini.png" alt="">
-              Бауржанулы Акжан
-            </th>
-            <td>Какое то название курса</td>
-            <td>45 000 ₸</td>
-            <td>2 000 ₸</td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <img src="../../../../img/avatar-mini.png" alt="">
-              Бауржанулы Акжан
-            </th>
-            <td>Какое то название курса если оно длинное то 2 строку</td>
-            <td>45 000 ₸</td>
-            <td>2 000 ₸</td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <img src="../../../../img/avatar-mini.png" alt="">
-              Бауржанулы Акжан
-            </th>
-            <td>Какое то название курса</td>
-            <td>45 000 ₸</td>
-            <td>2 000 ₸</td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <img src="../../../../img/avatar-mini.png" alt="">
-              Бауржанулы Акжан
-            </th>
-            <td>Какое то название курса если оно длинное то 2 строку</td>
-            <td>45 000 ₸</td>
-            <td>2 000 ₸</td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <img src="../../../../img/avatar-mini.png" alt="">
-              Бауржанулы Акжан
-            </th>
-            <td>Какое то название курса если оно длинное то 2 строку</td>
-            <td>45 000 ₸</td>
-            <td>2 000 ₸</td>
-          </tr>
+            <tr v-for="sale in sales">
+              <th scope="row">
+                <img class="photo" :src="sale.purchase.user.profile_photo_path" alt="">
+                {{ sale.purchase.user.name }}
+              </th>
+              <td>
+                {{ sale.purchase.purchasable.title }}
+              </td>
+              <td>{{ sale.purchase.sum }} ₸</td>
+              <td>{{ sale.sum }} ₸</td>
+            </tr>
           </tbody>
         </table>
-        <a href="#"
-           class="page__program-modal__body__button">
-          Посмотреть все продажи
-        </a>
       </div>
     </div>
 
@@ -296,6 +251,10 @@
       },
       referral_tree: {
         type: Array,
+        default: null
+      },
+      next_level: {
+        type: Object,
         default: null
       }
     },
@@ -408,6 +367,9 @@
         } else {
           return route('')
         }
+      },
+      sales() {
+        return this.client?.sales;
       }
     }
   }
@@ -417,5 +379,19 @@
   .dotted-border {
     border: 3px dotted #dee2e6;
     background-color: rgba(2, 2, 2, 0.15) !important;
+  }
+
+  .photo {
+    border-radius: 50%;
+    width:50px;
+    height: 50px;
+    object-fit: cover;
+  }
+
+  .scrollable {
+    margin: auto auto;
+    z-index: 100;
+    max-height: 80vh;
+    overflow-y: scroll;
   }
 </style>

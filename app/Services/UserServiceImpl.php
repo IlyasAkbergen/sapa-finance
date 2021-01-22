@@ -166,9 +166,25 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
         $next_level = ReferralLevel::findOrFail($next_level_id);
 
         $deservesLevelUp = true;
+        $challenges = $next_level->achieve_challenges;
+        $passed_count = 0;
 
-        foreach ($next_level->achieve_challenges as $challenge) {
-            $deservesLevelUp = $deservesLevelUp && $challenge::check($user);
+        foreach ($challenges as $challenge) {
+            $passed = $challenge::check($user);
+            if ($passed) {
+                $passed_count++;
+            }
+            $deservesLevelUp = $deservesLevelUp && $passed;
+        }
+
+        $percent = $challenges->count() > 0 && $passed_count > 0
+            ? $passed_count * 100 / $challenges->count()
+            : 0;
+
+        if (data_get($user, 'next_level_progress') != $percent) {
+            $user->update([
+                'next_level_progress' => $percent
+            ]);
         }
 
         if ($deservesLevelUp) {
