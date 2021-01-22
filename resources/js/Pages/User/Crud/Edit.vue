@@ -140,6 +140,8 @@
             <th>Что продал</th>
             <th>Цена</th>
             <th>Комиссионные</th>
+            <th>Единицы</th>
+            <th>Ком. Единицы</th>
           </tr>
           </thead>
           <tbody>
@@ -151,8 +153,10 @@
               <td>
                 {{ sale.purchase.purchasable.title }}
               </td>
-              <td>{{ sale.purchase.sum }} ₸</td>
-              <td>{{ sale.sum }} ₸</td>
+              <td>{{ sale.purchase.sum | price }}</td>
+              <td>{{ sale.sum | price | defaultValue(0) }}</td>
+              <td>{{ sale.is_direct ? sale.points : 0 | defaultValue(0)}}</td>
+              <td>{{ sale.is_direct ? 0 : sale.points | defaultValue(0) }}</td>
             </tr>
           </tbody>
         </table>

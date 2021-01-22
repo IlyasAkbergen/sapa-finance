@@ -17,7 +17,7 @@ class Payment extends Model
     ];
 
     protected $fillable = [
-        'eid', 'status', 'payable_id', 'payable_type', 'redirect_url', 'sum', 'user_id', 'paid_at', 'note'
+        'eid', 'status', 'payable_id', 'payable_type', 'redirect_url', 'sum', 'user_id', 'paid_at', 'note', 'partner_id'
     ];
 
     public function payable()

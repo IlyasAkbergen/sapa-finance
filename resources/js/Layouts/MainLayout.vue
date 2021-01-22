@@ -85,7 +85,7 @@
       <div class="main__content">
         <slot name="actions"></slot>
         <slot></slot>
-        <Message />
+<!--        <Message :flash="flashMessage" />-->
       </div>
       <!-- Modal Portal -->
       <portal-target name="modal" multiple>
@@ -132,9 +132,15 @@
     },
 
     computed: {
-        notifications() {
-            return this.$page.notifications ? this.$page.notifications : [];
-        }
+      notifications() {
+        return this.$page.notifications ? this.$page.notifications : [];
+      },
+      // flashMessage() {
+      //   return this.$page.props.flash
+      //     ? this.$page.props.flash.message
+      //       ? this.$page.props.flash.message : null
+      //     : null;
+      // }
     },
 
     methods: {

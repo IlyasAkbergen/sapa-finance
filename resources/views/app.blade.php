@@ -31,6 +31,20 @@
         <script src="{{ mix('js/script.min.js') }}"></script>
     </head>
     <body class="font-sans antialiased">
+        @if ($message = Session::get('flash'))
+            <div class="main__content__course-success pointable">
+                <div class="main__content__course-success__left">
+                    <img src="../img/lesson-icon-passed.png">
+                </div>
+                <div class="main__content__course-success__right">
+                    <i class="fas fa-times fa-sm"></i>
+                    <p class="main__content__course-success__right__title"
+                       v-show="flash">
+                        {{ $message }}
+                    </p>
+                </div>
+            </div>
+        @endif
         @inertia
     </body>
 </html>
