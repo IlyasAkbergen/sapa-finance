@@ -18,6 +18,15 @@
             {{ order.briefcase.title }}
           </inertia-link>
         </td>
+
+        <td class="text-center float-right" v-if="isAdmin">
+          <a class="payments__link payments__link--red clickable"
+             href="#"
+             @click.prevent="() => deleteAcceptModalShow = true">
+            Удалить
+          </a>
+        </td>
+
         <td class="float-right">
           <a class="osk__action osk__action--sky"
              v-if="order.status === 1"
@@ -47,22 +56,32 @@
         <td class="float-right" v-if="order.status === 2">
           <a class="osk__status osk__status--sky">Принято</a>
         </td>
-
       </tr>
       </tbody>
     </table>
+    <DeleteAcceptModal :show="deleteAcceptModalShow"
+                       @close="deleteAcceptModalShow = false"
+                       @accepted="deleteOrder"/>
   </div>
 </template>
 
 <script>
 import Pencil from "@/assets/icons/Pencil";
+import HasUser from "@/Mixins/HasUser";
 export default {
   name: "OrderItem",
+  mixins: [HasUser],
   components: {
-    Pencil
+    Pencil,
+    DeleteAcceptModal: () => import('@/Shared/DeleteAcceptModal')
   },
   props: {
     order: Object
+  },
+  data() {
+    return {
+      deleteAcceptModalShow: false
+    }
   },
   methods: {
     accept() {
@@ -70,6 +89,9 @@ export default {
     },
     reject() {
       this.$inertia.put('/user-briefcase/reject/' + this.order.id)
+    },
+    deleteOrder() {
+      this.$inertia.delete('/user-briefcase/' + this.order.id);
     }
   }
 }

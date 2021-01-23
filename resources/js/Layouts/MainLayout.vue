@@ -85,7 +85,13 @@
       <div class="main__content">
         <slot name="actions"></slot>
         <slot></slot>
-<!--        <Message :flash="flashMessage" />-->
+        <Message v-if="flashMessage"
+          :message="flashMessage"
+          :type="'success'"
+        />
+        <Message v-if="error"
+          :type="'error'"
+          :message="error" />
       </div>
       <!-- Modal Portal -->
       <portal-target name="modal" multiple>
@@ -131,16 +137,26 @@
       }
     },
 
+    created() {
+      console.log("error: " + this.error)
+    },
+
     computed: {
       notifications() {
         return this.$page.notifications ? this.$page.notifications : [];
       },
-      // flashMessage() {
-      //   return this.$page.props.flash
-      //     ? this.$page.props.flash.message
-      //       ? this.$page.props.flash.message : null
-      //     : null;
-      // }
+      flashMessage() {
+        return this.$page.flash
+          ? this.$page.flash.message
+            ? this.$page.flash.message : null
+          : null;
+      },
+      error() {
+        return this.$page.errors
+          ? this.$page.errors[0]
+            ? this.$page.errors[0][0] : null
+          : null;
+      }
     },
 
     methods: {
