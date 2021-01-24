@@ -459,7 +459,7 @@ class PartnerUserController extends WebBaseController
             'partner_id' => data_get($order, 'briefcase.partner_id')
         ]);
 
-        // todo award peferrers after payment
+        $this->userService->awardReferrersAfterPurchase($payable, $payment);
 
         if (!empty($payment)) {
             $order->user->messages()->create([

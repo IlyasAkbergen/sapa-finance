@@ -28,12 +28,25 @@ class LevelUpListener implements ShouldQueue
     */
     public function handleRewardHandled($event)
     {
+        $reward = data_get($event, 'reward');
         // may be errors todo test
-        if (!$event->reward->relationLoaded('awardable')) {
-            $event->reward->load(['awardable.balance.incomes']);
+        if (!$reward->relationLoaded('awardable')) {
+            $reward->load(['awardable.balance.incomes']);
         }
 
-        $user = $event->reward->awardable;
+        $user = $reward->awardable;
+
+        $points = data_get($reward, 'points');
+
+        $user->messages()->create([
+            'title' => 'Получены бонусы',
+            'content' => "Вы получили бонус\n" .
+                "Комиссионные: " . data_get($reward, 'sum') .
+                "Единицы: " . (data_get($reward, 'is_direct') ? $points : 0) .
+                "Командные единицы: " . !(data_get($reward, 'is_direct') ? $points : 0),
+            'url' => null,
+            'is_public' => false
+        ]);
 
         $this->userService->tryNextLevel($user);
     }

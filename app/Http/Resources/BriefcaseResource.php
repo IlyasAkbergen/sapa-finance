@@ -24,6 +24,7 @@ class BriefcaseResource extends JsonResource
                 'type',
                 $this->type->title
             ),
+            'fee_percent' => $this->fee_percent,
         ];
     }
 }

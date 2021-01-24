@@ -1,42 +1,141 @@
 <template>
-    <main-layout>
-        <template #header>
-            ДЗ
-        </template>
-        <div class="main__content__sellings-wrapper">
-            <div class="osk mb-3">
-                <Item
-                        v-for="(homework, index) in homeworks"
-                        :key="index"
-                        :homework="homework"/>
-            </div>
-            <Pagination :prev_page_url="data.prev_page_url"
-                        :next_page_url="data.next_page_url"
-                        :current_page="data.current_page"
-                        :links="data.links"
-            />
+  <main-layout>
+    <template #header>
+      ДЗ
+    </template>
+    <div class="main__content__sellings-wrapper">
+      <div class="osk mb-3">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <Item
+              v-for="(homework, index) in homeworks"
+              :key="index"
+              @show="() => showItem(homework)"
+              :homework="homework"/>
+            </tbody>
+          </table>
         </div>
-    </main-layout>
+      </div>
+      <Pagination :prev_page_url="data.prev_page_url"
+                  :next_page_url="data.next_page_url"
+                  :current_page="data.current_page"
+                  :links="data.links"
+      />
+    </div>
+    <Modal :show="showModal"
+           :closeable="true"
+           @close="closeModal">
+      <div class="main__content__agent-new-card p-2"
+           v-if="focusedItem"
+      >
+        <p class="partner-info__subtitle">
+          Клиент
+        </p>
+        <p class="main__content__new-card__title">
+          {{ focusedItem.user.name }}
+        </p>
+
+        <p class="partner-info__subtitle">
+          Название урока
+        </p>
+        <p class="main__content__new-card__text">
+          {{ focusedItem.lesson.title }}
+        </p>
+
+        <p class="partner-info__subtitle">
+          Ответ
+        </p>
+        <p class="main__content__new-card__text">
+          {{ focusedItem.content ? focusedItem.content : 'Нет ответа'}}
+        </p>
+
+        <p class="partner-info__subtitle mb-2">
+          Файлы
+        </p>
+        <ul>
+          <li v-for="attachment in focusedItem.attachments">
+            <div class="d-flex justify-content-between my-1">
+              <img src="../../../img/lesson-icon.png">
+              <span>{{ attachment.name }}</span>
+              <a :href="attachment.path" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.8333 2.49984C10.8333 2.0396 10.4602 1.6665 9.99996 1.6665C9.53972 1.6665 9.16663 2.0396 9.16663 2.49984V10.488L6.42255 7.74392C6.09711 7.41848 5.56947 7.41848 5.24404 7.74392C4.9186 8.06935 4.9186 8.59699 5.24404 8.92243L9.4107 13.0891C9.73614 13.4145 10.2638 13.4145 10.5892 13.0891L14.7559 8.92243C15.0813 8.59699 15.0813 8.06935 14.7559 7.74392C14.4304 7.41848 13.9028 7.41848 13.5774 7.74392L10.8333 10.488V2.49984ZM2.49996 11.6665C2.9602 11.6665 3.33329 12.0396 3.33329 12.4998V15.8332C3.33329 16.0542 3.42109 16.2661 3.57737 16.4224C3.73365 16.5787 3.94561 16.6665 4.16663 16.6665H15.8333C16.0543 16.6665 16.2663 16.5787 16.4225 16.4224C16.5788 16.2661 16.6666 16.0542 16.6666 15.8332V12.4998C16.6666 12.0396 17.0397 11.6665 17.5 11.6665C17.9602 11.6665 18.3333 12.0396 18.3333 12.4998V15.8332C18.3333 16.4962 18.0699 17.1321 17.6011 17.6009C17.1322 18.0698 16.4963 18.3332 15.8333 18.3332H4.16663C3.50358 18.3332 2.8677 18.0698 2.39886 17.6009C1.93002 17.1321 1.66663 16.4962 1.66663 15.8332V12.4998C1.66663 12.0396 2.03972 11.6665 2.49996 11.6665Z" fill="#5FADE6"/>
+                </svg>
+              </a>
+            </div>
+          </li>
+        </ul>
+
+        <a class="osk__status osk__status--red" v-if="focusedItem.status === 2">Отказано</a>
+
+        <a class="osk__status osk__status--sky" v-if="focusedItem.status === 1">Принято</a>
+
+        <a class="osk__action osk__action--sky ml-2"
+           v-if="focusedItem.status !== 1"
+           @click.prevent="accept"
+           href="#">
+          Принять
+        </a>
+        <a class="osk__action osk__action--red ml-2"
+           v-if="focusedItem.status !== 2"
+           @click.prevent="reject"
+           href="#">
+          Отказать
+        </a>
+      </div>
+    </Modal>
+  </main-layout>
 </template>
 
 <script>
-    import MainLayout from "@/Layouts/MainLayout";
-    import Pagination from "@/Shared/Pagination";
+  import MainLayout from "@/Layouts/MainLayout";
+  import Pagination from "@/Shared/Pagination";
 
-    export default {
-        name: "Index",
-        components: {
-            MainLayout,
-            Pagination,
-            Item: () => import('./Item')
-        },
-        props: {
-            data: Object
-        },
-        computed: {
-            homeworks() {
-                return this.data.data;
-            }
-        }
+  export default {
+    name: "Index",
+    components: {
+      MainLayout,
+      Pagination,
+      Item: () => import('./Item'),
+      Modal: () => import('@/Jetstream/Modal')
+    },
+    props: {
+      data: Object
+    },
+    data() {
+      return {
+        focusedItem: null,
+        showModal: false
+      }
+    },
+    computed: {
+      homeworks() {
+        return this.data.data;
+      }
+    },
+    methods: {
+      showItem(homework) {
+        this.focusedItem = homework;
+        this.showModal = true;
+      },
+      closeModal() {
+        this.focusedItem = null;
+        this.showModal = false;
+      },
+      accept() {
+        this.rate(100, 1)
+      },
+      reject() {
+        this.rate(0, 2)
+      },
+      rate(score, status) {
+        this.$inertia.post('/rate-homework', {
+          'homework_id': this.focusedItem.id,
+          'score': score,
+          'status': status
+        }).then(() => this.closeModal())
+      },
     }
+  }
 </script>
