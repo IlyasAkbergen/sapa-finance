@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form class="scrollable">
         <div class="lesson-info">
             <p class="text-center">Данные урока</p>
             <input type="text"
@@ -18,7 +18,7 @@
             <JetInputError :message="form.error('video_url')" />
 
             <textarea id="lessondesc"
-                      cols="30" rows="5"
+                      rows="5"
                       v-model="form.content"
                       placeholder="Описание урока"></textarea>
 

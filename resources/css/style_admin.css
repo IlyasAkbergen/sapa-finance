@@ -1566,7 +1566,7 @@ body
 
 .lesson-info {
     width: 100%;
-    max-width: 280px;
+    /*max-width: 280px;*/
 }
 
 .lesson-homework {
