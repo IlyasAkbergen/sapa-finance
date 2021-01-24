@@ -14,7 +14,7 @@
                @change="updatePhotoPreview"
                class="hidden">
 
-        <JetInputError :message="form.error('image')" class="mt-1" />
+        <JetInputError :message="form.error('image')" class="mt-1"/>
 
         <label class="profile-form__label" for="name">
             Название программы
@@ -34,7 +34,7 @@
                id="pricewith"
                v-model="form.price_with_feedback"
                placeholder="Введите цену">
-        <jet-input-error :message="form.error('price_with_feedback')" class="mt-1" />
+        <jet-input-error :message="form.error('price_with_feedback')" class="mt-1"/>
 
         <label class="profile-form__label mt-3" for="pricewithout">
             Цена без обратной связи
@@ -44,7 +44,7 @@
                id="pricewithout"
                v-model="form.price_without_feedback"
                placeholder="Введите цену">
-        <jet-input-error :message="form.error('price_without_feedback')" class="mt-1" />
+        <jet-input-error :message="form.error('price_without_feedback')" class="mt-1"/>
 
         <label class="profile-form__label mt-3 mb-0">
             Способ проведения
@@ -144,11 +144,11 @@
             <label class="profile-form__label">Уроки</label>
             <div class="course-lessons-list">
                 <LessonItem
-                    v-for="(lesson, index) in course.lessons"
-                    :lesson="lesson"
-                    :key="index"
-                    @edit="() => editLesson(lesson)"
-                    @delete="() => deleteLesson(lesson)"
+                        v-for="(lesson, index) in course.lessons"
+                        :lesson="lesson"
+                        :key="index"
+                        @edit="() => editLesson(lesson)"
+                        @delete="() => deleteLesson(lesson)"
                 />
             </div>
 
@@ -184,115 +184,114 @@
 </template>
 
 <script>
+    import {uuid} from "vue-uuid";
 
-import { uuid } from "vue-uuid";
-
-export default {
-    name: "Form",
-    components: {
-        LessonItem: () => import('./LessonItem'),
-        JetInputError: () => import('@/Jetstream/InputError'),
-        JetActionMessage: () => import('@/Jetstream/ActionMessage'),
-        Attachments: () => import('@/Shared/Attachments'),
-        LessonForm: () => import('@/Pages/Lessons/Crud/Form'),
-        Modal: () => import('@/Jetstream/Modal')
-    },
-    props: {
-        form: Object,
-        course: Object
-    },
-    data() {
-        return {
-            photoPreview: null,
-            lessonForm: this.$inertia.form({}, {
-                preserveScroll: false
-            }),
-            lessonFormVisible: false
-        }
-    },
-    methods: {
-        submitForm() {
-            if (this.$refs.image) {
-                this.$set(this.form, 'image', this.$refs.image.files[0]);
+    export default {
+        name: "Form",
+        components: {
+            LessonItem: () => import('./LessonItem'),
+            JetInputError: () => import('@/Jetstream/InputError'),
+            JetActionMessage: () => import('@/Jetstream/ActionMessage'),
+            Attachments: () => import('@/Shared/Attachments'),
+            LessonForm: () => import('@/Pages/Lessons/Crud/Form'),
+            Modal: () => import('@/Jetstream/Modal')
+        },
+        props: {
+            form: Object,
+            course: Object
+        },
+        data() {
+            return {
+                photoPreview: null,
+                lessonForm: this.$inertia.form({}, {
+                    preserveScroll: false
+                }),
+                lessonFormVisible: false
             }
-            this.$emit('submit')
         },
-        showLessonForm(value) {
-            this.lessonFormVisible = value
-        },
-        selectNewPhoto() {
-            this.$refs.image.click();
-        },
-
-        updatePhotoPreview() {
-            const reader = new FileReader();
-
-            reader.onload = (e) => {
-                this.photoPreview = e.target.result;
-            };
-
-            reader.readAsDataURL(this.$refs.image.files[0]);
-        },
-
-        createLesson() {
-            this.lessonForm = this.$inertia.form(
-                {
-                    id: null,
-                    uuid: uuid.v1(),
-                    course_id: this.form.id,
-                    title: null,
-                    content: null,
-                    video_url: null,
-                    homework_content: null,
-                    order: this.nextLessonOrder
-                }, {
-                    resetOnSuccess: true,
-                    preserveScroll: false,
-                    bag: 'lessonForm',
+        methods: {
+            submitForm() {
+                if (this.$refs.image) {
+                    this.$set(this.form, 'image', this.$refs.image.files[0]);
                 }
-            )
-            this.showLessonForm(true)
-        },
+                this.$emit('submit')
+            },
+            showLessonForm(value) {
+                this.lessonFormVisible = value
+            },
+            selectNewPhoto() {
+                this.$refs.image.click();
+            },
 
-        editLesson(lesson) {
-            this.lessonForm = this.$inertia.form(
+            updatePhotoPreview() {
+                const reader = new FileReader();
+
+                reader.onload = (e) => {
+                    this.photoPreview = e.target.result;
+                };
+
+                reader.readAsDataURL(this.$refs.image.files[0]);
+            },
+
+            createLesson() {
+                this.lessonForm = this.$inertia.form(
+                    {
+                        id: null,
+                        uuid: uuid.v1(),
+                        course_id: this.form.id,
+                        title: null,
+                        content: null,
+                        video_url: null,
+                        homework_content: null,
+                        order: this.nextLessonOrder
+                    }, {
+                        resetOnSuccess: true,
+                        preserveScroll: false,
+                        bag: 'lessonForm',
+                    }
+                )
+                this.showLessonForm(true)
+            },
+
+            editLesson(lesson) {
+                this.lessonForm = this.$inertia.form(
                     {...lesson, uuid: null}, {
-                    resetOnSuccess: true,
-                    preserveScroll: false,
-                    bag: 'lessonForm',
-                }
-            )
-            this.showLessonForm(true)
-        },
+                        resetOnSuccess: true,
+                        preserveScroll: false,
+                        bag: 'lessonForm',
+                    }
+                )
+                this.showLessonForm(true)
+            },
 
-        submitLessonForm() {
-            if (!this.lessonForm.id) {
-                this.lessonForm.post('/lessons-crud')
-                    .then(() => {
-                        if (this.lessonForm.recentlySuccessful) {
-                            this.showLessonForm(false);
-                        }
-                    });
-            } else {
-                this.lessonForm.put('/lessons-crud/' + this.lessonForm.id)
-                    .then(() => {
-                        if (this.lessonForm.recentlySuccessful) {
-                            this.showLessonForm(false);
-                        }
-                    });
+            submitLessonForm() {
+                if (!this.lessonForm.id) {
+                    this.lessonForm.post('/lessons-crud')
+                        .then(() => {
+                            if (this.lessonForm.recentlySuccessful) {
+                                this.showLessonForm(false);
+                            }
+                        });
+                } else {
+                    this.lessonForm.put('/lessons-crud/' + this.lessonForm.id)
+                        .then(() => {
+                            if (this.lessonForm.recentlySuccessful) {
+                                this.showLessonForm(false);
+                            }
+                        });
+                }
+            },
+
+            deleteLesson(lesson) {
+                this.lessonForm.delete(route('lessons-crud.destroy', lesson.id));
             }
         },
-
-        deleteLesson (lesson) {
-            this.lessonForm.delete(route('lessons-crud.destroy', lesson.id));
-        }
-    },
-    computed: {
-        nextLessonOrder() {
-            return this.course.lessons.length > 0
-                ? Math.max.apply(Math, this.course.lessons.map((l) => l.order )) + 1
-                : 1;
+        computed: {
+            nextLessonOrder() {
+                return this.course.lessons.length > 0
+                    ? Math.max.apply(Math, this.course.lessons.map((l) => l.order)) + 1
+                    : 1;
+            }
         }
     }
-}
 </script>
