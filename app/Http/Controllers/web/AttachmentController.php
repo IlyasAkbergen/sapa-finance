@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
 class AttachmentController extends Controller
 {
     private $repository;
-    const COMMON_EXTENSIONS = 'odt,ods,png,jpg,jpeg,rar,zip,doc,docx,DOCX,xls,xlsx,pdf,ppt,pptx,gif,txt,mp4';
+    const COMMON_EXTENSIONS = 'odt,ods,png,jpg,jpeg,rar,zip,doc,docx,DOCX,xls,xlsx,pdf,ppt,pptx,gif,txt,mp4,PDF';
 
     private $attachments = [
         'course' => [
