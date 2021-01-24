@@ -582,7 +582,6 @@ body {
     color: #fff;
 }
 
-
 /*========== Main container My Courses ==========*/
 .main .main__content .main__content__empty-courses {
     width: 100%;
@@ -874,6 +873,7 @@ body {
 
 /*========== Main container Homework card ==========*/
 .main__content .main__content__lesson-flex .main__content__lesson-flex__task {
+    width: 39%;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -882,7 +882,6 @@ body {
 
 .main__content .main__content__lesson-flex .main__content__lesson-flex__task .main__content__lesson-flex__task__homework {
     width: 100%;
-    /*max-width: 330px;*/
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 1px 5px rgba(25, 1, 52, 0.1);
