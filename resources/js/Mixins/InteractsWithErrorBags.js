@@ -11,8 +11,5 @@ export default {
 
       return this.$page.errorBags[bag][key][0];
     },
-    hideFlash() {
-      $page.props.flash = null;
-    },
   }
 };

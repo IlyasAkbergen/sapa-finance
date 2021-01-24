@@ -247,6 +247,11 @@ Route::group(['middleware' => [
       [PartnerUserController::class, 'rejectOrder']
     );
 
+    Route::delete(
+        '/user-briefcase/{id}',
+        [PartnerUserController::class, 'deleteOrder']
+    );
+
     Route::get(
         'user-briefcase-payments',
         [PartnerUserController::class, 'payments']

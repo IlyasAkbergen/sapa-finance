@@ -487,4 +487,21 @@ class PartnerUserController extends WebBaseController
                 'message' => 'Платеж удален.'
             ]);
     }
+
+    public function deleteOrder($id)
+    {
+        $order = UserBriefcase::with('purchase')->find($id);
+
+        if ($purchase = data_get($order, 'purchase')) {
+            $purchase->delete();
+        }
+
+        $order->delete();
+
+        return redirect()
+            ->back()
+            ->with([
+                'message' => 'Удалено.'
+            ]);
+    }
 }

@@ -10,14 +10,14 @@ class WebBaseController extends Controller
     {
 
         return redirect()->back()
-            ->with('message', $message);
+            ->with(['message' => $message]);
     }
 
     public function responseFail($error, $data = null)
     {
         return redirect()
             ->back()
-            ->withErrors(['error' => $error]);
+            ->withErrors([$error]);
     }
 
     public function warning()
