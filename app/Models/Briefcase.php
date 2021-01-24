@@ -20,7 +20,7 @@ class Briefcase extends Model implements WithPurchase
         'title', 'description', 'type_id',
 //        'sum', 'profit', 'duration',
 //        'monthly_payment', 'direct_fee', 'awardable',
-        'image_path', 'partner_id'
+        'image_path', 'partner_id', 'fee_percent'
     ];
 
     protected $attributes = [

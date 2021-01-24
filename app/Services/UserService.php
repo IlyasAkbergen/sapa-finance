@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Models\Payment;
 use App\Models\Payout;
 use App\Models\Purchase;
 use App\Models\Reward;
@@ -35,8 +36,9 @@ interface UserService
 
     /**
      * @param Purchase $purchase
+     * @param Payment|null $payment
      */
-    public function awardReferrersAfterPurchase(Purchase $purchase);
+    public function awardReferrersAfterPurchase(Purchase $purchase, Payment $payment = null);
 
     /**
      * @param $user_id
