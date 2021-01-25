@@ -411,12 +411,16 @@ class PartnerUserController extends WebBaseController
             ->when($request->has('partner_id'), function ($q) use ($request) {
                 return $q->where('partner_id', data_get($request, 'partner_id'));
             })
-            ->paginate(20);
+            ->paginate(20)
+        ;
 
         return Inertia::render('Payments/Index', [
             'data' => $data,
             'payments' => PaymentResource::collection(
-                $data->items()
+                collect($data->items())->filter(function ($item) {
+                    return data_get($item, 'payable.purchasable')
+                        && data_get($item, 'user');
+                })
             )
             ->resolve()
         ]);
@@ -503,5 +507,39 @@ class PartnerUserController extends WebBaseController
             ->with([
                 'message' => 'Удалено.'
             ]);
+    }
+
+    public function partnerStats(Request $request)
+    {
+        $partner_id = Auth::user()->id;
+
+        if ($request->has('partner_id')) {
+            $partner_id = data_get($request, 'partner_id');
+        }
+
+        $briefcases = Briefcase::where('partner_id', $partner_id)->get();
+
+        $data = UserBriefcase::where(
+                'status', UserBriefcase::STATUS_ACCEPTED
+            )
+            ->has('user')
+            ->whereIn('briefcase_id', $briefcases->pluck('id'))
+            ->with('briefcase')
+            ->get()
+            ->mapToGroups(function ($item) {
+                return [data_get($item, 'briefcase.title')  => $item['id']];
+            })
+            ->map(function ($item, $key) {
+                return [
+                    'title' => $key,
+                    'count' => count($item)
+                ];
+            })
+            ->values()
+        ;
+
+        return Inertia::render('Partner/Stats', [
+           'data' => $data
+        ]);
     }
 }

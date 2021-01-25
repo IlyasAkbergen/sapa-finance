@@ -318,4 +318,9 @@ Route::group(['middleware' => [
         'partner-user-payment/{id}',
         [PartnerUserController::class, 'deletePayment']
     )->name('deletePayment');
+
+    Route::get(
+        'partner-stats',
+        [PartnerUserController::class, 'partnerStats']
+    )->name('partner-stats');
 });

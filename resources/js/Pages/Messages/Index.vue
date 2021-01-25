@@ -13,7 +13,6 @@
               <th scope="col">Заголовок</th>
               <th scope="col">Содержание</th>
               <th scope="col">Дополнительная ссылка</th>
-              <th scope="col">Документы для скачивания</th>
             </tr>
             </thead>
             <tbody>
@@ -26,20 +25,16 @@
                 </div>
               </td>
               <td class="align-middle">
+                <div class="w-50">
+                  {{ message.content | truncate(100) }}
+                </div>
+              </td>
+              <td class="align-middle">
                   <span class="ml-1">
                       <a :href="message.url" target="_blank">
                         {{ message.url | truncate(20)}}
                       </a>
                   </span>
-              </td>
-              <td class="align-middle">
-                <div class="d-flex" v-for="attachment in message.attachments">
-                  <img src="../../../img/uploaded-file.png">
-                  <span class="ml-2 pt-2">{{ attachment.name | truncate(10) }}</span>
-                  <a :href="attachment.path" class="ml-2 pt-2" target="_blank">
-                    <Download/>
-                  </a>
-                </div>
               </td>
             </tr>
             </tbody>
@@ -71,6 +66,13 @@
               {{ focusedMessage.url }}
             </a>
           </p>
+        </div>
+        <div class="d-flex" v-for="attachment in focusedMessage.attachments">
+          <img src="../../../img/uploaded-file.png">
+          <span class="ml-2 pt-2">{{ attachment.name | truncate(10) }}</span>
+          <a :href="attachment.path" class="ml-2 pt-2" target="_blank">
+            <Download/>
+          </a>
         </div>
       </div>
     </Modal>
@@ -120,3 +122,8 @@
     }
   }
 </script>
+<style scoped>
+  .clickable:hover {
+    background-color: rgba(132,132,132, 0.12);
+  }
+</style>
