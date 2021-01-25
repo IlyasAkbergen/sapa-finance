@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Enums\ReferralLevelEnum;
 use App\Helpers\Helper;
 use App\Models\Course;
+use App\Models\Payment;
 use App\Models\Purchase;
 use App\Models\ReferralLevel;
 use App\Models\Reward;
@@ -53,7 +54,7 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
      * В совокупности командный бонус составляет 20%. если в структуре отсутствует финансовый консультант, то первое вышестоящие наставник получают 10% + 5%,
      * а в случае если в структуре отсутствует финансовый консультант и наставник, то 1 вышестоящий ментор получает все 20% командного бонуса.
      */
-    public function awardReferrersAfterPurchase(Purchase $purchase)
+    public function awardReferrersAfterPurchase(Purchase $purchase, Payment $payment = null)
     {
         DB::beginTransaction();
 
@@ -85,28 +86,32 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
             $tutor_percent = 15;
             $mentor_percent = 20;
 
+            $awardSum = empty($payment)
+                ? $purchasable->getAwardSum()
+                : data_get($payment, 'sum') * (data_get($purchasable, 'fee_percent', 0) / 100);
+
             if (!empty($direct_referrer)) {
-                $points = $purchasable->isAwardable() && !$is_start_course
+                $points = $awardSum && !$is_start_course
                     ? Purchase::$DIRECT_POINTS_PER_PURCHASE
                     : null;
-                $this->makeReward($direct_referrer, $purchase, true, $purchasable->getAwardSum(), $points);
+                $this->makeReward($direct_referrer, $purchase, true, $awardSum, $points);
             }
 
             if (!empty($consultant)) {
-                $points = $purchasable->getAwardSum() * $consultant_percent / 100;
+                $points = $awardSum * $consultant_percent / 100;
                 $mentor_percent = 5;
                 $tutor_percent = 5;
                 $this->makeReward($consultant, $purchase, false, null, $points);
             }
 
             if (!empty($tutor)) {
-                $points = $purchasable->getAwardSum() * $tutor_percent / 100;
+                $points = $awardSum * $tutor_percent / 100;
                 $mentor_percent = 5;
                 $this->makeReward($tutor, $purchase, false, null, $points);
             }
 
             if (!empty($mentor)) {
-                $points = $purchasable->getAwardSum() * $mentor_percent / 100;
+                $points = $awardSum * $mentor_percent / 100;
                 $this->makeReward($mentor, $purchase, false, null, $points);
             }
 

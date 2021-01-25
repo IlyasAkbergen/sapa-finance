@@ -26,7 +26,9 @@ class HomeworkRated extends Notification implements ShouldQueue
     {
         $this->homework = $homework;
         $this->homework->load('user', 'course');
-        $this->homework->user->notify($this);
+        if (!config('app.debug')) {
+            $this->homework->user->notify($this);
+        }
     }
 
     public function via($notifiable)

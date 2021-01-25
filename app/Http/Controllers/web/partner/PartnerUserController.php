@@ -459,7 +459,7 @@ class PartnerUserController extends WebBaseController
             'partner_id' => data_get($order, 'briefcase.partner_id')
         ]);
 
-        // todo award peferrers after payment
+        $this->userService->awardReferrersAfterPurchase($payable, $payment);
 
         if (!empty($payment)) {
             $order->user->messages()->create([
@@ -485,6 +485,23 @@ class PartnerUserController extends WebBaseController
             ->back()
             ->with([
                 'message' => 'Платеж удален.'
+            ]);
+    }
+
+    public function deleteOrder($id)
+    {
+        $order = UserBriefcase::with('purchase')->find($id);
+
+        if ($purchase = data_get($order, 'purchase')) {
+            $purchase->delete();
+        }
+
+        $order->delete();
+
+        return redirect()
+            ->back()
+            ->with([
+                'message' => 'Удалено.'
             ]);
     }
 }

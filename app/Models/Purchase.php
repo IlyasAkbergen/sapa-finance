@@ -6,10 +6,11 @@ use App\Events\PurchaseMade;
 use App\Events\PurchasePayed;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Purchase extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     static $DIRECT_POINTS_PER_PURCHASE = 20;
 

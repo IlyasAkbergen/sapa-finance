@@ -87,7 +87,7 @@ class Course extends Model implements WithPurchase
             return 0;
         }
 
-        return $passed_lessons_count * 100 / $lessons_count;
+        return round($passed_lessons_count * 100 / $lessons_count);
     }
 
     function getLinkAttribute()

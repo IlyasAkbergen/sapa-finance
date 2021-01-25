@@ -24,6 +24,7 @@ class BriefcaseRequest extends FormRequest
             'title.required' => 'Укажите название',
             'type_id.required' => 'Укажите тип',
             'description.required' => ['Укажите полное описание'],
+            'fee_percent.required' => ['Укажите процент комиссионных'],
 //            'sum.required' => ['Не указан способ проведения'],
 //            'sum.integer' => ['Значение должно быть числовым'],
 //            'profit.required' => ['Не указан способ проведения'],

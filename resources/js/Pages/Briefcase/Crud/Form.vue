@@ -44,16 +44,16 @@
 
     <JetInputError :message="form.error('type_id')" class="mt-1"/>
 
-<!--    <div v-show="isCumulative">-->
-<!--      <label class="profile-form__label mt-3"-->
-<!--             for="monthly_payment">Размер ежемесячного взноса</label>-->
+    <div>
+      <label class="profile-form__label mt-3"
+             for="fee_percent">Процент комиссионных</label>
 
-<!--      <input class="profile-form__input mb-0" type="number"-->
-<!--             id="monthly_payment"-->
-<!--             v-model="form.monthly_payment"-->
-<!--             placeholder="Введите размер ежемесячного взноса">-->
-<!--      <JetInputError :message="form.error('monthly_payment')" class="mt-1"/>-->
-<!--    </div>-->
+      <input class="profile-form__input mb-0" type="number"
+             id="fee_percent"
+             v-model="form.fee_percent"
+             placeholder="Введите процент комиссионных">
+      <JetInputError :message="form.error('fee_percent')" class="mt-1"/>
+    </div>
 
 <!--    <label class="profile-form__label mt-3" for="duration">-->
 <!--      Срок накопления-->
