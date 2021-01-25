@@ -10,7 +10,7 @@
           {{ userTitle }}
         </p>
 
-        <ProfileStats v-if="!isAdmin"/>
+        <ProfileStats v-if="!isAdmin && !isPartner"/>
 
       </div>
 
@@ -160,6 +160,12 @@
             :route_name="'partner-users.payments'"
             icon="Cart">
             Еж. оплаты
+          </SidebarItem>
+
+          <SidebarItem
+            :route_name="'my_notify'"
+            icon="Bell">
+            Уведомления
           </SidebarItem>
         </ul>
       </div>

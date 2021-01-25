@@ -9,16 +9,25 @@
     <div :class="`main__content__course-success pointable clickable`"
          @click="hide = true"
          v-show="message && !hide">
-      <div :class="`main__content__course-success__left`">
-        <img src="../../img/lesson-icon-passed.png">
+      <div :class="`main__content__course-success__left ${type === 'error' ? 'danger-left' : ''}`">
+        <img :src="type === 'success'
+          ? '/images/lesson-icon-passed.png'
+          : '/images/success-times-icon.png'">
+        <!--   times вроде как крестик, и не может в принципе сочетаться с "success"
+          все равно что текст ошибки писать зеленым цветом
+         -->
       </div>
-      <div :class="`main__content__course-success__right`">
+      <div :class="`main__content__course-success__right ${type === 'error' ? 'danger-right' : ''}`">
         <i class="fas fa-times fa-sm"
            @click="hide = true"
         />
         <p :class="`main__content__course-success__right__title`"
            v-show="message">
           {{ message }}
+        </p>
+        <p :class="`main__content__course-${type}__right__subtitle`"
+           v-if="subMessage">
+          {{ subMessage }}
         </p>
       </div>
     </div>
@@ -33,6 +42,10 @@
         type: String|Array,
         default: null
       },
+      subMessage: {
+        type: String,
+        default: null
+      },
       type: String
     },
     data() {
@@ -42,3 +55,15 @@
     }
   }
 </script>
+
+<style scoped>
+  /* песдец конеш классы, facepalm */
+  .danger-left {
+    background-color: #EE5252 !important; /* сока испортант */
+    border: 1px solid #EE5252 !important;
+  }
+
+  .danger-right {
+    border: 1px solid #EE5252 !important;
+  }
+</style>
