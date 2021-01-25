@@ -5,7 +5,7 @@ mix.js('resources/js/app.js', 'public/js')
     .minify('public/js/script.js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
-        require('tailwindcss'),
+        require('tailwindcss')
     ])
     .postCss('resources/css/style.css', 'public/css/', [
         require('postcss-import')

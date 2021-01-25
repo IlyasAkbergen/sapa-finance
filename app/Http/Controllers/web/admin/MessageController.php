@@ -56,7 +56,7 @@ class MessageController extends WebBaseController
             ->whereHas('users', function ($query) {
             return $query->where('user_id', Auth::user()->id);
         })
-            ->orderBy('created_at')
+            ->orderByDesc('created_at')
             ->paginate(10);
 
         return Inertia::render('Messages/Index', [

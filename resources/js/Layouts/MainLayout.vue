@@ -87,6 +87,7 @@
         <slot></slot>
         <Message v-if="flashMessage"
           :message="flashMessage"
+          :sub-message="subMessage"
           :type="'success'"
         />
         <Message v-if="error"
@@ -149,6 +150,12 @@
         return this.$page.flash
           ? this.$page.flash.message
             ? this.$page.flash.message : null
+          : null;
+      },
+      subMessage() {
+        return this.$page.flash
+          ? this.$page.flash.sub_message
+            ? this.$page.flash.sub_message : null
           : null;
       },
       error() {

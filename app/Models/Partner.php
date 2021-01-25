@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\ReferralLevelEnum;
 use App\Scopes\PartnerLevelScope;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
