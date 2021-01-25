@@ -16,12 +16,18 @@
     </template>
 
     <div class="osk">
-      <MessageItem v-for="message in messages"
-              :key="message.id"
-              :message="message"
-               @show="() => showLevelsModal(message.levels)"
-               @delete="() => deleteClicked(message)"
-      />
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <MessageItem v-for="message in messages"
+                    :key="message.id"
+                    :message="message"
+                     @show="() => showLevelsModal(message.levels)"
+                     @delete="() => deleteClicked(message)"
+            />
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <Modal :show="formVisible"

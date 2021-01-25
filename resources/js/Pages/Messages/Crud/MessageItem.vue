@@ -1,7 +1,4 @@
 <template>
-  <div class="table-responsive">
-    <table class="table">
-      <tbody>
       <tr>
         <th class="align-middle" scope="row">
           {{ message.title }}
@@ -25,11 +22,13 @@
             </inertia-link>
           </span>
         </td>
-        <td class="align-middle d-flex" v-for="attachment in message.attachments">
-          <span>{{ attachment.name | truncate(10) }}</span>
-          <a :href="attachment.path" target="_blank">
-            <Download />
-          </a>
+        <td class="align-middle d-flex">
+          <div v-for="attachment in message.attachments">
+            <span>{{ attachment.name | truncate(10) }}</span>
+            <a :href="attachment.path" target="_blank">
+              <Download />
+            </a>
+          </div>
         </td>
         <td class="align-middle">
           <a class="osk__action osk__action--red" href="#"
@@ -39,9 +38,6 @@
           </a>
         </td>
       </tr>
-      </tbody>
-    </table>
-  </div>
 </template>
 
 <script>
