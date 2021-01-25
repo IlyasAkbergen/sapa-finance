@@ -37,7 +37,7 @@
             background-color: rgba(1, 15, 52, 0.7);
         }
 
-        .modal-dialog {
+        .modal-dialog-auth {
             max-width: 25%;
             margin: 50px auto;
         }
@@ -141,7 +141,7 @@
         }
 
         @media (max-width: 991px) {
-            .modal-dialog {
+            .modal-dialog-auth {
                 max-width: 60%;
                 margin: 1.75rem auto;
             }
@@ -149,7 +149,7 @@
         }
 
         @media (max-width: 576px) {
-            .modal-dialog {
+            .modal-dialog-auth {
                 max-width: 80%;
                 margin: 1.75rem auto;
             }
@@ -574,20 +574,26 @@
             <h1>Статьи</h1>
             <div class="articles__slider">
                 @foreach($articles as $article)
+
+                    @php
+
+                        $imgPath = !empty($article->image_path)
+                                        ? $article->image_path
+                                        : asset('images/slides/articles-slider-img1.png');
+                        $title = $article->title;
+                        $content = $article->content;
+                    @endphp
                     <div>
                         <div class="articles__slider__slide__inner">
-                            <img src="{{
-    							!empty($article->image_path)
-									? $article->image_path
-									: asset('images/slides/articles-slider-img1.png')}}"
+                            <img src="{{$imgPath}}"
                             >
                             <p>
-                                {{ substr($article->title, 0, 65) . (strlen($article->title) > 65 ? '...' : '') }}
+                                {{ substr($title, 0, 65) . (strlen($title) > 65 ? '...' : '') }}
                             </p>
                             <p>
-                                {{ substr($article->content, 0, 65) . (strlen($article->content) > 65 ? '...' : '') }}
+                                {{ substr($content, 0, 65) . (strlen($content) > 65 ? '...' : '') }}
                             </p>
-                            <a href="#">
+                            <a onclick="openArticleModal('{{$title}}', '{{$content}}', '{{$imgPath}}')">
                                 Читать &#8594;
                             </a>
                         </div>
@@ -652,7 +658,7 @@
     </footer>
 
     <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-auth">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="modal-content">
                 <h3>Вход в систему</h3>
@@ -670,7 +676,7 @@
     </div>
     <div class="modal fade" id="regModal" tabindex="-1"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-auth">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="modal-content">
                 <h3>Зарегистрироваться</h3>
@@ -687,7 +693,7 @@
         </div>
     </div>
     <div class="modal fade" id="passModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-auth">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="modal-content">
                 <h3>Восстановление пароля</h3>
@@ -709,6 +715,18 @@
                     <button type="button" data-bs-dismiss="modal" aria-label="Close">
                         Отправить
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="article-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg scrollable">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content">
+                <img class="img-fluid" src="" alt="img" id="article-img">
+                <h3 id="article-title"></h3>
+                <div class="modal-body" id="article-body">
+
                 </div>
             </div>
         </div>
@@ -894,6 +912,13 @@
                 ]
             });
         })
+
+        function openArticleModal(title, content, imgPath) {
+            $('#article-img').attr('src', imgPath);
+            $('#article-title').html(title);
+            $('#article-body').html(content);
+            $('#article-modal').modal('show');
+        }
     </script>
 </div>
 </body>
