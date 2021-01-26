@@ -30,7 +30,7 @@ export default {
     balance() {
       return !!this.getUser().balance
         ? this.getUser().balance
-        : null;
+        : {};
     },
 
     avatarPath() {
