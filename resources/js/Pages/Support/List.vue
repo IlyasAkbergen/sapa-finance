@@ -46,11 +46,8 @@
                 </div>
             </template>
             <template v-else>
-                <div class="col-12 d-flex align-items-center justify-content-center flex-column">
-                    <img class="mt-5 w-25"  src="../../../img/void.svg">
-                    <p class="text-muted mt-5">
-                        Тут у нас пусто :)
-                    </p>
+                <div class="col-12">
+                    <Empty/>
                 </div>
             </template>
 
@@ -70,7 +67,8 @@
         components: {
             MainLayout,
             Attachments,
-            DeleteAcceptModal: () => import('@/Shared/DeleteAcceptModal')
+            DeleteAcceptModal: () => import('@/Shared/DeleteAcceptModal'),
+            Empty: () => import('@/Shared/Empty'),
         },
         props: {
             items: Array
