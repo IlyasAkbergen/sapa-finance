@@ -47,311 +47,325 @@ Route::post('/', function () {
 Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
     ->middleware(['guest'])->name('welcome');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
-})->name('dashboard');
 
 Route::resource(
     '/articles',
     ArticleController::class
 );
 
-Route::group(['middleware' => [
-    'auth:sanctum',
-    'share.inertia',
-    'verified'
-]], function () {
-
-    Route::get('/users-crud/me', [UserController::class, 'me'])->name('me');
-    Route::put('/users-crud/update/{id}', [UserController::class, 'update'])->name('update');
-
-});
 
 Route::group(['middleware' => [
     'auth:sanctum',
-    'share.inertia',
-    'client',
-    'verified'
-]], function () {
-    Route::resource('courses', CourseController::class);
-
-    Route::get(
-        'my-courses',
-        [CourseController::class, 'my']
-    )->name('my-courses');
-
-    Route::resource(
-        'briefcases',
-        ClientBriefcaseController::class
-    )->withoutMiddleware('client');
-
-    Route::get('/my-briefcases', [ClientBriefcaseController::class, 'my'])
-        ->name('my-briefcases');
-
-    Route::post(
-        '/briefcase/add', [ClientBriefcaseController::class, 'attachToMe']
-    )->name('attach_briefcase');
-
-    Route::resource(
-        'purchases',
-        PurchaseController::class
-    );
-
-    Route::resource(
-        'payouts',
-        PayoutController::class
-    );
-
-    Route::get(
-        '/pay/success',
-        function () {
-            return redirect()->route('my-purchases');
-        }
-    );
-
-    Route::get(
-        '/my-purchases',
-        [PurchaseController::class, 'my']
-    )->name('my-purchases');
-
-    Route::post('/payout/success', function () {
-        return redirect('balance');
-    });
-
-    Route::get(
-        '/my-referrals',
-        [ReferralController::class, 'myReferrals']
-    )->name('my-referrals');
-
-    Route::resource('sales', SaleController::class);
-
-    Route::resource('support', SupportController::class);
-
-    Route::get('notifications', [MessageController::class, 'my'])
-        ->name('my_notify')
-        ->withoutMiddleware('client');
-
-    Route::resource(
-        'attachments',
-        AttachmentController::class
-    )->withoutMiddleware('client');
-
-    Route::post(
-        'attachments/list',
-        [AttachmentController::class, 'list']
-    )->withoutMiddleware('client');
-
-    Route::post('/complaints', [ComplaintController::class, 'store'])
-        ->name('complaints.store');
-
-    Route::resource('lessons', LessonController::class);
-
-    Route::get('/courses/{id}/next_lesson/{lesson_id}', [LessonController::class, 'next'])
-        ->name('next_lesson');
-
-    Route::get('/courses/{id}', [LessonController::class, 'show'])
-        ->name('courses');
-    Route::get('/agent', [CourseController::class, 'getStarterCourseAgent'])
-        ->name('starter_lesson');
-    Route::put('/lessons/{id}/submit_homework');
-    Route::resource(
-        'homeworks',
-        HomeworkController::class
-    )
-        ->withoutMiddleware('client');
-
-    Route::post(
-        '/rate-homework',
-        [HomeworkController::class, 'rate']
-    )
-        ->middleware('rates_homework')
-        ->withoutMiddleware('client');
-
-    Route::get(
-        '/complaints/create/{id}/{referrer_id}',
-        [ComplaintController::class, 'create']
-    )->name('complaints.create');
-
-    Route::post('/complaints-crud', [ComplaintController::class, 'store']);
-
-    Route::post('/make-messages-seen', [
-        MessageController::class,
-        'makeSeen'
-    ])
-        ->withoutMiddleware('client')
-        ->name('make_seen');
-
-    Route::resource('/payments', PaymentController::class);
-    Route::get('/my-payments', [PaymentController::class, 'my'])
-        ->name('payments.my');
-
-    Route::get('/users/{id}', [UserController::class, 'show'])
-        ->name('users.show')
-        ->withoutMiddleware('client');
-});
-
-Route::group(['middleware' => [
-    'auth:sanctum',
-    'share.inertia',
-    'admin'
 ]], function () {
 
-    Route::get(
-        '/users/{id}/complaints',
-        [ComplaintController::class, 'forUser'])
-        ->name('user_complaints');
+    Route::middleware(['verified'])->get('/dashboard', function () {
+        return Inertia\Inertia::render('Dashboard');
+    })->name('dashboard');
 
-    Route::get('/supports', [AdminSupportController::class, 'index'])->name('supports.index');
-    Route::delete('/supports/{id}', [AdminSupportController::class, 'destroy'])->name('supports.destroy');
+    Route::group(['middleware' => ['share.inertia',]], function () {
+
+        Route::group(['middleware' => ['verified']], function () {
+
+            Route::get('/users-crud/me', [UserController::class, 'me'])->name('me');
+
+            Route::put('/users-crud/update/{id}', [UserController::class, 'update'])->name('update');
+
+            Route::resource(
+                'attachments',
+                AttachmentController::class
+            );
+
+            Route::post(
+                'attachments/list',
+                [AttachmentController::class, 'list']
+            );
+
+            Route::resource(
+                'briefcases',
+                ClientBriefcaseController::class
+            );
+
+            Route::get('notifications', [MessageController::class, 'my'])
+                ->name('my_notify');
+
+            Route::resource(
+                'homeworks',
+                HomeworkController::class
+            );
+
+            Route::post(
+                '/rate-homework',
+                [HomeworkController::class, 'rate']
+            )->middleware('rates_homework');
+
+            Route::get('/users/{id}', [UserController::class, 'show'])
+                ->name('users.show');
+
+            Route::post('/make-messages-seen', [
+                MessageController::class,
+                'makeSeen'
+            ])->name('make_seen');
 
 
-    Route::resource('courses-crud', CourseCrudController::class);
-    Route::post('courses-crud/upload-image',
-        [CourseCrudController::class, 'uploadImage']
-    )->name('upload-course-image');
+            Route::group(['middleware' => ['client']], function () {
 
-    Route::post('courses-crud/upload-attachments',
-        [CourseCrudController::class, 'uploadAttachments']
-    )->name('upload-course-attachments');
 
-    Route::get(
-        '/courses-stats',
-        [CourseCrudController::class, 'stats']
-    )->name('courses-stats');
+                Route::resource('courses', CourseController::class);
 
-    Route::resource('briefcases-admin', AdminBriefcaseController::class);
+                Route::get(
+                    'my-courses',
+                    [CourseController::class, 'my']
+                )->name('my-courses');
 
-    Route::resource('lessons-crud', LessonCrudController::class);
-    Route::post('courses-crud/upload-image',
-        [CourseCrudController::class, 'uploadImage']
-    )->name('upload-course-image');
+                Route::get('/my-briefcases', [ClientBriefcaseController::class, 'my'])
+                    ->name('my-briefcases');
 
-    Route::resource('partners-crud', PartnerController::class);
-    Route::resource('users-crud', UserController::class);
-    Route::get('users-referral-tree', [UserController::class, 'referralTree'])
-        ->name('users-referral-tree');
-    Route::post('user-referrer-change', [UserController::class, 'changeReferrer'])
-        ->withoutMiddleware('admin')
-        ->name('user-referrer-change');
+                Route::post(
+                    '/briefcase/add', [ClientBriefcaseController::class, 'attachToMe']
+                )->name('attach_briefcase');
 
-    Route::get('/complaints', [ComplaintController::class, 'index'])
-        ->name('complaints.index');
+                Route::resource(
+                    'purchases',
+                    PurchaseController::class
+                );
 
-    Route::delete('/complaints/{id}', [ComplaintController::class, 'destroy'])
-        ->name('complaints-crud.destroy');
+                Route::resource(
+                    'payouts',
+                    PayoutController::class
+                );
 
-    Route::post('/penalty', [PenaltyController::class, 'store']);
+                Route::get(
+                    '/pay/success',
+                    function () {
+                        return redirect()->route('my-purchases');
+                    }
+                );
 
-    Route::post('/change-referral', [ComplaintController::class, 'changeReferral']);
+                Route::get(
+                    '/my-purchases',
+                    [PurchaseController::class, 'my']
+                )->name('my-purchases');
 
-    Route::resource('messages', MessageController::class);
+                Route::post('/payout/success', function () {
+                    return redirect('balance');
+                });
 
-    Route::resource('consultants-crud', ConsultantAdminController::class);
+                Route::get(
+                    '/my-referrals',
+                    [ReferralController::class, 'myReferrals']
+                )->name('my-referrals');
 
-    Route::get(
-        'briefcase-orders',
-        [PartnerUserController::class, 'orders']
-    )->name('admin.briefcase-orders');
+                Route::resource('sales', SaleController::class);
 
-    Route::put(
-        '/user-briefcase/accept/{id}',
-        [PartnerUserController::class, 'acceptOrder']
-    );
+                Route::resource('support', SupportController::class);
 
-    Route::put(
-        '/user-briefcase/reject/{id}',
-        [PartnerUserController::class, 'rejectOrder']
-    );
+                Route::post('/complaints', [ComplaintController::class, 'store'])
+                    ->name('complaints.store');
 
-    Route::delete(
-        '/user-briefcase/{id}',
-        [PartnerUserController::class, 'deleteOrder']
-    );
+                Route::resource('lessons', LessonController::class);
 
-    Route::get(
-        'user-briefcase-payments',
-        [PartnerUserController::class, 'payments']
-    )->name('user-briefcase-payments');
-});
+                Route::get('/courses/{id}/next_lesson/{lesson_id}', [LessonController::class, 'next'])
+                    ->name('next_lesson');
 
-Route::group(['middleware' => [
-    'auth:sanctum',
-    'share.inertia',
-    'roles:' . Role::ROLE_ADMIN . ',' . Role::ROLE_PARTNER
-]], function () {
-    Route::get('/partner-cabinet', [CabinetController::class, 'index'])
-        ->name('partner-cabinet.index');
-    Route::get('/partner-cabinet/edit', [CabinetController::class, 'edit'])
-        ->name('partner-cabinet.edit');
-    Route::post('/partner-cabinet/update', [CabinetController::class, 'update']);
-    Route::get(
-        '/programs/create/{id}',
-        [ProgramsController::class, 'create']
-    )->name('programs.create');
-    Route::resource('/programs-crud', ProgramsController::class);
+                Route::get('/courses/{id}', [LessonController::class, 'show'])
+                    ->name('courses');
+
+                Route::get('/agent', [CourseController::class, 'getStarterCourseAgent'])
+                    ->name('starter_lesson');
+
+                Route::put('/lessons/{id}/submit_homework');
+
+                Route::get(
+                    '/complaints/create/{id}/{referrer_id}',
+                    [ComplaintController::class, 'create']
+                )->name('complaints.create');
+
+                Route::post('/complaints-crud', [ComplaintController::class, 'store']);
+
+                Route::resource('/payments', PaymentController::class);
+
+                Route::get('/my-payments', [PaymentController::class, 'my'])
+                    ->name('payments.my');
+
+
+            });
+
+        });
+
+
+        Route::group(['middleware' => ['admin']], function () {
+
+
+            Route::get(
+                '/users/{id}/complaints',
+                [ComplaintController::class, 'forUser'])
+                ->name('user_complaints');
+
+            Route::get('/supports', [AdminSupportController::class, 'index'])->name('supports.index');
+
+            Route::delete('/supports/{id}', [AdminSupportController::class, 'destroy'])->name('supports.destroy');
+
+            Route::resource('courses-crud', CourseCrudController::class);
+
+            Route::post('courses-crud/upload-image',
+                [CourseCrudController::class, 'uploadImage']
+            )->name('upload-course-image');
+
+            Route::post('courses-crud/upload-attachments',
+                [CourseCrudController::class, 'uploadAttachments']
+            )->name('upload-course-attachments');
+
+            Route::get(
+                '/courses-stats',
+                [CourseCrudController::class, 'stats']
+            )->name('courses-stats');
+
+            Route::resource('briefcases-admin', AdminBriefcaseController::class);
+
+            Route::resource('lessons-crud', LessonCrudController::class);
+
+            Route::post('courses-crud/upload-image',
+                [CourseCrudController::class, 'uploadImage']
+            )->name('upload-course-image');
+
+            Route::resource('partners-crud', PartnerController::class);
+
+            Route::resource('users-crud', UserController::class);
+
+            Route::get('users-referral-tree', [UserController::class, 'referralTree'])
+                ->name('users-referral-tree');
+
+
+            Route::get('/complaints', [ComplaintController::class, 'index'])
+                ->name('complaints.index');
+
+            Route::delete('/complaints/{id}', [ComplaintController::class, 'destroy'])
+                ->name('complaints-crud.destroy');
+
+            Route::post('/penalty', [PenaltyController::class, 'store']);
+
+            Route::post('/change-referral', [ComplaintController::class, 'changeReferral']);
+
+            Route::resource('messages', MessageController::class);
+
+            Route::resource('consultants-crud', ConsultantAdminController::class);
+
+            Route::get(
+                'briefcase-orders',
+                [PartnerUserController::class, 'orders']
+            )->name('admin.briefcase-orders');
+
+            Route::put(
+                '/user-briefcase/accept/{id}',
+                [PartnerUserController::class, 'acceptOrder']
+            );
+
+            Route::put(
+                '/user-briefcase/reject/{id}',
+                [PartnerUserController::class, 'rejectOrder']
+            );
+
+            Route::delete(
+                '/user-briefcase/{id}',
+                [PartnerUserController::class, 'deleteOrder']
+            );
+
+            Route::get(
+                'user-briefcase-payments',
+                [PartnerUserController::class, 'payments']
+            )->name('user-briefcase-payments');
+
+
+        });
+
+
+        Route::post('user-referrer-change', [UserController::class, 'changeReferrer'])
+            ->name('user-referrer-change');
+
+
+        Route::group(['middleware' => ['roles:' . Role::ROLE_ADMIN . ',' . Role::ROLE_PARTNER,]], function () {
+
+
+            Route::get('/partner-cabinet', [CabinetController::class, 'index'])
+                ->name('partner-cabinet.index');
+            Route::get('/partner-cabinet/edit', [CabinetController::class, 'edit'])
+                ->name('partner-cabinet.edit');
+            Route::post('/partner-cabinet/update', [CabinetController::class, 'update']);
+            Route::get(
+                '/programs/create/{id}',
+                [ProgramsController::class, 'create']
+            )->name('programs.create');
+            Route::resource('/programs-crud', ProgramsController::class);
 
 //    Route::resource(
 //        'partner-users',
 //        PartnerUserController::class
 //    );
 
-    Route::get(
-        'partner-user-active-briefcases',
-        [PartnerUserController::class, 'activeOrders']
-    )->name('partner-users.deals');
+            Route::get(
+                'partner-user-active-briefcases',
+                [PartnerUserController::class, 'activeOrders']
+            )->name('partner-users.deals');
 
-    Route::get(
-        'partner-users-order/create',
-        [PartnerUserController::class, 'createOrder']
-    )->name('partner-users-order.create');
+            Route::get(
+                'partner-users-order/create',
+                [PartnerUserController::class, 'createOrder']
+            )->name('partner-users-order.create');
 
-    Route::get(
-        'partner-users-order/{id}/edit',
-        [PartnerUserController::class, 'editOrder']
-    )->name('partner-users-order.edit');
+            Route::get(
+                'partner-users-order/{id}/edit',
+                [PartnerUserController::class, 'editOrder']
+            )->name('partner-users-order.edit');
 
-    Route::post(
-        '/partner-user-order/update',
-        [PartnerUserController::class, 'updateOrder']
-    )->name('partner-users-order.update');
+            Route::post(
+                '/partner-user-order/update',
+                [PartnerUserController::class, 'updateOrder']
+            )->name('partner-users-order.update');
 
-    Route::post(
-        '/partner-user-order',
-        [PartnerUserController::class, 'storeOrder']
-    )->name('partner-users-order.store');
+            Route::post(
+                '/partner-user-order',
+                [PartnerUserController::class, 'storeOrder']
+            )->name('partner-users-order.store');
 
-    Route::get(
-        'user-briefcase-payments',
-        [PartnerUserController::class, 'payments']
-    )->name('partner-users.payments');
+            Route::get(
+                'user-briefcase-payments',
+                [PartnerUserController::class, 'payments']
+            )->name('partner-users.payments');
 
-    Route::post(
-        'partner-user-payment',
-        [PartnerUserController::class, 'storePayment']
-    );
+            Route::post(
+                'partner-user-payment',
+                [PartnerUserController::class, 'storePayment']
+            );
 
-    Route::delete(
-        'partner-user-payment/{id}',
-        [PartnerUserController::class, 'deletePayment']
-    )->name('deletePayment');
+            Route::delete(
+                'partner-user-payment/{id}',
+                [PartnerUserController::class, 'deletePayment']
+            )->name('deletePayment');
 
-    Route::get(
-        'partner-stats',
-        [PartnerUserController::class, 'partnerStats']
-    )->name('partner-stats');
+            Route::get(
+                'partner-stats',
+                [PartnerUserController::class, 'partnerStats']
+            )->name('partner-stats');
 
-    Route::resource(
-        'briefcase-change',
-        BriefcaseChangeController::class
-    );
+            Route::resource(
+                'briefcase-change',
+                BriefcaseChangeController::class
+            );
 
-    Route::get(
-        'briefcase-change/{id}/apply',
-        [BriefcaseChangeController::class, 'apply']
-    )->name('apply-briefcase-change');
+            Route::get(
+                'briefcase-change/{id}/apply',
+                [BriefcaseChangeController::class, 'apply']
+            )->name('apply-briefcase-change');
 
-    Route::get(
-        'briefcase-change/{id}/reject',
-        [BriefcaseChangeController::class, 'reject']
-    )->name('reject-briefcase-change');
+            Route::get(
+                'briefcase-change/{id}/reject',
+                [BriefcaseChangeController::class, 'reject']
+            )->name('reject-briefcase-change');
+
+
+        });
+
+    });
+
+
 });
