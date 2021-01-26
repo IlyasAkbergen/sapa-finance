@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\api\PayoutController;
 use App\Http\Controllers\api\PurchaseController;
-use App\Http\Controllers\web\HomeworkController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

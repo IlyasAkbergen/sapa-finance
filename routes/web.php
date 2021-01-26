@@ -9,6 +9,7 @@ use App\Http\Controllers\web\AttachmentController;
 use App\Http\Controllers\web\BriefcaseController as ClientBriefcaseController;
 use App\Http\Controllers\web\admin\BriefcaseController as AdminBriefcaseController;
 use App\Http\Controllers\web\admin\ConsultantController as ConsultantAdminController;
+use App\Http\Controllers\web\admin\SupportController as AdminSupportController;
 use App\Http\Controllers\web\ComplaintController;
 use App\Http\Controllers\web\CourseController;
 use App\Http\Controllers\web\admin\CourseController as CourseCrudController;
@@ -39,7 +40,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('/', function () {
-   return redirect()->route('my-courses');
+    return redirect()->route('my-courses');
 });
 
 Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
@@ -143,14 +144,14 @@ Route::group(['middleware' => [
         'homeworks',
         HomeworkController::class
     )
-    ->withoutMiddleware('client');
+        ->withoutMiddleware('client');
 
     Route::post(
         '/rate-homework',
         [HomeworkController::class, 'rate']
     )
-    ->middleware('rates_homework')
-    ->withoutMiddleware('client');
+        ->middleware('rates_homework')
+        ->withoutMiddleware('client');
 
     Route::get('/users-crud/me', [UserController::class, 'me'])->name('me');
     Route::put('/users-crud/update/{id}', [UserController::class, 'update'])->name('update');
@@ -165,8 +166,8 @@ Route::group(['middleware' => [
         MessageController::class,
         'makeSeen'
     ])
-    ->withoutMiddleware('client')
-    ->name('make_seen');
+        ->withoutMiddleware('client')
+        ->name('make_seen');
 
     Route::resource('/payments', PaymentController::class);
     Route::get('/my-payments', [PaymentController::class, 'my'])
@@ -186,8 +187,11 @@ Route::group(['middleware' => [
     Route::get(
         '/users/{id}/complaints',
         [ComplaintController::class, 'forUser'])
-        ->name('user_complaints')
-    ;
+        ->name('user_complaints');
+
+    Route::get('/supports', [AdminSupportController::class, 'index'])->name('supports.index');
+    Route::delete('/supports/{id}', [AdminSupportController::class, 'destroy'])->name('supports.destroy');
+
 
     Route::resource('courses-crud', CourseCrudController::class);
     Route::post('courses-crud/upload-image',
@@ -233,18 +237,18 @@ Route::group(['middleware' => [
     Route::resource('consultants-crud', ConsultantAdminController::class);
 
     Route::get(
-      'briefcase-orders',
-      [PartnerUserController::class, 'orders']
+        'briefcase-orders',
+        [PartnerUserController::class, 'orders']
     )->name('admin.briefcase-orders');
 
     Route::put(
-      '/user-briefcase/accept/{id}',
-      [PartnerUserController::class, 'acceptOrder']
+        '/user-briefcase/accept/{id}',
+        [PartnerUserController::class, 'acceptOrder']
     );
 
     Route::put(
-      '/user-briefcase/reject/{id}',
-      [PartnerUserController::class, 'rejectOrder']
+        '/user-briefcase/reject/{id}',
+        [PartnerUserController::class, 'rejectOrder']
     );
 
     Route::delete(
@@ -261,7 +265,7 @@ Route::group(['middleware' => [
 Route::group(['middleware' => [
     'auth:sanctum',
     'share.inertia',
-    'roles:'.Role::ROLE_ADMIN.','.Role::ROLE_PARTNER
+    'roles:' . Role::ROLE_ADMIN . ',' . Role::ROLE_PARTNER
 ]], function () {
     Route::get('/partner-cabinet', [CabinetController::class, 'index'])
         ->name('partner-cabinet.index');
@@ -310,8 +314,8 @@ Route::group(['middleware' => [
     )->name('partner-users.payments');
 
     Route::post(
-      'partner-user-payment',
-      [PartnerUserController::class, 'storePayment']
+        'partner-user-payment',
+        [PartnerUserController::class, 'storePayment']
     );
 
     Route::delete(

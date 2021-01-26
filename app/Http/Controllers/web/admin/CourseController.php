@@ -115,7 +115,7 @@ class CourseController extends WebBaseController
         if ($deleted) {
             return redirect()->route('courses-crud.index');
         } else {
-            return $this->responseFail('Не удалосьу удалить');
+            return $this->responseFail('Не удалось удалить');
         }
     }
 

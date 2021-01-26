@@ -117,6 +117,12 @@
                             icon="Conversation">
                         Консультанты на сайте
                     </SidebarItem>
+                    <SidebarItem
+                            v-if="isAdmin"
+                            :route_name="'supports.index'"
+                            icon="Info">
+                        Список запросов на поддержку
+                    </SidebarItem>
 
                     <!--                    <SidebarItem-->
                     <!--                            v-if="isAdmin"-->
