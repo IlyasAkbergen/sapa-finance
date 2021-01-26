@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\web;
 
 use App\Enums\ReferralLevelEnum;
-use App\Http\Resources\UserResource;
-use App\Models\Complaint;
-use App\Models\Role;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Complaint;
 use Inertia\Inertia;
+use App\Models\User;
 
 class ComplaintController extends WebBaseController
 {
