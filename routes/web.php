@@ -24,6 +24,7 @@ use App\Http\Controllers\web\PaymentController;
 use App\Http\Controllers\web\PayoutController;
 use App\Http\Controllers\web\PurchaseController;
 use App\Http\Controllers\web\ReferralController;
+use App\Http\Controllers\web\ReviewController;
 use App\Http\Controllers\web\SaleController;
 use App\Http\Controllers\web\SupportController;
 use App\Models\Role;
@@ -197,9 +198,9 @@ Route::group(['middleware' => [
 
 
             Route::get(
-                '/users/{id}/complaints',
-                [ComplaintController::class, 'forUser'])
-                ->name('user_complaints');
+                '/users/{id}/reviews',
+                [ReviewController::class, 'forUser'])
+                ->name('user_reviews');
 
             Route::get('/supports', [AdminSupportController::class, 'index'])->name('supports.index');
 

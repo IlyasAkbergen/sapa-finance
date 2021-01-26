@@ -30,22 +30,6 @@ class ComplaintController extends WebBaseController
         ]);
     }
 
-    public function forUser($id)
-    {
-        $data = Complaint::with([
-            'to_user', 'from_user'
-        ])
-        ->where('to_id', $id)
-        ->paginate(10);
-
-        $user = User::findOrFail($id);
-
-        return Inertia::render('Consultant/Complaints', [
-            'data' => $data,
-            'user' => $user
-        ]);
-    }
-
     public function store(Request $request)
     {
         $request->validate([
