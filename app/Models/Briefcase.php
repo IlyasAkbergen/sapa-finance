@@ -80,4 +80,15 @@ class Briefcase extends Model implements WithPurchase
             ? route('briefcases-admin.edit', $this->id)
             : route('briefcases.show', $this->id);
     }
+
+    function active_change()
+    {
+        return $this->changes()
+            ->where('status', BriefcaseChange::STATUS_CREATED);
+    }
+
+    function changes()
+    {
+        return $this->hasMany(BriefcaseChange::class);
+    }
 }

@@ -15,11 +15,12 @@ class PaymentResource extends JsonResource
      */
     public function toArray($request)
     {
+        $purchasable = data_get($this, 'payable.purchasable');
         return [
             'id' => $this->id,
-            'purchasable' => PurchasableResource::make(
-                                $this->payable->purchasable
-                            )->resolve(),
+            'purchasable' => $purchasable ? PurchasableResource::make(
+                    $purchasable)
+                ->resolve() : null,
             'updated_at' => Carbon::parse($this->updated_at)
                 ->format('d.m.Y H:i'),
             'paid_at' => Carbon::parse($this->paid_at)

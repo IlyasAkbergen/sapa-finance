@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BriefcaseChangeController;
 use App\Http\Controllers\web\admin\MessageController;
 use App\Http\Controllers\web\admin\PartnerController;
 use App\Http\Controllers\web\admin\PenaltyController;
@@ -115,7 +116,9 @@ Route::group(['middleware' => [
 
     Route::resource('support', SupportController::class);
 
-    Route::get('notifications', [MessageController::class, 'my'])->name('my_notify');
+    Route::get('notifications', [MessageController::class, 'my'])
+        ->name('my_notify')
+        ->withoutMiddleware('client');
 
     Route::resource(
         'attachments',
@@ -322,4 +325,24 @@ Route::group(['middleware' => [
         'partner-user-payment/{id}',
         [PartnerUserController::class, 'deletePayment']
     )->name('deletePayment');
+
+    Route::get(
+        'partner-stats',
+        [PartnerUserController::class, 'partnerStats']
+    )->name('partner-stats');
+
+    Route::resource(
+        'briefcase-change',
+        BriefcaseChangeController::class
+    );
+
+    Route::get(
+        'briefcase-change/{id}/apply',
+        [BriefcaseChangeController::class, 'apply']
+    )->name('apply-briefcase-change');
+
+    Route::get(
+        'briefcase-change/{id}/reject',
+        [BriefcaseChangeController::class, 'reject']
+    )->name('reject-briefcase-change');
 });
