@@ -49,15 +49,16 @@ Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
     ->middleware(['guest'])->name('welcome');
 
 
-Route::resource(
-    '/articles',
-    ArticleController::class
-);
-
-
 Route::group(['middleware' => [
     'auth:sanctum',
 ]], function () {
+
+
+    Route::resource(
+        '/articles',
+        ArticleController::class
+    );
+
 
     Route::middleware(['verified'])->get('/dashboard', function () {
         return Inertia\Inertia::render('Dashboard');
