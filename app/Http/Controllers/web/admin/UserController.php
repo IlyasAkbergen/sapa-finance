@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\web\admin;
 
-use App\Enums\ReferralLevelEnum;
 use App\Helpers\Helper;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\web\WebBaseController;
 use App\Http\Requests\ChangeReferrerRequest;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -18,11 +17,10 @@ use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
-class UserController extends Controller
+class UserController extends WebBaseController
 {
     private $userService;
     private $attachmentService;
@@ -123,6 +121,9 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, $id)
     {
+        if (!(auth()->user()->role_id == Role::ROLE_ADMIN || auth()->id() == $id)) {
+            return $this->responseFail('Не удалось обновить пользователя');
+        }
         $data = $request->except('password');
 
         if ($request->has('image')) {
@@ -153,8 +154,7 @@ class UserController extends Controller
         ]);
 
         if (!empty($user)) {
-            return redirect()
-                ->route('users-crud.index');
+            return redirect()->route('users-crud.index');
         } else {
             return $this->responseFail('Не удалось обновить пользователя');
         }

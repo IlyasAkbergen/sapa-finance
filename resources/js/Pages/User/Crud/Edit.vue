@@ -313,7 +313,9 @@
                 }
                 console.log('is partner: ' + this.isPartner);
                 console.log('route: ' + this.updateRouteName);
-                this.form.post(this.updateRouteName + this.client.id);
+                this.form.post(this.updateRouteName + this.client.id, {
+                    resetOnSuccess: false,
+                });
             },
             selectNewPhoto() {
                 this.$refs.image.click();
@@ -363,7 +365,7 @@
                 } else if (this.isPartner) {
                     return '/partner-users/'
                 } else {
-                    return ''
+                    return '/users-crud/update/'
                 }
             },
             backRoute() {

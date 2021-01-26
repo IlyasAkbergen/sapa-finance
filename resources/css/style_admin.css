@@ -347,6 +347,7 @@ body
     height: 120px;
     margin: 0 auto;
     margin-bottom: 15px;
+    border-radius: 50%;
 }
 
 .avatar__link {
