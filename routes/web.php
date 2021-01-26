@@ -243,6 +243,9 @@ Route::group(['middleware' => [
             Route::delete('/complaints/{id}', [ComplaintController::class, 'destroy'])
                 ->name('complaints-crud.destroy');
 
+            Route::delete('/reviews/{id}', [ReviewController::class, 'destroy'])
+                ->name('reviews-crud.destroy');
+
             Route::post('/penalty', [PenaltyController::class, 'store']);
 
             Route::post('/change-referral', [ComplaintController::class, 'changeReferral']);

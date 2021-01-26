@@ -11,33 +11,33 @@
             Отзывы консультанта {{ reviewedUser.name }}
         </template>
 
-        <div class="c-feeds-wrapper" v-if="complaints.length > 0">
-            <div class="c-feed" v-for="complaint in complaints"
-                 :key="complaint.id"
+        <div class="c-feeds-wrapper" v-if="reviews.length > 0">
+            <div class="c-feed" v-for="review in reviews"
+                 :key="review.id"
             >
                 <div class="c-feed__info">
                     <div class="c-feed__header">
                         <div class="c-feed__avatar">
-                            <img :src="complaint.from_user.profile_photo_path
-                ? complaint.from_user.profile_photo_path
+                            <img :src="review.from_user.profile_photo_path
+                ? review.from_user.profile_photo_path
                 : '/images/avatar-empty.png'">
                         </div>
                         <div class="c-feed__user-info">
                             <p class="c-feed__username">
-                                {{ complaint.from_user.name }}
+                                {{ review.from_user.name }}
                             </p>
                             <p class="c-feed__date">
-                                {{ complaint.created_at }}
+                                {{ review.created_at }}
                             </p>
                         </div>
                     </div>
                     <div class="c-feed__content">
-                        {{ complaint.content }}
+                        {{ review.content }}
                     </div>
                 </div>
                 <div class="c-feed__action">
                     <a class="c-feed__link c-feed__link--red"
-                       @click.prevent="deleteClicked(complaint.id)"
+                       @click.prevent="deleteClicked(review.id)"
                     >
                         <Trash/>
                     </a>
@@ -47,7 +47,7 @@
         <span v-else>Нет отзывов</span>
         <DeleteAcceptModal :show="deleteAcceptModalShow"
                            @close="cancelDelete"
-                           @accepted="deleteComplaint"/>
+                           @accepted="deleteReview"/>
     </main-layout>
 </template>
 
@@ -78,8 +78,8 @@
                 this.itemToBeDeleted = id;
                 this.deleteAcceptModalShow = true
             },
-            deleteComplaint() {
-                this.$inertia.delete(route('complaints-crud.destroy', this.itemToBeDeleted));
+            deleteReview() {
+                this.$inertia.delete(route('reviews-crud.destroy', this.itemToBeDeleted));
             },
             cancelDelete() {
                 this.deleteAcceptModalShow = false
@@ -87,7 +87,7 @@
             }
         },
         computed: {
-            complaints() {
+            reviews() {
                 return this.data.data;
             },
         }

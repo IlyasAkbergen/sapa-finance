@@ -30,4 +30,15 @@ class ReviewController extends WebBaseController
             'reviewedUser' => $reviewedUser
         ]);
     }
+
+    public function destroy($id)
+    {
+        $deleted = Review::findOrFail($id)->delete();
+
+        if ($deleted) {
+            return redirect()->back();
+        } else {
+            return $this->responseFail('Не удалось удалить');
+        }
+    }
 }
