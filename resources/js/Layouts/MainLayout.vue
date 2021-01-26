@@ -68,7 +68,8 @@
                                           class="dropdown-item">
                                 Настройка профиля
                             </inertia-link>
-                            <inertia-link v-if="!isAdmin" :href="route('support.index')"
+                            <inertia-link v-if="!isAdmin"
+                                          :href="route('support.index')"
                                           class="dropdown-item">
                                 Поддержка
                             </inertia-link>

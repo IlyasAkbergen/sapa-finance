@@ -42,7 +42,7 @@ class UserController extends Controller
             ->with('role')
             ->paginate(20);
         $items = collect($data->items())
-            ->map(function($item) {
+            ->map(function ($item) {
                 $item['role_name'] = data_get($item, 'role.name');
                 return $item;
             });
@@ -164,9 +164,9 @@ class UserController extends Controller
     {
         $user = $this->userService->find($id);
         $user->update([
-           'iin' => '_del_' . Carbon::now() . $user->iin,
-           'email' => '_del_' . Carbon::now() . $user->email,
-           'phone' => '_del_' . Carbon::now() . $user->phone,
+            'iin' => '_del_' . Carbon::now() . $user->iin,
+            'email' => '_del_' . Carbon::now() . $user->email,
+            'phone' => '_del_' . Carbon::now() . $user->phone,
         ]);
 
         $deleted = $user->delete($id);
@@ -178,7 +178,8 @@ class UserController extends Controller
         }
     }
 
-    public function me() {
+    public function me()
+    {
         if (Auth::check()) {
             Auth::user()->load([
                 'referrer',

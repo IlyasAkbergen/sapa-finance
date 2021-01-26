@@ -59,6 +59,17 @@ Route::resource(
 Route::group(['middleware' => [
     'auth:sanctum',
     'share.inertia',
+    'verified'
+]], function () {
+
+    Route::get('/users-crud/me', [UserController::class, 'me'])->name('me');
+    Route::put('/users-crud/update/{id}', [UserController::class, 'update'])->name('update');
+
+});
+
+Route::group(['middleware' => [
+    'auth:sanctum',
+    'share.inertia',
     'client',
     'verified'
 ]], function () {
@@ -156,8 +167,6 @@ Route::group(['middleware' => [
         ->middleware('rates_homework')
         ->withoutMiddleware('client');
 
-    Route::get('/users-crud/me', [UserController::class, 'me'])->name('me');
-    Route::put('/users-crud/update/{id}', [UserController::class, 'update'])->name('update');
     Route::get(
         '/complaints/create/{id}/{referrer_id}',
         [ComplaintController::class, 'create']
