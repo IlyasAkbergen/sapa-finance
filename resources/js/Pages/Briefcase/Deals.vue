@@ -3,6 +3,12 @@
     <template #header>
       Мои программы
     </template>
+    <div class="main__content__my-portfels-diagram" v-if="chartData">
+      <Chart
+        :id="id"
+        :option="option"
+      />
+    </div>
     <ul class="main__content__agent-portfels-nav">
       <li class="main__content__portfels-nav__item"
           :class="showType == 1 ? 'active' : ''">
@@ -47,20 +53,59 @@
 <script>
   import MainLayout from '@/Layouts/MainLayout'
   import DealCard from '@/Shared/DealCard';
+  import Chart from '@/Shared/PieChart'
 
   export default {
     name: 'Deals',
     props: {
-      deals: Array
+      deals: Array,
+      chartData: {
+        type: Array,
+        default: null
+      }
     },
     data() {
       return {
-        showType: 1
+        showType: 1,
+        id:"test",
+        option: {
+          chart: {
+            type: "pie", //pie chart
+            options3d: {
+              enabled: true, //Use 3d function
+              alpha: 60, //inclination angle along the y-axis
+              beta: 0,
+            }
+          },
+          title: {
+            text: "Диаграмма общих портфелей" //The title text of the chart
+          },
+          subtitle: {
+            text: "" //Subtitle text
+          },
+          plotOptions: {
+            pie: {
+              allowPointSelect: true, //Can each sector be selected
+              cursor: "pointer", //mouse pointer
+              depth: 35, //The thickness of the pie chart
+              dataLabels: {
+                enabled: true, //Whether to display the linear tip of the pie chart
+                // format: '{point.name}'
+              }
+            }
+          },
+          series: [
+            {
+              data: this.chartData
+            }
+          ]
+        }
       }
     },
     components: {
       MainLayout,
-      DealCard
+      DealCard,
+      Chart
     },
     computed: {
       cumulatives() {

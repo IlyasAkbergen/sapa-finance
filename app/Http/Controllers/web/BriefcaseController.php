@@ -56,8 +56,24 @@ class BriefcaseController extends WebBaseController
                     && data_get($item, 'purchase.payments');
             });
 
+        $chartData = $deals->groupBy('briefcase.title')
+            ->map(function ($group, $key) {
+                $payments = $group->pluck('purchase')->pluck('payments')->flatten() ?? collect([]);
+
+                $paid_sum = $payments
+                    ? $payments->sum('sum')
+                    : 0;
+
+                return [
+                    $key, $paid_sum
+                ];
+            })
+            ->values();
+
+
         return Inertia('Briefcase/Deals', [
-            'deals' => DealResource::collection($deals)->resolve()
+            'deals' => DealResource::collection($deals)->resolve(),
+            'chartData' => $chartData
         ]);
     }
 
