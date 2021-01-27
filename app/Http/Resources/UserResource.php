@@ -46,7 +46,8 @@ class UserResource extends JsonResource
             'sales' => $this->when(
                 $this->relationLoaded('sales'),
                 $this->sales
-            )
+            ),
+            'email_verified' => !empty(data_get($this, 'email_verified_at'))
         ];
     }
 }
