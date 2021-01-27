@@ -159,7 +159,7 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
 
     public function getReferralLinkAttribute()
     {
-        return url('/?referrer_id=' . $this->id);
+        return url('/guest?referrer_id=' . $this->id);
     }
 
     public static function updateReferral($user_id, $referrer_id)

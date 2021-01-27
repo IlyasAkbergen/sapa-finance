@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BriefcaseChangeController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\web\admin\MessageController;
 use App\Http\Controllers\web\admin\PartnerController;
 use App\Http\Controllers\web\admin\PenaltyController;
@@ -45,8 +46,23 @@ Route::post('/', function () {
     return redirect()->route('my-courses');
 });
 
-Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
-    ->middleware(['guest'])->name('welcome');
+Route::get('/', function () {
+    return redirect()->route('welcome');
+});
+
+Route::group([
+    'middleware' => 'guest',
+    'prefix' => 'guest'
+], function () {
+   Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
+       ->name('welcome');
+
+   Route::get('/course/{id}', [Controller::class, 'showCourse']);
+
+   Route::get('/article/{id}', [Controller::class, 'showArticle']);
+
+   Route::get('/consultant/{id}', [Controller::class, 'showConsultant']);
+});
 
 
 Route::group(['middleware' => [
