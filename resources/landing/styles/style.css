@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    outline: none !important;
 }
 
 html {
@@ -29,6 +30,7 @@ body {
 header {
     padding: 0 20px;
     background: #fff;
+    box-shadow: 0px 6px 20px rgba(25, 1, 52, 0.1);
 }
 
 header .inner {
@@ -367,7 +369,7 @@ nav#auth ul li a:hover {
     margin-left: 60px;
 }
 
-#test .inner div a {
+#test .inner div button {
     padding: 12px 20px;
     background: #fff;
     color: #373777;
@@ -380,11 +382,11 @@ nav#auth ul li a:hover {
     display: inline-block;
 }
 
-#test .inner div a:last-child {
+#test .inner div button:last-child {
     margin-bottom: 20px;
 }
 
-#test .inner div a:hover {
+#test .inner div button:hover {
     border: 1px solid #fff;
     color: #fff;
     background: #373777;
@@ -1023,6 +1025,7 @@ nav#auth ul li a:hover {
 .consultants .consultants__inner .consultants__main .consultants__main__slider .consultants__main__slider__prev {
     left: 5px;
     background: url(../../images/icons/left2.png);
+    background-repeat: no-repeat;
     border: none;
     width: 10px;
     background-size: contain;
@@ -1030,10 +1033,88 @@ nav#auth ul li a:hover {
     height: 30px;
     z-index: 1;
 }
+.slide-ttext{
+    color: #fff;
+    position: absolute;
+    bottom: 30%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    width: 70%;
+    max-height: 300px;
+    overflow: hidden;
+}
+.next, .close{
+    color: #fff;
+    background: #373777;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: .7s;
+    font-weight: bold;
+    border: 1px solid transparent;
+    float: right;
+}
+.next:hover, .close:hover{
+    transition: .7s;
+    background: #fff;
+    color: #373777;
+    border: 1px solid #373777;
+}
+.back-button{
+    background: #fff;
+    border: 1px solid #D9DAE7;
+    padding: 5px 10px;
+    color: #92929E;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: .5s;
+    margin-bottom: 30px;
+}
+.back-button svg{
+    fill: #92929E;
+    margin-right: 5px;
+    transition: .5s;
+}
+.back-button:hover{
+    background: #D9DAE7;
+    border: 1px solid #D9DAE7;
+    padding: 5px 10px;
+    color: #fff;
+    text-decoration: none;
+    transition: .5s;
+}
 
+.back-button:hover svg{
+    fill: #fff;
+    transition: .5s;
+}
+.slide-button{
+    color: #fff;
+    background: #373777;
+    padding: 5px 10px;
+    text-decoration: none;
+    position: absolute;
+    bottom: 15%;
+    /*margin: 0 auto;*/
+    left: 15%;
+    right: 0;
+    border-radius: 5px;
+    width: 20%;
+    text-align: center;
+    transition: .7s;
+    font-weight: bold;
+}
+.slide-button:hover{
+    transition: .7s;
+    background: #fff;
+    color: #373777;
+}
 .consultants .consultants__inner .consultants__main .consultants__main__slider .consultants__main__slider__next {
-    right: 5px;
+    right: 50px;
     background: url(../../images/icons/right2.png);
+    background-repeat: no-repeat;
     border: none;
     width: 10px;
     background-size: contain;
@@ -1243,7 +1324,18 @@ footer .footer__mail img {
     vertical-align: middle;
     margin-right: 12px;
 }
-
+.page-course-inner{
+    color: #190134 !important; 
+    text-align: left !important; 
+    padding-right: 20% !important; 
+    padding-top: 30px !important;
+}
+@media (max-width: 767px){
+    .page-course-inner{
+        padding-right: 0% !important; 
+        padding-top: 30px !important;
+    }
+}
 /*----- Footer End -----*/
 
 /*----- Media Queries -----*/
