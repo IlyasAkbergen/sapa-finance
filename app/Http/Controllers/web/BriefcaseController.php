@@ -50,10 +50,30 @@ class BriefcaseController extends WebBaseController
         $deals = UserBriefcase::query()
             ->where('user_id', Auth::user()->id)
             ->with(['briefcase', 'purchase.payments'])
-            ->get();
+            ->get()
+            ->filter(function ($item) {
+                return data_get($item, 'briefcase')
+                    && data_get($item, 'purchase.payments');
+            });
+
+        $chartData = $deals->groupBy('briefcase.title')
+            ->map(function ($group, $key) {
+                $payments = $group->pluck('purchase')->pluck('payments')->flatten() ?? collect([]);
+
+                $paid_sum = $payments
+                    ? $payments->sum('sum')
+                    : 0;
+
+                return [
+                    $key, $paid_sum
+                ];
+            })
+            ->values();
+
 
         return Inertia('Briefcase/Deals', [
-            'deals' => DealResource::collection($deals)->resolve()
+            'deals' => DealResource::collection($deals)->resolve(),
+            'chartData' => $chartData
         ]);
     }
 

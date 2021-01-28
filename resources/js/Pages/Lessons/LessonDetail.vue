@@ -46,6 +46,16 @@
             Домашнее задание
           </p>
 
+          <div class="main__content__lesson-card__materials">
+            <Attachments
+              :modelType="'lesson'"
+              :modelId="lesson.id"
+              :uuid="null"
+              :slug="'homework'"
+              :only-show="true"
+            />
+          </div>
+
           <p class="main__content__lesson-flex__task__homework__content">
             {{ lesson.homework_content }}
           </p>

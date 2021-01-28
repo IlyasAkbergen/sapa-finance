@@ -29,9 +29,11 @@
         "@inertiajs/progress": "^0.2.4",
         "bootstrap": "^4.5.3",
         "bootstrap-vue": "^2.21.2",
+        "highcharts": "^8.2.2",
         "izitoast": "^1.4.0",
         "v-mask": "^2.2.3",
         "vue-flash-message": "^0.7.2",
+        "vue-highcharts": "^0.2.0",
         "vue-search-select": "^2.9.3",
         "vue-slick-carousel": "^1.0.6",
         "vue-uuid": "^2.0.2"

@@ -57,6 +57,17 @@
     <JetInputError v-if="isAdmin || isPartnersUser"
                    :message="form.error('referral_level_id')" class="mt-1"/>
 
+    <div v-if="isAdmin">
+      <label class="profile-form__label mt-3" for="email_verified">Email активирован</label>
+      <input class="profile-form__checkbox mb-0" type="checkbox"
+             v-model="form.email_verified"
+             :checked="form.email_verified"
+             id="email_verified">
+      <label class="profile-form__clabel profile-form__clabel-2">
+        Да
+      </label>
+    </div>
+
     <div v-if="form.id">
       <label class="profile-form__label mt-3" for="item" v-if="isAdmin">Личные единицы</label>
       <input class="profile-form__input mb-0" type="number"

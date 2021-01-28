@@ -143,6 +143,10 @@ class UserController extends WebBaseController
             $data['referrer_id'] = env('SAPA_USER_ID');
         }
 
+        if ($request->has('email_verified')) {
+            $data['email_verified_at'] = Carbon::now();
+        }
+
         $user = $this->userService->update(
             $request->input('id'),
             $data

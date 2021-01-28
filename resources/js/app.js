@@ -30,6 +30,10 @@ import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import highcharts from "highcharts"
+import vuehighcharts from "vue-highcharts"
+import highcharts3d from "highcharts/highcharts-3d"
+highcharts3d (highcharts)
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
