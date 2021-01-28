@@ -1,208 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="yandex-verification" content="86c9f5bf65e2fb5c"/>
-    <title>Sapa</title>
-    <script src="https://kit.fontawesome.com/c9e46db961.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{asset('landing/styles/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('landing/styles/style.css')}}">
-    <link rel="stylesheet" href="{{asset('landing/slick-1.8.1/slick/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('landing/slick-1.8.1/slick/slick-theme.css')}}">
-    @livewireStyles
-    <style>
-        #auth button {
-            color: #0a884d;
-            background: none;
-            border: 1px solid transparent;
-            padding: 5px 15px;
-            border-radius: 25px;
-            transition: .5s;
-
-        }
-
-        #auth ul li:last-child button {
-            border: 1px solid #0a884d;
-        }
-
-        #auth button:hover {
-            color: #fff;
-            background: #0a884d;
-            transition: .5s;
-        }
-
-        .modal {
-            background-color: rgba(1, 15, 52, 0.7);
-        }
-
-        .modal-dialog-auth {
-            max-width: 25%;
-            margin: 50px auto;
-        }
-
-        .btn-close {
-            background: url(../images/icons/close.svg);
-            background-size: contain;
-            opacity: 1;
-            position: absolute;
-            right: -90%;
-            top: 0%;
-        }
-
-        .btn-close:hover {
-            cursor: pointer;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 40px 20px 20px;
-            border-radius: 10px;
-        }
-
-        .modal-content input[type=text], .modal-content input[type=password] {
-            width: 100%;
-            padding: 7px 15px;
-            border-radius: 24px;
-            border: 1px solid #C2C3CF;
-            margin-bottom: 20px;
-        }
-
-        .modal-content h3 {
-            text-align: center;
-            color: #190134;
-            font-weight: bold;
-            font-size: 20px;
-        }
-
-        .modal-content .modal-btn {
-            width: 100%;
-            background: #0a884d;
-            border: 1px solid #0a884d;
-            border-radius: 24px;
-            color: #fff;
-            padding: 5px;
-            transition: .5s;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .modal-content .modal-btn:hover {
-            background: #fff;
-            color: #0a884d;
-            transition: .5s;
-        }
-
-        .modal-footer button {
-            width: 100%;
-            border: 1px solid #373777;
-            border-radius: 24px;
-            color: #373777;
-            display: block;
-            padding: 6px;
-            text-align: center;
-            text-decoration: none;
-            cursor: pointer;
-            transition: .5s;
-            font-weight: bold;
-        }
-
-        .modal-footer button:hover {
-            background: #373777;
-            color: #fff;
-            transition: .5s;
-        }
-
-        .modal-flex {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 0;
-            color: #190134;
-        }
-
-        .modal-flex a {
-            color: #190134;
-            text-decoration: none;
-        }
-
-        @media (max-width: 1199px) {
-            #auth ul li {
-                padding-left: 15px;
-            }
-
-            #auth button {
-                color: #fff;
-                background: #0a884d;
-                margin-bottom: 5px;
-            }
-
-        }
-
-        @media (max-width: 991px) {
-            .modal-dialog-auth {
-                max-width: 60%;
-                margin: 1.75rem auto;
-            }
-
-        }
-
-        @media (max-width: 576px) {
-            .modal-dialog-auth {
-                max-width: 80%;
-                margin: 1.75rem auto;
-            }
-        }
-
-        html {
-            overflow-x: hidden;
-        }
-    </style>
-</head>
-<body>
-<div class="body-wrapper">
-    @if (session('status'))
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ session('status') }}
-        </div>
-    @endif
-    <header>
-        <div class="inner">
-            <img src="{{asset('images/icons/logo.png')}}" alt="Logo"/>
-            <a href="#" id="logo">
-                SAPA
-            </a>
-            <div id="navs">
-                <nav id="menu">
-                    <ul>
-                        <li><a href="#about">О компании</a></li>
-                        <li><a href="#academy__inner__1">SAPA Academy</a></li>
-                        <li><a href="#academy__inner__2">SAPA Market</a></li>
-                        <li><a href="#">Стать партнером</a></li>
-                        <li><a href="#">Стать агентом</a></li>
-                        <li><a href="#footer">Контакты</a></li>
-                    </ul>
-                </nav>
-                <nav id="auth">
-                    <ul>
-                        <li>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#authModal">
-                                Войти
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#regModal">
-                                Зарегистрироваться
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
-        </div>
-    </header>
-
+@extends('layouts.guest')
+@section('content')
     <div class="main-slider">
         <div>
             <div class="main-slider__inner-block">
@@ -234,11 +31,11 @@
         <div class="inner">
             <div>
                 <p>Пройди тест и определи свою финансовою стратегию!</p>
-                <a href="#">Пройти тест</a>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#quizModal">Пройти тест</button>
             </div>
             <div>
                 <p>Пройди тест и определи свою финансовою стратегию!</p>
-                <a href="#">Пройти диагностику</a>
+                <button>Пройти диагностику</button>
             </div>
         </div>
     </div>
@@ -259,16 +56,40 @@
             <div class="community__blog-slider">
                 <div class="community__blog-slider__for">
                     <div>
+                        <p class="slide-ttext">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Aliquam odit assumenda asperiores iure, nisi nobis, quasi, itaque quisquam eveniet fuga ullam distinctio sed exercitationem esse atque, repellat voluptate aperiam non.
+                        </p>
                         <img src="/images/slides/community-slider-img1.png" alt="">
+                        <a href="#" class="slide-button">
+                            Подробнее
+                        </a>
                     </div>
                     <div>
+                        <p class="slide-ttext">
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste qui accusamus enim, cupiditate. Iusto, sit, ipsa illum animi quasi at odio perspiciatis, voluptatibus praesentium alias quia tempore dignissimos rem placeat vero natus deserunt, harum laudantium. Perferendis placeat quaerat aperiam, modi.
+                        </p>
                         <img src="/images/slides/community-slider-img2.png" alt="">
+                        <a href="#" class="slide-button">
+                            Подробнее
+                        </a>
                     </div>
                     <div>
+                        <p class="slide-ttext">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, quos?
+                        </p>
                         <img src="/images/slides/community-slider-img3.png" alt="">
+                        <a href="#" class="slide-button">
+                            Подробнее
+                        </a>
                     </div>
                     <div>
+                        <p class="slide-ttext">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias deserunt maxime delectus inventore dolores voluptate doloribus, eveniet obcaecati magni neque dolorum commodi quos at rem fugiat quod ad, quasi earum quis ea quaerat minima ex repudiandae aliquam nostrum. Voluptas illo error rerum consequuntur similique debitis quisquam reiciendis vero aliquam corporis, eveniet adipisci inventore dolores, iusto, in alias perferendis blanditiis? Ratione?
+                        </p>
                         <img src="/images/slides/community-slider-img2.png" alt="">
+                        <a href="#" class="slide-button">
+                            Подробнее
+                        </a>
                     </div>
                 </div>
                 <div class="community__blog-slider__nav">
@@ -293,27 +114,36 @@
         <div class="wrapper">
             <div class="inner">
                 <h1>О компании</h1>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, repellat iste in veniam minima
-                    sequi molestiae, rerum aspernatur, consequatur ducimus necessitatibus ab blanditiis repellendus
-                    excepturi, porro! Aliquam maxime officia eligendi?
-                    Reiciendis molestias assumenda deserunt in labore quod vitae alias vero animi nihil illum dolor,
-                    dolorum aliquid enim, rerum, totam? Accusamus nemo deleniti cum repudiandae ullam esse nesciunt
-                    provident amet sunt! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, explicabo
-                    veritatis mollitia in laboriosam numquam iste adipisci praesentium, hic magnam molestiae cupiditate
-                    saepe, vitae voluptate debitis accusantium iure ea vel. Lorem ipsum dolor, sit amet consectetur
-                    adipisicing elit. Dolores amet, numquam, tempora ipsa ea autem magni sequi ad quod libero placeat
-                    vitae rem qui velit saepe. Culpa repellat cum nesciunt?
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, repellat iste in veniam minima
-                    sequi molestiae, rerum aspernatur, consequatur ducimus necessitatibus ab blanditiis repellendus
-                    excepturi, porro! Aliquam maxime officia eligendi?
-                    Reiciendis molestias assumenda deserunt in labore quod vitae alias vero animi nihil illum dolor,
-                    dolorum aliquid enim, rerum, totam? Accusamus nemo deleniti cum repudiandae ullam esse nesciunt
-                    provident amet sunt! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, explicabo
-                    veritatis mollitia in laboriosam numquam iste adipisci praesentium, hic magnam molestiae cupiditate
-                    saepe, vitae voluptate debitis accusantium iure ea vel. Lorem ipsum dolor, sit amet consectetur
-                    adipisicing elit. Dolores amet, numquam, tempora ipsa ea autem magni sequi ad quod libero placeat
-                    vitae rem qui velit saepe. Culpa repellat cum nesciunt?
+                <p style="margin-bottom: 1rem;">
+                    <b>Согласно Постановления Правительства Республики Казахстан от 30 мая 2020 года №338 «Об утверждении Концепции повышения финансовой грамотности на 2020 – 2024 годы».<br>
+                    Проект является инновационным и конкурентноспособным не только на территории г. Алматы, но и по Республике в целом.</b><br><br>
+                    Повышение финансовой грамотности населения является приоритетным направлением, но не развитым. В г. Алматы нет подобного рода услуг в одном месте. Имеющиеся финансовые консультанты лишь агенты отдельных компаний, представители инвестиционных компаний, либо финансовых пирамид. Финансовых пирамид на сегодняшний день очень много, на них есть спрос, соответственно постоянно возникает предложение. Население  хочет заработать быстро, надеется успеть забрать свои деньги, рискует, но чаще всего не успевает. <br>
+                    <i style="font-size: 16px;">Вся информация по финансовым продуктам будет идти по принципу одного окна. В центре всегда «стоит» клиент со своими потребностями и целями. </i><br><br>
+                    Мы хотим стать узнаваемым брендом Казахстана путем внедрения стандартизации, привлечения лучших как местных, так и зарубежных, специалистов в своей области! <br>
+                    <b>Миссия компании – оказание максимального содействия в повышении финансовых знаний населения, как основного элемента системы защиты прав потребителей финансовых услуг, непрерывного доступа населения к финансовым услугам, обеспечения финансовой стабильности и общественного благосостояния</b> путем предоставления: 
+                </p>
+                <ul style="list-style: decimal; text-align: left;">
+                    <li>
+                        персонифицированных консультационных услуг широкого спектра (обучение эффективному управлению личными финансами);
+                    </li>
+                    <li>
+                        консалтинг в области современных методик и технологий персонального (частного ) финансового планирования и обслуживания; 
+                    </li>
+                    <li>
+                        исследовательские проекты; 
+                    </li>
+                    <li>
+                        сотрудничество с компаниями с возможностью предоставления займов и инвестиций в долю бизнеса для поддержания развития казахстанского бизнеса;
+                    </li>
+                    <li>
+                        подготовка специалистов по нескольким уникальным направлениям: «Независимый Финансовый Советник», «Управление Личными Финансами», «Личное Финансовое Планирование».
+                    </li>
+                </ul>
+                <p style="margin-bottom: 1rem;">
+                    Центр уделяет большое внимание развитию цивилизованного рынка услуг Независимых Финансовых Советников и формированию стандартов качественного обслуживания в сфере управления личными финансами. 
+                    В основе программ подготовки лежат Европейские методики управления личными финансами, используемые более 30 лет Независимыми финансовыми советниками в странах Европы и Северной Америки и адаптированные к казахстанским условиям.
+                    <br><br>
+                    Центр является лидером рынка обучения методикам управления личными финансами. Прежде всего, работа компании представляется в роли своеобразного моста, причем как по финансовому, так и по образовательному направлению. Практически данный проект позволит центру продавать свой практический опыт, знания и партнерства, что для любого человека (семьи), для любого предпринимателя (компании) является наиболее практичным, полезным и значимым.
                 </p>
             </div>
         </div>
@@ -324,14 +154,41 @@
             <div class="founder__main">
                 <h1>Об основателе</h1>
                 <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap into electronic typesetting, remaining essentially unchanged.
-                    <br><br>
-                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                    and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem
-                    Ipsum.
+                    Айгуль Дильдабековна, родилась 19 ноября  1962 г. в г. Ташкент, в Республике Узбекистане. В 1980 г. окончила специализированный класс средней школы № 3 имени Н. Крупской в г. Джамбуле. В 1985 г. Окончила с отличием Джамбульский гидромелиоративно-строительный институт, факультет «Гидромелиорация», специальность: «Инженер-гидротехник». В 1995 гг. окончила Шымкентский педагогический институт, факультет: «Русский язык и литература в национальной школе», специальность: «Учитель русского языка». 
+                </p>
+                <ul style="list-style: none;">
+                    <li>Трудовую деятельность начала в 1988 году в колхозе им. Ленина, Ленинского районы ЮКО – администратор;</li>
+                    <li>1990 – 1995 гг. - Школа им. Алтынсарина, с. Каратас, Ленинского района ЮКО – преподаватель русского языка;</li>
+                    <li>1995 – 2003 гг. – Частный предприниматель;</li>
+                    <li>2003 – 2008 гг. -  Независимый консультант, агент по страхованию жизни</li>
+                    <li>2008 – 2009 гг. - Агент в БТА в отделе «Депозиты», менеджер в НПФ «БТА Казахстан»;</li>
+                    <li>2009 – 2011 гг. - Алматы, АО «L-Capital» - директор учебного центра;</li>
+                    <li>2011 – 2012 гг. принимала активное участие в продвижении государственной программы по повышению инвестиционной культуры и финансовой грамотности населения. Для реализации этой Программы в 2010 году было заключено соглашение о сотрудничестве 04-19/66-20 между акционерным обществом «Региональный Финансовый Центр Города Алматы» и Акционерным обществом «L-CAPITAL»;</li>
+                    <li>2012 г. принимала активное участие в консультативной работе по открытию брокерских счетов для реализации программы «народное IPO» в Республике Казахстан в сотрудничестве с брокерской компанией «Асыл-Инвест».</li>
+                </ul>
+                <p>
+                    Для повышения  квалификации  прошла следующие курсы:
+                </p>
+                <ul style="list-style: none;">
+                    <li>- 2002 – 2003 гг. – Финансовые семинары за рубежом;</li>
+                    <li>- 2004 г. – Тренинг «Психология продаж», Австрия г. Грац;</li>
+                    <li>- 2006 г. – Повышение квалификации по специальности «Накопительное страхование жизни», Австрия, г. Грац;</li>
+                    <li>- 2008 г. – «Как заработать деньги без стартового капитала», Алматы, С. Азимов;</li>
+                    <li>- 2009 г. – «Мой гениальный ребенок», Алматы, С. М. Давлатов;</li>
+                    <li>- 2011 г. – обучение в Академии РФЦА, г. Алматы;</li>
+                    <li>- 2012 г. – «Новые инвестиционные решения», Дубаи, ОАЭ;</li>
+                    <li>- 2012 г. – «Законы судьбы», Алматы, О. Гадецкий;</li>
+                    <li>- Март 2013 г. – «Лучшие техники продаж», Алматы, А.Винс;</li>
+                    <li>- Май 2013 г. «Техника продажи», Анталья, В. Красноруцкий;</li>
+                    <li>- Октябрь 2013 г. – «Ораторское искусство 2.0», мастер-класс Р.Гандапаса;</li>
+                    <li>- Ноябрь 2013 г. – Сертификационный курс «НЛП-Практик» (I- модуль);</li>
+                    <li>- Декабрь 2013 г. – Сертификационный курс «НЛП-Практик» (II- модуль);</li>
+                    <li>- Февраль 2014 г. – Сертификационный курс «НЛП-Практик» (III- модуль);</li>
+                    <li>- 2014 г. Дистанционное обучение «Практическая Психология», Европейская школа корреспондентского обучения;</li>
+                </ul>
+                <p>
+                    В 2016 году является руководителем ТОО « Школа финансовой грамотности Айгуль Абдраимовой». <br>
+                    В ноябре 2017 года  начали реализацию с Национальной библиотекой РК совместного социально-образовательный проекта «Центр финансовой грамотности «BEREKE».
                 </p>
                 <div class="founder__slider">
                     <div>
@@ -557,11 +414,13 @@
                 <div class="consultants__consultants__slider">
                     @foreach($consultants as $consultant)
                         <div>
-                            <p>{{ $consultant->name }}</p>
-                            <img src="{{
-    							$consultant->profile_photo_path
-    							?: asset('images/slides/consultants-consultants-slider-img4.png')
-							}}">
+                            <button style="border: none; background: none;" type="button" data-bs-toggle="modal" data-bs-target="#consultantModal">
+                                <p>{{ $consultant->name }}</p>
+                                <img src="{{
+                                    $consultant->profile_photo_path
+                                    ?: asset('images/slides/consultants-consultants-slider-img4.png')
+                                }}">
+                            </button>
                         </div>
                     @endforeach
                 </div>
@@ -610,317 +469,4 @@
             <img src="{{asset('images/sapa-zhol-img.png')}}" alt="">
         </div>
     </div>
-
-    <footer id="footer">
-        <div class="footer__inner">
-            <div>
-                <img src="{{asset('images/icons/footer-icon.png')}}" alt="">
-            </div>
-            <div>
-                <p class="footer__title">Sapa</p>
-                <ul class="menu-vertical">
-                    <li><a href="#">Главная</a></li>
-                    <li><a href="#">SAPA Academy</a></li>
-                    <li><a href="#">SAPA Market</a></li>
-                    <li><a href="#">Стать партнером</a></li>
-                    <li><a href="#">Стать агентом</a></li>
-                </ul>
-            </div>
-            <div>
-                <p class="footer__title">Документы</p>
-                <ul class="menu-vertical">
-                    <li><a href="#">Политика конфиденциальности</a></li>
-                    <li><a href="#">Публичная оферта</a></li>
-                    <li><a href="#">Отказ от ответственности</a></li>
-                    <li><a href="#">Презентация о компании</a></li>
-                </ul>
-            </div>
-            <div class="footer__socials">
-                <p class="footer__title">Социальные сети</p>
-                <ul class="menu-horizontal">
-                    <li><a href="#"><img src="{{asset('images/icons/footer-social-youtube.png')}}" alt=""></a></li>
-                    <li><a href="#"><img src="{{asset('images/icons/footer-social-fb.png')}}" alt=""></a></li>
-                    <li><a href="#"><img src="{{asset('images/icons/footer-social-vk.png')}}" alt=""></a></li>
-                    <li><a href="#"><img src="{{asset('images/icons/footer-social-instagram.png')}}" alt=""></a></li>
-                    <div class="clearfix"></div>
-                </ul>
-                <p class="footer__title">Контакты</p>
-                <div class="footer__phone">
-                    <img src="{{asset('images/icons/footer-phone.png')}}" alt="">
-                    <p>+7 707 747 0427</p>
-                </div>
-                <div class="footer__mail">
-                    <img src="{{asset('images/icons/footer-mail.png')}}" alt="">
-                    <p>info@sapazhol.kz</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-auth">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-content">
-                <h3>Вход в систему</h3>
-                <div class="modal-body">
-                    <livewire:login-form/>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal"
-                            data-bs-target="#regModal">
-                        Зарегистрироваться
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="regModal" tabindex="-1"
-         aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-auth">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-content">
-                <h3>Зарегистрироваться</h3>
-                <div class="modal-body">
-                    @livewire('register-form', ['referrer_id' => $referrer_id])
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-bs-dismiss="modal" aria-label="Close"
-                            data-bs-toggle="modal" data-bs-target="#authModal">
-                        Войти
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="passModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-auth">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-content">
-                <h3>Восстановление пароля</h3>
-                <div class="modal-body">
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-                        <x-jet-label for="email" value="{{ __('Email') }}"/>
-                        <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email"
-                                     required autofocus/>
-                        <div class="text-left">
-                            <p>
-                                Когда вы введете вашу почту, вам будет отправлено сообщение со ссылкой на форму
-                                обновления пароля.
-                            </p>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-bs-dismiss="modal" aria-label="Close">
-                        Отправить
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="article-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg scrollable">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-content">
-                <img class="img-fluid" src="" alt="img" id="article-img">
-                <h3 id="article-title"></h3>
-                <div class="modal-body" id="article-body">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    @livewireScripts
-    @stack('script')
-    <script src="{{asset('landing/scripts/jquery-3.5.1-min.js')}}"></script>
-    <script src="{{asset('landing/scripts/bootstrap.min.js')}}"></script>
-    <script src="{{asset('landing/slick-1.8.1/slick/slick.min.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.menu-toggle').click(function () {
-                $('#navs').toggleClass('active');
-                $(this).toggleClass('menu-toggle-active');
-                $('body').toggleClass('disable-scroll');
-            })
-
-            $('.articles__slider').slick({
-                infinite: true,
-                autoplay: true,
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                arrows: true,
-                prevArrow: '<button class="slide-arrow prev-arrow"></button>',
-                nextArrow: '<button class="slide-arrow next-arrow"></button>',
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            });
-
-            $('.main-slider').slick({
-                infinite: true,
-                autoplay: true,
-                pauseOnHover: false,
-                dots: true,
-                arrows: false,
-            });
-
-            $('.community__blog-slider__for').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: false,
-                fade: true,
-                asNavFor: '.community__blog-slider__nav'
-            });
-
-            $('.community__blog-slider__nav').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                asNavFor: '.community__blog-slider__for',
-                focusOnSelect: true,
-                autoplay: true,
-                arrows: true,
-                prevArrow: '<button class="slide-arrow community__blog-slider__prev"></button>',
-                nextArrow: '<button class="slide-arrow community__blog-slider__next"></button>'
-            });
-
-            $('.founder__slider').slick({
-                autoplay: true,
-                fade: true,
-                arrows: true,
-                prevArrow: '<button class="slide-arrow founder__slider__prev"></button>',
-                nextArrow: '<button class="slide-arrow founder__slider__next"></button>'
-            });
-
-            $('.academy__slider1').slick({
-                infinite: false,
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                dots: true,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                            dots: false
-                        }
-                    }
-                ]
-            });
-
-            $('.academy__slider2').slick({
-                infinite: false,
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                dots: true,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                            dots: false
-                        }
-                    }
-                ]
-            });
-
-            $('.consultants__main__slider').slick({
-                autoplay: true,
-                fade: true,
-                arrows: true,
-                prevArrow: '<button class="slide-arrow consultants__main__slider__prev"></button>',
-                nextArrow: '<button class="slide-arrow consultants__main__slider__next"></button>'
-            });
-
-            $('.consultants__consultants__slider').slick({
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                arrows: true,
-                dots: true,
-                infinite: false,
-                responsive: [
-                    {
-                        breakpoint: 1200,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                            dots: false
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                            arrows: false
-                        }
-                    }
-                ]
-            });
-        })
-
-        function openArticleModal(title, content, imgPath) {
-            $('#article-img').attr('src', imgPath);
-            $('#article-title').html(title);
-            $('#article-body').html(content);
-            $('#article-modal').modal('show');
-        }
-    </script>
-</div>
-</body>
-
-</html>
+@endsection
