@@ -47,7 +47,8 @@ class UserResource extends JsonResource
                 $this->relationLoaded('sales'),
                 $this->sales
             ),
-            'email_verified' => !empty(data_get($this, 'email_verified_at'))
+            'email_verified' => !empty(data_get($this, 'email_verified_at')),
+            'is_default_referrer' => $this->is_default_referrer
         ];
     }
 }
