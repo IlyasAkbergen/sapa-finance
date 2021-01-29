@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BriefcaseChangeController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\web\admin\AgentInfoController;
 use App\Http\Controllers\web\admin\MessageController;
 use App\Http\Controllers\web\admin\PartnerController;
 use App\Http\Controllers\web\admin\PenaltyController;
@@ -190,7 +191,7 @@ Route::group(['middleware' => [
                 Route::get('/courses/{id}', [LessonController::class, 'show'])
                     ->name('courses');
 
-                Route::get('/agent', [CourseController::class, 'getStarterCourseAgent'])
+                Route::get('/agent', [AgentInfoController::class, 'index'])
                     ->name('starter_lesson');
 
                 Route::put('/lessons/{id}/submit_homework');
@@ -298,7 +299,7 @@ Route::group(['middleware' => [
                 [PartnerUserController::class, 'payments']
             )->name('user-briefcase-payments');
 
-
+            Route::resource('agent-info', AgentInfoController::class);
         });
 
 

@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.landing-guest')
 @section('content')
 <div id="about" style="background: none;">
     <div class="wrapper" style="background: none;">
