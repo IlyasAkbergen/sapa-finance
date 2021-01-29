@@ -57,11 +57,13 @@ Route::group([
    Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
        ->name('welcome');
 
-   Route::get('/course/{id}', [Controller::class, 'showCourse']);
+   Route::get('/course/{id}', [Controller::class, 'showCourse'])
+        ->name('guest_course');
 
    Route::get('/article/{id}', [Controller::class, 'showArticle']);
 
-   Route::get('/consultant/{id}', [Controller::class, 'showConsultant']);
+   Route::get('/consultant/{id}', [Controller::class, 'showConsultant'])
+       ->name('guest_consultant');
 });
 
 
