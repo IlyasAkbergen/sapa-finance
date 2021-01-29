@@ -11,7 +11,10 @@
 				Вернуться назад
         	</a>
 
-            <img style="width: 100%; margin-top: 20px;" src="../../images/bgs/articles-bg.jpg" alt="">
+            <img style="width: 100%; margin-top: 20px;"
+                 src="{{ $this->profile_photo_path
+                    ?: asset('images/slides/consultants-consultants-slider-img4.png' }}"
+                 alt="">
             <h2 style=" font-weight: 600;">{{  $consultant->name }}</h2>
             <p>
             	{{ $consultant->description }}
