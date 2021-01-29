@@ -15,6 +15,9 @@ class AuthController extends Controller
     {
         $referrer_id = $request->input('referrer_id', null);
         $consultants = User::where('referral_level_id', ReferralLevelEnum::Consultant)
+            ->select([
+                'id', 'name', 'profile_photo_path'
+            ])
             ->get();
 
         $articles = Article::orderBy('created_at')
