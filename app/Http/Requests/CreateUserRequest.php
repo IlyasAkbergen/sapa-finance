@@ -50,7 +50,8 @@ class CreateUserRequest extends FormRequest
             'iin' => ['required', 'numeric', 'unique:users'],
             'direct_points' => ['integer'],
             'team_points' => ['integer'],
-            'email_verified' => ['boolean']
+            'email_verified' => ['boolean'],
+            'is_default_referrer' => ['boolean']
         ];
     }
 }
