@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Enums\ReferralLevelEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Course;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,8 +21,12 @@ class AuthController extends Controller
             ->limit(10)
             ->get();
 
+        $courses = Course::orderByDesc('created_at')
+            ->limit(10)
+            ->get();
+
         return view('welcome', compact([
-            'referrer_id', 'consultants', 'articles'
+            'referrer_id', 'consultants', 'articles', 'courses'
         ]));
     }
 }
