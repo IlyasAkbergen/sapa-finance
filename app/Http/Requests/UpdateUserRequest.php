@@ -48,7 +48,8 @@ class UpdateUserRequest extends FormRequest
             'iin' => ['required', 'numeric', 'unique:users,iin,'.$this->id],
             'direct_points' => ['integer'],
             'team_points' => ['integer'],
-            'email_verified' => ['boolean']
+            'email_verified' => ['boolean'],
+            'is_default_referrer' => ['boolean']
         ];
     }
 }

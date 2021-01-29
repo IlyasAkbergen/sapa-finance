@@ -77,7 +77,10 @@ class UserController extends WebBaseController
         }
 
         if (!$request->has('referrer_id')) {
-            $data['referrer_id'] = env('SAPA_USER_ID');
+            $default_referrer = User::where('is_default_referrer', true)
+                                    ->first();
+            $data['referrer_id'] = data_get($default_referrer, 'id')
+                ?: env('SAPA_USER_ID');
         }
 
         $user = $this->userService->create($data);
@@ -140,7 +143,10 @@ class UserController extends WebBaseController
         }
 
         if (!$request->has('referrer_id')) {
-            $data['referrer_id'] = env('SAPA_USER_ID');
+            $default_referrer = User::where('is_default_referrer', true)
+                                    ->first();
+            $data['referrer_id'] = data_get($default_referrer, 'id')
+                ?: env('SAPA_USER_ID');
         }
 
         if ($request->has('email_verified')) {
