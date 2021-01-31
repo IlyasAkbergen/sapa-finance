@@ -26,9 +26,9 @@
         form: this.$inertia.form({
           title: "",
           tag: 'is_became_agent',
-          price_with_feedback: null,
-          price_without_feedback: null,
-          direct_fee: null,
+          price_with_feedback: 0,
+          price_without_feedback: 0,
+          direct_fee: 0,
           short_description: null,
           description: null,
           uuid: uuid.v1(),

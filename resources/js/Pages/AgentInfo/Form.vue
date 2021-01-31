@@ -56,6 +56,14 @@
 
         <JetInputError :message="form.error('description')" class="mt-1"/>
 
+        <label class="profile-form__label mt-3 mb-0" for="video_url">
+          Ссылка на видео
+        </label>
+        <textarea class="profile-form__textarea mb-0"
+                  id="video_url" cols="30" rows="3"
+                  v-model="form.video_url"
+                  placeholder="Вставьте ссылку на видео"></textarea>
+
         <label class="profile-form__label">
             Документы для скачивания
         </label>

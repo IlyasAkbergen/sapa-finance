@@ -35,7 +35,10 @@
       </p>
       <p class="main__content__agent-card__video-title">Видео</p>
       <div class="ai__video">
-
+        <iframe class="w-100"
+                height="300"
+                :src="agent_info.video_url">
+        </iframe>
       </div>
 
       <p class="main__content__agent-card__img-title">Фото</p>
