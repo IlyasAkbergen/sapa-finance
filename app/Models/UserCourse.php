@@ -13,13 +13,18 @@ class UserCourse extends Model
 
     protected $fillable = [
         'user_id', 'course_id', 'progress',
-        'score', 'completed', 'paid', 'status'
+        'score', 'completed', 'paid', 'status',
+        'consultant_id'
     ];
 
     protected $dispatchesEvents = [
         // 'completed' => todo realize
     ];
 
+    const STATUS_PENDING = 1;
+    const STATUS_ACCEPTED = 2;
+    const STATUS_REJECTED = 3;
+    const STATUS_CLOSED = 4;
 
     public function purchase()
     {
@@ -29,6 +34,11 @@ class UserCourse extends Model
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     function makeCompleted()

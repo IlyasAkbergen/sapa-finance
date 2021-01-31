@@ -200,6 +200,11 @@
         showingNavigationDropdown: false,
         adminRouteList: [
           {
+            url: 'admin.course-orders',
+            name: 'Заявки на Курсы',
+            icon: 'Question',
+          },
+          {
             url: 'admin.briefcase-orders',
             name: 'Заявки на программы',
             icon: 'Question',
