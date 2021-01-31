@@ -3,6 +3,7 @@
 use App\Http\Controllers\BriefcaseChangeController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\web\admin\AgentInfoController;
+use App\Http\Controllers\web\admin\CourseUserController;
 use App\Http\Controllers\web\admin\MessageController;
 use App\Http\Controllers\web\admin\PartnerController;
 use App\Http\Controllers\web\admin\PenaltyController;
@@ -235,6 +236,26 @@ Route::group(['middleware' => [
             Route::post('courses-crud/upload-attachments',
                 [CourseCrudController::class, 'uploadAttachments']
             )->name('upload-course-attachments');
+
+            Route::get(
+                'course-orders',
+                [CourseUserController::class, 'index']
+            )->name('admin.course-orders');
+
+            Route::put(
+                '/course-order/accept/{id}',
+                [CourseUserController::class, 'acceptOrder']
+            );
+
+            Route::put(
+                '/course-order/reject/{id}',
+                [CourseUserController::class, 'rejectOrder']
+            );
+
+            Route::delete(
+                '/course-order/{id}',
+                [CourseUserController::class, 'delete']
+            );
 
             Route::get(
                 '/courses-stats',

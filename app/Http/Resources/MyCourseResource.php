@@ -30,7 +30,9 @@ class MyCourseResource extends JsonResource
             'price_without_feedback' => $this->price_without_feedback,
             'price_with_feedback' => $this->price_with_feedback,
             'image_path' => $this->image_path,
-            'video_url' => $this->video_url
+            'video_url' => $this->video_url,
+            'status' => !empty($this->auth_user_pivot)
+                && $this->auth_user_pivot->status,
         ];
     }
 }

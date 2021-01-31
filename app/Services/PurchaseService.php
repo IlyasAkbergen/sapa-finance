@@ -26,6 +26,7 @@ class PurchaseService extends BaseServiceImpl implements PurchaseServiceContract
         return $purchasable->users()->attach($user_ids, [
             'consultant_id' => $consultant_id,
             'paid' => true,
+            'status' => 2,
             'purchase_id' => data_get($purchase, 'id'),
             'with_feedback' => data_get($purchase, 'with_feedback')
         ]);

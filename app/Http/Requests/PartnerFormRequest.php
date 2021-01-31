@@ -43,6 +43,7 @@ class PartnerFormRequest extends FormRequest
             'email' => ['required', 'max:255', 'unique:users,email,'.$this->id ?:null],
             'phone' => ['required', 'unique:users,phone,'.$this->id ?:null],
             'bin' => ['required', 'numeric', 'unique:users,bin,'.$this->id ?:null],
+            'email_verified_at' => ['nullable'],
         ];
     }
 }

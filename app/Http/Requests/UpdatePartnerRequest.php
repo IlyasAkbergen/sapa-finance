@@ -42,7 +42,8 @@ class UpdatePartnerRequest extends FormRequest
             'email' => ['required', 'max:255', 'unique:users,email,'.$this->id],
             'phone' => ['required', 'unique:users,phone,'.$this->id],
             'image' => ['required_without:id'],
-            'bin' => ['required']
+            'bin' => ['required'],
+            'email_verified_at' => ['nullable'],
         ];
     }
 }

@@ -83,6 +83,10 @@ class UserController extends WebBaseController
                 ?: env('SAPA_USER_ID');
         }
 
+        if ($request->has('email_verified')) {
+            $data['email_verified_at'] = Carbon::now();
+        }
+
         $user = $this->userService->create($data);
 
         if (!empty($user)) {

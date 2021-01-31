@@ -8,6 +8,7 @@ use App\Http\Resources\PartnerResource;
 use App\Models\Role;
 use App\Services\AttachmentService;
 use App\Services\UserService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
@@ -52,6 +53,13 @@ class CabinetController extends Controller
         if ($request->has('password') && !empty($request->password)) {
             $data['password'] = Hash::make($request->input('password'));
         }
+
+        if ($request->has('email_verified_at')) {
+            $data['email_verified_at'] = data_get($request, 'email_verified_at')
+                ? Carbon::now()
+                : null;
+        }
+
         $user = $this->userService->update(
             $request->input('id'),
             $data

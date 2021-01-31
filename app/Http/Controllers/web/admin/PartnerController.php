@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PartnerFormRequest;
 use App\Models\Partner;
 use App\Services\PartnerServiceContract;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -43,10 +44,17 @@ class PartnerController extends Controller
             $data['password'] = Hash::make($request->input('password'));
         }
 
+        if ($request->has('email_verified_at')
+            && data_get($request, 'email_verified_at') === true) {
+            $data['email_verified_at'] = Carbon::now();
+        }
+
         $partner = $this->partnerService->create($data);
 
         if (!empty($partner)) {
-            event(new Registered($partner));
+            if (!config('app.debug')) {
+                event(new Registered($partner));
+            }
             return redirect()
                 ->route('partners-crud.edit', $partner->id);
         } else {
@@ -73,6 +81,11 @@ class PartnerController extends Controller
 
         if ($request->has('password') && !empty($request->password)) {
             $data['password'] = Hash::make($request->input('password'));
+        }
+
+        if ($request->has('email_verified_at')
+            && data_get($request, 'email_verified_at') === true ) {
+            $data['email_verified_at'] = Carbon::now();
         }
 
         $partner = $this->partnerService->update(
