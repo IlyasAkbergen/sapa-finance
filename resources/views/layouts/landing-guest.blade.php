@@ -199,17 +199,17 @@
         <header>
             <div class="inner">
                 <img src="{{asset('images/icons/logo.png')}}" alt="Logo"/>
-                <a href="#" id="logo">
+                <a href="/" id="logo">
                     SAPA
                 </a>
                 <div id="navs">
                     <nav id="menu">
                         <ul>
                             <li><a href="#about">О компании</a></li>
-                            <li><a href="#academy__inner__1">SAPA Academy</a></li>
-                            <li><a href="#academy__inner__2">SAPA Market</a></li>
-                            <li><a href="#">Стать партнером</a></li>
-                            <li><a href="#">Стать агентом</a></li>
+                            <li><a href="#academy">SAPA Academy</a></li>
+                            <li><a href="#academy">SAPA Market</a></li>
+                            <li><a href="#consultants">Стать партнером</a></li>
+                            <li><a href="#consultants">Стать агентом</a></li>
                             <li><a href="#footer">Контакты</a></li>
                         </ul>
                     </nav>
@@ -541,14 +541,25 @@
                 </div>
             </div>
         </div>
+        <!-- <style>
+            .news .modal-content{
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+            }
+        </style> -->
         <div class="modal fade" id="article-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg scrollable">
+            <div class="modal-dialog modal-lg scrollable news">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-content">
-                    <img class="img-fluid" src="" alt="img" id="article-img">
-                    <h3 id="article-title"></h3>
-                    <div class="modal-body" id="article-body">
-
+                    <div>
+                        <img class="img-fluid" src="" alt="img" id="article-img">
+                    </div>
+                    <div>
+                        <h3 id="article-title"></h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing, elit. Hic, itaque et voluptas est autem deserunt labore dolore sequi pariatur quo, rem, magni. Eos, incidunt sequi nemo ullam minima molestiae id, eius illum quaerat esse. Facilis omnis harum perferendis quidem ab.
+                        </p>
                     </div>
                 </div>
             </div>

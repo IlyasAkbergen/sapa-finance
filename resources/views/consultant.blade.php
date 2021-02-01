@@ -1,6 +1,31 @@
 @extends('layouts.landing-guest')
 @section('content')
 <h2></h2>
+<style>
+    .block_cc{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    .block_cc > div:first-child{
+        width: 40%;
+    }
+    .block_cc > div:last-child{
+        width: 55%;
+    }
+    @media (max-width: 767px){
+        .block_cc{
+            display: inline;
+            text-align: center;
+        }
+        .block_cc > div:first-child{
+            width: 65%;
+            margin: 0 auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    }
+</style>
 <div id="about" style="background: none;">
     <div class="wrapper" style="background: none;">
         <div class="inner page-course-inner">
@@ -10,28 +35,20 @@
 				</svg>
 				Вернуться назад
         	</a>
-
-            <img style="width: 100%; margin-top: 20px;"
-                 src="{{ $consultant->profile_photo_path
+            <div class="block_cc">
+                <div>
+                    <img style="width: 100%;" src="{{ $consultant->profile_photo_path
                     ?: asset('images/slides/consultants-consultants-slider-img4.png') }}"
                  alt="">
-            <h2 style=" font-weight: 600;">{{  $consultant->name }}</h2>
-            <p>
-            	{{ $consultant->description }}
-            </p>
-
-        </div>
-    </div>
-</div>
-<div class="articles">
-    <div class="articles__wrapper">
-        <h1>Читать также</h1>
-        <div class="articles__slider slick-initialized slick-slider">
-            <div class="slick-list draggable">
-            	<div class="slick-track" style="opacity: 1; width: 0px; transform: translate3d(0px, 0px, 0px);">
-
-            	</div>
+                </div>
+                <div>
+                    <h2 style=" font-weight: 600;">{{  $consultant->name }}</h2>
+                    <p>
+                        {{ $consultant->description }}
+                    </p>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
