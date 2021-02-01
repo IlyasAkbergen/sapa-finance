@@ -125,14 +125,14 @@ $(document).ready(function() {
   });
 
   /*========== Agent but course button open modal function ==========*/
-  $('.main__content__agent-card__bottom__button').click(function() {
-    $('.page__agent-modal').css("display", "block");
-  });
+  // $('.main__content__agent-card__bottom__button').click(function() {
+  //   $('.page__agent-modal').css("display", "block");
+  // });
 
   /*========== Agent modal close button function ==========*/
-  $('.page__agent-modal .fa-times').click(function() {
-    $('.page__agent-modal').css("display", "none");
-  });
+  // $('.page__agent-modal .fa-times').click(function() {
+  //   $('.page__agent-modal').css("display", "none");
+  // });
 
   /*========== Agent agree requirements function ==========*/
   $("#page__agent-modal__body__checkbox").change(function() {

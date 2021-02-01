@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BriefcaseChangeController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\web\admin\AgentInfoController;
+use App\Http\Controllers\web\admin\CourseUserController;
 use App\Http\Controllers\web\admin\MessageController;
 use App\Http\Controllers\web\admin\PartnerController;
 use App\Http\Controllers\web\admin\PenaltyController;
@@ -57,11 +59,13 @@ Route::group([
    Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
        ->name('welcome');
 
-   Route::get('/course/{id}', [Controller::class, 'showCourse']);
+   Route::get('/course/{id}', [Controller::class, 'showCourse'])
+        ->name('guest_course');
 
    Route::get('/article/{id}', [Controller::class, 'showArticle']);
 
-   Route::get('/consultant/{id}', [Controller::class, 'showConsultant']);
+   Route::get('/consultant/{id}', [Controller::class, 'showConsultant'])
+       ->name('guest_consultant');
 });
 
 
@@ -188,7 +192,7 @@ Route::group(['middleware' => [
                 Route::get('/courses/{id}', [LessonController::class, 'show'])
                     ->name('courses');
 
-                Route::get('/agent', [CourseController::class, 'getStarterCourseAgent'])
+                Route::get('/agent', [AgentInfoController::class, 'index'])
                     ->name('starter_lesson');
 
                 Route::put('/lessons/{id}/submit_homework');
@@ -232,6 +236,26 @@ Route::group(['middleware' => [
             Route::post('courses-crud/upload-attachments',
                 [CourseCrudController::class, 'uploadAttachments']
             )->name('upload-course-attachments');
+
+            Route::get(
+                'course-orders',
+                [CourseUserController::class, 'index']
+            )->name('admin.course-orders');
+
+            Route::put(
+                '/course-order/accept/{id}',
+                [CourseUserController::class, 'acceptOrder']
+            );
+
+            Route::put(
+                '/course-order/reject/{id}',
+                [CourseUserController::class, 'rejectOrder']
+            );
+
+            Route::delete(
+                '/course-order/{id}',
+                [CourseUserController::class, 'delete']
+            );
 
             Route::get(
                 '/courses-stats',
@@ -296,7 +320,7 @@ Route::group(['middleware' => [
                 [PartnerUserController::class, 'payments']
             )->name('user-briefcase-payments');
 
-
+            Route::resource('agent-info', AgentInfoController::class);
         });
 
 

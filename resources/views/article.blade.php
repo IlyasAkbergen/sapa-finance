@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.landing-guest')
 @section('content')
 
     <h1>{{ $article->title }}</h1>

@@ -1365,7 +1365,7 @@ body {
 }
 
 .page .page__agent-modal {
-    display: none;
+    /*display: none;*/
     position: absolute;
     top: 0;
     left: 0;
@@ -1377,7 +1377,7 @@ body {
 
 .page .page__agent-modal i {
     position: absolute;
-    top: 65px;
+    top: 90px;
     right: 5%;
     color: #fff;
 }

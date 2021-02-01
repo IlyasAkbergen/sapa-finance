@@ -36,7 +36,7 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
         'name', 'email', 'phone', 'iin', 'password', 'balance_id',
         'referrer_id', 'root_referer_id', 'referral_level_id',
         'profile_photo_path', 'description', 'bin', 'role_id', 'partner_id',
-        'next_level_progress', 'email_verified_at'
+        'next_level_progress', 'email_verified_at', 'is_default_referrer'
     ];
 
     /**

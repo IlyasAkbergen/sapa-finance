@@ -31,12 +31,13 @@
            @change="upload"
            class="hidden">
   </div>
-  <div v-else class="main__content__lesson-card__materials">
+  <div v-else class="main__content__lesson-card__materials main__content__agent-card__materials
+    тот_элемент_который_находится_под_этим_дивом, у_которго_есть_дядя-с--айдишкой--хз-какой--бещщщенные-классы">
     <a v-for="item in list"
        :href="item.path"
        :key="item.id"
        target="_blank"
-       class="main__content__lesson-card__materials__pdf">
+       class="main__content__lesson-card__materials__pdf main__content__agent-card__materials__pdf">
       {{ item.name | truncate(5) }}
     </a>
   </div>

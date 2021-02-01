@@ -10,7 +10,7 @@
                v-if="courses && courses.length > 0">
              <CourseCard v-for="course in courses"
                         :course="course"
-                        :bought="true"
+                        :bought="course.bought"
                         :key="course.id" />
           </div>
           <div class="main__content__agent-empty-courses" v-else>

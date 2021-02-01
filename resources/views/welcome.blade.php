@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.landing-guest')
 @section('content')
     <div class="main-slider">
         <div>
@@ -120,17 +120,17 @@
                     Повышение финансовой грамотности населения является приоритетным направлением, но не развитым. В г. Алматы нет подобного рода услуг в одном месте. Имеющиеся финансовые консультанты лишь агенты отдельных компаний, представители инвестиционных компаний, либо финансовых пирамид. Финансовых пирамид на сегодняшний день очень много, на них есть спрос, соответственно постоянно возникает предложение. Население  хочет заработать быстро, надеется успеть забрать свои деньги, рискует, но чаще всего не успевает. <br>
                     <i style="font-size: 16px;">Вся информация по финансовым продуктам будет идти по принципу одного окна. В центре всегда «стоит» клиент со своими потребностями и целями. </i><br><br>
                     Мы хотим стать узнаваемым брендом Казахстана путем внедрения стандартизации, привлечения лучших как местных, так и зарубежных, специалистов в своей области! <br>
-                    <b>Миссия компании – оказание максимального содействия в повышении финансовых знаний населения, как основного элемента системы защиты прав потребителей финансовых услуг, непрерывного доступа населения к финансовым услугам, обеспечения финансовой стабильности и общественного благосостояния</b> путем предоставления: 
+                    <b>Миссия компании – оказание максимального содействия в повышении финансовых знаний населения, как основного элемента системы защиты прав потребителей финансовых услуг, непрерывного доступа населения к финансовым услугам, обеспечения финансовой стабильности и общественного благосостояния</b> путем предоставления:
                 </p>
                 <ul style="list-style: decimal; text-align: left;">
                     <li>
                         персонифицированных консультационных услуг широкого спектра (обучение эффективному управлению личными финансами);
                     </li>
                     <li>
-                        консалтинг в области современных методик и технологий персонального (частного ) финансового планирования и обслуживания; 
+                        консалтинг в области современных методик и технологий персонального (частного ) финансового планирования и обслуживания;
                     </li>
                     <li>
-                        исследовательские проекты; 
+                        исследовательские проекты;
                     </li>
                     <li>
                         сотрудничество с компаниями с возможностью предоставления займов и инвестиций в долю бизнеса для поддержания развития казахстанского бизнеса;
@@ -140,7 +140,7 @@
                     </li>
                 </ul>
                 <p style="margin-bottom: 1rem;">
-                    Центр уделяет большое внимание развитию цивилизованного рынка услуг Независимых Финансовых Советников и формированию стандартов качественного обслуживания в сфере управления личными финансами. 
+                    Центр уделяет большое внимание развитию цивилизованного рынка услуг Независимых Финансовых Советников и формированию стандартов качественного обслуживания в сфере управления личными финансами.
                     В основе программ подготовки лежат Европейские методики управления личными финансами, используемые более 30 лет Независимыми финансовыми советниками в странах Европы и Северной Америки и адаптированные к казахстанским условиям.
                     <br><br>
                     Центр является лидером рынка обучения методикам управления личными финансами. Прежде всего, работа компании представляется в роли своеобразного моста, причем как по финансовому, так и по образовательному направлению. Практически данный проект позволит центру продавать свой практический опыт, знания и партнерства, что для любого человека (семьи), для любого предпринимателя (компании) является наиболее практичным, полезным и значимым.
@@ -154,7 +154,7 @@
             <div class="founder__main">
                 <h1>Об основателе</h1>
                 <p>
-                    Айгуль Дильдабековна, родилась 19 ноября  1962 г. в г. Ташкент, в Республике Узбекистане. В 1980 г. окончила специализированный класс средней школы № 3 имени Н. Крупской в г. Джамбуле. В 1985 г. Окончила с отличием Джамбульский гидромелиоративно-строительный институт, факультет «Гидромелиорация», специальность: «Инженер-гидротехник». В 1995 гг. окончила Шымкентский педагогический институт, факультет: «Русский язык и литература в национальной школе», специальность: «Учитель русского языка». 
+                    Айгуль Дильдабековна, родилась 19 ноября  1962 г. в г. Ташкент, в Республике Узбекистане. В 1980 г. окончила специализированный класс средней школы № 3 имени Н. Крупской в г. Джамбуле. В 1985 г. Окончила с отличием Джамбульский гидромелиоративно-строительный институт, факультет «Гидромелиорация», специальность: «Инженер-гидротехник». В 1995 гг. окончила Шымкентский педагогический институт, факультет: «Русский язык и литература в национальной школе», специальность: «Учитель русского языка».
                 </p>
                 <ul style="list-style: none;">
                     <li>Трудовую деятельность начала в 1988 году в колхозе им. Ленина, Ленинского районы ЮКО – администратор;</li>
@@ -207,173 +207,175 @@
             <div class="academy__inner__1" id="academy__inner__1">
                 <h1>SAPA Academy</h1>
                 <div class="academy__slider1">
+                    @foreach($courses as $course)
                     <div>
                         <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">
-                        <h1>Финансовая диагностика</h1>
+                        <h1>{{ $course->title }}</h1>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
+                            {{ $course->short_description }}
                         </p>
-                        <a href="#">Подробнее о курсе</a>
+                        <a href="{{ route('guest_course', $course->id) }}">Подробнее о курсе</a>
                     </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">
-                        <h1>Курсы, тренинги</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">
-                        <h1>Составление ЛФП</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">
-                        <h1>Курсы, тренинги</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">
-                        <h1>Составление ЛФП</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">
-                        <h1>Финансовая диагностика</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">
-                        <h1>Финансовая диагностика</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img2.png')}}" alt="">
-                        <h1>Курсы, тренинги</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">
-                        <h1>Составление ЛФП</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
+                    @endforeach
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">--}}
+{{--                        <h1>Курсы, тренинги</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">--}}
+{{--                        <h1>Составление ЛФП</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">--}}
+{{--                        <h1>Курсы, тренинги</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">--}}
+{{--                        <h1>Составление ЛФП</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">--}}
+{{--                        <h1>Финансовая диагностика</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">--}}
+{{--                        <h1>Финансовая диагностика</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img2.png')}}" alt="">--}}
+{{--                        <h1>Курсы, тренинги</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">--}}
+{{--                        <h1>Составление ЛФП</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
             <div class="academy__inner__2" id="academy__inner__2">
                 <h1>SAPA Market</h1>
                 <div class="academy__slider2">
+                    @foreach($courses as $course)
                     <div>
                         <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">
-                        <h1>Финансовая диагностика</h1>
+                        <h1>{{ $course->title }}</h1>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
+                            {{ $course->short_description }}
                         </p>
-                        <a href="#">Подробнее о курсе</a>
+                        <a href="{{ route('guest_course', $course->id) }}">Подробнее о курсе</a>
                     </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img2.png')}}" alt="">
-                        <h1>Курсы, тренинги</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">
-                        <h1>Составление ЛФП</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img2.png')}}" alt="">
-                        <h1>Курсы, тренинги</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">
-                        <h1>Составление ЛФП</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">
-                        <h1>Финансовая диагностика</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">
-                        <h1>Финансовая диагностика</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img2.png')}}" alt="">
-                        <h1>Курсы, тренинги</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
-                    <div>
-                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">
-                        <h1>Составление ЛФП</h1>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever.
-                        </p>
-                        <a href="#">Подробнее о курсе</a>
-                    </div>
+                    @endforeach
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img2.png')}}" alt="">--}}
+{{--                        <h1>Курсы, тренинги</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">--}}
+{{--                        <h1>Составление ЛФП</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img2.png')}}" alt="">--}}
+{{--                        <h1>Курсы, тренинги</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">--}}
+{{--                        <h1>Составление ЛФП</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">--}}
+{{--                        <h1>Финансовая диагностика</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img1.png')}}" alt="">--}}
+{{--                        <h1>Финансовая диагностика</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img2.png')}}" alt="">--}}
+{{--                        <h1>Курсы, тренинги</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <img src="{{asset('images/icons/academy-slider-img3.png')}}" alt="">--}}
+{{--                        <h1>Составление ЛФП</h1>--}}
+{{--                        <p>--}}
+{{--                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has--}}
+{{--                            been the industry's standard dummy text ever.--}}
+{{--                        </p>--}}
+{{--                        <a href="#">Подробнее о курсе</a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>
@@ -414,13 +416,14 @@
                 <div class="consultants__consultants__slider">
                     @foreach($consultants as $consultant)
                         <div>
-                            <button style="border: none; background: none;" type="button" data-bs-toggle="modal" data-bs-target="#consultantModal">
+                            <a style="border: none; background: none;" type="button"
+                               href="{{ route('guest_consultant', $consultant->id) }}">
                                 <p>{{ $consultant->name }}</p>
                                 <img src="{{
                                     $consultant->profile_photo_path
                                     ?: asset('images/slides/consultants-consultants-slider-img4.png')
                                 }}">
-                            </button>
+                            </a>
                         </div>
                     @endforeach
                 </div>

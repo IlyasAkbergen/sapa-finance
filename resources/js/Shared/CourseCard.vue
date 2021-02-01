@@ -35,7 +35,14 @@
         <p class="main__content__courses-flex__card__bottom__price">
           {{ course.price_without_feedback }} ₸
         </p>
+
+        <span
+          v-if="course.status && course.status == 1"
+          style="vertical-align: super; color: #5FADE5; text-transform: uppercase; font-size: 14px; font-weight: bold; margin-right: 5px;">
+              Запрос отправлен
+        </span>
         <inertia-link :href="route('courses.show', course.id)"
+           v-else
            class="main__content__courses-flex__card__bottom__button">
           Подробнее
         </inertia-link>

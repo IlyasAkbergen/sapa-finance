@@ -68,6 +68,17 @@
       </label>
     </div>
 
+    <div v-if="isAdmin">
+      <label class="profile-form__label mt-3" for="is_default_referrer">Консультант по умолчанию</label>
+      <input class="profile-form__checkbox mb-0" type="checkbox"
+             v-model="form.is_default_referrer"
+             :checked="form.is_default_referrer"
+             id="is_default_referrer">
+      <label class="profile-form__clabel profile-form__clabel-2">
+        Да
+      </label>
+    </div>
+
     <div v-if="form.id">
       <label class="profile-form__label mt-3" for="item" v-if="isAdmin">Личные единицы</label>
       <input class="profile-form__input mb-0" type="number"

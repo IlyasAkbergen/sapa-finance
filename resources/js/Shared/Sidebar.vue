@@ -111,25 +111,25 @@
           <!--                        Услуги на сайте-->
           <!--                    </SidebarItem>-->
 
-                    <SidebarItem
-                            v-if="isAdmin"
-                            :route_name="'consultants-crud.index'"
-                            icon="Conversation">
-                        Консультанты на сайте
-                    </SidebarItem>
-                    <SidebarItem
-                            v-if="isAdmin"
-                            :route_name="'supports.index'"
-                            icon="Info">
-                        Список запросов на поддержку
-                    </SidebarItem>
+          <SidebarItem
+                  v-if="isAdmin"
+                  :route_name="'consultants-crud.index'"
+                  icon="Conversation">
+              Консультанты на сайте
+          </SidebarItem>
+          <SidebarItem
+                  v-if="isAdmin"
+                  :route_name="'supports.index'"
+                  icon="Info">
+              Список запросов на поддержку
+          </SidebarItem>
 
-          <!--                    <SidebarItem-->
-          <!--                            v-if="isAdmin"-->
-          <!--                            :route_name="'welcome'"-->
-          <!--                            icon="Info">-->
-          <!--                        Информация об агентах-->
-          <!--                    </SidebarItem>-->
+          <SidebarItem
+                  v-if="isAdmin"
+                  :route_name="'agent-info.index'"
+                  icon="Info">
+              Информация об агентах
+          </SidebarItem>
 
           <SidebarItem
             v-if="isAdmin"
@@ -137,12 +137,14 @@
             icon="Bell">
             Уведомления
           </SidebarItem>
+
           <SidebarItem
             v-if="!isAdmin"
             :route_name="'my_notify'"
             icon="Bell">
             Уведомления
           </SidebarItem>
+
           <inertia-link v-if="canBecomeAgent"
                         :href="route('starter_lesson')"
                         class="sidebar__menu__link mt-4">
@@ -197,6 +199,11 @@
       return {
         showingNavigationDropdown: false,
         adminRouteList: [
+          {
+            url: 'admin.course-orders',
+            name: 'Заявки на Курсы',
+            icon: 'Question',
+          },
           {
             url: 'admin.briefcase-orders',
             name: 'Заявки на программы',

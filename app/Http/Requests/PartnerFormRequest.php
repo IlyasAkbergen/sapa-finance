@@ -40,9 +40,10 @@ class PartnerFormRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:255'],
-            'email' => ['required', 'max:255', 'unique:partners,email,'.$this->id ?:null],
-            'phone' => ['required', 'unique:partners,phone,'.$this->id ?:null],
-            'bin' => ['required', 'numeric', 'unique:partners,bin,'.$this->id ?:null],
+            'email' => ['required', 'max:255', 'unique:users,email,'.$this->id ?:null],
+            'phone' => ['required', 'unique:users,phone,'.$this->id ?:null],
+            'bin' => ['required', 'numeric', 'unique:users,bin,'.$this->id ?:null],
+            'email_verified_at' => ['nullable'],
         ];
     }
 }

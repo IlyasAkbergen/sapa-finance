@@ -37,6 +37,7 @@ class PartnerResource extends JsonResource
                 UserResource::make($this->referrer)
             ),
             'bin' => $this->bin,
+            'email_verified_at' => data_get($this, 'email_verified_at'),
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web;
 
 use App\Http\Requests\PurchaseRequest;
 use App\Models\Course;
+use App\Models\UserCourse;
 use App\Services\Gates\PaymentGateContract;
 use App\Services\PurchaseServiceContract;
 use App\Services\UserService;
@@ -116,7 +117,23 @@ class PurchaseController extends WebBaseController
             return $this->responseFail('Что-то пошло не так.');
         } else {
             if (!$request->pay_online) {
-                return redirect()->route('my-courses');
+
+                UserCourse::create([
+                    'status' => UserCourse::STATUS_PENDING,
+                    'paid' => 0,
+                    'purchase_id' => $purchase->id,
+                    'user_id' => $purchase->user_id,
+                    'course_id' => $purchase->purchasable_id,
+                    'with_feedback' => $request->with_feedback,
+                    'consultant_id' => Auth::user()->referrer_id ?: env('SAPA_USER_ID')
+                ]);
+
+                return redirect()
+                    ->route('my-courses')
+                    ->with([
+                        'message' => 'Заявка на курс отправлена.',
+                        'sub_message' => 'Ожидайте ответа администратора.'
+                    ]);
             }
 
             $this->paymentGate->initPayin();
