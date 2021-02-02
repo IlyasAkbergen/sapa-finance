@@ -194,15 +194,15 @@
                     <div>
                         <img src="{{asset('images/slides/founder-slider-img1.png')}}" alt="">
                     </div>
-                    <div>
+                    <!-- <div>
                         <img src="{{asset('images/slides/founder-slider-img2.jpeg')}}" alt="">
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="academy">
+    <div class="academy" id="academy">
         <div class="academy__inner">
             <div class="academy__inner__1" id="academy__inner__1">
                 <h1>SAPA Academy</h1>
@@ -385,7 +385,7 @@
         <div class="inner">
             <div class="materials-text">
                 <img src="{{asset('images/icons/Paper.png')}}" alt="paper">
-                <p>Полезные материалы</p>
+                <p style="margin-bottom: 0;">Полезные материалы</p>
             </div>
             <div class="files">
                 <a href="#"><img src="{{asset('images/icons/Downlaod.png')}}" alt="">Шаблон бюджета</a>
@@ -395,7 +395,7 @@
         </div>
     </div>
 
-    <div class="consultants">
+    <div class="consultants" id="consultants">
         <div class="consultants__inner">
             <div class="consultants__main">
                 <p>

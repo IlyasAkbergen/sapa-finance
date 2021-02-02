@@ -821,6 +821,16 @@ nav#auth ul li a:hover {
 #materials .files a:hover img {
     filter: invert(99%) sepia(99%) saturate(22%) hue-rotate(212deg) brightness(104%) contrast(100%);
 }
+.community .slick-slide img{
+    width: 100%;
+}
+.slick-slide img{
+    max-height: 470px;
+    object-fit: cover;
+}
+.consultants .slick-slide img{
+    width: 255px;
+}
 
 #materials .files img {
     vertical-align: middle;
@@ -828,6 +838,7 @@ nav#auth ul li a:hover {
     height: auto;
     margin-right: 10px;
     transition: 0.5s;
+    margin-top: -3px;
 }
 
 /*----- Materials End -----*/
@@ -1233,6 +1244,7 @@ nav#auth ul li a:hover {
     display: block;
     width: 100%;
     height: auto;
+    border-radius: 15px;
 }
 
 /*----- Consultants End -----*/
@@ -1330,10 +1342,33 @@ footer .footer__mail img {
     padding-right: 20% !important; 
     padding-top: 30px !important;
 }
+@media (max-width: 1020px){
+    .consultants .consultants__inner .consultants__main .consultants__main__slider .consultants__main__slider__next{
+        right: 5px;
+    }
+}
+div.consultants .consultants__inner .consultants__main__slider img{
+    border-radius: 15px;
+}
 @media (max-width: 767px){
     .page-course-inner{
         padding-right: 0% !important; 
         padding-top: 30px !important;
+    }
+    .consultants__consultants .consultants__consultants__slider .slick-list .slick-track .slick-slide{
+        text-align: center;
+    }
+    .consultants__consultants .consultants__consultants__slider .slick-list .slick-track .slick-slide p{
+        position: relative;
+        color: #190134;
+        left: 0;
+        bottom: 0;
+    }
+    .consultants__consultants .consultants__consultants__slider .slick-list .slick-track .slick-slide a{
+        text-decoration: none;
+    }
+    .consultants__consultants .consultants__consultants__slider .slick-next, .consultants__consultants .consultants__consultants__slider .slick-prev{
+        top: 50%;
     }
 }
 /*----- Footer End -----*/
@@ -1475,12 +1510,13 @@ footer .footer__mail img {
 
     .consultants__consultants .consultants__consultants__slider .slick-prev {
         left: 0;
-        top: -50px;
+        z-index: 1;
+        /*top: -50px;*/
     }
 
     .consultants__consultants .consultants__consultants__slider .slick-next {
         right: 0;
-        top: -50px;
+        /*top: -50px;*/
     }
 
     .process {
