@@ -238,6 +238,11 @@ Route::group(['middleware' => [
             )->name('upload-course-attachments');
 
             Route::get(
+                'user-courses/{id}',
+                [CourseUserController::class, 'ofUser']
+            )->name('admin.user-courses');
+
+            Route::get(
                 'course-orders',
                 [CourseUserController::class, 'index']
             )->name('admin.course-orders');

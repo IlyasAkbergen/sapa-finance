@@ -5,18 +5,30 @@ namespace App\Http\Controllers\web\admin;
 
 
 use App\Http\Controllers\web\WebBaseController;
+use App\Http\Resources\MyCourseResource;
 use App\Models\Message;
-use App\Models\UserBriefcase;
+use App\Models\User;
 use App\Models\UserCourse;
+use App\Services\CourseService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CourseUserController extends WebBaseController
 {
+    private $courseService;
+
+    public function __construct(CourseService $courseService)
+    {
+        $this->courseService = $courseService;
+    }
+
     public function index(Request $request)
     {
         $data = UserCourse::where('paid', 0)
             ->with(['user', 'course'])
+            ->when($request->has('user_id'), function ($q) use ($request) {
+                return $q->where('user_id', data_get($request, 'user_id'));
+            })
             ->paginate(20);
 
         $orders = $data->items();
@@ -27,6 +39,21 @@ class CourseUserController extends WebBaseController
         ]);
     }
 
+    public function ofUser($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $courses = $this->courseService
+            ->ofUser($user)
+            ->filter(function ($item) {
+                return data_get($item, 'pivot.status') == UserCourse::STATUS_ACCEPTED;
+            });
+
+        return Inertia::render('Courses/MyCourses', [
+            'courses' => MyCourseResource::collection($courses)
+                                         ->resolve()
+        ]);
+    }
+
     public function acceptOrder($id)
     {
         $order = UserCourse::with('course')
@@ -34,7 +61,7 @@ class CourseUserController extends WebBaseController
 
         if (data_get($order, 'status') != UserCourse::STATUS_ACCEPTED) {
             $data = [
-                'status' => UserBriefcase::STATUS_ACCEPTED,
+                'status' => UserCourse::STATUS_ACCEPTED,
                 'paid' => true
             ];
 
@@ -60,7 +87,7 @@ class CourseUserController extends WebBaseController
             ->findOrFail($id);
 
         $data = [
-            'status' => UserBriefcase::STATUS_REJECTED
+            'status' => UserCourse::STATUS_REJECTED
         ];
 
         $order->update($data);

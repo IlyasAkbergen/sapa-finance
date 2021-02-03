@@ -12,7 +12,7 @@
         </template>
 
         <b-tabs content-class="mt-3" align="center">
-            <b-tab title="Основные данные">
+            <b-tab title="Основные данные" active >
                 <div class="main__content__consultant-settings-flex">
                     <div class="main__content__settings-flex__ava">
                         <img class="avatar__img" :src="avatarPath"
@@ -91,10 +91,36 @@
                             </inertia-link>
                         </div>
                     </div>
+
+                    <div class="main__content__settings-flex__right"
+                         v-else-if="isAdmin">
+                      <div class="main__content__settings-flex__comission">
+                        <inertia-link
+                          :href="route('partner-users.deals', {user_id: client.id})"
+                          class="main__content__settings-flex__comission__btn-1 px-4">
+                          Договоры
+                        </inertia-link>
+                        <inertia-link
+                          :href="route('admin.briefcase-orders', {user_id: client.id})"
+                          class="main__content__settings-flex__comission__btn-1 px-4">
+                          Заявки на программы
+                        </inertia-link>
+                        <inertia-link
+                          :href="route('admin.user-courses', client.id)"
+                          class="main__content__settings-flex__comission__btn-1 px-4">
+                          Купленные курсы
+                        </inertia-link>
+                        <inertia-link
+                          :href="route('admin.course-orders', {user_id: client.id})"
+                          class="main__content__settings-flex__comission__btn-1 px-4">
+                          Заявки на курсы
+                        </inertia-link>
+                      </div>
+                    </div>
                 </div>
             </b-tab>
 
-            <b-tab title="Рефераллы" active v-if="isAdmin">
+            <b-tab title="Рефераллы" v-if="isAdmin">
                 <div :class="`panel panel-default  dotted-border mb-3
                 ${isDraggedOver ? 'isDraggedOver' : ''}`"
                      @drop.stop="(e) => drop(e)"

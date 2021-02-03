@@ -168,6 +168,9 @@ class PartnerUserController extends WebBaseController
                return $q->where('partner_id', data_get($request, 'partner_id'));
             });
         })
+        ->when($request->has('user_id'), function ($q) use ($request) {
+            return $q->where('user_id', data_get($request, 'user_id'));
+        })
         ->paginate(20);
 
         $orders = BriefcaseUserResourse::collection($data->items())
@@ -247,6 +250,9 @@ class PartnerUserController extends WebBaseController
                 return $q->whereHas('briefcase', function ($q) use ($request) {
                     return $q->where('partner_id', data_get($request, 'partner_id'));
                 });
+            })
+            ->when($request->has('user_id'), function ($q) use ($request) {
+                return $q->where('user_id', data_get($request, 'user_id'));
             })
             ->has('user')
             ->with('user', 'briefcase')
