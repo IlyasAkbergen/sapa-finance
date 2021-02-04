@@ -243,10 +243,10 @@
                     <p class="footer__title">Sapa</p>
                     <ul class="menu-vertical">
                         <li><a href="#">Главная</a></li>
-                        <li><a href="#">SAPA Academy</a></li>
-                        <li><a href="#">SAPA Market</a></li>
-                        <li><a href="#">Стать партнером</a></li>
-                        <li><a href="#">Стать агентом</a></li>
+                        <li><a href="#academy">SAPA Academy</a></li>
+                        <li><a href="#academy">SAPA Market</a></li>
+                        <li><a href="#consultants">Стать партнером</a></li>
+                        <li><a href="#consultants">Стать агентом</a></li>
                     </ul>
                 </div>
                 <div>
