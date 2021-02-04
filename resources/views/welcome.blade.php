@@ -35,7 +35,7 @@
             </div>
             <div>
                 <p>Пройди тест и определи свою финансовою стратегию!</p>
-                <button>Пройти диагностику</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#quizModal">Пройти диагностику</button>
             </div>
         </div>
     </div>
