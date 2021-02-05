@@ -12,7 +12,13 @@
     </template>
 
     <div class="main__content__program-card">
-      <img :src="imagePath" class="main__content__program-card__img" alt="">
+      <p class="main__content__program-card__title">Текущее фото</p>
+      <img :src="imagePath" class="main__content__program-card__img mt-2" alt="">
+
+      <p class="main__content__program-card__title" v-if="newImagePath">Новое фото</p>
+      <img v-if="newImagePath"
+        :src="newImagePath"
+        class="main__content__program-card__img mt-2" alt="">
 
       <p class="main__content__program-card__title">{{ briefcase.title }}</p>
 
@@ -69,6 +75,9 @@
         return this.briefcase.image_path
           ? this.briefcase.image_path
           : 'images/course-card-img.png';
+      },
+      newImagePath() {
+        return this.change?.change_data?.image_path;
       },
       headerTitle() {
         if (this.change.type_id == 1) {
