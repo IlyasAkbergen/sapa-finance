@@ -62,7 +62,8 @@ Route::group([
    Route::get('/course/{id}', [Controller::class, 'showCourse'])
         ->name('guest_course');
 
-   Route::get('/article/{id}', [Controller::class, 'showArticle']);
+   Route::get('/article/{id}', [Controller::class, 'showArticle'])
+        ->name('guest_article');
 
    Route::get('/consultant/{id}', [Controller::class, 'showConsultant'])
        ->name('guest_consultant');

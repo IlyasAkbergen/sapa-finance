@@ -20,16 +20,18 @@ class AuthController extends Controller
             ])
             ->get();
 
-        $articles = Article::orderBy('created_at')
+        $articles = Article::orderByDesc('created_at')
             ->limit(10)
             ->get();
+
+        $last_article = $articles->pull(0);
 
         $courses = Course::orderByDesc('created_at')
             ->limit(10)
             ->get();
 
         return view('welcome', compact([
-            'referrer_id', 'consultants', 'articles', 'courses'
+            'referrer_id', 'consultants', 'articles', 'courses', 'last_article'
         ]));
     }
 }

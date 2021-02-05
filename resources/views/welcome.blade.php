@@ -48,63 +48,41 @@
                 </div>
                 <div class="community__blog__main">
                     <h1>Сообщество</h1>
-                    <img src="/images/community-blog-img.png" alt="">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever.</p>
+                    <img src="{{ !empty($last_article->image_path)
+                                    ? $last_article->image_path
+                                    : asset('images/slides/articles-slider-img1.png') }}"
+                         alt="">
+                    <h5>
+                        {{ substr($last_article->title, 0, 65) . (strlen($last_article->title) > 65 ? '...' : '') }}
+                    </h5>
                 </div>
             </div>
             <div class="community__blog-slider">
                 <div class="community__blog-slider__for">
-                    <div>
-                        <p class="slide-ttext">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Aliquam odit assumenda asperiores iure, nisi nobis, quasi, itaque quisquam eveniet fuga ullam distinctio sed exercitationem esse atque, repellat voluptate aperiam non.
-                        </p>
-                        <img src="/images/slides/community-slider-img1.png" alt="">
-                        <a href="#" class="slide-button">
-                            Подробнее
-                        </a>
-                    </div>
-                    <div>
-                        <p class="slide-ttext">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste qui accusamus enim, cupiditate. Iusto, sit, ipsa illum animi quasi at odio perspiciatis, voluptatibus praesentium alias quia tempore dignissimos rem placeat vero natus deserunt, harum laudantium. Perferendis placeat quaerat aperiam, modi.
-                        </p>
-                        <img src="/images/slides/community-slider-img2.png" alt="">
-                        <a href="#" class="slide-button">
-                            Подробнее
-                        </a>
-                    </div>
-                    <div>
-                        <p class="slide-ttext">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, quos?
-                        </p>
-                        <img src="/images/slides/community-slider-img3.png" alt="">
-                        <a href="#" class="slide-button">
-                            Подробнее
-                        </a>
-                    </div>
-                    <div>
-                        <p class="slide-ttext">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias deserunt maxime delectus inventore dolores voluptate doloribus, eveniet obcaecati magni neque dolorum commodi quos at rem fugiat quod ad, quasi earum quis ea quaerat minima ex repudiandae aliquam nostrum. Voluptas illo error rerum consequuntur similique debitis quisquam reiciendis vero aliquam corporis, eveniet adipisci inventore dolores, iusto, in alias perferendis blanditiis? Ratione?
-                        </p>
-                        <img src="/images/slides/community-slider-img2.png" alt="">
-                        <a href="#" class="slide-button">
-                            Подробнее
-                        </a>
-                    </div>
+                    @foreach($articles as $article)
+                        <div>
+                            <p class="slide-ttext">
+                                {{ $article->content }}
+                            </p>
+                            <img src="{{ !empty($last_article->image_path)
+                                    ? $last_article->image_path
+                                    : asset('images/slides/articles-slider-img1.png') }}"
+                                 alt="">
+                            <a href="{{ route('guest_article', $article->id) }}" class="slide-button">
+                                Подробнее
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
                 <div class="community__blog-slider__nav">
+                    @foreach($articles as $article)
                     <div>
-                        <img src="/images/slides/community-slider-img1-mini.png" alt="">
+                        <img src="{{ !empty($last_article->image_path)
+                                    ? $last_article->image_path
+                                    : asset('images/slides/articles-slider-img1.png') }}"
+                             alt="">
                     </div>
-                    <div>
-                        <img src="/images/slides/community-slider-img2-mini.png" alt="">
-                    </div>
-                    <div>
-                        <img src="/images/slides/community-slider-img3-mini.png" alt="">
-                    </div>
-                    <div>
-                        <img src="/images/slides/community-slider-img2-mini.png" alt="">
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -455,7 +433,7 @@
                             <p>
                                 {{ substr($content, 0, 65) . (strlen($content) > 65 ? '...' : '') }}
                             </p>
-                            <a onclick="openArticleModal('{{$title}}', '{{$content}}', '{{$imgPath}}')">
+                            <a href="{{ route('guest_article', $article->id) }}">
                                 Читать &#8594;
                             </a>
                         </div>

@@ -1,5 +1,5 @@
 <template>
-    <div class="main__content__news-flex__card">
+    <div class="main__content__news-flex__card" @click="cardClicked">
         <img :src="article.image_path"
              class="main__content__news-flex__card__img">
 
@@ -71,6 +71,12 @@ export default {
         },
         deleteArticle() {
             this.$inertia.delete(route('articles.destroy', this.article.id));
+        },
+        cardClicked() {
+            this.$inertia.get(this.isAdmin
+              ? route('articles.edit', this.article.id)
+              : route('articles.show', this.article.id)
+            )
         }
     }
 }

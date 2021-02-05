@@ -17,7 +17,7 @@
                 <span>Список программ</span>
                 <a class="actions__link actions__link--green"
                    @click="showModal=true">
-                    <span>Добавить программу на сайт</span>
+                    <span>Добавить программу</span>
                 </a>
             </div>
         </template>
