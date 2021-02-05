@@ -116,7 +116,16 @@ class PartnerController extends Controller
 
     public function destroy($id)
     {
-        $deleted = $this->partnerService->delete($id);
+        $partner = $this->partnerService->find($id);
+
+        $partner->update([
+            'iin' => '_del_' . Carbon::now() . $partner->iin,
+            'bin' => '_del_' . Carbon::now() . $partner->bin,
+            'email' => '_del_' . Carbon::now() . $partner->email,
+            'phone' => '_del_' . Carbon::now() . $partner->phone,
+        ]);
+
+        $deleted = $partner->delete($id);
 
         if ($deleted) {
             return redirect()->route('partners-crud.index');
