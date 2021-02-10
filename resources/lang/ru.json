@@ -10,5 +10,5 @@
     "You are receiving this email because we received a password reset request for your account.": "Вы получили это письмо, потому-что мы получили запрос на восстановление пароля Вашей учетной записи.",
     "Reset Password": "Восставноить пароль",
     "This password reset link will expire in :count minutes.": "Ссылка будет недействительной через :count минут.",
-    "If you did not request a password reset, no further action is required.": "Если Вы не запрашивали восстановление пароля, проигнорируйте данное письмо.",
+    "If you did not request a password reset, no further action is required.": "Если Вы не запрашивали восстановление пароля, проигнорируйте данное письмо."
 }
