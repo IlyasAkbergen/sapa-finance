@@ -533,9 +533,9 @@
             <div class="modal-dialog modal-dialog-auth">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-content">
-                    <h3>Восстановление пароля</h3>
-                    <div class="modal-body">
-                        <form method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" action="{{ route('password.email') }}">
+                        <h3>Восстановление пароля</h3>
+                        <div class="modal-body">
                             @csrf
                             <x-jet-label for="email" value="{{ __('Email') }}"/>
                             <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email"
@@ -546,13 +546,13 @@
                                     обновления пароля.
                                 </p>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" data-bs-dismiss="modal" aria-label="Close">
-                            Отправить
-                        </button>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit">
+                                Отправить
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
