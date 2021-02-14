@@ -27,6 +27,7 @@ class PaymentController extends Controller
         $data = Payment::query()
             ->where('user_id', Auth::user()->id)
             ->with('payable.purchasable')
+            ->with('user')
             ->where(
                 'status',
                 Payment::PAYMENT_STATUS_OK

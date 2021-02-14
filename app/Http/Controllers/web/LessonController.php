@@ -51,11 +51,9 @@ class LessonController extends WebBaseController
         if (empty($lesson->auth_user_homework)
                 && $is_first_lesson
         ) {
-            $lesson->homeworks()->create([
+            $lesson->auth_user_homework = $lesson->homeworks()->create([
                 'user_id' => Auth::user()->id
             ]);
-
-            $lesson->loadMissing('auth_user_homework');
         }
 
         if (!empty($lesson)) {

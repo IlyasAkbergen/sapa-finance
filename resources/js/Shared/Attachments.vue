@@ -38,7 +38,7 @@
        :key="item.id"
        target="_blank"
        class="main__content__lesson-card__materials__pdf main__content__agent-card__materials__pdf">
-      {{ item.name | truncate(5) }}
+      {{ item.name | truncate(30) }}
     </a>
   </div>
 </template>

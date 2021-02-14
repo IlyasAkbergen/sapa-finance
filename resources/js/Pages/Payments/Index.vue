@@ -10,6 +10,7 @@
             <thead>
             <tr>
               <th>Что оплатил</th>
+              <th>Клиент</th>
               <th>Сумма</th>
               <th>Примечание</th>
               <th>Дата</th>
@@ -22,6 +23,11 @@
                   {{ payment.purchasable.title }}
                 </inertia-link>
               </th>
+              <td v-if="payment.user">
+                <inertia-link :href="route('users.show', payment.user.id)">
+                  {{ payment.user.name }}
+                </inertia-link>
+              </td>
               <td>
                 {{ payment.sum }} ₸
               </td>

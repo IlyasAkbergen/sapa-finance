@@ -16,6 +16,7 @@ class PaymentResource extends JsonResource
     public function toArray($request)
     {
         $purchasable = data_get($this, 'payable.purchasable');
+        $user = data_get($this, 'user');
         return [
             'id' => $this->id,
             'purchasable' => $purchasable ? PurchasableResource::make(
@@ -26,7 +27,8 @@ class PaymentResource extends JsonResource
             'paid_at' => Carbon::parse($this->paid_at)
                 ->format('d.m.Y H:i'),
             'sum' => $this->sum,
-            'note' => $this->note
+            'note' => $this->note,
+            'user' => $user ? UserResource::make($user)->resolve() : null,
         ];
     }
 }
