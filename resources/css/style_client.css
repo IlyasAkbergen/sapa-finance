@@ -1077,7 +1077,7 @@ body {
 }
 
 .main__content .main__content__lesson-flex .main__content__lesson-flex__task .main__content__lesson-flex__task__grade .progress.blue .progress-left .progress-bar {
-    animation: loading-2 1s linear forwards 1.8s;
+    animation: loading-1 1s linear forwards 1.8s;
 }
 
 .main__content .main__content__lesson-flex .main__content__lesson-flex__task .main__content__lesson-flex__task__grade .progress.green .progress-left .progress-bar {
