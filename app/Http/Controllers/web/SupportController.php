@@ -18,6 +18,7 @@ class SupportController extends WebBaseController
     {
         $this->supportService = $supportService;
     }
+
     public function index()
     {
         return Inertia::render('Support/Index');
@@ -42,8 +43,10 @@ class SupportController extends WebBaseController
 
             if ($request->only(['uuid'])) {
                 $attachment = Attachment::where('uuid', $request->only(['uuid']))->first();
-                $attachment->model_id = $support->id;
-                $attachment->save();
+                if ($attachment) {
+                    $attachment->model_id = $support->id;
+                    $attachment->save();
+                }
             }
             return $this->responseSuccess('Ваше обращение сохранено');
         } catch (\Exception $e) {
