@@ -43,12 +43,12 @@ class LoginForm extends Component
     {
         $this->validate();
 
-        if(\Auth::attempt([
+        if (\Auth::attempt([
             'email' => $this->email,
             'password' => $this->password
-        ])){
-            return redirect('/');
-        }else{
+        ])) {
+            return redirect()->route('courses.index');
+        } else {
             $this->addError('common', 'Неправильный логин или пароль');
         }
     }

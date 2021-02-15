@@ -51,13 +51,13 @@ Route::post('/', function () {
 Route::get('/', function () {
     return redirect()->route('welcome');
 });
+Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
+    ->name('welcome');
 
 Route::group([
     'middleware' => 'guest',
     'prefix' => 'guest'
 ], function () {
-   Route::get('/', [\App\Http\Controllers\web\AuthController::class, 'index'])
-       ->name('welcome');
 
    Route::get('/course/{id}', [Controller::class, 'showCourse'])
         ->name('guest_course');
