@@ -93,12 +93,11 @@
           <label for="page__agent-modal__body__checkbox">
             Принять соглашение
           </label><br>
-          <a href="#"
-             @click.prevent="submitPurchase"
-             :disabled="!agreementChecked"
-             class="page__agent-modal__body__button">
+          <button
+             @click="submitPurchase"
+             :class="`page__agent-modal__body__button ${agreementChecked && !createPurchaseForm.processing ? 'enabled' : ''}`">
             Купить
-          </a>
+          </button>
         </div>
       </div>
     </template>
