@@ -12,7 +12,7 @@
                             <div class="col-12 col-sm-2 d-flex justify-content-center align-items-center">
                                 <div>
                                     <img class="rounded-full h-20 w-20 object-cover"
-                                         :src="item.user.profile_photo_url">
+                                         :src="item.user.profile_photo_path">
                                     <inertia-link :href="route('users.show', item.user.id)" class="d-block">
                                         {{item.user.name}}
                                     </inertia-link>
