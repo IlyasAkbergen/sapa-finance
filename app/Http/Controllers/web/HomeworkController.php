@@ -71,7 +71,11 @@ class HomeworkController extends WebBaseController
 
             event(new HomeworkCreated($homework));
 
-            return redirect()->route('lessons.show', $homework->lesson_id);
+            return redirect()
+                ->route('lessons.show', $homework->lesson_id)
+                ->with([
+                    'message' => 'Ответ на ДЗ сохранен.',
+                ]);
         } catch (\Exception $e) {
             DB::rollBack();
             return $this->responseFail('Не удалось сохранить.');

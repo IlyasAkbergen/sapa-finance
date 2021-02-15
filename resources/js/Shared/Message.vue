@@ -7,8 +7,8 @@
           leave-class="opacity-100"
           leave-to-class="opacity-0">
     <div :class="`main__content__course-success pointable clickable`"
-         @click="hide = true"
-         v-show="message && !hide">
+         @click="$emit('hide')"
+         v-show="message">
       <div :class="`main__content__course-success__left ${type === 'error' ? 'danger-left' : ''}`">
         <img :src="type === 'success'
           ? '/images/lesson-icon-passed.png'
@@ -19,7 +19,7 @@
       </div>
       <div :class="`main__content__course-success__right ${type === 'error' ? 'danger-right' : ''}`">
         <i class="fas fa-times fa-sm"
-           @click="hide = true"
+           @click="$emit('hide')"
         />
         <p :class="`main__content__course-success__right__title`"
            v-show="message">
