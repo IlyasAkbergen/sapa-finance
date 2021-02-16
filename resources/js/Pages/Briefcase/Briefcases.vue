@@ -62,7 +62,11 @@
         <VueSlickCarousel v-bind="sliderSettings">
           <div v-for="consultant in consultants" class="mx-2">
             <a href="#" @click.prevent="() => setReferrer(consultant.id)">
-              <img :src="consultant.profile_photo_path ? consultant.profile_photo_path : '/images/consultant-avatar.png'">
+              <img class="avatar__img"
+                   :src="consultant.profile_photo_path
+                      ? consultant.profile_photo_path
+                      : '/images/consultant-avatar.png'"
+              >
               <p class="main__content__news-flex__card__title">
                 {{ consultant.name }}
               </p>
@@ -71,6 +75,7 @@
         </VueSlickCarousel>
       </div>
     </Modal>
+
   </main-layout>
 </template>
 
@@ -92,6 +97,8 @@
         showType: 1,
         showReferrers: false,
         sliderSettings: {
+          swipeToSlide: true,
+          "arrows": true,
           "dots": true,
           "infinite": true,
           "centerMode": true,

@@ -7,6 +7,7 @@ use App\Http\Controllers\web\WebBaseController;
 use App\Http\Resources\MyCourseResource;
 use App\Models\Course;
 use App\Models\Support;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -32,10 +33,15 @@ class AgentInfoController extends WebBaseController
             return redirect()->route('me');
         }
 
+        $consultants = User::query()
+            ->where('referral_level_id', ReferralLevelEnum::Consultant)
+            ->get();
+
         return Inertia::render('AgentInfo/Show', [
             'agent_info' => $course
                 ? MyCourseResource::make($course)->resolve()
                 : null,
+            'consultants' => $consultants
         ]);
     }
 

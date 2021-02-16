@@ -61,7 +61,7 @@
         </p>
         <a href="#"
            v-if="!isAdmin"
-           @click.prevent="showModal = true"
+           @click.prevent="buyClicked"
            class="main__content__agent-card__bottom__button">
           Купить агентский акканут
         </a>
@@ -101,6 +101,32 @@
         </div>
       </div>
     </template>
+
+    <Modal :show="showReferrers"
+           :closeable="true"
+           @close="showReferrers = false"
+    >
+      <div class="modal-body" v-if="consultants && consultants.length > 0">
+        <p class="page__program-modal__body__title">
+          Прежде чем добавить накопительную программу выберите фининсового консультанта
+        </p>
+        <VueSlickCarousel v-bind="sliderSettings">
+          <div v-for="consultant in consultants" class="mx-2">
+            <a href="#" @click.prevent="() => setReferrer(consultant.id)">
+              <img class="avatar__img"
+                   :src="consultant.profile_photo_path
+                      ? consultant.profile_photo_path
+                      : '/images/consultant-avatar.png'"
+              >
+              <p class="main__content__news-flex__card__title">
+                {{ consultant.name }}
+              </p>
+            </a>
+          </div>
+        </VueSlickCarousel>
+      </div>
+    </Modal>
+
   </main-layout>
 </template>
 
@@ -108,6 +134,7 @@
   import MainLayout from '@/Layouts/MainLayout'
   import SidebarItem from "@/Shared/SidebarItem";
   import HasUser from "@/Mixins/HasUser";
+  import VueSlickCarousel from 'vue-slick-carousel'
 
   export default {
     name: 'Agent',
@@ -116,17 +143,21 @@
       agent_info: {
         type: Object,
         default: null
-      }
+      },
+      consultants: Array
     },
     components: {
       MainLayout,
       SidebarItem,
       Attachments: () => import('@/Shared/Attachments'),
+      Modal: () => import('@/Jetstream/Modal'),
+      VueSlickCarousel
     },
     data() {
       return {
         showModal: false,
         agreementChecked: false,
+        showReferrers: false,
         createPurchaseForm: this.agent_info
           ? this.$inertia.form({
             purchasable_id: this.agent_info.id,
@@ -134,6 +165,17 @@
             with_feedback: true,
             pay_online: true
           }) : null,
+        sliderSettings: {
+          swipeToSlide: true,
+          "arrows": true,
+          "dots": true,
+          "infinite": true,
+          "centerMode": true,
+          "centerPadding": "20px",
+          "slidesToShow": 1,
+          "slidesToScroll": 1,
+          "variableWidth": true
+        },
       }
     },
     computed: {
@@ -144,6 +186,19 @@
       }
     },
     methods: {
+      buyClicked() {
+        if (!this.getUser().referrer_id) {
+          this.showReferrers = true;
+        } else {
+          this.showModal = true;
+        }
+      },
+      setReferrer(id) {
+        this.$inertia.post(route('user-referrer-change'), {
+          child_id: this.getUser().id,
+          parent_id: id
+        }).then(() => this.showReferrers = false)
+      },
       submitPurchase() {
         this.createPurchaseForm.post(route('purchases.store'))
           .then(response => {
@@ -160,5 +215,8 @@
   /* ЙОБАНЫЕ ГОВНОСТИЛИ */
   .fa-times {
     top: 90px !important;
+  }
+  .slick-arrow {
+    color: black !important;
   }
 </style>
