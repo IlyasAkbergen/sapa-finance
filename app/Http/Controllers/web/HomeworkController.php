@@ -29,6 +29,7 @@ class HomeworkController extends WebBaseController
             ->with([
                 'user', 'lesson', 'attachments'
             ])
+            ->orderByDesc('created_at')
             ->paginate(10);
 
         return Inertia::render('Homework/Index', [
@@ -91,9 +92,11 @@ class HomeworkController extends WebBaseController
             'status' => ['required', 'integer']
         ]);
 
+        $score = $request->input('score');
+
         $homework = $this->homeworkService->rate(
             $request->input('homework_id'),
-            $request->input('score'),
+            $score,
             $request->input('status')
         );
 
@@ -103,7 +106,7 @@ class HomeworkController extends WebBaseController
             event(new HomeworkRated($homework));
             $lesson = Lesson::find(data_get($homework, 'lesson_id'));
             $message = Message::create([
-                'title' => 'ДЗ проверено.',
+                'title' => $score == 0 ? 'ДЗ отклонено.' : 'ДЗ проверено.',
                 'content' => 'Админ поставил оценку на ДЗ урока: "'
                     . data_get($lesson, 'title') . '"',
                 'url' => route('lessons.show', data_get($homework, 'lesson_id')),
