@@ -29,6 +29,8 @@ class HomeworkController extends WebBaseController
             ->with([
                 'user', 'lesson', 'attachments'
             ])
+            ->whereHas('user')
+            ->whereHas('lesson')
             ->orderByDesc('created_at')
             ->paginate(10);
 
