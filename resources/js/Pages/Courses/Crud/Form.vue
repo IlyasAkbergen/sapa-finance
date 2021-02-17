@@ -124,7 +124,7 @@
             Полное описание
         </label>
         <textarea class="profile-form__textarea mb-0"
-                  id="description" cols="30" rows="6"
+                  id="description" cols="30" rows="10"
                   v-model="form.description"
                   placeholder="Введите полное описание"></textarea>
 

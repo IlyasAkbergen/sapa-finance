@@ -18,7 +18,7 @@
             <JetInputError :message="form.error('video_url')" />
 
             <textarea id="lessondesc"
-                      rows="5"
+                      rows="10"
                       v-model="form.content"
                       placeholder="Описание урока"></textarea>
 
@@ -45,7 +45,7 @@
 
             <textarea name="hwdesc" id="hwdesc" cols="30"
                       v-model="form.homework_content"
-                      rows="5" placeholder="Описание домашнего задания" />
+                      rows="10" placeholder="Описание домашнего задания" />
 
             <JetInputError :message="form.error('homework_content')" />
 

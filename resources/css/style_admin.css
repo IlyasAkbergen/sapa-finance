@@ -1359,7 +1359,7 @@ body
 /*}*/
 .js-add-lesson .modal-body {
     background: #fff;
-    max-width: 670px;
+    max-width: 750px !important;
     max-height: 100vh;
     padding: 20px;
     border-radius: 10px;
