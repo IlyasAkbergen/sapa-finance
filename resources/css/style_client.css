@@ -2620,3 +2620,19 @@ body {
         padding: 11.25px;
     }
 }
+
+.main__content__course-card__text,
+.main__content__portfels-flex__card__text,
+.main__content__program-card__text,
+.main__content__news-flex__card__text,
+.main__content__new-card__text,
+.card__text,
+.page__agent-modal__body__text,
+.main__content__lesson-card__text,
+.main__content__lesson-flex__task__homework__content
+{
+    white-space: pre-line;
+}
+.main__content__agent-new-card {
+    max-width: 800px !important;
+}

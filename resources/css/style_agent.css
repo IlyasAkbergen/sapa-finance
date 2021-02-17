@@ -3669,3 +3669,7 @@ a.panel-agent .panel-heading-flex p:last-child svg.opened
         padding: 11.25px;
     }
 }
+
+.main__content__agent-new-card {
+    max-width: 800px !important;
+}
