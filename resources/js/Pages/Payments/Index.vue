@@ -19,9 +19,11 @@
             <tbody>
             <tr v-for="payment in payments" :key="payment.id">
               <th scope="row">
-                <inertia-link :href="payment.purchasable.link">
+                <inertia-link v-if="payment.purchasable"
+                              :href="payment.purchasable.link">
                   {{ payment.purchasable.title }}
                 </inertia-link>
+                <span v-else>Удалено</span>
               </th>
               <td v-if="payment.user">
                 <inertia-link :href="route('users.show', payment.user.id)">

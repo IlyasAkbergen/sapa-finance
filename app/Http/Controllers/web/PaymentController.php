@@ -38,9 +38,9 @@ class PaymentController extends Controller
         return Inertia::render('Payments/Index', [
             'data' => $data,
             'payments' => PaymentResource::collection(
-                    $data->items()
-                )
-                ->resolve()
+                $data->items()
+            )
+            ->resolve()
         ]);
     }
 }
