@@ -86,12 +86,6 @@ class CourseUserController extends WebBaseController
         $order = UserCourse::with('course')
             ->findOrFail($id);
 
-        $data = [
-            'status' => UserCourse::STATUS_REJECTED
-        ];
-
-        $order->update($data);
-
         $message = Message::create([
             'title' => 'Заявка на курс отклонена.',
             'content' => 'Админ отклонил Вашу заявку на курс "'
@@ -101,6 +95,8 @@ class CourseUserController extends WebBaseController
         ]);
 
         $message->users()->attach(data_get($order, 'user_id'));
+
+        $order->delete();
 
         return redirect()->back();
     }

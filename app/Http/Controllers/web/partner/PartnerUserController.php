@@ -216,12 +216,6 @@ class PartnerUserController extends WebBaseController
         $order = UserBriefcase::with('briefcase')
             ->findOrFail($id);
 
-        $data = [
-            'status' => UserBriefcase::STATUS_REJECTED
-        ];
-
-        $order->update($data);
-
         $message = Message::create([
             'title' => 'Заявка на программу отказана.',
             'content' => 'Админ отказал на Вашу заявку на программу "'
@@ -231,6 +225,8 @@ class PartnerUserController extends WebBaseController
         ]);
 
         $message->users()->attach(data_get($order, 'user_id'));
+
+        $order->delete();
 
         return redirect()->back();
     }
