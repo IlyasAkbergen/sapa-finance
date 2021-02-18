@@ -16,17 +16,14 @@
                         </a>
                     </li>
 
-                    <li class="nav-item add-client mr-2"
+                    <li class="nav-item add-client mr-2 clickable"
                         v-if="hasSomeLevel([
-                'agent', 'consultant', 'mentor', 'tutor', 'partner'
-              ])">
-                        <JetDropdown :width="500" :align="'right'">
-                            <template #trigger>
-                                <a @click="copyReferralLink()" class="nav-link">
-                                    <p>Добавить клиента&nbsp;&nbsp;<span class="fas fa-user-plus"></span></p>
-                                </a>
-                            </template>
-                        </JetDropdown>
+                          'agent', 'consultant', 'mentor', 'tutor', 'partner'
+                        ])"
+                    >
+                        <a @click.prevent="() => copyReferralLink()" class="nav-link">
+                            <p>Добавить клиента&nbsp;&nbsp;<span class="fas fa-user-plus"></span></p>
+                        </a>
                     </li>
 
                     <li class="nav-item dropdown" style="display: block; padding: .5rem 1rem;">
@@ -137,10 +134,6 @@
                 modalShow: false,
                 refLinkCopied: null,
             }
-        },
-
-        created() {
-            console.log("error: " + this.error)
         },
 
         computed: {

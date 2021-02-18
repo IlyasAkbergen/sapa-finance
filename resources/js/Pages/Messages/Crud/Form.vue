@@ -84,7 +84,6 @@ export default {
   },
   methods: {
   	levelSwitch(e, level_id) {
-  		console.log(e);
   		if (e.target.checked) {
   		  this.form.levels.push(level_id)
   		} else {

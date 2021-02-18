@@ -20,7 +20,9 @@
 
         <div class="sidebar__profile__progress__header" v-if="activeCourse">
           <p class="sidebar__profile__progress__header__course">
-            Текущий курс: {{ activeCourse.title | truncate(10) }}
+            Текущий курс:
+            <br>
+            {{ activeCourse.title | truncate(30) }}
           </p>
           <p class="sidebar__profile__progress__header__percent">
             {{ activeCourse.pivot.progress }}%

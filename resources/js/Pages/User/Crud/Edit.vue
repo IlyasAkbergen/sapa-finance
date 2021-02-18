@@ -337,8 +337,6 @@
                 if (this.$refs.image) {
                     this.$set(this.form, 'image', this.$refs.image.files[0]);
                 }
-                console.log('is partner: ' + this.isPartner);
-                console.log('route: ' + this.updateRouteName);
                 this.form.post(this.updateRouteName + this.client.id, {
                     resetOnSuccess: false,
                 });
@@ -356,13 +354,11 @@
                 reader.readAsDataURL(this.$refs.image.files[0]);
             },
             referralTreeChanged(data) {
-                console.log(data);
                 this.referralChangeData = {
                     ...data,
                     '_method': 'POST'
                 };
                 this.acceptModalShow = true;
-                console.log(this.acceptModalShow)
             },
             submitReferralTreeChange() {
                 this.$inertia.post(
