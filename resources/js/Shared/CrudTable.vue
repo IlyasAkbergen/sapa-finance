@@ -12,7 +12,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="row in rows" :key="row.id">
+      <tr v-for="row in rows"
+          class="clickable"
+          @click="() => rowClicked(row.id)"
+          :key="row.id"
+      >
         <th class="align-middle" scope="row">
           {{ row[headers[0].key] }}
         </th>
@@ -72,6 +76,11 @@
       }
     },
     methods: {
+      rowClicked(id) {
+        if (this.edit_route_name) {
+          this.$inertia.get(route(this.edit_route_name, id));
+        }
+      },
       deleteClicked(id) {
         this.itemToBeDeleted = id;
         this.deleteAcceptModalShow = true
@@ -88,3 +97,8 @@
     }
   }
 </script>
+<style scoped>
+  .clickable:hover {
+    background-color: rgba(132,132,132, 0.12);
+  }
+</style>

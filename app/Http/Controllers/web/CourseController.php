@@ -22,7 +22,8 @@ class CourseController extends WebBaseController
     {
         $courses = $this->courseService->allCanBuy(Auth::user());
         return Inertia::render('Courses/Courses', [
-            'courses' => $courses
+            'courses' => MyCourseResource::collection($courses)
+                ->resolve()
         ]);
     }
 

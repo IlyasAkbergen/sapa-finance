@@ -4,9 +4,10 @@
             Курсы
         </template>
 
-        <div class="main__content__courses-flex">
+        <div class="main__content__courses-flex main__content__agent-my-courses-flex">
             <CourseCard v-for="course in courses"
                 :course="course"
+                :bought="course.bought"
                 :key="course.id" />
         </div>
     </main-layout>

@@ -23,9 +23,7 @@ class CourseServiceImpl extends BaseServiceImpl implements CourseService
 
     function allCanBuy(User $user)
     {
-        $courses = Course::whereDoesntHave('users_pivot', function ($query) use ($user) {
-                return $query->where('user_id', $user->id);
-            })
+        $courses = Course::with('auth_user_pivot')
             ->get()
             ->filter(function($item) {
                 return data_get($item, 'tag') != Course::START_COURSE_TAG;
