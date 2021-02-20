@@ -29,12 +29,14 @@ class LevelUpListener implements ShouldQueue
     public function handleRewardHandled($event)
     {
         $reward = data_get($event, 'reward');
-        // may be errors todo test
-        if (!$reward->relationLoaded('awardable')) {
-            $reward->load(['awardable.balance.incomes']);
+
+        if (!$reward) {
+            return;
         }
 
-        $user = $reward->awardable;
+        $reward->load(['awardable']);
+
+        $user = data_get($reward, 'awardable');
 
         $points = data_get($reward, 'points');
 

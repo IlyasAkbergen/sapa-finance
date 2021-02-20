@@ -18,7 +18,7 @@ class Balance extends Model
 
     public function incomes()
     {
-        $this->hasMany(BalanceOperation::class, 'target_balance_id')
+        return $this->hasMany(BalanceOperation::class, 'target_balance_id')
             ->committed();
     }
 }

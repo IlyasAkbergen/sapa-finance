@@ -36,7 +36,7 @@ class BriefcasePaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            'sum' => ['required', 'integer'],
+            'sum' => ['required', 'integer', 'min:1'],
             'user_id' => ['required', 'integer'],
             'order_id' => ['required'],
             'paid_at' => ['required', 'date']

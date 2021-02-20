@@ -12,42 +12,47 @@ trait Challengable
 {
     public function getPoints()
     {
-        $this->loadMissing('balance');
-        return $this->balance->direct_points;
+        $points = data_get($this, 'balance.direct_points');
+        if (!$points) {
+            $this->loadMissing('balance');
+        }
+        return data_get($this, 'balance.direct_points');
     }
 
     public function getDirectPoints()
     {
-        $this->loadMissing('balance');
-        return $this->balance ? $this->balance->direct_points : 0;
+        return $this->getPoints();
     }
 
     public function getTeamPoints()
     {
-        $this->loadMissing('balance');
-        return $this->balance ? $this->balance->team_points : 0;
+        $points = data_get($this, 'balance.team_points');
+        if (!$points) {
+            $this->loadMissing('balance');
+        }
+        return data_get($this, 'balance.team_points');
     }
 
     public function getAllReferrals()
     {
-        $this->loadMissing('all_referrals');
+        $this->load('all_referrals');
         return Helper::flat_all_referrals($this);
     }
 
     public function getBalanceIncomes($lastMonths = null)
     {
         if (!empty($lastMonths)) {
-            $this->loadMissing(['balance.incomes' => function (Builder $q) use ($lastMonths) {
+            $this->load(['balance.incomes' => function ($q) use ($lastMonths) {
                 return $q->whereDate(
                     'created_at', '>=',
                     Carbon::now()->subMonths($lastMonths)
                 );
             }]);
         } else {
-            $this->loadMissing('balance.incomes');
+            $this->load('balance.incomes');
         }
 
-        return $this->balance->incomes;
+        return data_get($this, 'balance.incomes');
     }
 
     function getPointsForLastMonths($lastMonths)

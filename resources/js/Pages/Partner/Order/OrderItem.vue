@@ -14,7 +14,7 @@
           </inertia-link>
         </th>
         <td class="align-middle">
-          <inertia-link :href="route('programs-crud.show', order.briefcase.id)">
+          <inertia-link :href="route('briefcases.show', order.briefcase.id)">
             {{ order.briefcase.title }}
           </inertia-link>
         </td>

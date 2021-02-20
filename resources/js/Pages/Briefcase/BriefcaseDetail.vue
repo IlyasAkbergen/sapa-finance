@@ -9,11 +9,19 @@
 
     <template #header>
       Просмотр {{ briefcase.title }}
+      <inertia-link v-if="isAdmin"
+                      :href="route('briefcases-admin.edit', briefcase.id)">
+        <div class="btn btn-warning ml-2">
+          Редактировать
+        </div>
+      </inertia-link>
     </template>
 
     <div class="main__content__program-card">
       <img :src="imagePath" class="main__content__program-card__img" alt="">
-      <p class="main__content__program-card__title">{{ briefcase.title }}</p>
+      <p class="main__content__program-card__title">
+        {{ briefcase.title }}
+      </p>
       <p class="main__content__program-card__text">
         {{ briefcase.description }}
       </p>
@@ -23,12 +31,16 @@
 
 <script>
   import MainLayout from "@/Layouts/MainLayout";
+  import HasUser from "@/Mixins/HasUser";
+  import Pencil from "@/assets/icons/Pencil";
 
   export default {
     name: "BriefcaseDetail",
     components: {
       MainLayout,
+      Pencil,
     },
+    mixins: [HasUser],
     props: {
       briefcase: Object,
     },

@@ -62,8 +62,8 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
 
             $purchase->loadMissing('user.referrer_recursive', 'purchasable');
 
-            if (empty($purchase->user->referrer)) {
-                DB::commit();
+            if (!data_get($purchase, 'user.referrer')) {
+                DB::rollBack();
                 return;
             }
 
@@ -80,7 +80,7 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
 
             $mentor = $all_referrers->firstWhere('referral_level_id', ReferralLevelEnum::Mentor);
 
-            $direct_referrer = $all_referrers->firstWhere('id', $purchase->user->referrer_id);
+            $direct_referrer = $all_referrers->firstWhere('id', data_get($purchase, 'user.referrer_id'));
 
             $consultant_percent = 10;
             $tutor_percent = 15;
@@ -115,28 +115,7 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
                 $this->makeReward($mentor, $purchase, false, null, $points);
             }
 
-//            foreach ($all_referrers as $referrer) {
-//                $is_direct = $purchase->user->referrer_id == $referrer->id;
-//
-//                $points = $is_direct
-//                    ? Purchase::$DIRECT_POINTS_PER_PURCHASE
-//                    : $purchasable->getAwardSum() * $percent / 100;
-//
-//                $this->updateOrAddReward($referrer->id, [
-//                    'purchase_id' => $purchase->id,
-//                ],[
-//                    'sum' => $is_direct
-//                        ? $purchasable->getAwardSum()
-//                        : null,
-//                    'is_direct' => $is_direct,
-//                    'points' => $purchasable->isAwardable() && !$is_start_course
-//                        ? $points
-//                        : null
-//                ]);
-//            }
-
             DB::commit();
-            dump('committed awardReferrersAfterPurchase');
         } catch (\Exception $e) {
             DB::rollBack();
         }
@@ -164,6 +143,16 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
             return false;
         }
 
+        $balance = data_get($user, 'balance');
+
+        if (!$balance) {
+            $user->balance = $user->balance()->create([
+                'sum' => 0,
+                'direct_points' => 0,
+                'team_points' => 0,
+            ]);
+        }
+
         $next_level_id = empty($user->referral_level_id)
             ? ReferralLevelEnum::Agent
             : $user->referral_level_id + 1;
@@ -173,17 +162,24 @@ class UserServiceImpl extends BaseServiceImpl implements UserService
         $deservesLevelUp = true;
         $challenges = $next_level->achieve_challenges;
         $passed_count = 0;
-
-        foreach ($challenges as $challenge) {
-            $passed = $challenge::check($user);
-            if ($passed) {
-                $passed_count++;
+        try {
+            foreach ($challenges as $challenge) {
+                try {
+                    $passed = $challenge::check($user);
+                } catch (\Exception $e) {
+                    $passed = false;
+                }
+                if ($passed) {
+                    $passed_count++;
+                }
+                $deservesLevelUp = $deservesLevelUp && $passed;
             }
-            $deservesLevelUp = $deservesLevelUp && $passed;
+        } catch (\Exception $e) {
+            $deservesLevelUp = false;
         }
 
-        $percent = $challenges->count() > 0 && $passed_count > 0
-            ? $passed_count * 100 / $challenges->count()
+        $percent = count($challenges) > 0 && $passed_count > 0
+            ? $passed_count * 100 / count($challenges)
             : 0;
 
         if (data_get($user, 'next_level_progress') != $percent) {
