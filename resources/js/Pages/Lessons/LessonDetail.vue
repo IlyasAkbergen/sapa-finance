@@ -14,7 +14,9 @@
     <div v-if="lesson.enabled"
          class="main__content__lesson-flex">
       <div class="main__content__lesson-card">
-        <p class="main__content__lesson-card__title">{{ lesson.title }}</p>
+        <p class="main__content__lesson-card__title">
+          {{ lesson.title }}
+        </p>
         <p class="main__content__lesson-card__text">
           {{ lesson.content }}
         </p>
@@ -25,20 +27,14 @@
         </iframe>
 
         <p class="main__content__lesson-card__materials-title mt-2">Материалы</p>
-        <div class="main__content__lesson-card__materials">
-          <Attachments
-            :modelType="'lesson'"
-            :modelId="lesson.id"
-            :uuid="null"
-            :slug="'lesson'"
-            :only-show="true"
-            ref="homework_attachments"
-          />
-        </div>
-<!--        <a :href="lesson.attachment_path"-->
-<!--           class="main__content__lesson-card__materials-button">-->
-<!--          Скачать материалы-->
-<!--        </a>-->
+        <Attachments
+          :modelType="'lesson'"
+          :modelId="lesson.id"
+          :uuid="null"
+          :slug="'lesson'"
+          :only-show="true"
+          ref="homework_attachments"
+        />
       </div>
       <div class="main__content__lesson-flex__task">
         <div class="main__content__lesson-flex__task__homework">
@@ -56,8 +52,12 @@
             />
           </div>
 
-          <p class="main__content__lesson-flex__task__homework__content">
+          <p class="main__content__lesson-flex__task__homework__content mb-4">
             {{ lesson.homework_content }}
+          </p>
+
+          <p class="main__content__lesson-flex__task__homework__title mt-4 pt-2">
+            Ответ на задание
           </p>
 
           <Attachments

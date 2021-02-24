@@ -14,7 +14,7 @@
       <tbody>
       <tr v-for="row in rows"
           class="clickable"
-          @click="() => rowClicked(row.id)"
+          @click.capture="() => rowClicked(row.id)"
           :key="row.id"
       >
         <th class="align-middle" scope="row">

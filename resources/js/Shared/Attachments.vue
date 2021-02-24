@@ -1,45 +1,52 @@
 <template>
-  <div v-if="!onlyShow">
-    <div class="course-docs-list"
-       v-for="item in list"
-       :key="item.id">
-      <div class="d-flex">
-        <img src="../../img/uploaded-file.png">
+  <div>
+    <div v-if="!onlyShow">
+      <div class="course-docs-list"
+         v-for="item in list"
+         :key="item.id">
+        <div class="d-flex">
+          <img src="../../img/uploaded-file.png">
 
-        <span id="course-doc-name" class="mt-2">
-          <a :href="item.path">
-            {{ item.name | truncate(20) }}
-          </a>
-        </span>
+          <span id="course-doc-name" class="mt-2">
+            <a :href="item.path">
+              {{ item.name | truncate(20) }}
+            </a>
+          </span>
+        </div>
+
+        <a href="#" class="mt-1">
+          <img src="../../img/remove-uploaded-file.png"
+               @click="() => destroy(item.id)">
+        </a>
       </div>
 
-      <a href="#" class="mt-1">
-        <img src="../../img/remove-uploaded-file.png"
-             @click="() => destroy(item.id)">
-      </a>
+      <label class="profile-form__label label-doc"
+             @drop="selectNewFile"
+             @click="selectNewFile">
+        <img v-if="!isSupport" src="../../img/add_file.svg">
+        <i v-else class="fas fa-plus" aria-hidden="true"></i>
+        <span>{{title}}</span>
+      </label>
+      <input type="file"
+             ref="file"
+             @change="upload"
+             class="hidden">
     </div>
+    <div v-else>
+      <div class="course-docs-list"
+           v-for="item in list"
+           :key="item.id">
+        <div class="d-flex">
+          <img src="../../img/uploaded-file.png">
 
-    <label class="profile-form__label label-doc"
-           @drop="selectNewFile"
-           @click="selectNewFile">
-      <img v-if="!isSupport" src="../../img/add_file.svg">
-      <i v-else class="fas fa-plus" aria-hidden="true"></i>
-      <span>{{title}}</span>
-    </label>
-    <input type="file"
-           ref="file"
-           @change="upload"
-           class="hidden">
+          <span class="mt-2">
+            <a :href="item.path">
+              {{ item.name | truncate(20) }}
+            </a>
+          </span>
+        </div>
+    </div>
   </div>
-  <div v-else class="main__content__lesson-card__materials main__content__agent-card__materials
-    тот_элемент_который_находится_под_этим_дивом, у_которго_есть_дядя-с--айдишкой--хз-какой--бещщщенные-классы">
-    <a v-for="item in list"
-       :href="item.path"
-       :key="item.id"
-       target="_blank"
-       class="main__content__lesson-card__materials__pdf main__content__agent-card__materials__pdf">
-      {{ item.name | truncate(30) }}
-    </a>
   </div>
 </template>
 

@@ -9,8 +9,8 @@
           <table class="table">
             <thead>
             <tr>
-              <th>Что оплатил</th>
-              <th>Клиент</th>
+              <th class="w-auto" style="max-width: 200px !important;">Что оплатил</th>
+              <th class="w-auto">Клиент</th>
               <th>Сумма</th>
               <th>Примечание</th>
               <th>Дата</th>
@@ -18,10 +18,10 @@
             </thead>
             <tbody>
             <tr v-for="payment in payments" :key="payment.id">
-              <th scope="row">
+              <th>
                 <inertia-link v-if="payment.purchasable"
                               :href="payment.purchasable.link">
-                  {{ payment.purchasable.title }}
+                  {{ payment.purchasable.title | truncate(35) }}
                 </inertia-link>
                 <span v-else>Удалено</span>
               </th>
@@ -35,7 +35,7 @@
               </td>
               <td>{{ payment.note }}</td>
               <td>{{ payment.paid_at }}</td>
-              <td class="text-center" v-if="isAdmin">
+              <td class="" v-if="isAdmin">
                 <a class="payments__link payments__link--red clickable"
                    href="#"
                   @click.prevent="() => alertAcceptDelete(payment.id)">
