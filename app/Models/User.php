@@ -189,6 +189,11 @@ class User extends Authenticatable implements Challengable, MustVerifyEmail
         return $q->where('role_id', Role::ROLE_CLIENT);
     }
 
+    public function scopeIsAdmin($q)
+    {
+        return $q->where('role_id', Role::ROLE_ADMIN);
+    }
+
     public function sales()
     {
         return $this->rewards();

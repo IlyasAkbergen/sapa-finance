@@ -5,6 +5,7 @@ namespace App\Events;
 use App\Models\Course;
 use App\Models\Homework;
 use App\Models\Purchase;
+use App\Models\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -26,26 +27,27 @@ class HomeworkCreated extends Notification implements ShouldQueue
     public function __construct(Homework $homework)
     {
         $this->homework = $homework;
-        $this->homework->load('user.referrer', 'course');
-        $user = $this->homework->user;
-        if (!empty($user->referrer)) {
-            $user->referrer->notify($this);
+        $this->homework->load('course');
+        $purchase = Purchase::where('purchasable_id', data_get($this, 'homework.course.id'))
+            ->where('purchasable_type', Course::class)
+            ->where('user_id', data_get($this, 'homework.user_id'))
+            ->first()
+        ;
+        if (!empty($purchase) && $purchase->with_feedback) {
+            $admins = User::query()
+                ->isAdmin()
+                ->orWhere('email', env('HOMEWORK_CHECKER_EMAIL', 'br.akzhunis@gmail.com'))
+                ->get()
+            ;
+            foreach ($admins as $admin) {
+                $admin->notify($this);
+            }
         }
     }
 
     public function via($notifiable)
     {
-        $result = [];
-        $purchase = Purchase::where('purchasable_id', $this->homework->course->id)
-            ->where('purchasable_type', Course::class)
-            ->where('user_id', $notifiable->id)
-            ->first();
-
-        if (!empty($purchase) && $purchase->with_feedback) {
-            array_push($result, 'mail');
-        }
-
-        return $result;
+        return ['mail'];
     }
 
     public function toMail($notifiable)

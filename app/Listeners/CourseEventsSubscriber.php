@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-use App\Events\HomeworkCreated;
 use App\Events\HomeworkRated;
 use App\Models\UserCourse;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -71,10 +70,10 @@ class CourseEventsSubscriber implements ShouldQueue
      */
     public function subscribe($events)
     {
-        $events->listen(
-            HomeworkCreated::class,
-            [self::class, 'handleHomeworkSubmitted']
-        );
+//        $events->listen(
+//            HomeworkCreated::class,
+//            [self::class, 'handleHomeworkSubmitted']
+//        );
 
         $events->listen(
             HomeworkRated::class,
