@@ -72,7 +72,7 @@ class HomeworkController extends WebBaseController
 
             DB::commit();
 
-            event(new HomeworkCreated($homework));
+//            event(new HomeworkCreated($homework));
 
             return redirect()
                 ->route('lessons.show', $homework->lesson_id)
