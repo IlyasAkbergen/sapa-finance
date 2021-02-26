@@ -125,7 +125,7 @@ class PurchaseController extends WebBaseController
                     'user_id' => $purchase->user_id,
                     'course_id' => $purchase->purchasable_id,
                     'with_feedback' => $request->with_feedback,
-                    'consultant_id' => Auth::user()->referrer_id ?: env('SAPA_USER_ID')
+                    'consultant_id' => Auth::user()->referrer_id ?: config('app.super_referrer_id')
                 ]);
 
                 return redirect()

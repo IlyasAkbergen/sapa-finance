@@ -134,6 +134,8 @@ return [
     |
     */
 
+    'super_referrer_id' => env('SAPA_USER_ID', 1),
+
     'providers' => [
 
         /*
