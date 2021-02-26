@@ -14,7 +14,7 @@
       <tbody>
       <tr v-for="row in rows"
           class="clickable"
-          @click.capture="() => rowClicked(row.id)"
+          @click="() => rowClicked(row.id)"
           :key="row.id"
       >
         <th class="align-middle" scope="row">
@@ -29,6 +29,7 @@
         <td class="align-middle">
           <inertia-link class="users__link--sky float-right"
                         v-if="show_route_name"
+                        @click.stop="() => {}"
                         :href="route(show_route_name, row.id)">
             Перейти
           </inertia-link>
@@ -36,7 +37,7 @@
                         float-right courses__delete"
              href="#"
              v-if="delete_route_name"
-             @click.prevent="() => deleteClicked(row.id)">
+             @click.capture.stop="() => deleteClicked(row.id)">
             <Trash/>
           </a>
           <inertia-link class="users__link users__link--blue float-right"
@@ -77,6 +78,7 @@
     },
     methods: {
       rowClicked(id) {
+        console.log('row clicked ' + id)
         if (this.edit_route_name) {
           this.$inertia.get(route(this.edit_route_name, id));
         }
